@@ -1,0 +1,8 @@
+*.sw*
+*__pycache__*
+*.map*
+*.pyc*
+*.map*
+*.sassc*
+*.scssc*
+*workspace*

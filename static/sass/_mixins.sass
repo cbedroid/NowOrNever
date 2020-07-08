@@ -1,0 +1,27 @@
+/*** MIXINS ***/
+
+=LineSpread($pos,$bottom,$color:"#fff")
+  // Border bottom line spread  from middle
+  box-sizing: border-box
+  positon: $pos
+  bottom: $bottom
+  border-bottom: 3px solid $color
+  animation-name: spread_ease_out
+  animation-duration: .5s
+  animation-fill-mode: forwards
+
+=bg_Image_Cover($width,$height,$pos:"center center")
+  height: $height
+  width: $width
+  margin: 0
+  padding: 0
+  position: absolute
+  background-color: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35))
+  background-repeat: no-repeat no-repeat
+  background-position: unquote($pos)
+  background-attachment: absolute
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
+  color: #fafafa
