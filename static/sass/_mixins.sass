@@ -1,5 +1,4 @@
-/*** MIXINS ***/
-
+/**** MIXINS ****/
 =LineSpread($pos,$bottom,$color:"#fff")
   // Border bottom line spread  from middle
   box-sizing: border-box
@@ -10,18 +9,17 @@
   animation-duration: .5s
   animation-fill-mode: forwards
 
-=bg_Image_Cover($width,$height,$pos:"center center")
+// Full Page image 
+=bg_Image_Cover($width,$height,$pos,$size,$bpos:"center center")
   height: $height
   width: $width
-  margin: 0
-  padding: 0
-  position: absolute
+  position: $pos
   background-color: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35))
   background-repeat: no-repeat no-repeat
-  background-position: unquote($pos)
-  background-attachment: absolute
-  -webkit-background-size: cover
-  -moz-background-size: cover
-  -o-background-size: cover
-  background-size: cover
+  background-position: unquote($bpos)
+  background-attachment: fixed
+  -webkit-background-size: unquote($size)
+  -moz-background-size: unquote($size)
+  -o-background-size: unquote($size)
+  background-size: unquote($size)
   color: #fafafa

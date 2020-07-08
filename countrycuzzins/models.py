@@ -1,5 +1,5 @@
 import os
-import base64
+import re
 import traceback
 from io import BytesIO
 from django.db import models
@@ -7,22 +7,35 @@ from django.conf import settings
 from django.core.files import File
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
+from django.core.validators import MinLengthValidator
 from image_cropping import ImageCropField,ImageRatioField
+from argparse import RawTextHelpFormatter
+from django.core.management.base import BaseCommand
+
 
 MEDIA_ROOT = "static"+settings.MEDIA_ROOT
-# Create your models here.
+
+class Command(BaseCommand):
+    def create_parser(self, *args, **kwargs):
+        parser = super(Command, self).create_parser(*args, **kwargs)
+        parser.formatter_class = RawTextHelpFormatter
+        return parser
+
+
 
 def toNameSpace(instance,*args,**kwargs):
   return  f"images/{instance.name}.png"
 
 
+# Create your models here.
 class Image(models.Model):
   ''' Images  Model Class '''
-  name = models.CharField(max_length=60, blank=True)
+  name = models.CharField(max_length=60, blank=True,unique=True)
   image = models.ImageField(upload_to=toNameSpace,height_field=None,
                              width_field=None, max_length=None)
   #cropping = ImageRatioField('image', '420x360')
   is_showcase = models.BooleanField(default=False)
+  upload_date = models.DateTimeField(auto_now=True, auto_now_add=False)
 
   def __str__(self):
     return self.name
@@ -46,7 +59,10 @@ class Image(models.Model):
     print('\nNAME',name)
     print('\nOLD_NAME',old_name)
     try:
-      if name not in old_name:
+
+      re_name = re.search(f'(.*)\.',old_name).group(1)
+      print('\nRE_NAME',re_name)
+      if name !=  re_name:
         rel_np_path  = 'images/' + name+'.png' # change img name to new name 
         old_path = os.path.abspath(self.image.path)
         new_path = os.path.join(settings.MEDIA_ROOT,rel_np_path)
@@ -65,21 +81,26 @@ class Image(models.Model):
     megabyte_limit = 5.0
     if filesize > megabyte_limit*1024*1024:
         raise ValidationError("Max file size is %sMB" % str(megabyte_limit))
+        
+help_html_string = '''Url for this article (basically just a name)</br><br/>
+                       <div style="color:#000;font-size:14px;">
+                        ( <span style="color:green;font-weight:700;">
+                          Example</span>:&nbsp;'Now or Never picture' )</div>
+                     '''
+class Article(models.Model):
+  #image = models.ForeignKey('Image', related_name='showcase_image', on_delete=models.CASCADE)
+  slug = models.SlugField(max_length=80,unique=True,
+        blank=False,null=False,
+        help_text=help_html_string,
+        validators=[MinLengthValidator(4)]
+        )
 
+  image = models.OneToOneField(Image, default="media/images/no_image.png",on_delete=models.SET_DEFAULT, primary_key=True)
+  title = models.CharField(max_length=60, blank=True, null=True)
+  description  = models.TextField(max_length=200,blank=True,null=False)
 
-  def img64(self): 
-    """Convert  images to base64 data """ 
-    try:
-      with open('static/' + self.image.url,'rb') as f: 
-        data = f.read()
-        img = base64.encodebytes(data)
-        return f"data:image/jpeg;base64,{str(img.decode('utf8'))}"
-    except Exception as error:
-      print('\nERROR',error)
-      return ""
-
-
-
+def __str__(self):
+  return f"ShowCase {self.name}"
 
 #           ************************* 
 #           ******   CLEAN UP *******

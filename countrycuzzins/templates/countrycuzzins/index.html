@@ -2,51 +2,19 @@
 {% load static %}
 {% load countrycuzzins_extras%}
 {% block body %}
-<section id="section_index_main" style="background-image:url('{{ image|image_get:'is_showcase,True' }}')">
-
-  <section class="l-index-pg" id="sect_one">
+<section id="section_index_main">
+  {% include "countrycuzzins/snippets/_navigation.html" %}
+  <div class="l-showcase" id="index_showcase" style="background-image:url('{{ image|image_get:'is_showcase,True,1' }}' );">
+    
+  </div>
+  <div class="l-inner-index-container">
     <div class="container fluid">
       <div class="row no-gutters">
         <div class="col-md-6 offset-md-3">
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto excepturi, totam dignissimos accusantium pariatur deleniti eveniet magnam iure, voluptas enim id nulla velit! Eos incidunt neque sequi tenetur id aut? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus neque mollitia consequatur inventore eum sint id earum, aliquid dicta ab totam modi! Ipsam sed perspiciatis, maxime neque impedit iusto veniam.
         </div>
-<div class="row no-gutters">
-        <div class="col-md-6 offset-md-3">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto excepturi, totam dignissimos accusantium pariatur deleniti eveniet magnam iure, voluptas enim id nulla velit! Eos incidunt neque sequi tenetur id aut? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus neque mollitia consequatur inventore eum sint id earum, aliquid dicta ab totam modi! Ipsam sed perspiciatis, maxime neque impedit iusto veniam.
-        </div>
-       </div>
-<div class="row no-gutters">
-        <div class="col-md-6 offset-md-3">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto excepturi, totam dignissimos accusantium pariatur deleniti eveniet magnam iure, voluptas enim id nulla velit! Eos incidunt neque sequi tenetur id aut? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus neque mollitia consequatur inventore eum sint id earum, aliquid dicta ab totam modi! Ipsam sed perspiciatis, maxime neque impedit iusto veniam.
-        </div>
-       </div>
-<div class="row no-gutters">
-        <div class="col-md-6 offset-md-3">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto excepturi, totam dignissimos accusantium pariatur deleniti eveniet magnam iure, voluptas enim id nulla velit! Eos incidunt neque sequi tenetur id aut? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus neque mollitia consequatur inventore eum sint id earum, aliquid dicta ab totam modi! Ipsam sed perspiciatis, maxime neque impedit iusto veniam.
-        </div>
-       </div>
- <div class="row no-gutters">
-        <div class="col-md-6 offset-md-3">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto excepturi, totam dignissimos accusantium pariatur deleniti eveniet magnam iure, voluptas enim id nulla velit! Eos incidunt neque sequi tenetur id aut? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus neque mollitia consequatur inventore eum sint id earum, aliquid dicta ab totam modi! Ipsam sed perspiciatis, maxime neque impedit iusto veniam.
-        </div>
-       </div>      </div>
-<div class="row no-gutters">
-        <div class="col-md-6 offset-md-3">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto excepturi, totam dignissimos accusantium pariatur deleniti eveniet magnam iure, voluptas enim id nulla velit! Eos incidunt neque sequi tenetur id aut? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus neque mollitia consequatur inventore eum sint id earum, aliquid dicta ab totam modi! Ipsam sed perspiciatis, maxime neque impedit iusto veniam.
-        </div>
-       </div>
-<div class="row no-gutters">
-        <div class="col-md-6 offset-md-3">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto excepturi, totam dignissimos accusantium pariatur deleniti eveniet magnam iure, voluptas enim id nulla velit! Eos incidunt neque sequi tenetur id aut? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus neque mollitia consequatur inventore eum sint id earum, aliquid dicta ab totam modi! Ipsam sed perspiciatis, maxime neque impedit iusto veniam.
-        </div>
-       </div>
-<div class="row no-gutters">
-        <div class="col-md-6 offset-md-3">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto excepturi, totam dignissimos accusantium pariatur deleniti eveniet magnam iure, voluptas enim id nulla velit! Eos incidunt neque sequi tenetur id aut? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus neque mollitia consequatur inventore eum sint id earum, aliquid dicta ab totam modi! Ipsam sed perspiciatis, maxime neque impedit iusto veniam.
-        </div>
-       </div>
       </div>
     </div>
-  </section>
+  </div>
 </section>
 {% endblock body %}
