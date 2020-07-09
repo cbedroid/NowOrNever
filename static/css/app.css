@@ -25,6 +25,7 @@ body {
   margin: 0;
   padding: 0;
   background: #000;
+  color: #fff;
   width: 100%;
   height: 100%;
   overflow-x: hidden; }
@@ -59,25 +60,10 @@ a:hover, i:hover {
   cursor: pointer; }
 
 /**** LAYOUTS *** */
-.l-index-pg {
-  min-height: calc(100vh / 3);
-  width: 100%; }
-
-#sect_one {
-  display: block; }
-
-#section_index_main {
-  display: block; }
-
 .l-showcase {
   display: block;
   width: 100%;
-  height: 400px;
-  position: relative;
-  background-size: 100%;
-  background-position: 50% 40%;
-  background-repeat: no-repeat;
-  width: 100%; }
+  height: 400px; }
 
 /* Layout Navigation */
 header {
@@ -95,14 +81,34 @@ header {
   height: auto; }
 
 /**** MODULES *** */
-.m-img-tray {
+.m-article-container {
   display: block;
-  margin: 0;
-  padding: 0; }
-  .m-img-tray--inline {
-    padding-top: -50px; }
-    .m-img-tray--inline * {
-      display: inline; }
+  max-height: 800px;
+  width: 100%;
+  position: relative; }
+  .m-article-container .m-article {
+    display: block; }
+    .m-article-container .m-article--bgi {
+      display: block;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-attachment: absolute;
+      background-position: 50% 50%;
+      background-repeat: no-repeat no-repeat;
+      -webkit-background-size: contain;
+      -moz-background-size: contain;
+      -o-background-size: contain;
+      background-size: contain;
+      height: 700px; }
+      .m-article-container .m-article--bgi::before {
+        display: block;
+        content: "";
+        position: absolute;
+        height: 700px;
+        width: 100%;
+        content: "";
+        background: rgba(0, 0, 0, 0.5); }
 
 /* Modules Navigtion */
 .m-nav-main {

@@ -9,17 +9,15 @@
   animation-duration: .5s
   animation-fill-mode: forwards
 
-// Full Page image 
-=bg_Image_Cover($width,$height,$pos,$size,$bpos:"center center")
-  height: $height
-  width: $width
-  position: $pos
-  background-color: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35))
-  background-repeat: no-repeat no-repeat
-  background-position: unquote($bpos)
-  background-attachment: fixed
-  -webkit-background-size: unquote($size)
-  -moz-background-size: unquote($size)
-  -o-background-size: unquote($size)
-  background-size: unquote($size)
-  color: #fafafa
+// Image to fit div container 
+=bg_div_image($pos,$bgsize,$bpos:"center center",$repeat:"no-repeat no-repeat")
+  top: 0
+  left: 0
+  right: 0
+  background-attachment: $pos
+  background-position: unquote($bpos) //50% 40%
+  background-repeat: unquote($repeat)
+  -webkit-background-size: $bgsize
+  -moz-background-size: $bgsize
+  -o-background-size: $bgsize
+  background-size: $bgsize

@@ -2,19 +2,24 @@
 {% load static %}
 {% load countrycuzzins_extras%}
 {% block body %}
-<section id="section_index_main">
+<section id="l-section_index_main">
   {% include "countrycuzzins/snippets/_navigation.html" %}
-  <div class="l-showcase" id="index_showcase" style="background-image:url('{{ image|image_get:'is_showcase,True,1' }}' );">
-    
-  </div>
-  <div class="l-inner-index-container">
-    <div class="container fluid">
-      <div class="row no-gutters">
-        <div class="col-md-6 offset-md-3">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto excepturi, totam dignissimos accusantium pariatur deleniti eveniet magnam iure, voluptas enim id nulla velit! Eos incidunt neque sequi tenetur id aut? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus neque mollitia consequatur inventore eum sint id earum, aliquid dicta ab totam modi! Ipsam sed perspiciatis, maxime neque impedit iusto veniam.
-        </div>
+  <div class="l-showcase l-showcase--main bt-effect"id="showcase_main">
+    <div class="m-article-container">
+      <div class="m-article--bgi" style="background-image:url('{{ image|image_get:'name,CC_pose_in_street'}}');">
+        <h1 class="m-article--headline">Country Cuzzins</h1
       </div>
     </div>
+  </div>
+  <div class="l-showcase l-showcase-sub">
+    {% for article in articles %}
+      <div class="m-article-container">
+      <div class="m-article--bgi" style="background-image:url('{{ article.image.image.url }}');">
+          <h1 class="m-article--headline">{{ article.headline }}</h1>
+          <p class="m-article blog">{{ article.blog|wordwrap:20}}</p>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 </section>
 {% endblock body %}

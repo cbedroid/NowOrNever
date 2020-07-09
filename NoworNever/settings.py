@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import mimetypes
+from easy_thumbnails.conf import Settings as thumbnail_settings
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,7 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 INSTALLED_APPS = [
     'countrycuzzins.apps.CountrycuzzinsConfig',
@@ -43,10 +44,12 @@ INSTALLED_APPS = [
     'image_cropping',
     ]
 
-from easy_thumbnails.conf import Settings as thumbnail_settings
+# Image Cropping 
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
     ) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
+
 
 
 MIDDLEWARE = [

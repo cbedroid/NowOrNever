@@ -1,10 +1,22 @@
 /**** MODULES ****/
 
-.m-img-tray
+.m-article-container
   display: block
-  margin: 0
-  padding: 0
-  &--inline
-    padding-top: -50px
-    *
-      display: inline
+  max-height: 800px
+  width: 100%
+  position: relative
+  // tinted image with background effect
+  .m-article
+    display: block
+    &--bgi
+      display: block
+      +bg_div_image(absolute,contain,"50% 50%")
+      height: $bgi_image_height
+      &::before
+        display: block
+        content: ""
+        position: absolute
+        height: $bgi_image_height
+        width: 100%
+        content: ""
+        background: rgba(0, 0, 0, .5)

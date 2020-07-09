@@ -11,7 +11,6 @@ def image_get(model,args):
       model (Models.Model): HTML Model String
       key (string): "Image model attribute"
       value (string|int|bool): value of attribute 
-
   Returns:
        string: return model atrribute (if exists)
   """
