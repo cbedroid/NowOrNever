@@ -1,11 +1,24 @@
 /**** MODULES ****/
 
+.full-bgimg
+  // section fulll background image
+  +bg_div_image(fixed,cover,"50% 50%")
+  &::before
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    content: " "
+    background: rgba(0,0,0,.8)
+
 .m-article-container
   display: block
   max-height: 800px
   width: 100%
   position: relative
   // tinted image with background effect
+
   .m-article
     display: block
     &--bgi

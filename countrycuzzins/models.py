@@ -16,8 +16,56 @@ from PIL import Image as PIL_IMAGE
 MEDIA_ROOT = "static"+settings.MEDIA_ROOT
 
 def toNameSpace(instance,*args,**kwargs):
+  """ Force all images to be PNG file """
   path = f"images/{instance.name}.png"
   return path
+
+def pathToName(instance,object,filetype,extention=None):
+  """Rename file path to model name's attribute
+  Args:
+      instance (class object): models.Models class instance
+      object (class field):  models.Model class field 
+      filetype (str):  media field type
+      extention (str, optional): extention to assign to path. Defaults to None.
+
+  Returns:
+      str: path to file
+  """
+
+  # force name constrain on any model using this function 
+  if not hasattr(instance,"name"):
+    print("model must have a name atrribute to set path")
+    return
+
+
+  NOTE START HERE Migrate wehn Done
+  name = instance.name
+  old_name = os.path.basename(self.image.url)
+    # print('\nNAME',name)
+    # print('\nOLD_NAME',old_name)
+    try:
+      re_name = re.search(f'(.*)\.',old_name).group(1)
+      # print('\nRE_NAME',re_name)
+      if name !=  re_name:
+        rel_np_path  = 'images/' + name+'.png' # change img name to new name 
+        old_path = os.path.abspath(self.image.path)
+        new_path = os.path.join(settings.MEDIA_ROOT,rel_np_path)
+        try:
+          os.rename( old_path,new_path) 
+        except: 
+          pass
+        # print('\nREL_PATH',old_path)
+        # print('\nABS_PATH',new_path)
+        # print('\IMAGE URL.',self.image.url)
+        self.image = rel_np_path
+        print('\nNEW_PATH',new_path)
+        return new_path
+    except Exception as e:
+      print('\nE',e)
+      traceback.print_exc()
+  
+
+
 
 
 
@@ -46,9 +94,9 @@ class Image(models.Model):
    if  "name"  attritube change
   """
   def save(self, *args, **kwargs):
+    super(Image, self).save(*args, **kwargs)
     path = self.renameImgPath()
     self.imageResize(path)
-    super(Image, self).save(*args, **kwargs)
 
   @staticmethod
   def imageResize(imagepath):
@@ -144,9 +192,23 @@ class Article(models.Model):
 
 
 
-#           ************************* 
-#           ******   CLEAN UP *******
-#           ************************* 
+class Song(models.Models):
+  # NOTE: Check out models.FieldPath to specify the directory for song
+  # this may need to be force on albums (child class) since we will have 
+  # more than one album as the projects grows larger 
+  # https://docs.djangoproject.com/en/3.0/ref/models/fields/
+  name = models.CharField(max_length=60, blank=True, null=True, unique=True)
+  song = models.FieldField('songs')
+  created = models.DateTimeField(auto_now=False, auto_now_add=True)
+  updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+
+  
+#########################################################
+#           *************************                   #
+#           ******   CLEAN UP *******                   #
+#           *************************                   #
+#########################################################
 
 @receiver(models.signals.post_delete, sender=Image)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
@@ -157,3 +219,4 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
   if instance.image:
     if os.path.isfile(instance.image.path):
       os.remove(instance.image.path)
+

@@ -1,6 +1,32 @@
 /**** LAYOUTS ****/
 
+.zed
+  // z-index of positional element
+  &--1
+    z-index: 1
+  &--2
+    z-index: 2
+  &--3
+    z-index: 3
+
 .l-showcase
   display: block
   width: 100%
   height: 400px
+
+.l-main-section
+  diplay: block
+  width: 100vw
+  height: 100vh
+  position: relative
+
+.l-inner-section-overlay
+  // overlay section on top of main-section image
+  display: block
+  position: absolute
+  top: 40%
+  width: 100vw
+  height: 100vh
+  background: transparent
+  &--z3
+    z-index: 3

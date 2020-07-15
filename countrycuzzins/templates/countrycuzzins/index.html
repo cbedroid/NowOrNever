@@ -2,24 +2,17 @@
 {% load static %}
 {% load countrycuzzins_extras%}
 {% block body %}
-<section id="l-section_index_main">
-  {% include "countrycuzzins/snippets/_navigation.html" %}
-  <div class="l-showcase l-showcase--main bt-effect"id="showcase_main">
-    <div class="m-article-container">
-      <div class="m-article--bgi" style="background-image:url('{{ image|image_get:'name,CC_pose_in_street'}}');">
-        <h1 class="m-article--headline">Country Cuzzins</h1
-      </div>
-    </div>
-  </div>
-  <div class="l-showcase l-showcase-sub">
-    {% for article in articles %}
-      <div class="m-article-container">
-      <div class="m-article--bgi" style="background-image:url('{{ article.image.image.url }}');">
-          <h1 class="m-article--headline">{{ article.headline }}</h1>
-          <p class="m-article blog">{{ article.blog|wordwrap:20}}</p>
+  <section class="l-main-section full-bgimg zed--1" style="background-image:url('{% static  "media/images/CC_pose_in_street.png" %}');">
+    <section class="l-inner-section-overlay zed--3">
+    <div class="l-banner-container">
+      <div class="m-banner">
+        <div class="m-image-wrapper m-image-wrapper--article">
+          <img src="" alt="">
+            <p class="m-content-article"></p>
         </div>
       </div>
-    {% endfor %}
-  </div>
-</section>
+    </div>
+    </section>
+  </section>
+
 {% endblock body %}
