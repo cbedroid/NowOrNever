@@ -54,7 +54,7 @@ a {
 a:hover, i:hover {
   cursor: pointer; }
 
-/**** LAYOUTS *** */
+/**** LAYOUTS  *** */
 .zed--1 {
   z-index: 1; }
 .zed--2 {
@@ -82,6 +82,17 @@ a:hover, i:hover {
   background: transparent; }
   .l-inner-section-overlay--z3 {
     z-index: 3; }
+
+.l-musicplayer {
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto sans-serif;
+  background: #1A1B1E;
+  color: #e9e9e9;
+  width: 400px;
+  height: 400px;
+  margin: 50px auto;
+  border-radius: 10px; }
 
 /* Layout Navigation */
 header {
@@ -233,6 +244,9 @@ header {
 .no-effect:hover::after {
   content: " ";
   display: none; }
+
+body {
+  background: grey; }
 
 /* ICONS AND IMAGES */
 .i-logo-img {

@@ -1,0 +1,27 @@
+{% extends "countrycuzzins/base.html" %}
+{% load static %}
+{% load countrycuzzins_extras%}
+{% block body %} {# Delete -- ONLY FOR TESTING#}
+<!--- Music Player -->
+<div class="l-musicplayer">
+  <!-- Music Player Cover Top-->
+  <div class="l-musicplayer-cover">
+    <nav class="m-nav-menu">
+      <div class="nav-items"></div>
+    </nav>
+    <div class="m-musicplayer-control-top">
+      <div class="i-icon-tray">
+      <i class="fa fa-step-backward" aria-hidden="true"></i>
+      <i class="fa fa-play-circle" aria-hidden="true"></i>
+      <i class="fa fa-step-forward" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div> {# musicplayer cover #}
+
+  <!-- Music Player Content Bottom -->
+  <div class="content-wrapper">
+    <div class="m-album-container">
+    </div>
+  </div>
+</div>
+{% endblock body %} {# Delete -- ONLY FOR TESTING#}

@@ -28,3 +28,18 @@ def index(request):
 
     }
     return render(request, "countrycuzzins/index.html", context)
+
+
+#########################################################
+#           *************************                   #
+#           ****  TESTER VIEWS   ****                   #
+#           *************************                   #
+#########################################################
+
+from .models import Song
+
+def test_music_player(request):
+  songs = Song.objects.all()
+  context = {'music': songs}
+  return render(request,"countrycuzzins/snippets/_music_player.html",context)
+
