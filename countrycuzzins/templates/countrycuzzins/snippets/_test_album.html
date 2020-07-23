@@ -1,0 +1,18 @@
+{% extends "countrycuzzins/base.html" %}
+{% load static %}
+{% block body %}
+<div class="album-container">
+  <h1>Hello World</h1>
+  <ul class="album">
+    <h4>{{object_list.songs}}</h4>
+    {% for song in object_list.songs %}
+    <h4>title</h4>
+    <li class="song-items">
+      <h3>{{ song }} </h3>
+      <a href="{{ song.url }}"></a>
+    </li>
+
+  </ul>
+  {% endfor %}
+</div>
+{% endblock body %}

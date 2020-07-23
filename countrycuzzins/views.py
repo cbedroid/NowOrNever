@@ -4,6 +4,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView,DetailView
 from .models import Image, Article
+from .music_models import Album
 
 # Create your views here.
 
@@ -22,6 +23,17 @@ class ImageList(DetailView):
     model = Image
     context_object_name = 'image'
     template_name='countrycuzzins/index.html'
+
+class AlbumList(ListView):
+    model = Album
+    #context_object_name = 'albums'
+    template_name='countrycuzzins/snippets/_test_album.html'
+
+    def get_context_data(self, **kwargs):
+          context = super().get_context_data(**kwargs)
+          context['now'] = timezone.now()
+          return context
+
 
 def index(request):
     context = {'articles':Article.objects.all(),

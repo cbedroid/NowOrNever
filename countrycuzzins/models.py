@@ -36,15 +36,18 @@ def toNameSpace(instance, *args, **kwargs):
     """ Force all images to be PNG file """
     # hashed check memory allocated
     instance_hash = hash(instance.__class__)
+    # optional kwargs if model doesnt have an name attribute
+    name = kwargs.get('name',None) 
+
     Image_hash = hash(Image)
     Song_hash = hash(Song)
-    save_info = {Image_hash: ['images/', '.png'],
+    path,ext = {Image_hash: ['images/', '.png'],
                  Song_hash: ['audio/', '.mp3'],
                  }.get(instance_hash)
 
-    path = f"{save_info[0]}{instance.name}{save_info[1]}"
-    return path
-
+    # NOTE:: If image does populate with extention
+    # then add the extention to path below (save_info[1])
+    return f"{path}{instance.name}{ext}"
 
 
 class Command(BaseCommand):
@@ -156,7 +159,8 @@ class Article(models.Model):
     def __str__(self):
         return f"Article {self.name}"
 
-    def add_SlugField(self):
+    ##NOTE:: MAKE THIS DYNAMIC FOR ALL MODELS 
+    def add_SlugField(self): 
         """
           Create custom url for SlugField from article name on initilization
         """
@@ -180,6 +184,7 @@ class Song(models.Model):
     # this may need to be force on albums (child class) since we will have
     # more than one album as the projects grows larger
     # https://docs.djangoproject.com/en/3.0/ref/models/fields/
+    id = models.AutoField(primary_key=True,null=False,blank=True)
     artist = models.CharField('artist(s)', default="Country Cuzzins",
                               max_length=120, blank=True, null=True,
                               help_text='<p style="color:#000; font-weight:700;"> Main Artist(s) Only</p>'
@@ -189,27 +194,25 @@ class Song(models.Model):
                                help_text='<p style="color:#000; font-weight:700;"> Feature Artist(s) Only </p><span>(optional)</span>',
                                )
 
-    title = models.CharField(
+    name = models.CharField( verbose_name = "title",
         max_length=120, blank=False, null=True, unique=True)
     slug = models.SlugField(max_length=80, unique=True,
                             blank=False, null=False,
                             help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
                             validators=[MinLengthValidator(4)]
                             )
-    song = models.FileField('songs')
+    file = models.FileField(verbose_name="song file",upload_to=toNameSpace)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
         if self.feature:
             self.feature = f" ft {self.feature.title()} "
-        return f'{self.artist}{self.feature} - {self.title}'
+        return f'{self.artist}{self.feature or "" } - {self.name}'
 
     def save(self, *args, **kwargs):
         super(Song, self).save(*args, **kwargs)
-        path = pathToName(self, self.song)
-
-
+        path = pathToName(self, self.file)
 
 
 #########################################################
@@ -217,6 +220,7 @@ class Song(models.Model):
 #           ****  HELP METHODS   ****                   #
 #           *************************                   #
 #########################################################
+
 
 def pathToName(instance, obj):
     """Rename file path to model name's attribute
@@ -232,7 +236,7 @@ def pathToName(instance, obj):
     # capture object classname and set
     # the save path and extention
     Image_hash = hash(Image.image.field)
-    Song_hash = hash(Song.song.field)
+    Song_hash = hash(Song.file.field)
     save_info = {Image_hash: ['images/', '.png'],
                  Song_hash: ['audio/', '.mp3'],
                  }.get(hash(obj.field))
@@ -242,6 +246,8 @@ def pathToName(instance, obj):
         return
 
     # get the name attribute from model
+
+    savepath,ext = save_info
     name_of_obj = instance.name
 
     # check if the model objects has an url field
@@ -254,25 +260,30 @@ def pathToName(instance, obj):
     default_path = os.path.basename(obj.url)
     try:
         # get the basename  minus the extention of the url
-        base_path, extention = os.path.splitext((os.path.basename))
+        base_path, extention = os.path.splitext((default_path))
         #base_path = re.search(f'(.*)\.', default_path).group(1)
 
         # change obj basename to obj name
         if name_of_obj != base_path:
-            rel_np_path = save_info[0] + name_of_obj + \
-                save_info[1]  # change img name to new name
-            old_path = os.path.abspath(self.image.path)
+            rel_np_path = savepath + str(name_of_obj) +  ext # change img name to new name
+            print('\nREL_NP_PATH',rel_np_path)
+            old_path = os.path.abspath(obj.path)
             new_path = os.path.join(settings.MEDIA_ROOT, rel_np_path)
+            print('\nOLD_PATH',old_path)
+            print('\nNEW_PATH',new_path)
             try:
                 os.rename(old_path, new_path)
             except:
                 pass
 
             obj = rel_np_path
+            print('\n\nRETURN GOOD\n')
             return new_path
     except Exception as e:
         print('\nE', e)
         traceback.print_exc()
+
+
 
 
 
