@@ -2,26 +2,48 @@
 {% load static %}
 {% load countrycuzzins_extras%}
 {% block body %} {# Delete -- ONLY FOR TESTING#}
-<!--- Music Player -->
-<div class="l-musicplayer">
-  <!-- Music Player Cover Top-->
-  <div class="l-musicplayer-cover">
-    <nav class="m-nav-menu">
-      <div class="nav-items"></div>
-    </nav>
-    <div class="m-musicplayer-control-top">
-      <div class="i-icon-tray">
-      <i class="fa fa-step-backward" aria-hidden="true"></i>
-      <i class="fa fa-play-circle" aria-hidden="true"></i>
-      <i class="fa fa-step-forward" aria-hidden="true"></i>
+{# THIS IS THE TEST_HTML NOW#}
+  <!--- Music Player -->
+  <section id="m_musicplayer">
+  <!--mp top one-->
+  <nav id="mp_top_one" class="m-flex m-flex--inline m-flex--sb">
+    <i class="fa fa-backward" aria-hidden="true"></i>
+    <div>
+      <i class="fa fa-forward" aria-hidden="true"></i>
+    </div>
+  </nav>
+
+  <div class="album-container" style="background-image: url('{{ albums.0.image.image.url }}');">
+    <div class="m-coverscreen"></div>
+    <div class=" m-mp-album-top">
+      <!--MP TOP BEGIN-->
+
+            <!--mp top two-->
+      <div id="mp_top_two" class="m-hero">
+        <h3 class="m-title">{{ albums.0.name }}</h3>
       </div>
     </div>
-  </div> {# musicplayer cover #}
+    <!--MP TOP END-->
 
-  <!-- Music Player Content Bottom -->
-  <div class="content-wrapper">
-    <div class="m-album-container">
+    <!-- MP CONTENT-->
+    <div class="m-mp-album-content">
+      <ul>
+        {% for song in albums.0.songslist %}
+        <li class="song-items">
+          <h3>{{ song }} </h3>
+          <audio controls>
+            <source src="{{ song.file.url }}" type="audio/ogg">
+            <source src="{{ song.file.url }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </li>
+        {% empty %}
+        <h4>NO SONGS </h4>
+        {% endfor %}
+      </ul>
     </div>
   </div>
-</div>
+  </div>
+</section>
+
 {% endblock body %} {# Delete -- ONLY FOR TESTING#}

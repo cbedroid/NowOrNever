@@ -26,7 +26,7 @@ class ImageList(DetailView):
 
 class AlbumList(ListView):
     model = Album
-    #context_object_name = 'albums'
+    context_object_name = 'albums'
     template_name='countrycuzzins/snippets/_test_album.html'
 
     def get_context_data(self, **kwargs):

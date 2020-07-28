@@ -57,7 +57,9 @@ class Album(models.Model):
           raise ValidationError(f"Album must have at least one ({MIN_SONG}) song and no more than {MAX_SONG}")
       super(Album, self).clean(*args, **kwargs)
 
-   
+    @property
+    def songslist(self):
+      return list(self.songs.all())
 
 
 

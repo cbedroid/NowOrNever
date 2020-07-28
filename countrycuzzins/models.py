@@ -7,13 +7,22 @@ from django.core.files import File
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator
+from django.core.files.storage import FileSystemStorage
 from image_cropping import ImageCropField, ImageRatioField
 from argparse import RawTextHelpFormatter
 from django.core.management.base import BaseCommand
 from PIL import Image as PIL_IMAGE
 
+
+
+
 MEDIA_ROOT = "static" + settings.MEDIA_ROOT
 
+class OverwriteStorage(FileSystemStorage):
+  
+    def get_available_name(self, name, max_length=None):
+        self.delete(name)
+        return name
 def js_slugUrl(instance):
   """
     Hacky way to Build SlugField using ip and/or port of website.
@@ -41,14 +50,20 @@ def toNameSpace(instance, *args, **kwargs):
 
     Image_hash = hash(Image)
     Song_hash = hash(Song)
-    path,ext = {Image_hash: ['images/', '.png'],
-                 Song_hash: ['audio/', '.mp3'],
+    attr,path,ext= {Image_hash: ['image.url','images/', '.png'],
+                 Song_hash: ['file.url','audio/', '.mp3'],
                  }.get(instance_hash)
 
+    attr_name = "".join((instance.name,ext))
+    print('\nNP ATTRNAME:',attr_name)
+    setattr(instance,attr, attr_name)
+    print('\nNP INSTANCE:',instance)
+    print(f"\n\nNP From instance: {instance.file.url}\n")
     # NOTE:: If image does populate with extention
     # then add the extention to path below (save_info[1])
-    return f"{path}{instance.name}{ext}"
-
+    new_name = f"{path}{instance.name}{ext}"
+    print('\nNP NEW_NAME',new_name)
+    return new_name
 
 class Command(BaseCommand):
     """ pre-parser hook to change HTML text before rendering to admin """
@@ -64,7 +79,7 @@ class Command(BaseCommand):
 class Image(models.Model):
     ''' Images  Model Class '''
     name = models.CharField(max_length=60, blank=True, unique=True)
-    image = models.ImageField(upload_to=toNameSpace, blank=True)
+    image = models.ImageField(upload_to=toNameSpace, blank=True, storage=OverwriteStorage())
     #cropping = ImageRatioField('image', '420x360')
     is_article = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -74,10 +89,9 @@ class Image(models.Model):
         return self.name
 
     """
-   Hooking into  ___init___ save method and changing "image" name
-   if  "name"  attritube change
-  """
-
+    Hooking into  ___init___ save method and changing "image" name
+    if  "name"  attritube change
+    """
     def save(self, *args, **kwargs):
         super(Image, self).save(*args, **kwargs)
         path = pathToName(self, self.image)
@@ -201,7 +215,9 @@ class Song(models.Model):
                             help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
                             validators=[MinLengthValidator(4)]
                             )
-    file = models.FileField(verbose_name="song file",upload_to=toNameSpace)
+    file = models.FileField(max_length=120,verbose_name="song file",upload_to=lambda instance, obj: "audio/{}.mp3".format(instance.name),
+      storage=OverwriteStorage()
+        )
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
@@ -213,6 +229,7 @@ class Song(models.Model):
     def save(self, *args, **kwargs):
         super(Song, self).save(*args, **kwargs)
         path = pathToName(self, self.file)
+        print('\nSELF.FILE.URL',path)
 
 
 #########################################################
@@ -223,65 +240,67 @@ class Song(models.Model):
 
 
 def pathToName(instance, obj):
-    """Rename file path to model name's attribute
-    Args:
-        instance (class object): models.Models class instance
-        obj (class field):  models.Model class field 
-        filetype (str):  media field type
-        extention (str, optional): extention to assign to path. Defaults to None.
+    #def inner
+      """Rename file path to model name's attribute
+      Args:
+          instance (class object): models.Models class instance
+          obj (class field):  models.Model class field 
+          filetype (str):  media field type
+          extention (str, optional): extention to assign to path. Defaults to None.
 
-    Returns:
-        str: path to file
-    """
-    # capture object classname and set
-    # the save path and extention
-    Image_hash = hash(Image.image.field)
-    Song_hash = hash(Song.file.field)
-    save_info = {Image_hash: ['images/', '.png'],
-                 Song_hash: ['audio/', '.mp3'],
-                 }.get(hash(obj.field))
+      Returns:
+          str: path to file
+      """
+      # capture object classname and set
+      # the save path and extention
+      Image_hash = hash(Image.image.field)
+      Song_hash = hash(Song.file.field)
+      save_info = {Image_hash: ['images/', '.png'],
+                  Song_hash: ['audio/', '.mp3'],
+                  }.get(hash(obj.field))
 
-    # Force name constrain on any model using this function
-    if not hasattr(instance, "name"):
-        return
+      # Force name constrain on any model using this function
+      if not hasattr(instance, "name"):
+          return
 
-    # get the name attribute from model
+      # get the name attribute from model
 
-    savepath,ext = save_info
-    name_of_obj = instance.name
+      savepath,ext = save_info
+      name_of_obj = instance.name
 
-    # check if the model objects has an url field
-    # if not hen return the current object untouched
-    url = getattr(obj, 'url', None)
-    if not url or not save_info:
-        print('Failed')
-        return
+      # check if the model objects has an url field
+      # if not hen return the current object untouched
+      url = getattr(obj, 'url', None)
+      if not url or not save_info:
+          print('Failed')
+          return
 
-    default_path = os.path.basename(obj.url)
-    try:
-        # get the basename  minus the extention of the url
-        base_path, extention = os.path.splitext((default_path))
-        #base_path = re.search(f'(.*)\.', default_path).group(1)
+      default_path = os.path.basename(obj.url)
+      try:
+          # get the basename  minus the extention of the url
+          base_path, extention = os.path.splitext((default_path))
+          #base_path = re.search(f'(.*)\.', default_path).group(1)
 
-        # change obj basename to obj name
-        if name_of_obj != base_path:
-            rel_np_path = savepath + str(name_of_obj) +  ext # change img name to new name
-            print('\nREL_NP_PATH',rel_np_path)
-            old_path = os.path.abspath(obj.path)
-            new_path = os.path.join(settings.MEDIA_ROOT, rel_np_path)
-            print('\nOLD_PATH',old_path)
-            print('\nNEW_PATH',new_path)
-            try:
-                os.rename(old_path, new_path)
-            except:
-                pass
+          # change obj basename to obj name
+          if name_of_obj != base_path:
+              rel_np_path = savepath + str(name_of_obj) +  ext # change img name to new name
+              print('\nREL_NP_PATH',rel_np_path)
+              old_path = os.path.abspath(obj.path)
+              new_path = os.path.join(settings.MEDIA_ROOT, rel_np_path)
+              print('\nOLD_PATH',old_path)
+              print('\nNEW_PATH',new_path)
+              try:
+                  os.rename(old_path, new_path)
+              except:
+                  pass
 
-            obj = rel_np_path
-            print('\n\nRETURN GOOD\n')
-            return new_path
-    except Exception as e:
-        print('\nE', e)
-        traceback.print_exc()
+              #obj = rel_np_path
+              print('\n\nRETURN GOOD\n')
+              print('------------------------------------------------\n')
+              return rel_np_path
+      except Exception as e:
+          print('\nE', e)
+          traceback.print_exc()
 
 
 

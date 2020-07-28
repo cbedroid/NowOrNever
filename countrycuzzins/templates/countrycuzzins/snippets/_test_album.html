@@ -1,18 +1,59 @@
 {% extends "countrycuzzins/base.html" %}
 {% load static %}
 {% block body %}
-<div class="album-container">
-  <h1>Hello World</h1>
-  <ul class="album">
-    <h4>{{object_list.songs}}</h4>
-    {% for song in object_list.songs %}
-    <h4>title</h4>
-    <li class="song-items">
-      <h3>{{ song }} </h3>
-      <a href="{{ song.url }}"></a>
-    </li>
+  <div class="row justify-content-md-center">
+    <div class="col-6 col-md-4">
+      <section id="main_musicplayer">
+        <!--MUSIC PLAYER TOP-->
+        <div class="cover-image" style="background-image: url('{{ albums.0.image.image.url }}')"></div>
+        <div class="mp-top flex ">
+          <!-- music headers -->
+          <nav class="nav" id="mp_navigation">
+            <ul class="nav-list flex flex--inline flex--sa">
+              <li class="nav-items">
+                <i class="fa fa-music" aria-hidden="true"></i>
+              </li>
+              <li class="nav-items">
+                <i class="fa fa-music" aria-hidden="true"></i>
+              </li>
+              <li class="nav-items">
+                <i class="fa fa-music" aria-hidden="true"></i>
+              </li>
+            </ul>
+          </nav>
+          <!-- musicplayer controls -->
+          <div id="mp_controls">
 
-  </ul>
-  {% endfor %}
-</div>
+            <div class="controls controls-top flex flex--inline flex--sa">
+              <i class="fa fa-repeat" aria-hidden="true"></i>
+              {#<h3 class="m-title">{{ albums.0.name }}</h3> #}
+              <div id="mp_progress"></div>
+              <i class="fa fa-volume-up" aria-hidden="true"></i>
+            </div>
+            <div class="controls controls-bottom  flex flex--inline flex--sa" id="main-controls">
+              <i id="mp_rewind" class="fa fa-backward" aria-hidden="true"></i>
+              <i id="mp_play" class="fa fa-play" aria-hidden="true"></i>
+              <i id="mp_fast_forward" class="fa fa-forward" aria-hidden="true"></i>
+            </div>
+          </div>
+          
+        </div>
+
+
+        
+        <!--MUSIC PLAYER BOTTOM-->
+        <div class="track-container">
+          <ul class="track-list">
+
+            {% for song in albums.0.songslist %}
+              <li class="list-item">
+                <h4 class="song-title"> {{ song }}</h4>
+                <i class="material-icons">equalizer</i>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
 {% endblock body %}

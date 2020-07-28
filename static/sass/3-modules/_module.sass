@@ -1,5 +1,18 @@
 /**** MODULES ****/
 
+.m-flex
+  display: flex
+  flex-direction: column
+  &--inline
+    flex-direction: row
+    justify-content: space-evenly
+  &--sa
+    justify-content: space-around
+  &--se
+    justify-content: space-evenly
+  &--sb
+    justify-content: space-between
+
 .full-bgimg
   // section fulll background image
   +bg_div_image(fixed,cover,"50% 50%")
