@@ -1,4 +1,5 @@
 import os 
+import re
 import base64
 from django import template
 from ..models import Image
@@ -36,5 +37,20 @@ def img64(obj):
       print('\nERROR',error)
       return obj
 
+@register.filter('space_escape')
+def space_escape(value):
+    return value.replace(" ","_")
 
+@register.filter('re_sub')
+def re_sub(value,ret):
+  value = str(value)
+  try:
+      pat,sub = ret.split(',')
+      return re.sub(pat,sub,value)
+  except ValueError: # if ret is string and not a tuple 
+    pat = ret
+    sub = " "
+    return re.sub(pat,sub,value)
+  except:
+    return value
 

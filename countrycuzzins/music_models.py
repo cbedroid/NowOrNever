@@ -52,7 +52,6 @@ class Album(models.Model):
       # and less than 20
       MAX_SONGS = 20
       MIN_SONGS = 1
-
       if MIN_SONGS > self.songs.count() > MAX_SONGS:
           raise ValidationError(f"Album must have at least one ({MIN_SONG}) song and no more than {MAX_SONG}")
       super(Album, self).clean(*args, **kwargs)
@@ -60,6 +59,10 @@ class Album(models.Model):
     @property
     def songslist(self):
       return list(self.songs.all())
+
+    @property
+    def song_urls(self):
+      return list(song.file.url for song in self.songslist)
 
 
 

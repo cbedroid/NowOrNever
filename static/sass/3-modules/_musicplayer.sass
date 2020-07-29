@@ -35,33 +35,36 @@ i
   &--sb
     justify-content: space-between
 
-
-    
+.hidden
+  display: none
 
 body 
   background: grey
 
 #main_musicplayer
   width: 100%
-  height: 500px
-  margin-top: 30px
+  height: 600px
+  margin-top: 100px
   background: $dark
   color: $light
   position: relative
-
+  padding: 10px
+  border-radius: 10px
+  border: 1px solid silver
+  
 .mp-top
   display: flex
   flex-direction: column
   position: absolute
   top: 0
   width: 100%
-  height: 200px
+  height: 300px
   z-index: 2
 
 
 .cover-image
   display: block
-  height: 200px
+  height: 300px
   position: relative
   +bg_div_image(absolute,cover,"100% 50%")
   &::after
@@ -72,7 +75,7 @@ body
     left: 0
     content: ""
     height: inherit
-    background: rgba(0,0,0,.6)
+    background: rgba(0,0,0,.8)
     z-index: 1
 
 
@@ -80,64 +83,96 @@ body
   margin: 0
   display: flex
   max-height: 100px
+  padding: 10px 0 
 
   .nav-list
-    background:  rgba(0,0,0, .5)
     width: 100%
     color: $light
 
+
+
+// PLAYER CONTROLS 
 #mp_controls
   position: absolute
   left: 0 
   right: 0
   bottom: 20px
   .controls-top
-    margin-bottom: 30px
+    margin-bottom: 15px
+
+.title-wrapper
+  margin-bottom: 40px
+  align-self: center
+  text-align: center
+
+  .mp-title--top
+    font: 24px 
+    font-family: Oswald, "Roboto Slab", Merriweather
+    letter-spacing: .15em
+    
+
+.track-info
+  margin: 0 45px
 
 #mp_progress
   display: block
-  width: 150px
+  width: 200px
   height: 4px
   background: rgba(255, 255, 255, 0.3)
   border-radius: 10px
   position: relative
-  &::before,&::after
-    display: block
+
+#progress_meter
+  // progress bar
+  display: block
+  position: relative
+  height: 4px
+  width: 0px
+  background: red
+  //$ctrl_primary
+  
+  #progress_ball
+    // progress ball
     content: ""
     position: absolute
-    height: 4px
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-  &::before
-    width: 10px
-    background: $ctrl_primary
-  &::after
-    background: $ctrl_primary
-    left: 5px
-    top: -4px
+    background: #f2f2f2
+    left: 0px
+    top: -5px
     height: 12px 
-    width: 12px
+    width: 12px 
     border-radius: 50%
 
 .controls-bottom
   i
-    font-size: 32px
+    font-size: 28px
     padding: 5px
     &:hover
-      color: $ctrl_secondary
-
+      color: $ctrl_primary
 
 
 // TRACK SECTION
-.track-container
-  padding: 5px 2px
-  .track-list
-    width: 100%
+.mp-bottom
+  height: 300px
+  overflow: auto 
+  padding: 5px 10px
+  border-top: 1px solid grey
 
-  .list-item
+  #track-list
+    width: 100%
+    .track-index
+      color: grey 
+      letter-spacing: .15em
+
+    .list-item
+      padding: 10px 2px
+      border-bottom: 1px solid $light
+      i
+        font-size: 28px
+      i.active
+        color: $ctrl_primary
 
   .song-title
     font: 18px Roboto ,Arial, san-serif
     text-size-adjust: 80%
+
+

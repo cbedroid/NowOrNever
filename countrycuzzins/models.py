@@ -227,6 +227,8 @@ class Song(models.Model):
         return f'{self.artist}{self.feature or "" } - {self.name}'
 
     def save(self, *args, **kwargs):
+        self.name = re.sub(' ','_',self.name)
+        self.slug = self.slug.lower().strip()
         super(Song, self).save(*args, **kwargs)
         path = pathToName(self, self.file)
         print('\nSELF.FILE.URL',path)
