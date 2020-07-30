@@ -62,9 +62,9 @@
                 <input type="hidden" name="songs_url" class="song_urls" value= "{{ song.file.url|space_escape}}">
                 <i class="mp-equalizer material-icons">equalizer</i>
                 {# REMOVE THIS #}
-                  <audio class="mp_audio">
+                  {% comment %} <audio class="mp_audio">
                     <source src="{{ song.file.url|space_escape}}" type="audio/mpeg">
-                  </audio>
+                  </audio> {% endcomment %}
               </li>
             {% endfor %}
           </ul>

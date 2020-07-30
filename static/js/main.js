@@ -1,3 +1,4 @@
+import { MusicPlayer } from "./musicplayer.js";
 var was_playing = [];
 $(document).ready(function () {
   const audio_tracks = $(".mp_audio");
