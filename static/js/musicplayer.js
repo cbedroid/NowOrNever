@@ -1,6 +1,11 @@
-class MusicPlayer extends Audio {
+export class MusicPlayer extends Audio {
   constructor(url) {
     super(url);
+    this.init = false;
+    this._status = false;
+    this.loaded = false;
+    this._song = "";
+    this._songs_length;
     this.startEvents();
 
     if (url) {
@@ -12,14 +17,22 @@ class MusicPlayer extends Audio {
 
   get _song_list() {
     // collect all songs url from DOM
-    return $(".song_urls").map(function () {
+    const sl = $(".song_urls").map(function () {
       return this.value;
     });
+
+    console.log(sl);
+    this._songs_length = sl.length;
+    return sl;
   }
 
   _parseName(track) {
-    name = track.match(/\/.*\/(.*\w*).mp3/i)[1];
-    return name.replace("_", " ");
+    try {
+      name = track.match(/\/.*\/(.*\w*).mp3/i)[1];
+      return name.replace("_", " ");
+    } catch {
+      return "";
+    }
   }
 
   set song(name) {
@@ -33,29 +46,72 @@ class MusicPlayer extends Audio {
     return this._song;
   }
 
-  load(path) {
+  _next_track(set_it) {
+    /* Set next available track for future reference 
+      *  This is  set incase user is lazy and jst hit the play button again
+          We will select next track for them.
+      */
+
+    //NOTE: need to rename the dataset "next_track" to something else  for clarity purpose
+
+    /* Step 1:  On every success track load ,--> see load(),  "setter" will set the current track.*/
+    /* Step 2: Following that, the logic below will decide what the next available track */
+
+    // Step 1
+    if (set_it !== undefined || set_it !== "undefined") {
+      //then set CURRENT TRACK
+      $("#ctr_next_track").data("next_track", set_it);
+    }
+
+    // Step 2
+    try {
+      const ct = parseInt($("#ctr_next_track").data("next_track"));
+      const next_track = ct + 1 < this._songs_length - 1 ? ct + 1 : 0;
+      $("#ctr_next_track").data("next_track", next_track);
+      console.log("NEXT TRACK", next_track);
+    } catch {
+      $("#ctr_next_track").data("next_track", 0);
+    }
+  }
+
+  load(index) {
+    this.loaded = false;
     // load audio track
     // If path is a number then get the url from songs_list.
     let url;
-    try {
-      url = isNaN(path) ? path : this._song_list[parseInt(path)];
-    } catch (e) {
-      console.error(`${path} is out of tracks range  `, e.message);
+
+    // check if songs are available
+    if (this._songs_length === 0) {
+      this.setDomName("No Tracks Available");
+      this._status = true;
+      return false;
+    } else if (index > this._songs_length - 1) {
+      this.setDomName("Sorry, This Tracks Unavailable");
+      this._status = true;
       return false;
     }
 
+    console.log("THIS._SONG_LIST", this._song_list, "\nIndex", index);
+    try {
+      url = this._song_list[parseInt(index)];
+    } catch (e) {
+      console.error(`Track ${index} is out of tracks range  `, e.message);
+      this._status = true;
+      return false;
+    }
+    console.log("load url", url);
     this.src = url;
     this.song = url;
     this.url = url;
+    this.init = true;
+    this.loaded = true;
+    this._next_track(index);
     return true;
   }
 
-  setDomName() {
+  setDomName(name) {
     // update the DOM with current track name
-    name = this._song;
-    if (this.state["ready"] === true) {
-      $("#current_track").text(name);
-    }
+    $("#current_track").text(name || this._song);
   }
 
   _clockTime(time) {
@@ -66,6 +122,7 @@ class MusicPlayer extends Audio {
     const sec = ("0" + Math.floor(time % 60)).slice(-2);
     return `${min}:${sec}`;
   }
+
   updateTrackTime() {
     /* Updates the Dom with current track time.
        Updates DOM progress meter.
@@ -94,10 +151,17 @@ class MusicPlayer extends Audio {
 
   pause() {
     super.pause();
+    $("#mp_play").removeClass("fa-pause").addClass("fa-play");
     if (this.INTERVAL) {
       clearInterval(this.INTERVAL);
       console.log("INTERVAL CLEARED");
     }
+  }
+
+  play() {
+    super.play();
+    $("#mp_play").removeClass("fa-play").addClass("fa-pause");
+    console.log("playing");
   }
 
   get state() {
@@ -106,6 +170,7 @@ class MusicPlayer extends Audio {
       ready: this.readyState === 4,
       playing: !this.paused,
       paused: this.paused,
+      loaded: this.loaded,
       song: this.song,
       url: this.url,
     };
@@ -122,5 +187,14 @@ class MusicPlayer extends Audio {
     $(audio).on("timeupdate", () => {
       this.updateTrackTime();
     });
+
+    $(audio).on("ended", () => {
+      // change pause button to play
+      $("#mp_play").removeClass("fa-pause").addClass("fa-play");
+
+      //TODO: add render next track
+    });
+
+    //TODO: Add on error
   }
 }
