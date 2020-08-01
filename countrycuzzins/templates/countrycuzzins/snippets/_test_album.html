@@ -40,7 +40,10 @@
                 <span id="progress_ball"></span>
                 </div>            
               </div>
-              <i class="fa fa-volume-up" aria-hidden="true"></i>
+              <i id="volume_btn" class="fa fa-volume-up" aria-hidden="true"></i>
+              <div class="" id="volume_slider_wrapper" style="display: none;">
+                <input type="range" name="volume_range" id="volume_slider" min="0" max="1" step=".1">
+              </div>
             </div>
             <div class="controls controls-bottom  flex flex--inline flex--sa" id="main-controls">
               <input type="hidden" name="current_track_index" id="ctr_next_track" data-next_track="0" >
@@ -56,17 +59,19 @@
         <div class="mp-bottom">
           <ul id="track-list">
             {% for song in albums.0.songslist %}
-            <small class="mp_track-index">track {{forloop.counter}}</small>
             {# Add thumbs icons here#}
-              <li class="track-list list-item flex flex--inline flex--sb" data-tracknumber={{forloop.counter}}>
-                <input type="hidden" name="songs_url" class="song_urls" value= "{{ song.file.url|space_escape}}">
-                <h4 class="song-title"> {{ song|re_sub:"_" }}</h4>
-                <i class="mp-equalizer material-icons">equalizer</i>
-                {# REMOVE THIS #}
-                  {% comment %} <audio class="mp_audio">
-                    <source src="{{ song.file.url|space_escape}}" type="audio/mpeg">
-                  </audio> {% endcomment %}
-              </li>
+              <div class="track-item" data-tracknumber={{forloop.counter}}>
+                <small class="mp_track-index">track {{forloop.counter}}</small>
+                <li class="track-item-inner list-item flex flex--inline flex--sb">
+                  <input type="hidden" name="songs_url" class="song_urls" value= "{{ song.file.url|space_escape}}">
+                  <h4 class="song-title"> {{ song|re_sub:"_" }}</h4>
+                  <i class="mp-equalizer active material-icons">equalizer</i>
+                  {# REMOVE THIS #}
+                    {% comment %} <audio class="mp_audio">
+                      <source src="{{ song.file.url|space_escape}}" type="audio/mpeg">
+                    </audio> {% endcomment %}
+                </li>
+              </div>
             {% endfor %}
           </ul>
         </div>

@@ -6,6 +6,7 @@ export class MusicPlayer extends Audio {
     this.loaded = false;
     this._song = "";
     this._songs_length;
+    this._next_track = 0;
     this.startEvents();
 
     if (url) {
@@ -45,8 +46,11 @@ export class MusicPlayer extends Audio {
     // get track name for DOM (NOT FROM DOM)
     return this._song;
   }
+  get next_track() {
+    return this._next_track !== undefined ? parseInt(this._next_track) : 0;
+  }
 
-  _next_track(set_it) {
+  set next_track(set_it) {
     /* Set next available track for future reference 
       *  This is  set incase user is lazy and jst hit the play button again
           We will select next track for them.
@@ -57,21 +61,33 @@ export class MusicPlayer extends Audio {
     /* Step 1:  On every success track load ,--> see load(),  "setter" will set the current track.*/
     /* Step 2: Following that, the logic below will decide what the next available track */
 
-    // Step 1
-    if (set_it !== undefined || set_it !== "undefined") {
+    // Step 1  Getting current track index for next step
+    if (set_it !== undefined || set_it !== "undefined" || !isNaN(set_it)) {
       //then set CURRENT TRACK
       $("#ctr_next_track").data("next_track", set_it);
+      console.log("Set_IT", set_it);
     }
 
-    // Step 2
+    // Step 2 Add current track by 1 to get next track.
     try {
       const ct = parseInt($("#ctr_next_track").data("next_track"));
-      const next_track = ct + 1 < this._songs_length - 1 ? ct + 1 : 0;
+
+      console.log("CT", ct);
+      // if track out of range then reset to 0
+      const next_track = ct + 1 <= this._songs_length - 1 ? ct + 1 : 0;
+
+      // update the DOM with new  next trac
       $("#ctr_next_track").data("next_track", next_track);
+
       console.log("NEXT TRACK", next_track);
-    } catch {
+    } catch (e) {
+      // on failure , just next track to  reset it to 0
+      consol.log("Next track failed", e.message);
       $("#ctr_next_track").data("next_track", 0);
     }
+
+    // Save next track for internal usage
+    this._next_track = $("#ctr_next_track").data("next_track");
   }
 
   load(index) {
@@ -79,6 +95,9 @@ export class MusicPlayer extends Audio {
     // load audio track
     // If path is a number then get the url from songs_list.
     let url;
+
+    // if "index" argument is not pass, then
+    // just load next track
 
     // check if songs are available
     if (this._songs_length === 0) {
@@ -105,7 +124,7 @@ export class MusicPlayer extends Audio {
     this.url = url;
     this.init = true;
     this.loaded = true;
-    this._next_track(index);
+    this.next_track = index;
     return true;
   }
 
@@ -189,10 +208,13 @@ export class MusicPlayer extends Audio {
     });
 
     $(audio).on("ended", () => {
+      // unloaded track
+      this.loaded = false;
       // change pause button to play
       $("#mp_play").removeClass("fa-pause").addClass("fa-play");
 
       //TODO: add render next track
+      this.load(this.next_track);
     });
 
     //TODO: Add on error
