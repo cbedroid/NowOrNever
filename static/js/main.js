@@ -4,7 +4,7 @@ var test;
 $(document).ready(() => {
   const Audio = new MusicPlayer();
   let seekInterval;
-  test = Audio;
+  var test = Audio;
   /**********************************
    *****  MUSIC PLAYER **********
    ***********************************/
@@ -28,9 +28,16 @@ $(document).ready(() => {
     if (Audio.init === false || Audio.ended === true) {
       // user did not slect track.. Play first track
       console.log(`Loading Track: ${Audio.src}`);
-      const auto_selected = Audio.next_track;
+      const nt = Audio.next_track;
+      const auto_selected = nt;
       const loaded = Audio.load(auto_selected);
-      if (loaded === true) Audio.play();
+      if (loaded === true) {
+        $(".mp-equalizer").removeClass("active");
+        const equalizer = $(".mp-equalizer")[nt];
+
+        $(equalizer).addClass("active");
+        Audio.play();
+      }
     }
   });
 
@@ -58,6 +65,7 @@ $(document).ready(() => {
 
     $(element).on("click", () => {
       let ct = Audio.currentTime;
+      console.log("CURRENTTIME MOUSEDOWN", ct, `CURRENT TRACK: ${Audio.url}`);
       if (Audio.state["loaded"]) {
         const SEEK = 5; // five second SEEK
         // Direction -1 == rewind  and 1 == fast forward
@@ -92,17 +100,17 @@ $(document).ready(() => {
     $("#volume_btn").click(function () {
       console.log("clicked");
       const vol_wrap = $("#volume_slider_wrapper");
-      $(vol_wrap).show();
+      $(vol_wrap).css("visibility", "visible");
 
       $("#volume_slider").on("change", function () {
         Audio.volume = $(this).val();
-        console.log($(this).val());
+        console.log(Audio.volume);
       });
       // hide the volume control
       $(vol_wrap).on("mouseleave", () => {
         console.log("leaving volume");
         setTimeout(() => {
-          $(vol_wrap).hide(1500);
+          $(vol_wrap).css("visibility", "hidden");
         }, 1000);
       });
     });

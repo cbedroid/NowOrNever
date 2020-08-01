@@ -29,8 +29,9 @@ export class MusicPlayer extends Audio {
 
   _parseName(track) {
     try {
-      name = track.match(/\/.*\/(.*\w*).mp3/i)[1];
-      return name.replace("_", " ");
+      //name = track.match(/\/.*\/(.*\w*).mp3/i)[1];
+      name = track.match(/\-\s*(.*.mp3)/i)[1];
+      return name.replace("/s/gi", "_");
     } catch {
       return "";
     }
@@ -119,7 +120,7 @@ export class MusicPlayer extends Audio {
       return false;
     }
     console.log("load url", url);
-    this.src = url;
+    this.src = encodeURI(url);
     this.song = url;
     this.url = url;
     this.init = true;
@@ -178,9 +179,9 @@ export class MusicPlayer extends Audio {
   }
 
   play() {
-    super.play();
     $("#mp_play").removeClass("fa-play").addClass("fa-pause");
     console.log("playing");
+    return super.play();
   }
 
   get state() {

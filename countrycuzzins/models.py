@@ -227,7 +227,7 @@ class Song(models.Model):
         return f'{self.artist}{self.feature or "" } - {self.name}'
 
     def save(self, *args, **kwargs):
-        self.name = re.sub(' ','_',self.name)
+        self.name = re.sub('\s|\W','_',self.name)
         self.slug = self.slug.lower().strip()
         super(Song, self).save(*args, **kwargs)
         path = pathToName(self, self.file)
@@ -315,14 +315,20 @@ def pathToName(instance, obj):
 #########################################################
 
 @receiver(models.signals.post_delete, sender=Image)
+@receiver(models.signals.post_delete, sender=Song)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     """
     Deletes file from filesystem
     when corresponding `MediaFile` object is deleted.
     """
-    if instance.image:
-        if os.path.isfile(instance.image.path):
-            os.remove(instance.image.path)
+    try:
+      if instance.image:
+          if os.path.isfile(instance.image.path):
+              os.remove(instance.image.path)
+    except:
+      if instance.file:
+        if os.path.isfile(instance.file.path):
+              os.remove(instance.file.path)
 
 
 ART = Article
