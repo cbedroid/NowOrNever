@@ -27,7 +27,9 @@ class ImageList(DetailView):
 class AlbumList(ListView):
     model = Album
     context_object_name = 'albums'
-    template_name='countrycuzzins/snippets/_music_player.html'
+    #template_name='countrycuzzins/snippets/_music_player.html'
+    # new Msic player testing
+    template_name='countrycuzzins/snippets/testing_music_player.html'
 
     def get_context_data(self, **kwargs):
           context = super().get_context_data(**kwargs)
@@ -55,4 +57,10 @@ def test_music_player(request):
   songs = Song.objects.all()
   context = {'music': songs}
   return render(request,"countrycuzzins/snippets/_music_player.html",context)
+
+def test_html(request):
+  #testing html 
+  context = {}
+  return render(request,"countrycuzzins/snippets/_testing.html",context)
+
 

@@ -8,9 +8,37 @@
   &--3
     z-index: 3
 
+// navigation
+#main_nav
+  background: $primary
+  color: $secondary
+  font: 600 .5rem  Arial, sans-serif
+
 #l_index_main_section
   width: 100vw
   height: 100vh
   margin: 0
   padding: 0
   background: $primary
+
+// modal id upcoming
+#modal_upcoming
+  //height: 50vh
+
+  #modal_upcoming_title
+    text-align: center
+    margin-left: 20px
+    color: $secondary
+    text-transform: uppercase
+    text-shadow: 2px 2px 5px #000
+    letter-spacing: .2em
+
+  .modal-body
+    img
+      height: 250px
+  .modal-footer
+    button:nth-child(1)
+
+    button:nth-child(2)
+      background: $secondary
+      color: $primary

@@ -2,106 +2,133 @@
 {% load static %}
 {% load countrycuzzins_extras %}
 {% block body %}
-<header>
-  <nav id="main_nav">
-    <ul class="nav-list m-flex m-flex--inline">
-      <li class="nav-item active">Home</li>
-      <li class="nav-item">Events</li>
-      <li class="nav-item">Music</li>
-      <li class="nav-item">Account</li>
-      <li class="nav-item">Sign In</li>
-      <li class="nav-item">Booking</li>
-      <li class="nav-item">My Account</li>
-    </ul>
-  </nav>
-</header>
+
+{% comment %}
+{% block header %}
+<nav id="main_nav">
+  <ul class="nav-list m-flex m-flex--inline">
+    <li class="nav-item active">Home</li>
+    <li class="nav-item">Events</li>
+    <li class="nav-item">Music</li>
+    <li class="nav-item">Account</li>
+    <li class="nav-item">Sign In</li>
+    <li class="nav-item">Booking</li>
+    <li class="nav-item">My Account</li>
+  </ul>
+</nav>
+{% endblock header %}
+{% endcomment %}
 <!-- New release modal -->
 <!-- Modal -->
-<div class="modal fade" id="modal_upcoming" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="m-title" id="modal_upcoming_title"> Coming Soon</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h5 class="m-title">Dreams 2 Reality</h5>
-        <p class="subtitle">By: Mr. Laidback</p>
-        <img class="m-img" src="static/images/5-mrlb-album-cover.png" alt="">
-      </div>
-      <div class="modal-footer" id=modal_upcoming_account>
-        <!-- add user account info here -->
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="m-btn btn btn-primary">Subscribe</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-<div class="row">
-  <div class="col-12">
-    <div class="m-widget">
-      <div class="m-banner m-banner--center">
-        <img class="m-img m-img--full" src="static/images/1-CC-logo.png" alt="Logo image">
-        <h1 class="m-title m-title--bg">Country Cuzzins</h1>
-        <p class="m-subtitle">Check out Country Cuzzins music</p>
-        <button class="m-btn m-btn-action" id="btn_action">Country Cuzzins' Album</button>
-      </div>
-    </div>
-    <hr>
-  </div>
-
-  <div class="col-12">
-    <div class="m-widget">
-      <h1 class="title">Coursel</h1>
-    </div>
-    <hr>
-  </div>
-</div>
-<div class="col-12">
-  <div class="m-widget">
-    <div class="card-deck-wrapper ">
-      <div class="card-deck">
-        <div class="card-nob">
-          <img class="card-img-top m-img m-img--round" src="static/images/3-microphone.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title">Country Rap Tunes</h4>
-            <p class="card-text">Country Cuzzins has their own, original flavor, from Mississippi. A sound that
-              consist of rap, blues, soul and melodic tunes, that they call "Country Rap Tunes" in respect to a Down
-              South Legend "Pimp C". Coming from the poorest state in America, Their lyrics are based on the everyday
-              struggles of living in the ghetto.</p>
-          </div>
+<section id="l_index_main_section">
+  {# Coming soon modal #}
+  <div class="modal fade" id="modal_upcoming" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="m-title" id="modal_upcoming_title"> Coming Soon</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="card-nob">
-          <img class="card-img-top m-img m-img--round" src="{% static 'media/images/decorative/4-equalizer.png' %} alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title">About County Cuzzins</h4>
-            <p class="card-text">From the dirty south, born and raised in Greenwood/Jackson, Ms. They came up
-              performing for family members and so on. They was introduced to blues, soul, rap and other music as they
-              were coming up that influenced their style of music. They also looked up too Southern rap groups such as
-              Outkast, UGK, 8ball and MJG and recently Young thug and rich homie Quan.</p>
-          </div>
+        <div class="modal-body">
+          <h5 class="m-title">Dreams 2 Reality</h5>
+          <p class="subtitle">By: Mr. Laidback</p>
+          <img class="m-img" src="{% static 'media/images/decorative/5-mrlb-album-cover.png' %}"
+            alt=" New Ablum Dreams 2 Reality by Mr. Laidback">
         </div>
-        <div class="card-nob">
-          <img class="card-img-top m-img m-img--round" src="{% static 'media/images/decorative/2-CC-pose.png' %}" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title">Be Inspired by Everything</h4>
-            <p class="card-text">Country Cuzzins inspiration came from the death of BottomBoyCort's brother Robert
-              "Spud" Brooks. They begin sharing their pain through their music. Becoming a house hold name, they just
-              want to be seen as Different from the rest and in their own lane. The whole southern rap culture is what
-              inspired them to put on.</p>
-          </div>
+        <div class="modal-footer" id=modal_upcoming_account>
+          <!-- add user account info here -->
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="m-btn btn btn-primary">Subscribe</button>
         </div>
       </div>
     </div>
   </div>
-  <hr>
-</div>
 
+
+  <div class="index-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="m-widget">
+            <div class="m-index m-index--top">
+              <div class="m-banner m-banner--center">
+                <img class="m-img" src="{% static 'media/images/decorative/1-CC-logo.png' %}"
+                  alt="Country Cuzzins logo">
+                <h1 class="m-title m-title--bg">Country Cuzzins</h1>
+                <p class="m-subtitle">Check out Country Cuzzins music</p>
+                <button class="m-btn m-btn-action" id="btn_action">Country Cuzzins' Album</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="m-widget" id="music-player">
+            {% include 'countrycuzzins/snippets/_music_player.html' %}
+          </div>
+          <hr>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="m-widget">
+          <h1 class="title">Coursel</h1>
+        </div>
+        <hr>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="m-widget">
+        <div class="card-deck-wrapper ">
+          <div class="card-deck">
+            <div class="card-nob">
+              <img class="card-img-top m-img m-img--round" src="{% static 'media/images/decorative/3-microphone.png' %}"
+                alt="Card image cap">
+              <div class="card-block">
+                <h4 class="card-title">Country Rap Tunes</h4>
+                <p class="card-text">Country Cuzzins has their own, original flavor, from Mississippi. A sound that
+                  consist of rap, blues, soul and melodic tunes, that they call "Country Rap Tunes" in respect to a Down
+                  South Legend "Pimp C". Coming from the poorest state in America, Their lyrics are based on the
+                  everyday
+                  struggles of living in the ghetto.</p>
+              </div>
+            </div>
+            <div class="card-nob">
+              <img class="card-img-top m-img m-img--round" src="{% static 'media/images/decorative/4-equalizer.png' %}"
+                alt="Card image cap">
+              <div class="card-block">
+                <h4 class="card-title">About County Cuzzins</h4>
+                <p class="card-text">From the dirty south, born and raised in Greenwood/Jackson, Ms. They came up
+                  performing for family members and so on. They was introduced to blues, soul, rap and other music as
+                  they
+                  were coming up that influenced their style of music. They also looked up too Southern rap groups such
+                  as
+                  Outkast, UGK, 8ball and MJG and recently Young thug and rich homie Quan.</p>
+              </div>
+            </div>
+            <div class="card-nob">
+              <img class="card-img-top m-img m-img--round" src="{% static 'media/images/decorative/2-CC-pose.png' %}"
+                alt="Card image cap">
+              <div class="card-block">
+                <h4 class="card-title">Be Inspired by Everything</h4>
+                <p class="card-text">Country Cuzzins inspiration came from the death of BottomBoyCort's brother Robert
+                  "Spud" Brooks. They begin sharing their pain through their music. Becoming a house hold name, they
+                  just
+                  want to be seen as Different from the rest and in their own lane. The whole southern rap culture is
+                  what
+                  inspired them to put on.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+</section>
 {% endblock body %}

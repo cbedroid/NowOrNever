@@ -6,8 +6,9 @@ $(document).ready(() => {
   const bs_nav = $("#main_nav"); //bootstrap navv
   let fired = false;
 
-  const md_upcoming = $("#modal_upcoming");
-  $(md_upcoming).modal("show");
+  /* MODAL */
+  // const md_upcoming = $("#modal_upcoming");
+  // $(md_upcoming).modal("show");
 
   // $(window).on("scroll", function () {
   //   console.log("Scroller running");

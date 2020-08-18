@@ -1,0 +1,48 @@
+{% extends "countrycuzzins/base.html" %}
+{% load static %}
+{% load countrycuzzins_extras%}
+{% block body %}
+<div class="player-container">
+  <div class="player player-top">
+    <div class="album-full-bgcover" style="background-image: url('{{ albums.0.image.image.url }}')"></div>
+    <div class="mp-controls-wrapper">
+      <h4 class="m-title" id="album_name">music player</h4>
+      <p class="m-subtitle" id="song_name">hello world</p>
+      <div class="mp-controls">
+        <div class="mp-controls--mid">
+          <input type="range" name="progress" id="progress" min="0" max="">
+          <span class="volume-tray">
+            <input type="range" name="volume" id="volume" min="0" max="1" step="0.1" value="1">
+            <i class="fa fa-volume-up" aria-hidden="true"></i>
+          </span>
+        </div>
+        <div class="mp-controls--mid">
+          <i class="fa fa-backward" id="rewind" aria-hidden="true"></i>
+          <i class="fa fa-pause" id="play" aria-hidden="true"></i>
+          <i class="fa fa-forward" id="rewind" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="player player--bottom">
+    <div class="songs-wrapper">
+      <ul class="song-list">
+        {% for song in albums.0.songslist %}
+        <li class="song-item">
+
+          <h4 class="song-title"> {{ song|re_sub:"_" }}</h4>
+          <i class="mp-equalizer material-icons">equalizer</i>
+        </li>
+        {% endfor %}
+
+
+      </ul>
+    </div>
+
+
+  </div>
+
+
+</div>
+
+{% endblock body %}

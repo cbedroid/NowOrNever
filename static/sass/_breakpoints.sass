@@ -1,6 +1,6 @@
 /**** BREAKPOINTS ****/
 /*** MEDIA QUERIES VARS ***/
-$mq_phone: "(max-device-width: 400px)"
+$mq_phone: "(max-device-width: 360px)"
 $mq_phone_portrait: "(max-device-width: 360px) and (orientation: portrait)"
 $mq_phone_tablet: "(max-device-width: 1024px)"
 $mq_tablet: "(min-device-width: 401px) and (max-device-width: 700px)"
@@ -9,4 +9,11 @@ $mq_tablet_laptop: "(min-device-width: 401px)"
 
 /*** BREAKPOINT VARS  ***/
 
-
+@media #{$mq-phone}
+  #main_musicplayer
+    i,li.fa
+      margin: 0
+      font-size: .5rem !important
+      padding: 0
+      width: 30px
+      background: green

@@ -1,26 +1,25 @@
 /**** BASES ****/
-*, *:hover, *::before, *::after
+*, *::before, *::after
+  padding: 0
+  margin: 0
   -webkit-box-sizing: border-box  /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box     /* Firefox, other Gecko */
   box-sizing: border-box          /* Opera/IE 8+ */
 
-body
-  font-family: Arial, Helvetica, sans-serif
-  font-size: 18px
+body,html
+  background: $primary
+  font: normal 16px Arial, "Helvetica Neue", Helvetica, sans-serif
   margin: 0
   padding: 0
-  width: 100%
-  height: 100%
+  width: 100vw
+  height: 100vh
+  background: red
+  color: #000
   overflow-x: hidden
-  background: $primary
 
-header
-  display: block
-  width: 100%
-
-  h1,h2,h3,h5,h5
-    padding: 0
-    margin: 0
+h1,h2,h3,h5,h5
+  padding: 0
+  margin: 0
 
 section
   display: block
@@ -29,16 +28,29 @@ ul
   padding: 0
   margin: 0
 
-li
-  list-style: none
+a,i,button
+  font: 700 1em "Anton", sans-serif
+  color: $primary
+  background: $secondary
+  border-radius: 10px
+  outline: none
+  border: none
+  :hover
+    outline: none
+    border: none
+    border-radius: 10px
 
-a
-  color: #000
-  text-decoration: none
-  &:hover
-    color: inherit
-    text-decoration: none
-
-a,i
+li,a,i,button
   &:hover
     cursor: pointer
+
+button
+  &:hover
+    border: none
+    outline: none
+
+li,li:hover
+  list-style: none
+a,a:hover
+  text-decoration: none
+  color: inherit
