@@ -27,7 +27,7 @@ class ImageList(DetailView):
 class AlbumList(ListView):
     model = Album
     context_object_name = 'albums'
-    template_name='countrycuzzins/snippets/_test_album.html'
+    template_name='countrycuzzins/snippets/_music_player.html'
 
     def get_context_data(self, **kwargs):
           context = super().get_context_data(**kwargs)
@@ -37,6 +37,7 @@ class AlbumList(ListView):
 
 def index(request):
     context = {'articles':Article.objects.all(),
+    'albums':Album.objects.all(), 'Images':Image.objects.all()
 
     }
     return render(request, "countrycuzzins/index.html", context)

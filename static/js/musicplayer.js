@@ -166,6 +166,12 @@ export class MusicPlayer extends Audio {
       // set progression bar
       $("#progress_meter").css("width", progress);
       $(progress_ball).css("left", `${Math.floor(progress)}px`);
+
+      // set pressball drag event
+      $(progress_ball).on("drag", function () {
+        console.log("dragging", progress);
+        $(this).css("left", `${Math.floor(progress)}px`);
+      });
     }
   }
 

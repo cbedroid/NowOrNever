@@ -1,6 +1,7 @@
 
 # static images and audio
 static/media/*
+android/*
 
 # Byte-compiled / optimized / DLL files
 

@@ -15,14 +15,27 @@ from PIL import Image as PIL_IMAGE
 
 
 
-
 MEDIA_ROOT = "static" + settings.MEDIA_ROOT
+
+#lambda instance, obj: "audio/{}.mp3".format(instance.name)
+def makeSongName(instance, obj,**kwargs):
+  #NOTE: This oly fires on creation of model NOT on every save
+  #*** TODO: Put this method in Model's save method to save on every save
+  print('\nMakeSongName',instance.name)
+  abspath = kwargs.get('abspath',False)
+  if abspath:
+    print('\nABSPATH',abspath)
+    return "{}/audio/{}.mp3".format(MEDIA_ROOT,instance.name)
+  print('\nNO ABSPATH',abspath)
+  return "audio/{}.mp3".format(instance.name)
+
 
 class OverwriteStorage(FileSystemStorage):
   
     def get_available_name(self, name, max_length=None):
         self.delete(name)
         return name
+
 def js_slugUrl(instance):
   """
     Hacky way to Build SlugField using ip and/or port of website.
@@ -58,7 +71,7 @@ def toNameSpace(instance, *args, **kwargs):
     print('\nNP ATTRNAME:',attr_name)
     setattr(instance,attr, attr_name)
     print('\nNP INSTANCE:',instance)
-    print(f"\n\nNP From instance: {instance.file.url}\n")
+    #print(f"\n\nNP From instance: {instance.file.url}\n")
     # NOTE:: If image does populate with extention
     # then add the extention to path below (save_info[1])
     new_name = f"{path}{instance.name}{ext}"
@@ -74,7 +87,6 @@ class Command(BaseCommand):
         return parser
 
 # Create your models here.
-
 
 class Image(models.Model):
     ''' Images  Model Class '''
@@ -215,7 +227,7 @@ class Song(models.Model):
                             help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
                             validators=[MinLengthValidator(4)]
                             )
-    file = models.FileField(max_length=120,verbose_name="song file",upload_to=lambda instance, obj: "audio/{}.mp3".format(instance.name),
+    file = models.FileField(max_length=120,verbose_name="song file",upload_to=makeSongName,
       storage=OverwriteStorage()
         )
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -229,15 +241,16 @@ class Song(models.Model):
     def save(self, *args, **kwargs):
         self.name = re.sub('\s|\W','_',self.name)
         self.slug = self.slug.lower().strip()
+        #self.file = makeSongName(self,self.name,abspath=True)
         super(Song, self).save(*args, **kwargs)
         path = pathToName(self, self.file)
         print('\nSELF.FILE.URL',path)
 
 
 #########################################################
-#           *************************                   #
-#           ****  HELP METHODS   ****                   #
-#           *************************                   #
+#               *************************               #
+#               ****  HELP METHODS   ****               #
+#               *************************               #
 #########################################################
 
 
@@ -271,10 +284,10 @@ def pathToName(instance, obj):
       name_of_obj = instance.name
 
       # check if the model objects has an url field
-      # if not hen return the current object untouched
+      # if not then return the current object untouched
       url = getattr(obj, 'url', None)
       if not url or not save_info:
-          print('Failed')
+          print('\nPathToNameFailed')
           return
 
       default_path = os.path.basename(obj.url)

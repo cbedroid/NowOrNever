@@ -1,49 +1,77 @@
 {% extends "countrycuzzins/base.html" %}
 {% load static %}
 {% load countrycuzzins_extras%}
-{% block body %} {# Delete -- ONLY FOR TESTING#}
-{# THIS IS THE TEST_HTML NOW#}
-  <!--- Music Player -->
-  <section id="m_musicplayer">
-  <!--mp top one-->
-  <nav id="mp_top_one" class="m-flex m-flex--inline m-flex--sb">
-    <i class="fa fa-backward" aria-hidden="true"></i>
-    <div>
-      <i class="fa fa-forward" aria-hidden="true"></i>
-    </div>
-  </nav>
-
-  <div class="album-container" style="background-image: url('{{ albums.0.image.image.url }}');">
-    <div class="m-coverscreen"></div>
-    <div class=" m-mp-album-top">
-      <!--MP TOP BEGIN-->
-
-            <!--mp top two-->
-      <div id="mp_top_two" class="m-hero">
-        <h3 class="m-title">{{ albums.0.name }}</h3>
+{% block body %}
+  <section id="main_musicplayer">
+    <!--MUSIC PLAYER TOP-->
+    <div class="cover-image" style="background-image: url('{{ albums.1.image.image.url }}')"></div>
+    <div class="mp-top flex ">
+      <!-- music headers -->
+      <nav class="nav" id="mp_navigation">
+        <ul class="nav-list flex flex--inline flex--sa">
+          <li class="nav-items">
+            <i class="fa fa-music" aria-hidden="true"></i>
+          </li>
+          <li class="nav-items">
+            <i class="fa fa-music" aria-hidden="true"></i>
+          </li>
+          <li class="nav-items">
+            <i class="fa fa-music" aria-hidden="true"></i>
+          </li>
+        </ul>
+      </nav>
+      <!-- musicplayer controls -->
+      <div id="mp_controls">
+        <div class="title-wrapper flex">
+          <h3 class="mp-title--top">{{ albums.1.name }}</h3> 
+          <h5 id="current_track" class="mp-subtitle"></h5>
+        </div>
+        <div class="track-info flex flex--inline flex--sa">
+          <h6 id="track_position"></h6>
+          <h6 id="track_duration"></h6>
+        </div>
+        <div class="controls controls-top flex flex--inline flex--sa">
+          <i id="repeater" class="fa fa-repeat" aria-hidden="true"></i>
+          
+          <div id="mp_progress">
+            <div id="progress_meter">
+            <span id="progress_ball" draggable=true></span>
+            </div>            
+          </div>
+          <i id="volume_btn" class="fa fa-volume-up" aria-hidden="true"></i>
+          <div class="" id="volume_slider_wrapper" style="visibility:hidden; position:absolute;top:35px; right:10px;">
+            <input type="range" name="volume_range" id="volume_slider" value="1" min="0" max="1" step=".1">
+          </div>
+        </div>
+        <div class="controls controls-bottom  flex flex--inline flex--sa" id="main-controls">
+          <input type="hidden" name="current_track_index" id="ctr_next_track" data-next_track="0" >
+          <i id="mp_rewind" class="fa fa-backward" aria-hidden="true"></i>
+          <i id="mp_play" class="fa fa-play" aria-hidden="true"></i>
+          <i id="mp_fast_forward" class="fa fa-forward" aria-hidden="true"></i>
+        </div>
       </div>
+      
     </div>
-    <!--MP TOP END-->
 
-    <!-- MP CONTENT-->
-    <div class="m-mp-album-content">
-      <ul>
-        {% for song in albums.0.songslist %}
-        <li class="song-items">
-          <h3>{{ song }} </h3>
-          <audio controls>
-            <source src="{{ song.file.url }}" type="audio/ogg">
-            <source src="{{ song.file.url }}" type="audio/mpeg">
-            Your browser does not support the audio element.
-          </audio>
-        </li>
-        {% empty %}
-        <h4>NO SONGS </h4>
+    <!--MUSIC PLAYER BOTTOM-->
+    <div class="mp-bottom">
+      <ul id="track-list">
+        {% for song in albums.1.songslist %}
+        {# Add thumbs icons here#}
+          <div class="track-item" data-tracknumber={{forloop.counter}}>
+            <small class="mp_track-index">track {{forloop.counter}}</small>
+            <li class="track-item-inner list-item flex flex--inline flex--sb">
+              <input type="hidden" name="songs_url" class="song_urls" value= "{{ song.file.url }}">
+              <h4 class="song-title"> {{ song|re_sub:"_" }}</h4>
+              <i class="mp-equalizer material-icons">equalizer</i>
+              {# REMOVE THIS #}
+                {% comment %} <audio class="mp_audio">
+                  <source src="{{ song.file.url|space_escape}}" type="audio/mpeg">
+                </audio> {% endcomment %}
+            </li>
+          </div>
         {% endfor %}
       </ul>
     </div>
-  </div>
-  </div>
-</section>
-
-{% endblock body %} {# Delete -- ONLY FOR TESTING#}
+  </section>
+{% endblock body %}

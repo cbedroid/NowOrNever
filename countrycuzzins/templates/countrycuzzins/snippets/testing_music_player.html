@@ -63,7 +63,7 @@
               <div class="track-item" data-tracknumber={{forloop.counter}}>
                 <small class="mp_track-index">track {{forloop.counter}}</small>
                 <li class="track-item-inner list-item flex flex--inline flex--sb">
-                  <input type="hidden" name="songs_url" class="song_urls" value= "{{ song.file.url|safe}}">
+                  <input type="hidden" name="songs_url" class="song_urls" value= "{{ song.file.url }}">
                   <h4 class="song-title"> {{ song|re_sub:"_" }}</h4>
                   <i class="mp-equalizer material-icons">equalizer</i>
                   {# REMOVE THIS #}

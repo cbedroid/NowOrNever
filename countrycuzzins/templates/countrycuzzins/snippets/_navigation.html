@@ -1,32 +1,46 @@
 {% extends "countrycuzzins/base.html" %}
 {% load static %}
 {% block header %}
-  <div class="l-nav-sticky">
-    <nav class="m-nav-main">
-      <div class="m-nav-items">
-        <img class="i-logo-img img-round" src="{% static 'media/images/Now_or_Never_Logo.png' %}" alt="LOGO" class="img img-round">
-        <h1 id="logo_title">Cuzzins</h1>
-      </div>
-      <ul class="m-nav-items">
-        <li class="m-menu-link"><a href="#">News</a></li>
-        <li class="m-menu-link"><a href="#">Music</a></li>
-        <li class="m-menu-link"><a href="#">Home</a></li>
-        <li class="m-menu-link"><a href="#">About</a></li>
-        {% if request.user.is_authenticated %}
-            <div class="dropdown open" id="m_nav_dd">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="m_bs_user_btn" data-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="false">
-                  {{ request.user }}
-                  </button>
-              <div class="dropdown-menu" aria-labelledby="m_bs_user_btn">
-                <a class="dropdown-item" href="#">Logout</a>
-              </div>
-            </div>
-        {% else %}
-          <li class="m-menu-link"><a href="#"> Logout</a></li>
-          <li class="m-menu-link"><a href="#"> Register</a></li>
-        {% endif %}
+ <section id="main_nav_container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main_nav">
+    <a class="navbar-brand" href="#">Home</a>
+    <span class="navbar-user navbar-brand">
+      {% if request.user.is_authenticated %}
+       <li class="nav-item">
+          <a class="user-profile-img" href="#Login_register" class="nav-link">
+            <i class="fa fa-user" aria-hidden="true"> </i>
+          {{ request.user }}
+          </a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+        </li>
+         <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            Login
+          </a>
+        </li>
+      {% endif %}
+
+      </span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Event<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Music</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
       </ul>
-    </nav>
-  </div>
+      
+    </div>
+  </nav>
+ </section>
 {% endblock header %}

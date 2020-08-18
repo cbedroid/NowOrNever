@@ -46,13 +46,12 @@ body
 #main_musicplayer
   width: 100%
   height: $player_height
-  margin-top: 100px
   background: $dark
   color: $light
   position: relative
   padding: 10px
   border-radius: 10px
-  border: 1px solid silver
+  border: 1px solid #1c1c1c
   
 .mp-top
   display: flex
@@ -95,12 +94,20 @@ body
 
 // PLAYER CONTROLS 
 #mp_controls
+  width: 95%
   position: absolute
   left: 0 
   right: 0
   bottom: 20px
   .controls-top
     margin-bottom: 15px
+
+  i
+    font-size: 28px
+    padding: 5px
+    &:hover
+      color: $ctrl_primary
+
 
 
   #volume_btn
@@ -196,6 +203,7 @@ body
     height: 12px 
     width: 12px 
     border-radius: 50%
+    cursor: pointer
 
 .controls-bottom
   i
@@ -237,5 +245,4 @@ body
   .song-title
     font: 18px Roboto ,Arial, san-serif
     text-size-adjust: 80%
-
 

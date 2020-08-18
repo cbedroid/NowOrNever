@@ -8,8 +8,12 @@ $(document).ready(() => {
   /**********************************
    *****  MUSIC PLAYER **********
    ***********************************/
-  // BIND REWIND AND FFWD
+  const is_mobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+    navigator.userAgent.toLowerCase()
+  );
 
+  const clicker = is_mobile ? "click" : "t";
+  // BIND REWIND AND FFWD
   bindSeekEvent("#mp_rewind", -1);
   bindSeekEvent("#mp_fast_forward", 1);
   volumeControl();
@@ -42,7 +46,7 @@ $(document).ready(() => {
   });
 
   // Set track when track is click
-  $(".track-item").click(function () {
+  $(".track-item").on("click", function () {
     $(".mp-equalizer").removeClass("active");
     $(this).find(".mp-equalizer").addClass("active");
 
@@ -97,7 +101,7 @@ $(document).ready(() => {
 
   // Bind Volume button
   function volumeControl() {
-    $("#volume_btn").click(function () {
+    $("#volume_btn").on("click", function () {
       console.log("clicked");
       const vol_wrap = $("#volume_slider_wrapper");
       $(vol_wrap).css("visibility", "visible");

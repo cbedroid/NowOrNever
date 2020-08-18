@@ -1,15 +1,51 @@
 /* Layout Navigation */
 
+
+
 header
   display: block
   width: 100vw
   max-height: 150px
-
-.l-nav-sticky
-  display: block
-  position: sticky
+  position: relative
   top: 0
-  z-index: 10
-  background: rgba(0, 0, 0, .5)
-  max-height: 85px
-  height: auto
+  z-index: 400
+
+
+#main_nav_container
+  height: 200px
+#main_nav 
+  /* bootstrap nav */
+  background: transparent !important
+  top: 50px
+  bottom: 20px
+  
+  a
+    font: 700 16px Helvetica, arial, sans-serif
+    transition: .3s ease-in
+    &:hover
+      color: $secondary
+  li
+    margin: 5px
+    &.active
+
+
+  i
+    font-size: 24px
+    padding: 5px
+
+.desktop-abs-right
+  position: flex
+  height: inherit
+  align-self: center
+  justify-self: center
+  position: absolute
+  height: inherit
+  right: 20px
+
+.override-nav-fixed
+  background: red
+  position: fixed
+  top: 0
+  bottom: 0 
+  left: 0
+  height: 0

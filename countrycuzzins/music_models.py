@@ -27,7 +27,7 @@ class Album(models.Model):
     id = models.AutoField(primary_key=True,null=False,blank=True)
     name = models.CharField(max_length=100, blank=False, unique=True)
     #name2 = models.CharField(max_length=100, blank=False, null=True,unique=False)
-    image = models.ForeignKey('Image', related_name='album_image', on_delete=models.DO_NOTHING)
+    image = models.ForeignKey('Image', related_name='album_image', null=True, blank=True, default="images/_no_image_profile.png" ,on_delete=models.DO_NOTHING)
     slug = models.SlugField(verbose_name="album url",max_length=80, unique=True,
                             blank=False, null=False,
                             help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
@@ -35,7 +35,7 @@ class Album(models.Model):
                             )
     songs = models.ManyToManyField(Song, verbose_name="list of songs",
                            help_text='<p style="color:#000; font-weight:700;"> Select ALL songs that will be on album</p>',
-                             )
+                           related_name="album_songs",  )
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
