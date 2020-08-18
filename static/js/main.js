@@ -12,7 +12,6 @@ $(document).ready(() => {
     navigator.userAgent.toLowerCase()
   );
 
-  const clicker = is_mobile ? "click" : "t";
   // BIND REWIND AND FFWD
   bindSeekEvent("#mp_rewind", -1);
   bindSeekEvent("#mp_fast_forward", 1);

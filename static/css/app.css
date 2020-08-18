@@ -22,7 +22,11 @@
     font-size: 0.5rem !important;
     padding: 0;
     width: 30px;
-    background: green; } }
+    background: green; }
+  #main_musicplayer #track-list {
+    background: red; }
+    #main_musicplayer #track-list .track-item {
+      letter-spacing: 0.1em; } }
 /**** PLUGINS *** */
 /**** BASES *** */
 *, *::before, *::after {
@@ -54,7 +58,7 @@ ul {
   padding: 0;
   margin: 0; }
 
-a, i, button {
+a, button {
   font: 700 1em "Anton", sans-serif;
   color: #fff;
   background: #f70303;
@@ -420,12 +424,10 @@ i {
   text-align: center;
   padding: 2px;
   width: 50px;
+  border-radius: 10px;
   max-height: 40px;
   transition: 0.3s;
   cursor: pointer; }
-  i:hover {
-    padding: inherit;
-    color: #e9e9e9; }
 
 .flex {
   display: flex;
@@ -443,7 +445,7 @@ i {
 body {
   background: grey; }
 
-#main_musicplayer {
+section#main_musicplayer {
   width: 100%;
   height: 500px;
   background: #1A1B1E;
@@ -488,43 +490,37 @@ body {
     background: rgba(0, 0, 0, 0.8);
     z-index: 1; }
 
-#mp_navigation {
-  margin: 0;
-  display: flex;
-  max-height: 100px;
-  padding: 10px 0; }
-  #mp_navigation .nav-list {
-    width: 100%;
-    color: #e9e9e9; }
-
-#mp_controls {
+.mp-controls-container {
   width: 95%;
   position: absolute;
   top: 30px;
   left: 0;
   right: 0;
   bottom: 100px; }
-  #mp_controls .controls-top {
+  .mp-controls-container .controls-top {
     margin-bottom: 5px; }
-  #mp_controls i {
+  .mp-controls-container .mp-subtitle {
+    margin-top: 5px; }
+  .mp-controls-container i {
     font-size: 28px;
     padding: 5px;
-    transition: 0.3s ease-in-out; }
-    #mp_controls i:hover {
+    transition: 0.3s ease-in-out;
+    border-radius: 10px; }
+    .mp-controls-container i:hover {
       padding: 5px;
       color: #fff;
       background: #f44336; }
-  #mp_controls .volume-control {
+  .mp-controls-container .volume-control {
     display: block;
     max-width: 50px;
     position: relative; }
-  #mp_controls .volume-container {
+  .mp-controls-container .volume-container {
     display: block;
     transform: rotateZ(270deg);
     position: absolute;
     left: 30%;
     top: -50%; }
-    #mp_controls .volume-container.mobile {
+    .mp-controls-container .volume-container.mobile {
       position: absolute;
       left: -150%;
       top: -150%;
@@ -532,7 +528,7 @@ body {
       transform: rotateZ(0deg);
       height: 10px;
       width: 100px; }
-    #mp_controls .volume-container #volume_slider {
+    .mp-controls-container .volume-container #volume_slider {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
@@ -542,10 +538,10 @@ body {
       opacity: 0.7;
       -webkit-transition: 0.2s;
       transition: opacity 0.2s; }
-    #mp_controls .volume-container #volume_slider:hover {
+    .mp-controls-container .volume-container #volume_slider:hover {
       opacity: 1;
       height: 8px; }
-    #mp_controls .volume-container #volume_slider::-webkit-slider-thumb {
+    .mp-controls-container .volume-container #volume_slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
       width: 15px;
@@ -553,7 +549,7 @@ body {
       background: #f44336;
       cursor: pointer;
       border-radius: 50%; }
-    #mp_controls .volume-container #volume_slider::-moz-range-thumb {
+    .mp-controls-container .volume-container #volume_slider::-moz-range-thumb {
       width: 25px;
       height: 25px;
       background: #4CAF50;
@@ -569,6 +565,7 @@ body {
     font-family: "Racing Sans One", cursive;
     letter-spacing: 0.15em; }
   .title-wrapper .mp-subtitle {
+    color: #fff;
     font: 500 18px Oswald, "Roboto Slab", Merriweather;
     letter-spacing: 0.15em; }
 
@@ -601,7 +598,7 @@ body {
     cursor: pointer; }
 
 .controls-bottom {
-  margin-top: 1.5em; }
+  margin-top: 0.5em; }
 
 .mp-bottom {
   height: 250px;
@@ -614,7 +611,8 @@ body {
     .mp-bottom #track-list .track-item {
       transition: 0.3s;
       border-radius: 5px;
-      padding: 5px; }
+      padding: 5px;
+      letter-spacing: 0.15em; }
       .mp-bottom #track-list .track-item:hover {
         cursor: pointer;
         background: rgba(244, 67, 54, 0.3); }
@@ -625,9 +623,8 @@ body {
       padding: 10px 2px;
       border-bottom: 1px solid #e9e9e9; }
       .mp-bottom #track-list .list-item i {
+        align-self: flex-end;
         font-size: 1.3em; }
-        .mp-bottom #track-list .list-item i:hover {
-          padding: inherit; }
       .mp-bottom #track-list .list-item i.active {
         color: #f44336;
         background: #e9e9e9; }

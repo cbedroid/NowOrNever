@@ -30,7 +30,8 @@ export class MusicPlayer extends Audio {
   _parseName(track) {
     try {
       //name = track.match(/\/.*\/(.*\w*).mp3/i)[1];
-      name = track.match(/\-\s*(.*.mp3)/i)[1];
+      //name = track.match(/\-\s*(.*.mp3)/i)[1];
+      name = track.match(/audio\/*(.*.mp3)/i)[1];
       return name.replace("/s/gi", "_");
     } catch {
       return "";
@@ -131,7 +132,9 @@ export class MusicPlayer extends Audio {
 
   setDomName(name) {
     // update the DOM with current track name
-    $("#current_track").text(name || this._song);
+    const name_of_track = name || this._song;
+    $("#current_track").text(name_of_track);
+    console.log("Current Song", name_of_track);
   }
 
   _clockTime(time) {
@@ -206,7 +209,7 @@ export class MusicPlayer extends Audio {
     const audio = this;
     //play event
     $(audio).on("play", () => {
-      this.setDomName();
+      this.setDomName(this._song);
     });
 
     // Update DOM with track duration and currentTime

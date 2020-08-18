@@ -16,17 +16,16 @@ $ctrl_primary: rgb(244, 67, 54)
 $ctrl_primary_rgba: rgba(244,67,54,.3)
 $ctrl_secondary: #03A9F4
 
+// Base rules for icon
 i
   verticle-align: middle
   text-align: center
   padding: 2px
   width: 50px
+  border-radius: 10px
   max-height: 40px
   transition: .3s
   cursor: pointer
-  &:hover
-    padding: inherit
-    color: $light
 
 .flex
   display: flex
@@ -44,7 +43,7 @@ i
 body
   background: grey
 
-#main_musicplayer
+section#main_musicplayer
   width: 100%
   height: $player_height
   background: $dark
@@ -55,6 +54,7 @@ body
   border: 1px solid #1c1c1c
   overflow: hidden
 
+// musicplayer top window 
 .mp-top
   display: flex
   flex-direction: column
@@ -80,18 +80,8 @@ body
     background: rgba(0,0,0,.8)
     z-index: 1
 
-#mp_navigation
-  margin: 0
-  display: flex
-  max-height: 100px
-  padding: 10px 0
-
-  .nav-list
-    width: 100%
-    color: $light
-
 // PLAYER CONTROLS 
-#mp_controls
+.mp-controls-container
   width: 95%
   position: absolute
   top: 30px
@@ -101,10 +91,14 @@ body
   .controls-top
     margin-bottom: 5px
 
+  .mp-subtitle
+    margin-top: 5px
+
   i
     font-size: 28px
     padding: 5px
     transition: .3s ease-in-out
+    border-radius: 10px
     &:hover
       padding: 5px
       color: #fff
@@ -173,6 +167,7 @@ body
     font-family: 'Racing Sans One', cursive
     letter-spacing: .15em
   .mp-subtitle
+    color: #fff
     font: 500 18px  Oswald, "Roboto Slab", Merriweather
     letter-spacing: .15em
 
@@ -209,13 +204,7 @@ body
     cursor: pointer
 
 .controls-bottom
-  margin-top: 1.5em
-  // i
-  //   font-size: 1em
-  //   padding: 5px
-  //   &:hover
-  //     padding: 5px
-  //     color: $ctrl_primary
+  margin-top: .5em
 
 // TRACK SECTION
 .mp-bottom
@@ -231,6 +220,7 @@ body
       transition: .3s
       border-radius: 5px
       padding: 5px
+      letter-spacing: .15em
       &:hover
         cursor: pointer
         background: $ctrl_primary_rgba
@@ -243,9 +233,9 @@ body
       padding: 10px 2px
       border-bottom: 1px solid $light
       i
+        align-self: flex-end
         font-size: 1.3em
-        &:hover
-          padding: inherit
+
       i.active
         color: $ctrl_primary
         background: $light

@@ -6,6 +6,7 @@ $(document).ready(() => {
   const bs_nav = $("#main_nav"); //bootstrap navv
   let fired = false;
 
+  //
   /* MODAL */
   // const md_upcoming = $("#modal_upcoming");
   // $(md_upcoming).modal("show");
