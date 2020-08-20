@@ -8,6 +8,13 @@ export class MusicPlayer extends Audio {
     this._songs_length;
     this._next_track = 0;
     this.startEvents();
+    // Set audio progress width  according to musicplayer container width
+    let pw = $('#main_musicplayer').innerWidth();
+    this._PROGRESS_WIDTH = parseInt(pw / 3);
+    console.log('PW', this._PROGRESS_WIDTH);
+    $('#mp_progress').width(this._PROGRESS_WIDTH)
+    //this.PROGRESS_WIDTH = 200; // width of HTML progress bar
+
 
     if (url) {
       console.log("URL", url);
@@ -22,7 +29,6 @@ export class MusicPlayer extends Audio {
       return this.value;
     });
 
-    console.log(sl);
     this._songs_length = sl.length;
     return sl;
   }
@@ -67,14 +73,12 @@ export class MusicPlayer extends Audio {
     if (set_it !== undefined || set_it !== "undefined" || !isNaN(set_it)) {
       //then set CURRENT TRACK
       $("#ctr_next_track").data("next_track", set_it);
-      console.log("Set_IT", set_it);
     }
 
     // Step 2 Add current track by 1 to get next track.
     try {
       const ct = parseInt($("#ctr_next_track").data("next_track"));
 
-      console.log("CT", ct);
       // if track out of range then reset to 0
       const next_track = ct + 1 <= this._songs_length - 1 ? ct + 1 : 0;
 
@@ -112,7 +116,6 @@ export class MusicPlayer extends Audio {
       return false;
     }
 
-    console.log("THIS._SONG_LIST", this._song_list, "\nIndex", index);
     try {
       url = this._song_list[parseInt(index)];
     } catch (e) {
@@ -120,7 +123,6 @@ export class MusicPlayer extends Audio {
       this._status = true;
       return false;
     }
-    console.log("load url", url);
     this.src = encodeURI(url);
     this.song = url;
     this.url = url;
@@ -137,6 +139,7 @@ export class MusicPlayer extends Audio {
     console.log("Current Song", name_of_track);
   }
 
+
   _clockTime(time) {
     // format time to clock representation
 
@@ -146,54 +149,59 @@ export class MusicPlayer extends Audio {
     return `${min}:${sec}`;
   }
 
+  pause() {
+    super.pause();
+    $("#mp_play").removeClass("fa-pause").addClass("fa-play");
+    if (this.INTERVAL) {
+      clearInterval(this.INTERVAL);
+    }
+  }
+
+  play() {
+    $("#mp_play").removeClass("fa-play").addClass("fa-pause");
+    return super.play();
+  }
+
   updateTrackTime() {
     /* Updates the Dom with current track time.
        Updates DOM progress meter.
     */
+    const AUDIO = this;
     const playing =
       this.paused === false && this.ended === false && this.readyState === 4;
 
     if (playing === true) {
-      const MAX_WIDTH = 200; // width of HTML progress bar
       const position = $("#track_position");
       const duration = $("#track_duration");
-      const progress_ball = $("#progress_ball");
+      const progress_val = $("#progress_meter").val();
 
-      const wps = MAX_WIDTH / this.duration; // width per second
-      let progress = (wps * this.currentTime).toFixed(2);
+      const wps = this._PROGRESS_WIDTH / this.duration; // width per second
+      //let progress = (wps * this.currentTime).toFixed(2)
+      let progress = (wps * this.currentTime);
 
       // set DOM track time
       $(position).text(this._clockTime(this.currentTime));
       $(duration).text(this._clockTime(this.duration));
 
       // set progression bar
-      $("#progress_meter").css("width", progress);
-      $(progress_ball).css("left", `${Math.floor(progress)}px`);
+      $("#progress_meter").val(progress);
+      //console.log('Progress',progress);
 
       // set pressball drag event
-      $(progress_ball).on("drag", function () {
-        console.log("dragging", progress);
-        $(this).css("left", `${Math.floor(progress)}px`);
+      $("#progress_meter").on("mousedown", function () {AUDIO.pause()});
+      $('#progress_meter').on("mouseup",()=>{
+        const pg_val = $("#progress_meter").val();
+        //console.log("dragging", pg_val * wps );
+        this.currentTime =  pg_val * wps;
+        $(this).val(`${Math.floor(pg_val * wps)}`);
+          AUDIO.play();
       });
+
+
     }
   }
 
-  pause() {
-    super.pause();
-    $("#mp_play").removeClass("fa-pause").addClass("fa-play");
-    if (this.INTERVAL) {
-      clearInterval(this.INTERVAL);
-      console.log("INTERVAL CLEARED");
-    }
-  }
-
-  play() {
-    $("#mp_play").removeClass("fa-play").addClass("fa-pause");
-    console.log("playing");
-    return super.play();
-  }
-
-  get state() {
+    get state() {
     // return info about the current audio player
     return {
       ready: this.readyState === 4,

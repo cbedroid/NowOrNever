@@ -25,7 +25,8 @@ i
   border-radius: 10px
   max-height: 40px
   transition: .3s
-  cursor: pointer
+  &:hover
+    +CrossBrowser(cursor, pointer)
 
 .flex
   display: flex
@@ -40,9 +41,13 @@ i
 .hidden
   display: none
 
-body
-  background: grey
+input[type="range"]::-webkit-slider-thumb
+  &:hover
+    +CrossBrowser(cursor,grab)
+  &:active
+    +CrossBrowser(cursor, grabbing)
 
+// BASE END 
 section#main_musicplayer
   width: 100%
   height: $player_height
@@ -95,7 +100,7 @@ section#main_musicplayer
     margin-top: 5px
 
   i
-    font-size: 28px
+    font-size: 1.2rem
     padding: 5px
     transition: .3s ease-in-out
     border-radius: 10px
@@ -104,26 +109,68 @@ section#main_musicplayer
       color: #fff
       background: $ctrl_primary
 
-  .volume-control
+  .track-info
+    margin: 0 45px
+
+// Progress Bar  
+#mp_progress
+  display: block
+  width: 200px
+  align-self: center
+  padding: 10px 0
+
+  input[type="range"]
+    display: block
+    +CrossBrowser(appearance,none)
+    +CrossBrowser(border-radius, 10px)
+    +CrossBrowser(transition,.2s)
+    width: 100%
+    height: 8px
+    background: #d3d3d3
+    outline: none
+    opacity: 0.7
+
+    //* Mouse-over effects */
+    input[type="range"]:hover
+      +CrossBrowser(opacity,1)
+      height: 8px
+
+  input[type="range"]::-webkit-slider-thumb
+    -webkit-appearance: none
+    border: none
+    width: 15px
+    height: 15px
+    background: red
+    +CrossBrowser(cursor, grab)
+    border-radius: 50%
+    transform: translateX(-50%)
+    &:active
+      +CrossBrowser(cursor, grabbing)
+
+  //CONTROLS PANEL
+.control--middle
+  display: block
+  width: 100%
+  min-height: 25px
+  position: relative
+
+  // VOLUME PANEL 
+  .volume-control-container
     display: block
     max-width: 50px
-    position: relative
 
-  .volume-container
+  .volume-slider-panel
     display: block
-    transform: rotateZ(270deg)
     position: absolute
-    left: 30%
-    top: -50%
-    &.mobile
-      position: absolute
-      left: -150%
-      top: -150%
-      bottom: 50%
-      transform: rotateZ(0deg)
+    left: calc(100% -  65px )
+    top: 0px
+    width: 100px
+    background: #1c1c1c
+    border: 1px  solid #000
+    border-radius: 10px
+    padding: 5px
+    +CrossBrowser(transform, rotateZ(270deg))
 
-      height: 10px /* reverse since rotated.. width is height */
-      width: 100px
     #volume_slider
       -webkit-appearance: none  /* Override default CSS styles */
       appearance: none
@@ -147,14 +194,20 @@ section#main_musicplayer
       width: 15px /* Set a specific slider handle width */
       height: 20px /* Slider handle height */
       background: $ctrl_primary /* background */
-      cursor: pointer /* Cursor on hover */
+      cursor: grabbing /* Cursor on hover */
       border-radius: 50%
+      &:hover
+        +CrossBrowser(cursor,grab)
+      &:active
+        +CrossBrowser(cursor,grabbing)
 
     #volume_slider::-moz-range-thumb
       width: 25px /* Set a specific slider handle width */
       height: 25px /* Slider handle height */
       background: #4CAF50 /* Green background */
-      cursor: pointer /* Cursor on hover */
+      cursor: grabbing /* Cursor on hover */
+      &:hover
+        cursor: grabbing
 
 .title-wrapper
   margin-bottom: 40px
@@ -170,38 +223,6 @@ section#main_musicplayer
     color: #fff
     font: 500 18px  Oswald, "Roboto Slab", Merriweather
     letter-spacing: .15em
-
-.track-info
-  margin: 0 45px
-
-#mp_progress
-  display: block
-  width: 200px
-  height: 4px
-  background: rgba(255, 255, 255, 0.3)
-  border-radius: 10px
-  position: relative
-
-#progress_meter
-  // progress bar
-  display: block
-  position: relative
-  height: 4px
-  width: 0px
-  background: red
-  //$ctrl_primary
-
-  #progress_ball
-    // progress ball
-    content: ""
-    position: absolute
-    background: #f2f2f2
-    left: 0px
-    top: -5px
-    height: 12px
-    width: 12px
-    border-radius: 50%
-    cursor: pointer
 
 .controls-bottom
   margin-top: .5em
@@ -245,3 +266,22 @@ section#main_musicplayer
     max-width: 85%
     font: 1em Roboto ,Arial, san-serif
     text-size-adjust: 80%
+
+// Mobile Version 
+#main_musicplayer.mobile
+  #mp_progress
+    width: 150px
+
+  .control--middle
+    display: block
+    width: 100%
+    height: 55px
+    position: relative
+
+    .volume-slider-panel
+      display: block
+      width: 100px
+      position: absolute
+      top: calc(100% - 20px)
+      left: calc(100% - 110px)
+      +CrossBrowser(transform, rotateZ(0deg))

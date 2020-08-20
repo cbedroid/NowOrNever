@@ -11,6 +11,24 @@ $(document).ready(() => {
   const is_mobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
     navigator.userAgent.toLowerCase()
   );
+  
+  /* APPLY STYLE ON MOBILE */
+  if (is_mobile){
+    
+    // add mobile class to corresponding element
+    // thats using a mobile device
+    $('section div ul').each(function(i,e){
+    if ($(e).data('mobile')){
+      console.log('Adding Mobile',e)
+     $(e).removeClass('desktop').addClass('mobile');
+     return e;    
+    }
+    });
+    // Set audio progress width 
+    //AUDIO.PROGRESS_WIDTH = 
+  }
+
+
 
   // BIND REWIND AND FFWD
   bindSeekEvent("#mp_rewind", -1);
@@ -54,7 +72,6 @@ $(document).ready(() => {
       Audio.load(parseInt(track) - 1);
       Audio.play();
     }
-    console.log({ track });
   });
 
   function setAudioTime(time) {

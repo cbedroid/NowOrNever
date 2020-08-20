@@ -1,4 +1,11 @@
 /**** MIXINS ****/
+// Cross Browser Property
+=CrossBrowser($name,$style)
+  -moz-#{$name}: #{$style}
+  -webkit-#{$name}: #{$style}
+  -ms-#{$name}: #{$style}
+  -o-#{$name}: #{$style}
+  #{$name}: #{$style}
 
 =position_zero
   // zero out all position element 

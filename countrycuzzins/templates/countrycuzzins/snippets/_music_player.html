@@ -2,7 +2,7 @@
 {% load static %}
 {% load countrycuzzins_extras%}
 {% block body %}
-<section id="main_musicplayer">
+<section id="main_musicplayer" data-mobile="true" class="desktop">
   <!--MUSIC PLAYER TOP-->
   <div class="cover-image" style="background-image: url('{{ albums.0.image.image.url }}')"></div>
   <div class="mp-top flex ">
@@ -26,14 +26,11 @@
         <div class="controls controls-top flex flex--inline flex--sa">
           <i id="repeater" class="fa fa-repeat" aria-hidden="true"></i>
           <div id="mp_progress">
-            <div id="progress_meter">
-              <span id="progress_ball" draggable=true></span>
-            </div>
+            <input type="range" class="progress-slider" id="progress_meter" min="0" max="200" value="0">
           </div>
-          <div class="volume-control">
+          <div class="volume-control-container">
             <i id="volume_btn" class="fa fa-volume-up" aria-hidden="true"></i>
-            <div class="volume-container " id="volume_slider_wrapper"
-              style="visibility:hidden; position:absolute;top:35px; right:10px;">
+            <div class="volume-slider-panel" id="volume_slider_wrapper" style="visibility:hidden;">
               <input type="range" name="volume_range" id="volume_slider" value="1" min="0" max="1" step=".1">
             </div>
           </div>
