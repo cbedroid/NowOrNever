@@ -8,13 +8,13 @@ export class MusicPlayer extends Audio {
     this._songs_length;
     this._next_track = 0;
     this.startEvents();
+
     // Set audio progress width  according to musicplayer container width
     let pw = $('#main_musicplayer').innerWidth();
     this._PROGRESS_WIDTH = parseInt(pw / 3);
-    console.log('PW', this._PROGRESS_WIDTH);
     $('#mp_progress').width(this._PROGRESS_WIDTH)
+    $('#progress_meter').attr('max',this._PROGRESS_WIDTH)
     //this.PROGRESS_WIDTH = 200; // width of HTML progress bar
-
 
     if (url) {
       console.log("URL", url);
@@ -188,8 +188,10 @@ export class MusicPlayer extends Audio {
       //console.log('Progress',progress);
 
       // set pressball drag event
-      $("#progress_meter").on("mousedown", function () {AUDIO.pause()});
-      $('#progress_meter').on("mouseup",()=>{
+      $("#progress_meter").on("mousedown vmousedown", function () {
+        
+        AUDIO.pause()});
+      $('#progress_meter').on("mouseup vmouseup",()=>{
         const pg_val = $("#progress_meter").val();
         //console.log("dragging", pg_val * wps );
         this.currentTime =  pg_val * wps;

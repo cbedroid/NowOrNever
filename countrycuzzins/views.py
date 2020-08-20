@@ -37,6 +37,7 @@ class AlbumList(ListView):
           return context
 
 
+@never_cache
 def index(request):
     context = {'articles':Article.objects.all(),
     'albums':Album.objects.all(), 'Images':Image.objects.all()

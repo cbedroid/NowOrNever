@@ -59,6 +59,11 @@ section#main_musicplayer
   border: 1px solid #1c1c1c
   overflow: hidden
 
+.mp-subtitle
+  margin-top: 5px
+  font-size: .8em
+  color: $secondary
+
 // musicplayer top window 
 .mp-top
   display: flex
@@ -93,12 +98,6 @@ section#main_musicplayer
   left: 0
   right: 0
   bottom: 100px
-  .controls-top
-    margin-bottom: 5px
-
-  .mp-subtitle
-    margin-top: 5px
-
   i
     font-size: 1.2rem
     padding: 5px
@@ -108,6 +107,9 @@ section#main_musicplayer
       padding: 5px
       color: #fff
       background: $ctrl_primary
+
+  .controls--top
+    margin-bottom: 5px
 
   .track-info
     margin: 0 45px
@@ -269,6 +271,18 @@ section#main_musicplayer
 
 // Mobile Version 
 #main_musicplayer.mobile
+  i
+    font-size: 1rem
+    verticle-align: middle
+    text-align: center
+    padding: 5px
+    width: 50px
+    border-radius: 10px
+    max-height: 40px
+    transition: .3s
+    &:hover
+      +CrossBrowser(cursor, pointer)
+
   #mp_progress
     width: 150px
 

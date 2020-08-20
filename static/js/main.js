@@ -11,24 +11,21 @@ $(document).ready(() => {
   const is_mobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
     navigator.userAgent.toLowerCase()
   );
+
   
   /* APPLY STYLE ON MOBILE */
   if (is_mobile){
+    $('i a button li .fa').css({'cursor':'pointer'});
     
     // add mobile class to corresponding element
     // thats using a mobile device
     $('section div ul').each(function(i,e){
     if ($(e).data('mobile')){
-      console.log('Adding Mobile',e)
      $(e).removeClass('desktop').addClass('mobile');
      return e;    
     }
     });
-    // Set audio progress width 
-    //AUDIO.PROGRESS_WIDTH = 
   }
-
-
 
   // BIND REWIND AND FFWD
   bindSeekEvent("#mp_rewind", -1);
@@ -36,7 +33,7 @@ $(document).ready(() => {
   volumeControl();
 
   // music play button
-  $("#mp_play").on("click", function () {
+  $("#mp_play").on("click" ,function () {
     if (Audio.init && $(this).hasClass("fa-pause")) {
       //then the audio is playing then stop it
       console.log("init paused ");
@@ -45,9 +42,9 @@ $(document).ready(() => {
       Audio.play();
     }
 
-    // user press play button without selecting track
+    // method: for user pressing play button without selecting track
     if (Audio.init === false || Audio.ended === true) {
-      // user did not slect track.. Play first track
+      // If user did not slect track.. Play first track
       console.log(`Loading Track: ${Audio.src}`);
       const nt = Audio.next_track;
       const auto_selected = nt;
@@ -75,33 +72,35 @@ $(document).ready(() => {
   });
 
   function setAudioTime(time) {
-    console.log("TIMER", time);
+    // Set Audio Player track time
     Audio.currentTime = time;
   }
 
   // Rewind track button
   function bindSeekEvent(element, direction) {
     // Bind both rewind and fast forward to mouse click event
-
+    let ct = 0;
     $(element).on("click", () => {
-      let ct = Audio.currentTime;
-      console.log("CURRENTTIME MOUSEDOWN", ct, `CURRENT TRACK: ${Audio.url}`);
+      ct = Audio.currentTime;
       if (Audio.state["loaded"]) {
-        const SEEK = 5; // five second SEEK
-        // Direction -1 == rewind  and 1 == fast forward
+        const SEEK = 5; 
+        // hint: Direction -1 == rewind  and 1 == fast forward
 
         const seek = direction < 0 ? -SEEK : SEEK;
         /* NOTE: no need to worry setting Audio currentTime over range negative or positive
            The built in audio module will handle this correctly */
-        ct += seek;
-        setAudioTime(ct);
 
+        // Bind long-press rewind and fast-forward button for desktop and mobile
         $(element).on("mousedown", () => {
           seekInterval = setInterval(() => {
-            ct = Audio.currentTime;
-            ct += seek;
-            console.log("MouseDown", ct);
-            setAudioTime(ct);
+            if (direction < 0 ) {
+              ct = Audio.currentTime - 5;
+             } else {
+               ct = Audio.currentTime + 5
+             }
+
+            // TODO: fixed both seek btn when pressed for the first time
+            if (ct > 0 ) setAudioTime(ct.toFixed(2));
           }, 100);
         }); // mousedown
       } // if statement
@@ -109,16 +108,15 @@ $(document).ready(() => {
 
     $(element).on("mouseup", () => {
       /* Remove interval and release Audio.currentTime */
+      console.log('SEEK TIME',ct.toFixed(2))
       clearInterval(seekInterval);
       $(element).off("mousedown");
-      console.log("interval cleared");
     }); // mouseup
   } // end function bindSeekEvent
 
   // Bind Volume button
   function volumeControl() {
     $("#volume_btn").on("click", function () {
-      console.log("clicked");
       const vol_wrap = $("#volume_slider_wrapper");
       $(vol_wrap).css("visibility", "visible");
 
@@ -128,7 +126,6 @@ $(document).ready(() => {
       });
       // hide the volume control
       $(vol_wrap).on("mouseleave", () => {
-        console.log("leaving volume");
         setTimeout(() => {
           $(vol_wrap).css("visibility", "hidden");
         }, 1000);

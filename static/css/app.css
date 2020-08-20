@@ -17,16 +17,11 @@
 /*** MEDIA QUERIES VARS ** */
 /*** BREAKPOINT VARS  ** */
 @media (max-device-width: 360px) {
-  #main_musicplayer i, #main_musicplayer li.fa {
-    margin: 0;
-    font-size: 0.5rem !important;
-    padding: 0;
-    width: 30px;
-    background: green; }
-  #main_musicplayer #track-list {
-    background: red; }
-    #main_musicplayer #track-list .track-item {
-      letter-spacing: 0.1em; } }
+  #main_musicplayer .mp-subtitle {
+    margin-top: 15px;
+    font-size: 0.8em; }
+  #main_musicplayer #track-list .track-item {
+    letter-spacing: 0.1em; } }
 /**** PLUGINS *** */
 /**** BASES *** */
 *, *::before, *::after {
@@ -43,8 +38,11 @@ body, html {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background: red;
   color: #000;
+  -moz-overflow-x: hidden;
+  -webkit-overflow-x: hidden;
+  -ms-overflow-x: hidden;
+  -o-overflow-x: hidden;
   overflow-x: hidden; }
 
 h1, h2, h3, h5, h5 {
@@ -65,12 +63,16 @@ a, button {
   border-radius: 10px;
   outline: none;
   border: none;
+  cursor: pointer;
   hover-outline: none;
   hover-border: none;
-  hover-border-radius: 10px; }
+  hover-border-radius: 10px;
+  hover-cursor: pointer; }
 
-li:hover, a:hover, i:hover, button:hover {
+li, a, i, button {
   cursor: pointer; }
+  li:hover, a:hover, i:hover, button:hover {
+    cursor: pointer; }
 
 button:hover {
   border: none;
@@ -471,6 +473,11 @@ section#main_musicplayer {
   border: 1px solid #1c1c1c;
   overflow: hidden; }
 
+.mp-subtitle {
+  margin-top: 5px;
+  font-size: 0.8em;
+  color: #f70303; }
+
 .mp-top {
   display: flex;
   flex-direction: column;
@@ -512,10 +519,6 @@ section#main_musicplayer {
   left: 0;
   right: 0;
   bottom: 100px; }
-  .mp-controls-container .controls-top {
-    margin-bottom: 5px; }
-  .mp-controls-container .mp-subtitle {
-    margin-top: 5px; }
   .mp-controls-container i {
     font-size: 1.2rem;
     padding: 5px;
@@ -525,6 +528,8 @@ section#main_musicplayer {
       padding: 5px;
       color: #fff;
       background: #f44336; }
+  .mp-controls-container .controls--top {
+    margin-bottom: 5px; }
   .mp-controls-container .track-info {
     margin: 0 45px; }
 
@@ -697,6 +702,21 @@ section#main_musicplayer {
     font: 1em Roboto, Arial, san-serif;
     text-size-adjust: 80%; }
 
+#main_musicplayer.mobile i {
+  font-size: 1rem;
+  verticle-align: middle;
+  text-align: center;
+  padding: 5px;
+  width: 50px;
+  border-radius: 10px;
+  max-height: 40px;
+  transition: 0.3s; }
+  #main_musicplayer.mobile i:hover {
+    -moz-cursor: pointer;
+    -webkit-cursor: pointer;
+    -ms-cursor: pointer;
+    -o-cursor: pointer;
+    cursor: pointer; }
 #main_musicplayer.mobile #mp_progress {
   width: 150px; }
 #main_musicplayer.mobile .control--middle {
@@ -731,7 +751,6 @@ i {
   background: #000; }
 
 .slider-container {
-  background: green;
   margin: 50px auto;
   padding: 10px 50px;
   width: 400px; }

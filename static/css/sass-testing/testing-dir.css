@@ -6,7 +6,6 @@ i {
   background: #000; }
 
 .slider-container {
-  background: green;
   margin: 50px auto;
   padding: 10px 50px;
   width: 400px; }
@@ -32,3 +31,5 @@ i {
   -webkit-border-radius: 10px;
   border-radius: 10px;
   background: #ffffff; }
+
+/*# sourceMappingURL=testing-dir.css.map */

@@ -13,9 +13,8 @@ body,html
   padding: 0
   width: 100vw
   height: 100vh
-  background: red
   color: #000
-  overflow-x: hidden
+  +CrossBrowser(overflow-x, hidden)
 
 h1,h2,h3,h5,h5
   padding: 0
@@ -35,12 +34,15 @@ a,button
   border-radius: 10px
   outline: none
   border: none
+  cursor: pointer
   :hover
     outline: none
     border: none
     border-radius: 10px
+    cursor: pointer
 
 li,a,i,button
+  cursor: pointer
   &:hover
     cursor: pointer
 
