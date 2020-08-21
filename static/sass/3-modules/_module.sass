@@ -46,8 +46,12 @@
   &-fe
     justify-content: flex-end
 
+// Main widget wrapper for all divs
 .m-widget
   display: block
+  height: auto
+  width: 100%
+  padding-top: 20px
 
 .m-banner
   display: flex
@@ -66,12 +70,14 @@
   &--round
     box-shadow: 5px 5px 8px #000
 
-.card-wrapper
+// Index Card 
+.card-deck-wrapper
   width: 100%
 
 .card-deck
   display: grid
-  grid-template-columns: auto
+  margin: 20px 0px
+  grid-template-columns: repeat(3, 1fr)
   grid-gap: .5em
   justify-items: center
 
@@ -83,11 +89,15 @@
     height: 200px
     margin: 0 auto
 
-  .card-text
-    text-align: center
-    line-height: 1.5em
-    font-weight: 300
-
   .card-block
     text-align: center
+    width: calc(100vw / 4 )
     padding: 20px 10px
+
+    .card-text
+      height: auto
+      text-align: center
+      line-height: 1.5rem !important
+      word-wrap: break-word
+      font: 300 1em Helvetica, sans-serif
+      color: #575757

@@ -247,6 +247,17 @@ class Song(models.Model):
         print('\nSELF.FILE.URL',path)
 
 
+class Video(models.Model):
+  ''' Video Model Class '''
+  name = models.CharField(max_length=100, blank=True, null=True)
+  url = models.URLField(max_length=300, blank=True,null=True)
+  is_music = models.BooleanField(default=true)
+
+  
+  def __str__(self):
+      return self.__class__.name__
+  
+
 #########################################################
 #               *************************               #
 #               ****  HELP METHODS   ****               #

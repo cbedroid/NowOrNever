@@ -1,6 +1,6 @@
 from django.contrib import admin
 from image_cropping import ImageCroppingMixin          
-from .models import Image,Article,Song
+from .models import Image,Article,Song, Video
 from .music_models import Artist,Album
 
 
@@ -21,4 +21,5 @@ admin.site.register(Album,DateCreateAdmin)
 admin.site.register(Image,DateCreateAdmin)
 admin.site.register(Article,SlugFieldAdmin)
 admin.site.register(Song,DateCreateAdmin)
+admin.site.register(Video)
 #admin.site.register(Image, MyModelAdmin)

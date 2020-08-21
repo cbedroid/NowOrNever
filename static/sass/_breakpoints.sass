@@ -1,6 +1,6 @@
 /**** BREAKPOINTS ****/
 /*** MEDIA QUERIES VARS ***/
-$mq_phone: "(max-device-width: 360px)"
+$mq_phone: "(max-device-width: 380px)"
 $mq_phone_portrait: "(max-device-width: 360px) and (orientation: portrait)"
 $mq_phone_tablet: "(max-device-width: 1024px)"
 $mq_tablet: "(min-device-width: 401px) and (max-device-width: 700px)"
@@ -18,3 +18,22 @@ $mq_tablet_laptop: "(min-device-width: 401px)"
     #track-list
       .track-item
         letter-spacing: .1em
+
+  .card-deck
+    display: grid
+    grid-template-columns: 1fr
+    grid-gap: 1em
+    width: 100%
+
+    .card-block
+      text-align: center
+      padding: 20px 10px
+      width: 100%
+
+      .card-text
+        height: auto
+        text-align: center
+        line-height: 1.5rem !important
+        word-wrap: break-word
+        font: 300 1em Helvetica, sans-serif
+        color: #575757

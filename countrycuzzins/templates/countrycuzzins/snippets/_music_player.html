@@ -11,7 +11,7 @@
       <!--control top-->
       <div class="control--top">
         <div class="title-wrapper flex">
-          <h3 class="mp-title--top">{{ albums.1.name }}</h3>
+          <h3 class="mp-title--top">{{ albums.0.name }}</h3>
           <h5 id="current_track" class="mp-subtitle"></h5>
         </div>
 
@@ -53,7 +53,7 @@
   <!--MUSIC PLAYER BOTTOM-->
   <div class="mp-bottom">
     <ul id="track-list">
-      {% for song in albums.1.songslist %}
+      {% for song in albums.0.songslist %}
       {# Add thumbs icons here#}
       <div class="track-item" data-tracknumber={{forloop.counter}}>
         <small class="mp_track-index">track {{forloop.counter}}</small>

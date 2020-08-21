@@ -40,7 +40,7 @@ class AlbumList(ListView):
 @never_cache
 def index(request):
     context = {'articles':Article.objects.all(),
-    'albums':Album.objects.all(), 'Images':Image.objects.all()
+    'albums':Album.objects.filter(name="Country Cuzzins"), 'Images':Image.objects.all()
 
     }
     return render(request, "countrycuzzins/index.html", context)

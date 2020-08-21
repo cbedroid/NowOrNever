@@ -22,7 +22,7 @@
 <!-- Modal -->
 <section id="l_index_main_section">
   {# Coming soon modal #}
-  <div class="modal fade" id="modal_upcoming" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  <div class="modal fade" id="modal_upcoming" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -34,7 +34,7 @@
         </div>
         <div class="modal-body">
           <h5 class="m-title">Dreams 2 Reality</h5>
-          <p class="subtitle">By: Mr. Laidback</p>
+          <p class="m-subtitle">By: Mr. Laidback</p>
           <img class="m-img" src="{% static 'media/images/decorative/5-mrlb-album-cover.png' %}"
             alt=" New Ablum Dreams 2 Reality by Mr. Laidback">
         </div>
@@ -48,7 +48,7 @@
   </div>
 
 
-  <div class="index-container">
+  <section class="index-container">
     <div class="container">
       <div class="row">
         <div class="col-12 col-md-6">
@@ -68,7 +68,7 @@
           <div class="m-widget" id="music-player">
             {% include 'countrycuzzins/snippets/_music_player.html' %}
           </div>
-          <hr>
+          <!--hr-->
 
         </div>
       </div>
@@ -79,56 +79,64 @@
         <div class="m-widget">
           <h1 class="title">Coursel</h1>
         </div>
-        <hr>
+        <!--hr-->
       </div>
-    </div>
-    <div class="col-12">
-      <div class="m-widget">
-        <div class="card-deck-wrapper ">
-          <div class="card-deck">
-            <div class="card-nob">
-              <img class="card-img-top m-img m-img--round" src="{% static 'media/images/decorative/3-microphone.png' %}"
-                alt="Card image cap">
-              <div class="card-block">
-                <h4 class="card-title">Country Rap Tunes</h4>
-                <p class="card-text">Country Cuzzins has their own, original flavor, from Mississippi. A sound that
-                  consist of rap, blues, soul and melodic tunes, that they call "Country Rap Tunes" in respect to a Down
-                  South Legend "Pimp C". Coming from the poorest state in America, Their lyrics are based on the
-                  everyday
-                  struggles of living in the ghetto.</p>
+      <div class="col-12">
+        <div class="m-widget" id="about_card">
+          <div class="card-deck-wrapper ">
+            <div class="card-deck">
+              <div class="card-nob">
+                <img class="card-img-top m-img m-img--round"
+                  src="{% static 'media/images/decorative/3-microphone.png' %}" alt="Card image cap">
+                <div class="card-block">
+                  <h4 class="card-title">Country Rap Tunes</h4>
+                  <p class="card-text">Country Cuzzins has their own, original flavor, from Mississippi. A sound that
+                    consist of rap, blues, soul and melodic tunes, that they call "Country Rap Tunes" in respect to a
+                    Down
+                    South Legend "Pimp C". Coming from the poorest state in America, Their lyrics are based on the
+                    everyday
+                    struggles of living in the ghetto.</p>
+                </div>
               </div>
-            </div>
-            <div class="card-nob">
-              <img class="card-img-top m-img m-img--round" src="{% static 'media/images/decorative/4-equalizer.png' %}"
-                alt="Card image cap">
-              <div class="card-block">
-                <h4 class="card-title">About County Cuzzins</h4>
-                <p class="card-text">From the dirty south, born and raised in Greenwood/Jackson, Ms. They came up
-                  performing for family members and so on. They was introduced to blues, soul, rap and other music as
-                  they
-                  were coming up that influenced their style of music. They also looked up too Southern rap groups such
-                  as
-                  Outkast, UGK, 8ball and MJG and recently Young thug and rich homie Quan.</p>
+              <div class="card-nob">
+                <img class="card-img-top m-img m-img--round"
+                  src="{% static 'media/images/decorative/4-equalizer.png' %}" alt="Card image cap">
+                <div class="card-block">
+                  <h4 class="card-title">About County Cuzzins</h4>
+                  <p class="card-text">From the dirty south, born and raised in Greenwood/Jackson, Ms. They came up
+                    performing for family members and so on. They was introduced to blues, soul, rap and other music as
+                    they
+                    were coming up that influenced their style of music. They also looked up too Southern rap groups
+                    such
+                    as
+                    Outkast, UGK, 8ball and MJG and recently Young thug and rich homie Quan.</p>
+                </div>
               </div>
-            </div>
-            <div class="card-nob">
-              <img class="card-img-top m-img m-img--round" src="{% static 'media/images/decorative/2-CC-pose.png' %}"
-                alt="Card image cap">
-              <div class="card-block">
-                <h4 class="card-title">Be Inspired by Everything</h4>
-                <p class="card-text">Country Cuzzins inspiration came from the death of BottomBoyCort's brother Robert
-                  "Spud" Brooks. They begin sharing their pain through their music. Becoming a house hold name, they
-                  just
-                  want to be seen as Different from the rest and in their own lane. The whole southern rap culture is
-                  what
-                  inspired them to put on.</p>
+              <div class="card-nob">
+                <img class="card-img-top m-img m-img--round" src="{% static 'media/images/decorative/2-CC-pose.png' %}"
+                  alt="Card image cap">
+                <div class="card-block">
+                  <h4 class="card-title">Be Inspired by Everything</h4>
+                  <p class="card-text">Country Cuzzins inspiration came from the death of BottomBoyCort's brother Robert
+                    "Spud" Brooks. They begin sharing their pain through their music. Becoming a house hold name, they
+                    just
+                    want to be seen as Different from the rest and in their own lane. The whole southern rap culture is
+                    what
+                    inspired them to put on.</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <!--hr-->
       </div>
-      <hr>
+      <!-- Video container-->
+      <div class="col-12">
+        <div class="m-widget video-container" id="videos">
+
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </section>
 {% endblock body %}
