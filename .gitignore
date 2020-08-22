@@ -4,7 +4,8 @@ static/media/*
 android/*
 sass-testing/*
 sqltest*
-
+*_BAK*
+*_BAK
 # Byte-compiled / optimized / DLL files
 
 __pycache__/

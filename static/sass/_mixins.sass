@@ -46,13 +46,11 @@
 
     @each $color in $colors
       #{$frame}%
-        @debug $color 
+        @debug $color
         //box-shadow: 2px  5px 5px  $color
         $lgc: red
         @for $c from 1 through 5
           $lgc: append($lgc,nth($colors, random(length($colors))),comma)
-        //$lgc: join($lgc,comma)  
-        @debug $lgc
-        background: linear-gradient(45deg, $lgc)
+          background: linear-gradient(45deg, $lgc)
       $frame: $frame + $length
     @content

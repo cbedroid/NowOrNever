@@ -2,18 +2,36 @@
 {% load static %}
 {% load countrycuzzins_extras %}
 {% block body %}
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_navbar"
+    aria-controls="main_navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="main_navbar">
+    <a class="navbar-brand" href="{%url 'index' %}">
+      <img class="m-img m-img--logo" src="{% static 'media/images/decorative/1-CC-logo.png' %}" alt="Now or Never Logo">
+    </a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item  m-nav-item active">
+        <a class="nav-link m-nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item m-nav-item">
+        <a class="nav-link m-nav-link" href="#">Events</a>
+      </li>
+      <li class="nav-item m-nav-item">
+        <a class="nav-link m-nav-link" href="#">Music</a>
+      </li>
 
-<nav id="main_nav">
-  <ul class="nav-list m-flex m-flex--inline">
-    <li class="nav-item active">Home</li>
-    <li class="nav-item">Events</li>
-    <li class="nav-item">Music</li>
-    <li class="nav-item">Account</li>
-    <li class="nav-item">Sign In</li>
-    <li class="nav-item">Booking</li>
-    <li class="nav-item">My Account</li>
-  </ul>
+      <li class="nav-item m-nav-item">
+        <a class="nav-link m-nav-link" href="#">Contact</a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      user account
+    </span>
+  </div>
 </nav>
+
 <!-- New release modal -->
 <!-- Modal -->
 <section id="l_index_main_section">
