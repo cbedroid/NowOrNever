@@ -251,11 +251,32 @@ class Video(models.Model):
   ''' Video Model Class '''
   name = models.CharField(max_length=100, blank=True, null=True)
   url = models.URLField(max_length=300, blank=True,null=True)
-  is_music = models.BooleanField(default=true)
+  short_description = models.CharField(max_length=100, blank=True,null=True)
+  is_youtube = models.BooleanField(default=False)
+  is_music = models.BooleanField(default=True)
+  created = models.DateTimeField(auto_now=False, auto_now_add=True)
+  updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
+
+
+  class Meta:
+    managed = True
   
+  def save(self,*args,**kwargs):
+    url = re.sub(r"\.",'',self.url) 
+    print('\nYoutube URL',url)
+    if 'youtube' in url:
+      print('Changing url')
+      self.is_youtube = True
+      #change the url to youtube embed format
+      endpoint = re.split('\/',self.url)[-1]
+      print('\nENDPOINT',endpoint)
+      self.url = 'https://www.youtube.com/embed/{}'.format(endpoint)
+    super(Video, self).save(*args, **kwargs)
+
+
   def __str__(self):
-      return self.__class__.name__
+      return self.name
   
 
 #########################################################
@@ -309,6 +330,7 @@ def pathToName(instance, obj):
 
           # change obj basename to obj name
           if name_of_obj != base_path:
+            
               rel_np_path = savepath + str(name_of_obj) +  ext # change img name to new name
               print('\nREL_NP_PATH',rel_np_path)
               old_path = os.path.abspath(obj.path)
