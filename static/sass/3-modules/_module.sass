@@ -20,6 +20,12 @@
   font: 900 2em Roboto, Arial, sans-serif
   &--bg
     text-transform: uppercase
+  &--header
+    color: $secondary
+    text-align: center
+    font: 900 3em Anton, Arial sans-serif
+    letter-spacing: .1em
+    margin-bottom: 20px
 
 .m-subtitle
   font: 600 .8em Roboto, Arial, sans-serif
@@ -52,6 +58,7 @@
   height: auto
   width: 100%
   padding-top: 20px
+  margin: 50px 0
 
 .m-banner
   display: flex
@@ -69,6 +76,43 @@
     padding: 10px
   &--round
     box-shadow: 5px 5px 8px #000
+
+.m-carousel-wrapper
+  display: block
+  width: 100%
+  max-height: 500px
+  font-size: 1rem
+  padding: 20px 50px
+
+// Index Carousel 
+#index_carousel
+  display: flex
+  flex-direction: rows
+  justify-self: center
+  align-content: center
+  width: 100%
+
+  .carousel-inner
+    .carousel-item
+      diplay: block
+      margin: 0 auto
+      width: 100%
+      padding: 10px
+      max-height: 500px
+      img
+        margin: 0 auto
+        background: #fff
+        width: 100%
+        height: 500px
+
+  a
+    background: rgba(207, 201, 201,.2)
+    +CrossBrowser(transition, .3s ease-in-out)
+    &:hover
+      background: rgba(207, 201, 201,.7)
+  .m-cr-control
+    +CrossBrowser(background-color, rbga(0,0,0,.4))
+    +CrossBrowser(background, rbga(0,0,0,.4))
 
 // Index Card 
 .card-deck-wrapper
@@ -104,34 +148,36 @@
 
 // Index Videos 
 #music_videos
+  background: whitesmoke
   display: flex
   width: 100%
   align-self: center
-  flow-direction: columns
-  align-content: space-around
+  flex-direction: row
+  align-content: center
   align-items: center
   justify-content: center
-  background: #e9ecef
+  font-size: 1rem
 
   .jumbotron
     +CrossBrowser(transform,translate(-50% -50%))
     text-align: center
     background: transparent
+    margin: 5em 0
 
     h1.display-4
       color: $secondary
-      font: 400 3rem "Ultra",cursive, Arial, sans-serif
+      font: 400 3em "Ultra",cursive, Arial, sans-serif
       letter-spacing: .15em
       text-transform: uppercase
     .m-description
+      margin-top: 1em
       color: #575757
-      margin: 10px  0
       justify-self: flex-start
       text-align: left
-      font: normal 1.1rem Helvetic Arial,sans-serif
+      font: normal 1.2em Helvetic Arial,sans-serif
     .video-container
       width: 100%
       max-height: 500px
       iframe,video
         width: 100%
-        height: 600px
+        height: 500px

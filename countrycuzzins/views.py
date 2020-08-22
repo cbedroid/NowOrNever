@@ -41,7 +41,7 @@ class AlbumList(ListView):
 def index(request):
     context = {'articles':Article.objects.all(),
     'albums':Album.objects.filter(name="Country Cuzzins"), 
-    'Images':Image.objects.all(),
+    'images':Image.objects.all(),
     'music_videos': Video.objects.filter(is_music=True),
 
     }
