@@ -2,16 +2,19 @@
 {% load static %}
 {% load countrycuzzins_extras%}
 {% block body %}
+{% with ALBUM=albums.0 %}
 <section id="main_musicplayer" data-mobile="true" class="desktop">
   <!--MUSIC PLAYER TOP-->
-  <div class="cover-image" style="background-image: url('{{ albums.0.image.image.url }}')"></div>
+  <div class="cover-image" style="background-image: url('{{ ALBUMimage.image.url }}')"></div>
   <div class="mp-top flex ">
     <!-- musicplayer controls -->
     <div class="mp-controls-container pos--abs" id="mp_controls">
       <!--control top-->
       <div class="control--top">
         <div class="title-wrapper flex">
-          <h3 class="mp-title--top">{{ albums.0.name }}</h3>
+          <h3 class="mp-title--top" title="{{ ALBUM.name }}">
+          {{ ALBUM.name }}</h3>
+          <span class="hover-tip">{{ALBUM.name}}</span>
           <h5 id="current_track" class="mp-subtitle"></h5>
         </div>
 
@@ -53,7 +56,7 @@
   <!--MUSIC PLAYER BOTTOM-->
   <div class="mp-bottom">
     <ul id="track-list">
-      {% for song in albums.0.songslist %}
+      {% for song in ALBUM.songslist %}
       {# Add thumbs icons here#}
       <div class="track-item" data-tracknumber={{forloop.counter}}>
         <small class="mp_track-index">track {{forloop.counter}}</small>
@@ -71,4 +74,5 @@
     </ul>
   </div>
 </section>
+{% endwith %}
 {% endblock body %}

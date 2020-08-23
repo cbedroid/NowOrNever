@@ -26,9 +26,26 @@
         <a class="nav-link m-nav-link" href="#">Contact</a>
       </li>
     </ul>
-    <span class="navbar-text">
-      user account
-    </span>
+    <div class="navbar-text">
+      {% if request.user.is_authenticated %}
+      <div class="profile-tray">
+      <a href="#" class="m-user m-user-link">
+      <img class="m-img m-img--profile" src="{% static 'media/images/no_image_profile.png' %}" alt="" >
+      </a>
+      <h4 class="profile-title">{{ request.user }}</h4>
+      </div>
+        {% else %}
+        <ul class="m-flex m-flex-inline">
+        <li class="m-nav-item">
+          <a href="#" class="m-nav-link">Register</a>
+        </li>
+         <li class="m-nav-item">
+          <a href="#" class="m-nav-link">Login</a>
+        </li>
+        
+        </ul>
+      {% endif %}
+    </div>
   </div>
 </nav>
 
@@ -72,7 +89,7 @@
                 <img class="m-img" src="{% static 'media/images/decorative/1-CC-logo.png' %}"
                   alt="Country Cuzzins logo">
                 <h1 class="m-title m-title--bg">Country Cuzzins</h1>
-                <p class="m-subtitle">Check out Country Cuzzins music</p>
+                <p class="m-subtitle">Check out our latest music</p>
                 <button class="m-btn m-btn-action" id="btn_action">Country Cuzzins' Album</button>
               </div>
             </div>
@@ -88,6 +105,7 @@
       </div>
     </div>
 
+    <!--Carousel and Cards-->
     <div class="row">
       <div class="col-12">
         <div class="m-widget">
@@ -136,8 +154,8 @@
          </div>
 
         </div>
-        <!--hr-->
       </div>
+      <!--About Card-->
       <div class="col-12">
         <div class="m-widget" id="about_card">
           <div class="card-deck-wrapper ">
@@ -187,33 +205,80 @@
         </div>
         <!--hr-->
       </div>
-      <!-- Video container-->
-      <div class="col-12">
-        <div class="m-widget video-container" id="music_videos">
-          {% for video in  music_videos %}
-          <div class="jumbotron jumbotron-fluid">
-            <h1 class="display-4">{{ video.name }}</h1>
-            <p class=" lead m-description">{{ video.short_description }}</p>
-                  <div class="video-container">
-                    {% if video.is_youtube %}
-                    <iframe src="{{ video.url }}" frameborder="0"
-                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen></iframe>
-                    {% else %}
-                    <video controls>
-                      <source src="{{ video.url }}" type="video/mp4">
-                      <source src="{{ video.url }}" type="video/ogg">
-                      Your browser does not support the video tag.
-                    </video>
-                    {% endif %}
-                    <hr class="my-4">
-                  </div>
-                  {# <small>{{ video.created|date:"D M d Y"   }}</small> #}
-                  {% endfor %}
+      </div>
 
+      <div class="row">
+     <div class="col-12">
+        <div class="m-widget" id="follow_us">
+          <div class="m-follow-us-container m-banner" id="follow_us_banner">
+          <div class="m-banner m-banner--header">
+            <h1 class="m-title m-title--bg">Join Us</h1>
+            <p class="m-subtitle">Over 15k subscribers already joined! 
+              Connect now and get the latest news, music video and special events
+            </p>
+          </div>
+          <div class="m-banner m-banner--content">
+            <ul class="m-social m-social--icon-list m-flex m-flex--inline m-flex--sb">
+              <li class="m-social m-social--item">
+                <a href="{{ 'facebook'|social_get:'link' }}">
+                  <i class="fa fa-facebook m-social m-social--{{ facebook|social_get:'name'}}"
+                    aria-hidden="true"></i></a>
+                  </li>
+                  <li class="m-social m-social--item">
+                    <a href="{{ 'instgram'|social_get:'link' }}">
+                      <i class="fa fa-instagram m-social--{{ instagram |social_get:'name'}}" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="m-social m-social--item">
+                    <a href="{{ 'snapchat'|social_get:'link' }}">
+                      <i class="fa fa-snapchat-ghost m-social--{{ snapchat|social_get:'name'}}" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="m-social m-social--item">
+                    <a href="{{ 'twitter'|social_get:'link' }}">
+                      <i class="fa fa-twitter m-social--{{ twitter|social_get:'name'}}" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="m-social m-social--item">
+                    <a href="{{ 'youtube'|social_get:'link' }}">
+                      <i class="fa fa-youtube-square m-social--{{ youtube|social_get:'name'}}" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  </ul>
                 </div>
+
+              </div> {# Banner#}
+            </div> {# m-widget #}
+          </div>{# col-12#}
+
+          <!-- Video container-->
+          <div class="col-12">
+            <div class="m-widget video-container" id="music_videos">
+              {% for video in  music_videos %}
+              <div class="jumbotron jumbotron-fluid">
+                <h1 class="display-4">{{ video.name }}</h1>
+                <p class=" lead m-description">{{ video.short_description }}</p>
+                <div class="video-container">
+                  {% if video.is_youtube %}
+                  <iframe src="{{ video.url }}" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                  {% else %}
+                  <video controls>
+                    <source src="{{ video.url }}" type="video/mp4">
+                    <source src="{{ video.url }}" type="video/ogg">
+                    Your browser does not support the video tag.
+                  </video>
+                  {% endif %}
+                  <hr class="my-4">
+                </div>
+                {# <small>{{ video.created|date:"D M d Y"   }}</small> #}
+                {% endfor %}
+
               </div>
             </div>
+          </div>
+        </div>
   </section>
 </section>
 {% endblock body %}

@@ -2,7 +2,7 @@ import os
 import re
 import base64
 from django import template
-from ..models import Image
+from ..models import Image,SocialMedia
 
 register = template.Library()
 @register.filter('image_get')
@@ -53,4 +53,26 @@ def re_sub(value,ret):
     return re.sub(pat,sub,value)
   except:
     return value
+
+
+@register.filter('social_get')
+def social_get(name,data):
+    """Get Social media link by name
+    Args:
+        name (str): name of social media site
+        data (str): model attribute to return
+
+    Returns:
+        dict: social media model dictionary
+    """
+    try:
+      social = SocialMedia.objects.filter(name__iregex=rf"[.*[\w\s]*.*{name}[\w.\s]*")
+      print('\nNAME,DATA',name,data)
+      print('\nsocial',social)
+      if social:
+        return getattr(social.first(),data)
+      return {"name":"N/A","link":"#"}[data]
+    except:
+      return "N/A"
+    
 

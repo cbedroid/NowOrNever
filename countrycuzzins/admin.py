@@ -1,6 +1,6 @@
 from django.contrib import admin
 from image_cropping import ImageCroppingMixin          
-from .models import Image,Article,Song, Video
+from .models import Image,Article,Song, Video,SocialMedia
 from .music_models import Artist,Album
 
 
@@ -16,6 +16,7 @@ class SlugFieldAdmin(DateCreateAdmin):
 
 
 # Register your models here.
+admin.site.register(SocialMedia,DateCreateAdmin)
 admin.site.register(Artist,DateCreateAdmin)
 admin.site.register(Album,DateCreateAdmin)
 admin.site.register(Image,DateCreateAdmin)

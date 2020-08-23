@@ -257,11 +257,9 @@ class Video(models.Model):
   created = models.DateTimeField(auto_now=False, auto_now_add=True)
   updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
-
-
   class Meta:
-    managed = True
-  
+      managed = True
+    
   def save(self,*args,**kwargs):
     url = re.sub(r"\.",'',self.url) 
     print('\nYoutube URL',url)
@@ -279,6 +277,34 @@ class Video(models.Model):
       return self.name
   
 
+
+class SocialMedia(models.Model):
+  # Social media site for all website platform
+  name = models.CharField(verbose_name="social media site name",max_length=100, blank=True, null=True,unique=True)
+  link = models.CharField(max_length=250, blank=True, null=True)
+  created = models.DateTimeField(auto_now=False, auto_now_add=True)
+  updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+  def __str__(self):
+    return self.name 
+
+  # @classmethod
+  # def get(cls, choice):
+  #   #TODO: Aug,22,2020  Not working. Added workaround in templatetag extra
+  #   """Get Social media link by name
+  #   Args:
+  #       choice (str): name of social media site
+
+  #   Returns:
+  #       dict: social media model dictionary
+  #   """
+  #   social = cls.objects.filter(name__iregex=rf"[.*[\w\s]*.*{choice}[\w.\s]*")
+  #   print('\nsocial',social)
+  #   return social
+
+    
+
+  
 #########################################################
 #               *************************               #
 #               ****  HELP METHODS   ****               #

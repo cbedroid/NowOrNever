@@ -163,6 +163,13 @@ a, a:hover {
   width: 100vw;
   background: whitesmoke; }
 
+#follow_us {
+  align-self: center;
+  font-size: 1rem;
+  margin: -40px 0;
+  padding: 20px;
+  background: linear-gradient(to right, #ddd, #5c5c5c); }
+
 /* Layout Navigation */
 nav {
   position: sticky;
@@ -253,13 +260,15 @@ nav {
   height: auto;
   width: 100%;
   padding-top: 20px;
-  margin: 50px 0; }
+  margin: 40px 0; }
 
 .m-banner {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: space-around; }
+  .m-banner--header {
+    justify-self: flex-start; }
 
 .m-img, .card-deck img {
   display: block;
@@ -274,12 +283,24 @@ nav {
     display: block;
     width: 100px;
     height: inherit; }
+  .m-img--profile {
+    border-radius: 50%;
+    width: 50px;
+    height: 45px; }
+
+.profile-tray {
+  display: flex;
+  min-width: 300px;
+  width: clamp(300, 60%, 50vw);
+  flex-directionttt: row;
+  justify-content: space-around;
+  justify-items: space-around;
+  vertical-align: middle; }
+  .profile-tray .profile-title {
+    font: 600 1.3em Arial, sans-serif; }
 
 .m-carousel-wrapper {
   display: block;
-  width: 100%;
-  max-height: 500px;
-  font-size: 1rem;
   padding: 20px 50px; }
 
 #index_carousel {
@@ -383,6 +404,64 @@ nav {
       #music_videos .jumbotron .video-container iframe, #music_videos .jumbotron .video-container video {
         width: 100%;
         height: 500px; }
+
+.m-follow-us-container {
+  width: 100%; }
+  .m-follow-us-container .m-banner--header {
+    margin-bottom: 20px; }
+    .m-follow-us-container .m-banner--header .m-title--bg {
+      font: 700 3.5em "Anton", cursive, Arial, sans-serif;
+      letter-spacing: 0.15em;
+      color: #f70303;
+      text-shadow: 2px 2px 5px #000; }
+    .m-follow-us-container .m-banner--header .m-subtitle {
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em;
+      white-space: pre-line;
+      line-height: 1.2em; }
+  .m-follow-us-container .m-banner--content {
+    width: fit-content; }
+
+.m-social {
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+  width: 100%; }
+  .m-social--icon-list {
+    display: flex;
+    width: 100%;
+    padding: 20px; }
+  .m-social--item {
+    padding: calc(100% / 25); }
+    .m-social--item .fa, .m-social--item .fa5, .m-social--item .fa4 {
+      display: flex;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7em;
+      font-size: calc(100vw / 25);
+      width: 2em;
+      height: 6em;
+      border-radius: 20px; }
+      .m-social--item .fa.fa-facebook, .m-social--item .fa5.fa-facebook, .m-social--item .fa4.fa-facebook {
+        background: #00f;
+        color: #fff; }
+      .m-social--item .fa.fa-instagram-, .m-social--item .fa5.fa-instagram-, .m-social--item .fa4.fa-instagram- {
+        background: #fff;
+        color: #bc2a8d; }
+      .m-social--item .fa.fa-snapchat-ghost, .m-social--item .fa .fa-snapchat, .m-social--item .fa5.fa-snapchat-ghost, .m-social--item .fa5 .fa-snapchat, .m-social--item .fa4.fa-snapchat-ghost, .m-social--item .fa4 .fa-snapchat {
+        background: #fffc00;
+        color: #fff;
+        text-shadow: 2px 2px 5px #000; }
+      .m-social--item .fa.fa-twitter, .m-social--item .fa5.fa-twitter, .m-social--item .fa4.fa-twitter {
+        background: #00f; }
+      .m-social--item .fa.fa-youtube, .m-social--item .fa.fa-youtube-square, .m-social--item .fa5.fa-youtube, .m-social--item .fa5.fa-youtube-square, .m-social--item .fa4.fa-youtube, .m-social--item .fa4.fa-youtube-square {
+        background: #bb0000;
+        color: #fff;
+        color: #fff;
+        color: #fff;
+        color: #fff; }
 
 /**** MODULES *** */
 .m-flex {
@@ -440,13 +519,15 @@ nav {
   height: auto;
   width: 100%;
   padding-top: 20px;
-  margin: 50px 0; }
+  margin: 40px 0; }
 
 .m-banner {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: space-around; }
+  .m-banner--header {
+    justify-self: flex-start; }
 
 .m-img, .card-deck img {
   display: block;
@@ -461,12 +542,24 @@ nav {
     display: block;
     width: 100px;
     height: inherit; }
+  .m-img--profile {
+    border-radius: 50%;
+    width: 50px;
+    height: 45px; }
+
+.profile-tray {
+  display: flex;
+  min-width: 300px;
+  width: clamp(300, 60%, 50vw);
+  flex-directionttt: row;
+  justify-content: space-around;
+  justify-items: space-around;
+  vertical-align: middle; }
+  .profile-tray .profile-title {
+    font: 600 1.3em Arial, sans-serif; }
 
 .m-carousel-wrapper {
   display: block;
-  width: 100%;
-  max-height: 500px;
-  font-size: 1rem;
   padding: 20px 50px; }
 
 #index_carousel {
@@ -570,6 +663,64 @@ nav {
       #music_videos .jumbotron .video-container iframe, #music_videos .jumbotron .video-container video {
         width: 100%;
         height: 500px; }
+
+.m-follow-us-container {
+  width: 100%; }
+  .m-follow-us-container .m-banner--header {
+    margin-bottom: 20px; }
+    .m-follow-us-container .m-banner--header .m-title--bg {
+      font: 700 3.5em "Anton", cursive, Arial, sans-serif;
+      letter-spacing: 0.15em;
+      color: #f70303;
+      text-shadow: 2px 2px 5px #000; }
+    .m-follow-us-container .m-banner--header .m-subtitle {
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em;
+      white-space: pre-line;
+      line-height: 1.2em; }
+  .m-follow-us-container .m-banner--content {
+    width: fit-content; }
+
+.m-social {
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+  width: 100%; }
+  .m-social--icon-list {
+    display: flex;
+    width: 100%;
+    padding: 20px; }
+  .m-social--item {
+    padding: calc(100% / 25); }
+    .m-social--item .fa, .m-social--item .fa5, .m-social--item .fa4 {
+      display: flex;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7em;
+      font-size: calc(100vw / 25);
+      width: 2em;
+      height: 6em;
+      border-radius: 20px; }
+      .m-social--item .fa.fa-facebook, .m-social--item .fa5.fa-facebook, .m-social--item .fa4.fa-facebook {
+        background: #00f;
+        color: #fff; }
+      .m-social--item .fa.fa-instagram-, .m-social--item .fa5.fa-instagram-, .m-social--item .fa4.fa-instagram- {
+        background: #fff;
+        color: #bc2a8d; }
+      .m-social--item .fa.fa-snapchat-ghost, .m-social--item .fa .fa-snapchat, .m-social--item .fa5.fa-snapchat-ghost, .m-social--item .fa5 .fa-snapchat, .m-social--item .fa4.fa-snapchat-ghost, .m-social--item .fa4 .fa-snapchat {
+        background: #fffc00;
+        color: #fff;
+        text-shadow: 2px 2px 5px #000; }
+      .m-social--item .fa.fa-twitter, .m-social--item .fa5.fa-twitter, .m-social--item .fa4.fa-twitter {
+        background: #00f; }
+      .m-social--item .fa.fa-youtube, .m-social--item .fa.fa-youtube-square, .m-social--item .fa5.fa-youtube, .m-social--item .fa5.fa-youtube-square, .m-social--item .fa4.fa-youtube, .m-social--item .fa4.fa-youtube-square {
+        background: #bb0000;
+        color: #fff;
+        color: #fff;
+        color: #fff;
+        color: #fff; }
 
 i {
   verticle-align: middle;
@@ -678,8 +829,8 @@ section#main_musicplayer {
       padding: 5px;
       color: #fff;
       background: #f44336; }
-  .mp-controls-container .controls--top {
-    margin-bottom: 5px; }
+  .mp-controls-container .control--top {
+    margin: 5px 30px 0px 30px; }
   .mp-controls-container .track-info {
     margin: 0 45px; }
 
@@ -806,10 +957,48 @@ section#main_musicplayer {
   align-self: center;
   text-align: center;
   letter-spacing: 0.15em; }
+  .title-wrapper .hover-tip {
+    display: none; }
+  .title-wrapper:hover .hover-tip {
+    display: flex;
+    max-height: 50px;
+    width: fit-content;
+    align-self: center;
+    justify-self: center;
+    margin: 0 auto;
+    padding: 10px 20px;
+    align-items: center;
+    font: italic 700 1em "Roboto", Arial, sans-serif;
+    justify-content: center;
+    background: #fff;
+    color: #000;
+    border: 2px solid brown;
+    border-radius: 10px;
+    position: absolute;
+    -moz-z-index: 200;
+    -webkit-z-index: 200;
+    -ms-z-index: 200;
+    -o-z-index: 200;
+    z-index: 200;
+    top: -15px;
+    right: 0;
+    bottom: 0;
+    left: 0; }
   .title-wrapper .mp-title--top {
-    font: 24px;
+    display: inline-block;
+    width: 100%;
+    font-size: 1.3em;
     font-family: "Racing Sans One", cursive;
-    letter-spacing: 0.15em; }
+    -moz-line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -ms-line-clamp: 1;
+    -o-line-clamp: 1;
+    line-clamp: 1;
+    letter-spacing: 0.15em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden; }
   .title-wrapper .mp-subtitle {
     color: #fff;
     font: 500 18px Oswald, "Roboto Slab", Merriweather;
