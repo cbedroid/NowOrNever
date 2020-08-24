@@ -47,6 +47,11 @@ def index(request):
     }
     return render(request, "countrycuzzins/index.html", context)
 
+def accountLogin(request):
+  context = {}
+  return render(request,"countrycuzzins/snippets/account/login.html",context)
+
+
 
 #########################################################
 #           *************************                   #
@@ -59,11 +64,11 @@ from .models import Song
 def test_music_player(request):
   songs = Song.objects.all()
   context = {'music': songs}
-  return render(request,"countrycuzzins/snippets/_music_player.html",context)
+  return render(request,"countrycuzzins/testing/_music_player.html",context)
 
 def test_html(request):
   #testing html 
   context = {}
-  return render(request,"countrycuzzins/snippets/_testing.html",context)
+  return render(request,"countrycuzzins/testing/_testing.html",context)
 
 

@@ -1,46 +1,51 @@
-{% extends "countrycuzzins/base.html" %}
 {% load static %}
-{% block header %}
- <section id="main_nav_container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main_nav">
-    <a class="navbar-brand" href="#">Home</a>
-    <span class="navbar-user navbar-brand">
-      {% if request.user.is_authenticated %}
-       <li class="nav-item">
-          <a class="user-profile-img" href="#Login_register" class="nav-link">
-            <i class="fa fa-user" aria-hidden="true"> </i>
-          {{ request.user }}
-          </a>
-        </li>
-      {% else %}
-        <li class="nav-item">
-        </li>
-         <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            Login
-          </a>
-        </li>
-      {% endif %}
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" id="main_header_nav">
+  <button class="navbar-toggler" id="nav_mobile_toggler" type="button" data-toggle="collapse" data-target="#main_navbar"
+    aria-controls="main_navbar" aria-expanded="true" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="main_navbar">
+    <a class="navbar-brand" href="{%url 'index' %}">
+      <img class="m-img m-img--logo" id="main_nav_logo" src="{% static 'media/images/decorative/1-CC-logo.png' %}"
+        alt="Now or Never Logo">
+    </a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item  m-nav-item active">
+        <a class="nav-link m-nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item m-nav-item">
+        <a class="nav-link m-nav-link" href="#">Events</a>
+      </li>
+      <li class="nav-item m-nav-item">
+        <a class="nav-link m-nav-link" href="#">Music</a>
+      </li>
 
-      </span>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Event<span class="sr-only">(current)</span></a>
+      <li class="nav-item m-nav-item">
+        <a class="nav-link m-nav-link" href="#">Contact</a>
+      </li>
+    </ul>
+    <div class="navbar-text">
+      {% if request.user.is_authenticated %}
+      <div class="profile-tray" id="index_profile_tray">
+        <a href="#" class="m-user m-user-link">
+          <img class="m-img m-img--profile" src="{% static 'media/images/no_image_profile.png' %}" alt="">
+        </a>
+        <h4 class="profile-title">{{ request.user }}</h4>
+        <a href="#logout" class="nav-link m-nav-link">
+          <button class="m-user m-user-link">logout</button>
+        </a>
+      </div>
+      {% else %}
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item m-nav-item">
+          <a class="nav-item m-nav-link" href="#" class="m-nav-link">Register</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Music</a>
+        <li class="nav-item m-nav-item">
+          <a class="nav-link m-nav-link" href="#" class="m-nav-link">Login</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-        </li>
+
       </ul>
-      
+      {% endif %}
     </div>
-  </nav>
- </section>
-{% endblock header %}
+  </div>
+</nav>

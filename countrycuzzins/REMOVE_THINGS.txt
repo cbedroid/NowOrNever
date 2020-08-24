@@ -2,3 +2,8 @@
 - remove console logs from js 
 - remove console log in utils.py
 - remove cache from views
+- remove template testing folder
+
+- remove allowed-hosts settings
+- remove debug from settings
+- add caching in setting

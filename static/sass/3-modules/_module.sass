@@ -89,16 +89,43 @@
     border: 2px solid #000
 
 .profile-tray
-  display: flex
-  flex-direction: row
-  width: fit-content
-  justify-content: space-between
+  display: grid
+  grid-template-columns: repeat(3,1fr)
+  grid-template-rows: auto
+  grid-gap: 20px
+  justify-items: center
+  align-items: center
+  img
+    margin: 0
+    padding: 0
+  button
+    margin: 0
+    color: #000
+    background: #fff
+    outline: #000
+    border: 2px solid $secondary
+    width: 100px
+    height: 35px
+    letter-spacing: .1em
+    border-radius: 5px
+    letter-spacing: .1em
+    text-transform: uppercase
+    font-family: 'Anton', cursive, Arial, sans-serif
+    font-weight: 500
+    +CrossBrowser(transition, .3s ease-in-out)
+    &:hover
+      background: $secondary
+      border-color: #000
+      color: #fff
+  a
+    margin: 0
+    background: #fff
+    color: #000
 
   .profile-title
+    padding: 0
+    margin: 0
     font: 600 1.3em Arial,sans-serif
-    align-self: flex-end
-    justify-self: flex-end
-    margin-left: 20px
 
 // CAROUSEL
 .m-carousel-wrapper

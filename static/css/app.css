@@ -178,24 +178,29 @@ a, a:hover {
   background: linear-gradient(to right, #ddd, #5c5c5c); }
 
 /* Layout Navigation */
-nav {
-  position: sticky;
+header {
+  position: sticky !important;
   width: 100% !important;
   height: 75px !important;
-  top: 0% !important;
+  top: 0px !important;
   left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
+  -moz-z-index: 200;
+  -webkit-z-index: 200;
+  -ms-z-index: 200;
+  -o-z-index: 200;
+  z-index: 200; }
+
+#main_header_nav {
   background: #fff !important; }
-  nav .navbar-collapse {
+  #main_header_nav .navbar-collapse {
     background: #fff !important; }
-  nav .m-nav-item {
+  #main_header_nav .m-nav-item {
     padding: 6px !important;
     color: #000 !important;
     margin: -3px !important; }
-    nav .m-nav-item:hover {
+    #main_header_nav .m-nav-item:hover {
       color: #f70303 !important; }
-    nav .m-nav-item .m-nav-link {
+    #main_header_nav .m-nav-item .m-nav-link {
       color: inherit !important;
       font: 600 1.2rem Helvetica, sans-serif !important;
       text-transform: uppercase !important;
@@ -204,11 +209,11 @@ nav {
       -ms-transition: 0.2s ease-in-out !important;
       -o-transition: 0.2s ease-in-out !important;
       transition: 0.2s ease-in-out !important; }
-    nav .m-nav-item.active .m-nav-link {
+    #main_header_nav .m-nav-item.active .m-nav-link {
       border-bottom: 2px solid #f70303 !important; }
-  nav .button {
+  #main_header_nav .button {
     color: #000 !important; }
-    nav .button span {
+    #main_header_nav .button span {
       color: #000 !important; }
 
 /**** MODULES *** */
@@ -297,15 +302,46 @@ nav {
     border: 2px solid #000; }
 
 .profile-tray {
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
-  justify-content: space-between; }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  justify-items: center;
+  align-items: center; }
+  .profile-tray img {
+    margin: 0;
+    padding: 0; }
+  .profile-tray button {
+    margin: 0;
+    color: #000;
+    background: #fff;
+    outline: #000;
+    border: 2px solid #f70303;
+    width: 100px;
+    height: 35px;
+    letter-spacing: 0.1em;
+    border-radius: 5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: "Anton", cursive, Arial, sans-serif;
+    font-weight: 500;
+    -moz-transition: 0.3s ease-in-out;
+    -webkit-transition: 0.3s ease-in-out;
+    -ms-transition: 0.3s ease-in-out;
+    -o-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out; }
+    .profile-tray button:hover {
+      background: #f70303;
+      border-color: #000;
+      color: #fff; }
+  .profile-tray a {
+    margin: 0;
+    background: #fff;
+    color: #000; }
   .profile-tray .profile-title {
-    font: 600 1.3em Arial, sans-serif;
-    align-self: flex-end;
-    justify-self: flex-end;
-    margin-left: 20px; }
+    padding: 0;
+    margin: 0;
+    font: 600 1.3em Arial, sans-serif; }
 
 .m-carousel-wrapper {
   display: block;
@@ -557,15 +593,46 @@ nav {
     border: 2px solid #000; }
 
 .profile-tray {
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
-  justify-content: space-between; }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  justify-items: center;
+  align-items: center; }
+  .profile-tray img {
+    margin: 0;
+    padding: 0; }
+  .profile-tray button {
+    margin: 0;
+    color: #000;
+    background: #fff;
+    outline: #000;
+    border: 2px solid #f70303;
+    width: 100px;
+    height: 35px;
+    letter-spacing: 0.1em;
+    border-radius: 5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: "Anton", cursive, Arial, sans-serif;
+    font-weight: 500;
+    -moz-transition: 0.3s ease-in-out;
+    -webkit-transition: 0.3s ease-in-out;
+    -ms-transition: 0.3s ease-in-out;
+    -o-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out; }
+    .profile-tray button:hover {
+      background: #f70303;
+      border-color: #000;
+      color: #fff; }
+  .profile-tray a {
+    margin: 0;
+    background: #fff;
+    color: #000; }
   .profile-tray .profile-title {
-    font: 600 1.3em Arial, sans-serif;
-    align-self: flex-end;
-    justify-self: flex-end;
-    margin-left: 20px; }
+    padding: 0;
+    margin: 0;
+    font: 600 1.3em Arial, sans-serif; }
 
 .m-carousel-wrapper {
   display: block;
