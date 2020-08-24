@@ -83,6 +83,10 @@ a, a:hover {
   text-decoration: none;
   color: inherit; }
 
+/* Work around fo boostrap 4 collapse not closing on mobile */
+.navbar-close {
+  display: none !important; }
+
 /**** LAYOUTS  *** */
 .zed--1 {
   z-index: 1; }
@@ -158,6 +162,9 @@ a, a:hover {
   #modal_upcoming .modal-footer button:nth-child(2) {
     background: #f70303;
     color: #fff; }
+
+#index_profile_tray {
+  margin-right: 50px; }
 
 #about_card {
   width: 100vw;
@@ -286,18 +293,19 @@ nav {
   .m-img--profile {
     border-radius: 50%;
     width: 50px;
-    height: 45px; }
+    height: 45px;
+    border: 2px solid #000; }
 
 .profile-tray {
   display: flex;
-  min-width: 300px;
-  width: clamp(300, 60%, 50vw);
-  flex-directionttt: row;
-  justify-content: space-around;
-  justify-items: space-around;
-  vertical-align: middle; }
+  flex-direction: row;
+  width: fit-content;
+  justify-content: space-between; }
   .profile-tray .profile-title {
-    font: 600 1.3em Arial, sans-serif; }
+    font: 600 1.3em Arial, sans-serif;
+    align-self: flex-end;
+    justify-self: flex-end;
+    margin-left: 20px; }
 
 .m-carousel-wrapper {
   display: block;
@@ -545,18 +553,19 @@ nav {
   .m-img--profile {
     border-radius: 50%;
     width: 50px;
-    height: 45px; }
+    height: 45px;
+    border: 2px solid #000; }
 
 .profile-tray {
   display: flex;
-  min-width: 300px;
-  width: clamp(300, 60%, 50vw);
-  flex-directionttt: row;
-  justify-content: space-around;
-  justify-items: space-around;
-  vertical-align: middle; }
+  flex-direction: row;
+  width: fit-content;
+  justify-content: space-between; }
   .profile-tray .profile-title {
-    font: 600 1.3em Arial, sans-serif; }
+    font: 600 1.3em Arial, sans-serif;
+    align-self: flex-end;
+    justify-self: flex-end;
+    margin-left: 20px; }
 
 .m-carousel-wrapper {
   display: block;
@@ -1120,6 +1129,9 @@ i {
 /*** MEDIA QUERIES VARS ** */
 /*** BREAKPOINT VARS  ** */
 @media (max-device-width: 380px) {
+  #main_nav_logo {
+    display: none; }
+
   #main_musicplayer .mp-subtitle {
     margin-top: 15px;
     font-size: 0.8em; }

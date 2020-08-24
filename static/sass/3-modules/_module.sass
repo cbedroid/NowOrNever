@@ -86,20 +86,19 @@
     border-radius: 50%
     width: 50px
     height: 45px
+    border: 2px solid #000
 
 .profile-tray
   display: flex
-  min-width: 300px
-  width: clamp(300,60% ,50vw)
-
-  flex-directionttt: row
-  justify-content: space-around
-  justify-items: space-around
-  vertical-align: middle
+  flex-direction: row
+  width: fit-content
+  justify-content: space-between
 
   .profile-title
-
     font: 600 1.3em Arial,sans-serif
+    align-self: flex-end
+    justify-self: flex-end
+    margin-left: 20px
 
 // CAROUSEL
 .m-carousel-wrapper
