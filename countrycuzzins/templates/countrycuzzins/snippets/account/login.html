@@ -1,5 +1,6 @@
 {% extends 'countrycuzzins/base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 {% load countrycuzzins_extras%}
 {% block body %}
 <section id="login_section">
@@ -7,50 +8,37 @@
   <hr>
   <div class="container">
     <div class="row">
-      <div class="col-12 col-md-8 col-lg-6">
-        <div class="m-widget">
-          {% comment %}
+      <div class="col-12 col-md-9 col-lg-6">
+        <div class="m-widget m-account-widget">
+          <div class="m-banner" id="signup_banner">
+            <div class="m-banner m-banner--header">
+              <h1 class="m-title m-title--up">Sign In</h1>
+              <p class="m-subtitle">Connect now to stay tune with the latest news and update </p>
+            </div>
+          </div>
+          <hr class="hr hr--dark">
           <form method="post" action="{% url 'account_login' %}">
             {% csrf_token %}
             <div class="form-group">
-              <label for="username">Username or Email</label>
-              <input type="text" class="form-control" id="username" aria-describedby="usernameHelp">
-              <small id="usernameHelp" class="form-text text-muted">Enter your Username or Email.</small>
-            </div>
 
+              {{ form.username.label_tag }}<br>
+              {{ form.username| add_class:"form-control" }}
+              <small>{{ form.help_text|safe }} </small>
+            </div>
             <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password">
+              {{ form.password.label_tag }}<br>
+              {{ form.password| add_class:"form-control" }}
             </div>
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-          {% endcomment %}
 
-          <form method="post" action="{% url 'account_login' %}">
-            {% csrf_token %}
-
-            <table>
-              <tr>
-                <td>{{ form.username.label_tag }}</td>
-                <td>{{ form.username }}</td>
-              </tr>
-              <tr>
-                <td>{{ form.password.label_tag }}</td>
-                <td>{{ form.password }}</td>
-              </tr>
-            </table>
-
-            <input type="submit" value="login">
+            <button class="btn btn-outline-primary" type="submit">Login</button>
             <input type="hidden" name="next" value="{{ next }}">
           </form>
         </div>
       </div>
+      <div class="col-12 col-md-3 col-lg-6">
+        {% include  'countrycuzzins/snippets/aside/social_media_banner.html' %}
+      </div>
     </div>
   </div>
 </section>
-
 {% endblock body %}

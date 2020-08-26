@@ -1,88 +1,23 @@
 /**** BREAKPOINTS ****/
 /*** MEDIA QUERIES VARS ***/
-$mq_phone: "(max-device-width: 380px)"
-$mq_phone_portrait: "(max-device-width: 360px) and (orientation: portrait)"
-$mq_phone_tablet: "(max-device-width: 1024px)"
-$mq_tablet: "(min-device-width: 401px) and (max-device-width: 700px)"
-$mq_laptop: "(min-device-width: 701px)"
-$mq_tablet_laptop: "(min-device-width: 401px)"
-
+$mq_phone: "(max-device-width: 480px)"
+$mq_phone_landscape: "(max-device-height: 480px) and (orientation: landscape)"
+$mq_tablet: "(min-device-width: 481px) and (max-device-width: 768px)"
+$mq_tablet_landscape: "(max-device-height: 768px) and (max-device-width: 1024px) and  (orientation: landscape)"
+$mq_laptop: "(min-device-width: 769px)"
+$mq_tv: "(min-device-width: 1201px)"
 /*** BREAKPOINT VARS  ***/
 
+// Phones
 @media #{$mq-phone}
-  #main_nav_logo
-    display: none
+  +responsive_phone_mixin()
 
-  #main_musicplayer
-    .mp-subtitle
-      margin-top: 15px
-      font-size: .8em
+@media #{$mq_phone_landscape}
+  +responsive_phone_mixin()
 
-    #track-list
-      .track-item
-        letter-spacing: .1em
+// Tablets
+@media #{$mq_tablet}
+  +responsive_tablet_mixin()
 
-  // Index Carousel
-  .m-carousel-wrapper
-    padding: 10px
-
-  #index_carousel
-    display: flex
-    flex-direction: rows
-    justify-self: center
-    align-content: center
-    width: 100%
-
-    .carousel-inner
-      .carousel-item
-        diplay: block
-        margin: 0 auto
-        width: 100%
-        padding: 10px
-        max-height: 300px
-        img
-          width: 100%
-          margin: 0 auto
-          height: 300px
-
-  .card-deck
-    display: grid
-    grid-template-columns: 1fr
-    grid-gap: 1em
-    width: 100%
-
-    .card-block
-      text-align: center
-      padding: 20px 10px
-      width: 100%
-
-      .card-text
-        height: auto
-        text-align: center
-        line-height: 1.5rem !important
-        word-wrap: break-word
-        font: 300 1em Helvetica, sans-serif
-        color: #575757
-
-  // Music video
-  #music_videos
-    font-size: .75rem
-
-    .jumbotron
-      display: block
-      width: 100%
-      padding: 0 20px
-      .video-container
-        display: block
-        width: 100%
-        max-height: 350px
-        overflow-y: hidden
-        iframe,video
-          height: 200px
-          width: 100%
-
-  #account_signup_section
-    margin: 5px
-    .m-banner
-      font-size: .75rem
-      letter-spacing: .02rem
+@media #{$mq_tablet_landscape}
+  +responsive_tablet_mixin()

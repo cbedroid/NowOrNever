@@ -14,6 +14,7 @@ body,html
   height: 100vh
   color: #000
   +CrossBrowser(overflow-x, hidden)
+  +CrossBrowser(font-smoothing, antialiased)
 
 h1,h2,h3,h5,h5
   padding: 0
@@ -55,6 +56,18 @@ li,li:hover
 a,a:hover
   text-decoration: none
   color: inherit
+
+.hr
+  width: 100%
+  border: 1px ridged lightgrey
+  &--blue
+    border-color: #003F72
+  &--secondary
+    border-color: $secondary
+  &--primary
+    border-color: $secondary
+  &--dark
+    border-color: grey
 
 /* Work around fo boostrap 4 collapse not closing on mobile */
 .navbar-close
