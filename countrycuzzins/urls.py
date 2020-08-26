@@ -5,9 +5,6 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('article/<slug:slug>/', views.ArticleDetailView.as_view(), name='article-detail'),
     path('countrycuzzins/album/<slug:slug>/', views.AlbumList.as_view(), name='albums'),
-    path('account/login/', views.accountLogin, name='account_login'),
-    path('account/signup/', views.accountSignup, name="account_signup"),
-    path("account/logout", views.accountLogout, name="account_logout"),
 
 ]
 

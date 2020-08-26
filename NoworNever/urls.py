@@ -21,6 +21,7 @@ import countrycuzzins as cc
 
 urlpatterns = [
     path('', include('countrycuzzins.urls')),
+    path('', include('users.urls')),
     path('admin/', admin.site.urls),
 ]
 

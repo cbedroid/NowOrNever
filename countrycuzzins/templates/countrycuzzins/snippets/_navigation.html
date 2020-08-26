@@ -28,7 +28,7 @@
       <div class="profile-tray" id="index_profile_tray">
       {% if request.user.is_authenticated %}
         <a href="#" class="m-user m-user-link">
-          <img class="m-img m-img--profile" src="{% static 'media/images/no_image_profile.png' %}" alt="">
+          <img class="m-img m-img--profile" src="{% static 'media/images/default_profile.png' %}" alt="">
         </a>
         <h4 class="profile-title">{{ request.user }}</h4>
         <a href="{% url 'account_logout' %}" class="nav-link m-nav-link">

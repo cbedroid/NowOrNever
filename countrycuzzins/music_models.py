@@ -12,7 +12,7 @@ from .utils import add_SlugField
 
 class Artist(models.Model):
   name = models.CharField(max_length=80, blank=True, unique=True)
-  profile_image = models.OneToOneField(Image, default='images/no_image_artist.png', on_delete=models.SET_DEFAULT)
+  profile_image = models.OneToOneField(Image, default='images/default_artist.png', on_delete=models.SET_DEFAULT)
   article = models.ManyToManyField(Article, verbose_name='article(s)')
   created = models.DateTimeField(auto_now=False, auto_now_add=True)
   updated = models.DateTimeField(auto_now=True, auto_now_add=False)
@@ -27,7 +27,7 @@ class Album(models.Model):
     id = models.AutoField(primary_key=True,null=False,blank=True)
     name = models.CharField(max_length=100, blank=False, unique=True)
     #name2 = models.CharField(max_length=100, blank=False, null=True,unique=False)
-    image = models.ForeignKey('Image', related_name='album_image', null=True, blank=True, default="images/_no_image_profile.png" ,on_delete=models.DO_NOTHING)
+    image = models.ForeignKey('Image', related_name='album_image', null=True, blank=True, default="images/default_album.png" ,on_delete=models.DO_NOTHING)
     slug = models.SlugField(verbose_name="album url",max_length=80, unique=True,
                             blank=False, null=False,
                             help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
