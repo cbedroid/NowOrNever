@@ -1,0 +1,20 @@
+
+// FORM TEMPLATE FORMS ERROR 
+.m-form-error-list
+  display: flex
+  flex-direction: columns
+  align-content: center
+  justify-content: fex-start
+
+  .m-form-error-item
+    color: red !important
+    font: italic 500 1em Arial,sans-serif
+    padding: 10px
+    padding-left: 0
+    +CrossBrowser(cursor, help)
+    &::before
+      content: "*"
+      font-size: 1.3em
+      vertical-align: middle
+      color: red
+      margin-right: 5px

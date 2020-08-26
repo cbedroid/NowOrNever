@@ -3,36 +3,49 @@
 {% load countrycuzzins_extras%}
 {% block body %}
 <section id="login_section">
-<hr>
+  {% include  'countrycuzzins/snippets/messages.html' %}
+  <hr>
   <div class="container">
     <div class="row">
       <div class="col-12 col-md-8 col-lg-6">
         <div class="m-widget">
-          <form>
-           <div class="form-group">
-              <label for="username">Username</label>
+          {% comment %}
+          <form method="post" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="username">Username or Email</label>
               <input type="text" class="form-control" id="username" aria-describedby="usernameHelp">
-              <small id="usernameHelp" class="form-text text-muted">Choose an awesome username.</small>
+              <small id="usernameHelp" class="form-text text-muted">Enter your Username or Email.</small>
             </div>
 
             <div class="form-group">
-              <label for="email">Email address</label>
-              <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
               <label for="password">Password</label>
               <input type="password" class="form-control" id="password">
-            </div>
-            <div class="form-group">
-              <label for="confirmPassword">Confirm Password</label>
-              <input type="password" class="form-control" id="confirmPassword">
             </div>
             <div class="form-group form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          {% endcomment %}
+
+          <form method="post" action="{% url 'account_login' %}">
+            {% csrf_token %}
+
+            <table>
+              <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+              </tr>
+              <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+              </tr>
+            </table>
+
+            <input type="submit" value="login">
+            <input type="hidden" name="next" value="{{ next }}">
           </form>
         </div>
       </div>

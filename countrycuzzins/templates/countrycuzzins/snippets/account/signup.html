@@ -1,0 +1,90 @@
+{% extends 'countrycuzzins/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load countrycuzzins_extras%}
+{% block body %}
+<section id="account_signup_section">
+  {% include  'countrycuzzins/snippets/messages.html' %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-9 col-lg-6">
+        <div class="l-widget" id="signup_widget">
+          <div class="m-banner" id="signup_banner">
+            <div class="m-banner m-banner--header">
+              <h1 class="m-title">Create An Account</h1>
+              <p class="m-subtitle">Signup to get the latest news and updates!</p>
+            </div>
+          </div>
+          <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+              {{ field.label_tag }}<br>
+              {{ field|add_class:"form-control" }}
+              {% if field.help_text %}
+              <small>{{ field.help_text|safe }}</small>
+              {% endif %}
+              <ul class="m-form-error-list">
+                {% for error in field.errors %}
+                <li class="m-form-error-item">{{error}}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endfor %}
+            <button type="submit">Sign up</button>
+          </form>
+        </div>
+      </div>
+
+      <!--aside-->
+      <div class="col-12 col-md-3 col-lg-6">
+        <aside id="signup_aside">
+          <div id="aside_banner_image">
+            <img src="{% static 'media/images/decorative/social-mobile.png' %}" alt="social media mobile image">
+          </div>
+          <div class="l-widget">
+            <div class="m-banner" id="aside_banner">
+              <div class="m-banner--header">
+                <h1 class="m-title m-title--bg">Follow Us</h1>
+                <p class="m-subtitle">Join us on social media </p>
+              </div>
+              <div class="m-banner m-banner--content">
+
+                <ul class="m-social m-social--icon-list m-flex m-flex--inline m-flex--sb" id="aside_socialmedia_list">
+                  <li class="m-social m-social--item">
+                    <a href="{{ 'facebook'|social_get:'link' }}">
+                      <i class="fa fa-facebook m-social m-social--{{ facebook|social_get:'name'}}"
+                        aria-hidden="true"></i></a>
+                  </li>
+                  <li class="m-social m-social--item">
+                    <a href="{{ 'instgram'|social_get:'link' }}">
+                      <i class="fa fa-instagram m-social--{{ instagram |social_get:'name'}}" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="m-social m-social--item">
+                    <a href="{{ 'snapchat'|social_get:'link' }}">
+                      <i class="fa fa-snapchat-ghost m-social--{{ snapchat|social_get:'name'}}" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="m-social m-social--item">
+                    <a href="{{ 'twitter'|social_get:'link' }}">
+                      <i class="fa fa-twitter m-social--{{ twitter|social_get:'name'}}" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="m-social m-social--item">
+                    <a href="{{ 'youtube'|social_get:'link' }}">
+                      <i class="fa fa-youtube-square m-social--{{ youtube|social_get:'name'}}" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+{% endblock body %}

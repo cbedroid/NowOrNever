@@ -65,8 +65,29 @@
   flex-direction: column
   align-items: center
   justify-items: space-around
+  font-size: 1rem
+
   &--header
     justify-self: flex-start
+    margin-bottom: 20px
+    .m-title
+      font: 700 2.7em 'Anton',cursive ,Arial, sans-serif
+      letter-spacing: .15em
+      color: $secondary
+      text-shadow: 2px 2px 5px #000
+      &--bg
+        font-size: 3.5em
+        font-weight: 700
+
+    .m-subtitle
+      width: 100%
+      text-align: center
+      font-size: 1.2em
+      white-space: pre-line
+      line-height: 1.2em
+
+  &--content
+    width: fit-content
 
 .m-img
   display: block
@@ -90,7 +111,7 @@
 
 .profile-tray
   display: grid
-  grid-template-columns: repeat(3,1fr)
+  grid-template-columns: repeat(3, 1fr)
   grid-template-rows: auto
   grid-gap: 20px
   justify-items: center
@@ -126,6 +147,17 @@
     padding: 0
     margin: 0
     font: 600 1.3em Arial,sans-serif
+
+.m-user
+  font: 500 1.3rem Helvetica, Arial, sans-serif
+  color: #000
+  +CrossBrowser(transition,.3s ease-in-out)
+  &--link
+    &.lg
+      font-size: 1.5rem
+      font-weight: 600
+    &:hover
+      color: $secondary
 
 // CAROUSEL
 .m-carousel-wrapper
@@ -233,24 +265,6 @@
 //Follow us Banner
 .m-follow-us-container
   width: 100%
-  .m-banner--header
-    margin-bottom: 20px
-    .m-title
-      &--bg
-        font: 700 3.5em 'Anton',cursive ,Arial, sans-serif
-        letter-spacing: .15em
-        color: $secondary
-        text-shadow: 2px 2px 5px #000
-
-    .m-subtitle
-      width: 100%
-      text-align: center
-      font-size: 1.2em
-      white-space: pre-line
-      line-height: 1.2em
-
-  .m-banner--content
-    width: fit-content
 
 //Social Media 
 .m-social
@@ -260,18 +274,19 @@
   width: 100%
   &--icon-list
     display: flex
+    flex-direction: rows
+    justify-content: space-around
     width: 100%
-    padding: 20px
+    margin: 20px
   &--item
-    padding: calc(100% / 25)
     .fa,.fa5,.fa4
       display: flex
+      max-width: 32px
       align-content: center
       align-items: center
       justify-content: center
       padding: .7em
-      font-size: calc(100vw / 25)
-      width: 2em
+      font-size: 4em
       height: 6em
       border-radius: 20px
 
@@ -291,7 +306,4 @@
 
       &.fa-youtube, &.fa-youtube-square
         background: #bb0000
-        color: #fff
-        color: #fff
-        color: #fff
         color: #fff

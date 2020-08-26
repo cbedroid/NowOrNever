@@ -25,17 +25,14 @@
   animation-fill-mode: forwards
 
 // Image to fit div container 
-=bg_div_image($pos,$bgsize,$bpos:"center center",$repeat:"no-repeat no-repeat")
+=mixin_bg_image($pos,$bgsize,$bpos:"center center",$repeat:"no-repeat no-repeat")
   top: 0
   left: 0
   right: 0
   background-attachment: $pos
-  background-position: unquote($bpos) //50% 40%
-  background-repeat: unquote($repeat)
-  -webkit-background-size: $bgsize
-  -moz-background-size: $bgsize
-  -o-background-size: $bgsize
-  background-size: $bgsize
+  +CrossBrowser(background-position,unquote($bpos)) //50% 40%
+  +CrossBrowser(background-repeat,no-repeat)
+  +CrossBrowser(background-size,$bgsize )
 
 =keyframe($name)
   $colors: green,red,blue,yellow,orange,purple,grey,pink,teal,orangered
