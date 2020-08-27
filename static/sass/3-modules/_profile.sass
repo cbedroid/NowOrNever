@@ -1,0 +1,77 @@
+// User Profile 
+
+#profile_section
+  display: block
+  padding: 5px
+  color: #000
+  background: rgba(0,0,0,.8)
+
+.profile-container
+  display: block
+  width: 100%
+  padding: 10px 20px
+
+  .profile-banner
+    display: block
+    width: 100%
+    height: 30vh
+    .banner-header
+      display: flex
+      width: 50%
+      flex-direction: row
+      justify-content: space-around
+      align-items: center
+      .m-title
+        color: #fff
+
+    .img-container
+      display: block
+      .profile-img
+        width: calc(30vh / 1.5)
+        height: calc(30vh / 1.5)
+        background: #000
+        border: 3px solid blue
+        border-radius: 50%
+
+  legend
+    display: inline-block
+    width: 100%
+    text-align: center
+    color: whitesmoke
+    letter-spacing: .1em
+    padding: 5px
+    text-shadow: 2px 2px 5px #000
+    button
+      &:hover
+        padding: 6px, 12px !important
+        border: 1px solid transparent !important
+
+  .m-profile
+    display: grid
+    grid-template-columns: repeat(2,1fr)
+    grid-column-gap: 1em
+    font: 500 1rem "Roboto",sans-serif
+    hr
+      padding: 0
+      margin: 0 0 5px 0
+    &--title
+      font: 500 2em "Roboto",sans-serif
+      &.email
+        font-size: 1.2em
+        color: #000
+
+    &--left,&--right
+      background: whitesmoke
+      padding: 4px 7px
+      .profile-tray
+        display: flex
+        align-items: center
+
+      .m-form--title
+        font: 600 1.5rem "ceviche",sans-serif
+        text-transform: uppercase
+        text-align: center
+        background: grey
+        color: Whitesmoke
+      .m-form
+        margin-top: 10px

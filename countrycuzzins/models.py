@@ -124,7 +124,7 @@ class Image(models.Model):
     """ Hooking into  ___init___ save method and changing "image" name. """
     
     super(Image, self).save(*args, **kwargs)
-    path = pathToName(self, self.image)
+    path = pathFromName(self, self.image)
     self.imageResize(path)
 
   @staticmethod
@@ -212,7 +212,7 @@ class Song(models.Model):
     self.name = re.sub('\s|\W','_',self.name)
     self.slug = self.slug.lower().strip()
     super(Song, self).save(*args, **kwargs)
-    path = pathToName(self, self.file)
+    path = pathFromName(self, self.file)
 
 
 class Video(models.Model):
@@ -261,7 +261,7 @@ class SocialMedia(models.Model):
 #########################################################
 
 
-def pathToName(instance, obj):
+def pathFromName(instance, obj):
   """Rename file path to model name's attribute
   Args:
       instance (class object): models.Models class instance

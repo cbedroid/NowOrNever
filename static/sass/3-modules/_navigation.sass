@@ -1,0 +1,79 @@
+/* Navigation Header */
+
+.m-nav-text--override
+  span
+    display: inline-block
+    vertical-align: middle
+    margin-left: 10px
+  img
+    margin: 0
+    padding: 0
+
+  .m-user--link
+    border: 2px solid transparent
+    border-radius: 5px
+
+  .profile-title
+    display: inline-block
+    padding: 0
+    margin: 0
+    font: 600 1.3em Arial,sans-serif
+
+  button
+    margin: 0
+    color: #000
+    background: rgb(255, 255, 255) !important
+    outline: #000
+    border: 2px solid $secondary
+    width: 100px
+    height: 35px
+    letter-spacing: .1em
+    border-radius: 5px
+    letter-spacing: .1em
+    text-transform: uppercase
+    font-family: 'Anton', cursive, Arial, sans-serif
+    font-weight: 500
+    +CrossBrowser(transition, .3s ease-in-out)
+    &:hover
+      background: $secondary !important
+      border-color: #000
+      color: #fff
+  a
+    margin: 0
+    background: #fff
+    color: #000
+
+.m-nav-profile-tray
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  grid-template-rows: auto
+  grid-column-gap: 5px
+  justify-items: center
+  align-items: center
+  width: fit-content
+  position: relative
+  +CrossBrowser(transition, .3s ease-in-out)
+  *
+    padding: 2px
+  // a:first-child
+  //   border: 1px solid #000
+  //   &:hover
+  //     &::after
+  //       font: 500 1em Anton,Arial sans-serif
+  //       background: linear-gradient(to bottom, #000 , $secondary_rgba)
+  //       text-transform: uppercase
+  //       letter-spacing: .2em
+  //       content: "Profile"
+  //       display: block
+  //       text-align: center
+  //       +CrossBrowser(translate,-50% -50%)
+  //       width: fit-content
+  //       height: inherit
+  //       position: absolute
+  //       color: $secondary
+  //       background: rgba(0,0,0,1)
+  //       border-radius: 5px
+  //       padding: 2px
+  //       top: -15px
+  //       left: -15%
+  //       right: 0

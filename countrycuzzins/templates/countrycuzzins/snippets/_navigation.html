@@ -24,13 +24,16 @@
         <a class="nav-link m-nav-link" href="#">Contact</a>
       </li>
     </ul>
-    <div class="navbar-text">
-      <div class="profile-tray" id="index_profile_tray">
+    <div class="navbar-text m-nav-text--override">
+      <div class="m-nav-profile-tray" id="index_profile_tray">
       {% if request.user.is_authenticated %}
-        <a href="#" class="m-user m-user-link">
-          <img class="m-img m-img--profile" src="{% static 'media/images/default_profile.png' %}" alt="">
+        <a href="{% url 'profile' %}" class=" m-user m-user--link profile">
+          <span> <img class="m-img m-img--profile" src="{{request.user.profile.image.url}}" alt="">
+          </span>
+          <span>
+            <h4 class="profile-title">{{ request.user }}</h4>
+          </span>
         </a>
-        <h4 class="profile-title">{{ request.user }}</h4>
         <a href="{% url 'account_logout' %}" class="nav-link m-nav-link">
           <button class="m-user m-user--link">logout</button>
         </a>
@@ -41,8 +44,8 @@
       <a href="{% url 'account_signup' %}" class="nav-link m-nav-link">
         <button class="m-user m-user--link">Signup</button>
       </a>
-      {% endif %}
       </div>
+      {% endif %}
     </div>
   </div>
 </nav>

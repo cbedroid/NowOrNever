@@ -1,35 +1,35 @@
 /* Layout Navigation */
 header
-  position: sticky !important
-  width: 100% !important
-  height: 75px !important
-  top: 0px !important
-  left: 0 !important
+  position: sticky
+  width: 100%
+  height: 75px
+  top: 0px
+  left: 0
   +CrossBrowser(z-index,200)
 
 #main_header_nav
   background: #fff !important
 
   .navbar-collapse,
-    background: #fff !important
+    background: #fff
 
   .m-nav-item
-    padding: 6px  !important
-    color: #000 !important
-    margin: -3px !important
+    padding: 6px
+    color: #000
+    margin: -3px
 
     &:hover
-      color: $secondary !important
+      color: $secondary
     .m-nav-link
-      color: inherit !important
-      font: 600 1.2rem Helvetica, sans-serif !important
-      text-transform: uppercase !important
-      +CrossBrowser(transition, .2s ease-in-out !important)
+      color: inherit
+      font: 600 1.2rem Helvetica, sans-serif
+      text-transform: uppercase
+      +CrossBrowser(transition, .2s ease-in-out)
     &.active
       .m-nav-link
-        border-bottom: 2px solid $secondary !important
+        border-bottom: 2px solid $secondary
 
   .button
-    color: #000 !important
+    color: #000
     span
-      color: #000 !important
+      color: #000

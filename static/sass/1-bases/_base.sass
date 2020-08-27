@@ -22,6 +22,7 @@ h1,h2,h3,h5,h5
 
 section
   display: block
+  margin-top: 35px /* clear fix for navigation header */
 
 ul
   padding: 0
@@ -41,7 +42,8 @@ button
 a,a:hover
   text-decoration: none
 
-li,a,i,button
+li,a,i,button,span
+  +CrossBrowser(transition, .3s ease-in-out)
   cursor: pointer
   &:hover
     cursor: pointer
