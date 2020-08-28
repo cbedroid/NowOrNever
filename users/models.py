@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from PIL import Image
 from django.dispatch import receiver
+from NoworNever.utils.utils_models import Command,OverwriteStorage,generateSlug
 
 MEDIA_ROOT = "static" + settings.MEDIA_ROOT
 
@@ -21,30 +22,41 @@ def user_namespace_path(instance, *args, **kwargs):
   instance_hash = hash(instance.__class__)
 
   # optional kwargs if model does NOT have an name attribute
-  name = kwargs.get('name',None) 
+  user = kwargs.get('name',None) 
 
   Image_hash = hash(Profile)
   attr,path,ext= {Image_hash: ['image.url','images/profile/', '.png'],
                 }.get(instance_hash)
 
-  attr_name = "".join((instance.name,ext))
-  setattr(instance,attr, attr_name)
+  attr_name = "".join((instance.user.username,ext))
+  print('ATTR_USER',attr_name)
 
-  new_name = f"{path}{instance.url}{ext}"
-  return new_name
+  if attr_name:
+    new_image = f"{path}{attr_name}"
+  else:
+    setattr(instance,attr, attr_name)
+    new_image = f"{path}{instance.image.url}{ext}"
+  print('\nNEW_IMAGE',new_image)
+  return new_image
 
 
 class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  image = models.ImageField(default='images/default_profile.png', upload_to=user_namespace_path)
+  image = models.ImageField(default='images/default_profile.png', upload_to=user_namespace_path,storage=OverwriteStorage())
   created = models.DateTimeField(auto_now=False, auto_now_add=True)
   updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-
-
 
   def __str__(self):
     return f'{self.user.username} Profile'
 
+
+  @property
+  def getImage(self):
+    if os.path.isfile(self.image.path):
+      return self.image.url
+    default_image =  "static/media/images/profidefault_profile.png"
+    return default_image 
+    
   def save(self, *args, **kwargs):
     super().save(*args, **kwargs)
     img = Image.open(self.image.path)

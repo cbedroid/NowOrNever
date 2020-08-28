@@ -17,8 +17,7 @@ def accountSignup(request):
       user = form.save()
       print('USER',user)
       login(request,user)
-      messages.success(request, 'Welcome %s'%user.username)
-      return reverse('index')
+      messages.success(request, 'Welcome %s!'%user.username)
       return HttpResponseRedirect(reverse('index'))
   context['form']=form
   return render(request,'users/snippets/account/signup.html',context)
@@ -45,10 +44,11 @@ def accountLogin(request):
                   context={"form":form})
 
 
+
 def accountLogout(request):
   logout(request)
-  messages.info(request, "Logged out successfully!")
-  return redirect('index')
+  messages.info(request, "You logged out successfully!")
+  return HttpResponseRedirect(reverse('index'))
 
 
 

@@ -7,7 +7,10 @@ Artist models
 from django.db import models
 from django.core.validators import MinLengthValidator
 from .models import Article, Image, Song
-from .utils import add_SlugField
+from NoworNever.utils.utils_models import Command,\
+      OverwriteStorage,\
+      generateSlug,\
+      urlParseSlugField
 
 
 class Artist(models.Model):
@@ -43,7 +46,7 @@ class Album(models.Model):
       return self.name
 
     def save(self, *args, **kwargs):
-      self = add_SlugField(self,[self.name,self.id])
+      self = urlParseSlugField(self,[self.name,self.id])
       super(Album, self).save(*args, **kwargs)
 
 
@@ -64,8 +67,3 @@ class Album(models.Model):
     def song_urls(self):
       return list(song.file.url for song in self.songslist)
 
-
-
-
-  
-  

@@ -1,3 +1,6 @@
+
+#NOTE: CAN BE DELETE as of August 25, 2020 DELETE THIS FILE, FILE HAS BEEN REFACTORED IN NoworNever/utils/ folder 
+
 import os
 import re
 

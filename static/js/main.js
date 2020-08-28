@@ -3,6 +3,7 @@ $(document).ready(() => {
   $("body").on("click", () => {
     $(".navbar-collapse").collapse("hide");
   });
+
   //Fixed bootstrap 4 collaspe not working on mobile
   let is_open = false;
   $(".navbar-toggler").on("click", function (e) {
@@ -15,12 +16,17 @@ $(document).ready(() => {
     is_open = !is_open;
   });
 
+  // Bootstrap alert fade out
+  setTimeout(function () {
+    $("#alert_message").alert("close");
+  }, 2500);
+
   function showComingSoon() {
     // show modal base on datetime of user last visit
 
     const cs_modal = $("#modal_upcoming");
     const data = {};
-    const vph = 1000 * 60 * 60;
+    const vph = 1000 * 60 * 60; //show modal  every hour
     //* 60; // visit per hour
     const today = new Date().getTime();
     let last_shown = localStorage.getItem("last_shown");

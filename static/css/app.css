@@ -508,11 +508,12 @@ header {
   grid-gap: 0.2em;
   justify-items: center; }
   .card-deck img {
+    display: block;
     padding: 0;
     border-radius: 50%;
     width: 200px;
     height: 200px;
-    margin: 0 auto; }
+    margin: auto; }
   .card-deck .card-block {
     text-align: center;
     width: calc(100vw / 4 );
@@ -997,7 +998,7 @@ section#main_musicplayer {
 
 .message-wrapper {
   position: fixed;
-  top: 70px;
+  top: 90px;
   left: 0;
   right: 0;
   -moz-z-index: 210;
@@ -1035,7 +1036,8 @@ section#main_musicplayer {
         height: calc(30vh / 1.5);
         background: #000;
         border: 3px solid blue;
-        border-radius: 50%; }
+        border-radius: 50%;
+        color: #f70303; }
   .profile-container legend {
     display: inline-block;
     width: 100%;
@@ -1104,7 +1106,7 @@ section#main_musicplayer {
   .i-logo-img.img-round {
     border-radius: 50%; }
 
-.m-img, .card-deck img {
+.m-img {
   display: block;
   height: 400px; }
   .m-img--full {
@@ -1115,11 +1117,15 @@ section#main_musicplayer {
     display: block;
     width: 100px;
     height: inherit; }
+  .m-img--cs-modal {
+    margin: 0 auto;
+    width: 100%; }
   .m-img--profile {
     border-radius: 50%;
     width: 85px;
     height: 75px;
-    border: 2px solid #000; }
+    border: 2px solid #000;
+    background: grey; }
     .m-img--profile .bg {
       width: 75px;
       height: 70px; }
@@ -1329,7 +1335,13 @@ i {
       margin: 5px; }
       .m-social #account_signup_section .m-banner {
         font-size: 0.75rem;
-        letter-spacing: 0.02rem; } }
+        letter-spacing: 0.02rem; }
+
+  #profile_section {
+    width: 100%; }
+    #profile_section .profile-banner .banner-header {
+      display: flex;
+      width: 100%; } }
 @media (max-device-height: 480px) and (orientation: landscape) {
   #main_nav_logo {
     display: none; }
@@ -1414,7 +1426,13 @@ i {
       margin: 5px; }
       .m-social #account_signup_section .m-banner {
         font-size: 0.75rem;
-        letter-spacing: 0.02rem; } }
+        letter-spacing: 0.02rem; }
+
+  #profile_section {
+    width: 100%; }
+    #profile_section .profile-banner .banner-header {
+      display: flex;
+      width: 100%; } }
 @media (min-device-width: 481px) and (max-device-width: 768px) {
   .card-deck {
     display: grid;

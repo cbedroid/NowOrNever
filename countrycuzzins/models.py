@@ -13,6 +13,7 @@ from argparse import RawTextHelpFormatter
 from django.core.management.base import BaseCommand
 from PIL import Image as PIL_IMAGE
 
+from NoworNever.utils.utils_models import Command,OverwriteStorage,generateSlug
 
 
 MEDIA_ROOT = "static" + settings.MEDIA_ROOT
@@ -68,45 +69,6 @@ def toNameSpace(instance, *args, **kwargs):
 
   new_name = f"{path}{instance.name}{ext}"
   return new_name
-
-
-class OverwriteStorage(FileSystemStorage):
-  def get_available_name(self, name, max_length=None):
-    self.delete(name)
-    return name
-
-
-def js_slugUrl(instance):
-  """ Add additional help to Admin model site slugfield fields. 
-      Build slugfield help text from site deployed ip and port.
-
-      Hacky way to Build SlugField using ip and/or port of website.
-      Using javascript instead of python to get url address
-
-
-  Args:
-      instance (models.Model): instance of models.Model
-  """
-  slug_url = instance.slug +";"
-  html = "".join(('''<span id="myslughelp"></span><script>
-        const full = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-        const myhelp = document.getElementById("myslughelp");
-        const data = myhelp.parentElement.innerHTML;
-        myhelp.innerHTML = full + /article/''' ,slug_url , 
-        '''alert('Custom ranned');
-      </script>'''
-      ))
-  instance._meta.get_field('slug').help_text  = html
-
-
-
-class Command(BaseCommand):
-  """ pre-parser hook to change HTML text before rendering to admin """
-
-  def create_parser(self, *args, **kwargs):
-    parser = super(Command, self).create_parser(*args, **kwargs)
-    parser.formatter_class = RawTextHelpFormatter
-    return parser
 
 
 class Image(models.Model):
@@ -175,7 +137,7 @@ class Article(models.Model):
   def save(self, *args, **kwargs):
     self.setIsArticle()
     self.add_SlugField()
-    js_slugUrl(self)
+    generateSlug(self)
     super(Article, self).save(*args, **kwargs)
 
   def setIsArticle(self):
@@ -339,7 +301,3 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     if instance.file:
       if os.path.isfile(instance.file.path):
         os.remove(instance.file.path)
-
-
-ART = Article
-IMG = Image

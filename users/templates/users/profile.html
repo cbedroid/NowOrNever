@@ -6,20 +6,20 @@
 
 <section id="profile_section">
   <div class="row">
-    <div class="col-12 col-md-9">
+    <div class="col-12 col-sm-12 col-lg-9">
       <div class="profile-container">
         <div class="profile-banner"
           style="background-image: url('{% static 'media/images/decorative/profile_background.png' %}')">
           <div class="banner-header">
             <div class="img-container">
-              <img class="profile-img" src="{{ user.profile.image.url }}" data-color="blue" alt="Profile Image">
+              <img class="profile-img" src="{{ user.profile.getImage }}" data-color="blue" alt="Profile Image">
             </div>
             <h2 class="m-title m-title--bg">{{user.username }}</h2>
             <h3 class=" m-subtitle">{{user.email }}</h3>
           </div>
         </div>
-        <div class="form-container">
 
+        <div class="form-container">
           <legend class="m-title m-title--bg border-bottom mb-4">
             <span>Profile Info</span>
           </legend>
@@ -61,11 +61,13 @@
                   <button class="btn btn-outline-info" type="submit">Update</button>
                 </div>
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            </div>{# right #}
+          </div> {# m-profile #}
+        </div>{# form container #}
+
+      </div>{# p-container #}
+
+    </div> {# col #}
   </div>
 </section>
 {% endblock body %}
