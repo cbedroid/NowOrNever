@@ -6,8 +6,8 @@
 <section id="account_signup_section">
   {% include  'countrycuzzins/snippets/messages.html' %}
   <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-9 col-lg-6">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-6">
         <div class="m-widget" id="signup_widget">
           <div class="m-banner" id="signup_banner">
             <div class="m-banner m-banner--header">
@@ -16,7 +16,7 @@
             </div>
             <hr>
           </div>
-          <form class="m-from-widget" method="post">
+          <form class="m-form-widget" method="post">
             {% csrf_token %}
             {% for field in form %}
             <div class="form-group">

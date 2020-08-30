@@ -6,27 +6,6 @@ $(document).ready(() => {
   /**********************************
    *****  MUSIC PLAYER **********
    ***********************************/
-  const is_mobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-    navigator.userAgent.toLowerCase()
-  );
-
-
-  /* APPLY STYLE ON MOBILE */
-  if (is_mobile)
-  {
-    $('i a button li .fa').css({ 'cursor': 'pointer' });
-
-    // add mobile class to corresponding element
-    // thats using a mobile device
-    $('section div ul').each(function (i, e) {
-      if ($(e).data('mobile'))
-      {
-        $(e).removeClass('desktop').addClass('mobile');
-        return e;
-      }
-    });
-  }
-
   // BIND REWIND AND FFWD
   bindSeekEvent("#mp_rewind", -1);
   bindSeekEvent("#mp_fast_forward", 1);
@@ -34,26 +13,22 @@ $(document).ready(() => {
 
   // music play button
   $("#mp_play").on("click", function () {
-    if (Audio.init && $(this).hasClass("fa-pause"))
-    {
+    if (Audio.init && $(this).hasClass("fa-pause")) {
       //then the audio is playing then stop it
       console.log("init paused ");
       Audio.pause();
-    } else if (Audio.state["loaded"])
-    {
+    } else if (Audio.state["loaded"]) {
       Audio.play();
     }
 
     // method: for user pressing play button without selecting track
-    if (Audio.init === false || Audio.ended === true)
-    {
+    if (Audio.init === false || Audio.ended === true) {
       // If user did not slect track.. Play first track
       console.log(`Loading Track: ${Audio.src}`);
       const nt = Audio.next_track;
       const auto_selected = nt;
       const loaded = Audio.load(auto_selected);
-      if (loaded === true)
-      {
+      if (loaded === true) {
         $(".mp-equalizer").removeClass("active");
         const equalizer = $(".mp-equalizer")[nt];
 
@@ -69,27 +44,25 @@ $(document).ready(() => {
     $(this).find(".mp-equalizer").addClass("active");
 
     const track = $(this).data("tracknumber");
-    if (track !== undefined)
-    {
+    if (track !== undefined) {
       Audio.load(parseInt(track) - 1);
       Audio.play();
     }
   });
 
-  function setAudioTime (time) {
+  function setAudioTime(time) {
     // Set Audio Player track time
     Audio.currentTime = time;
   }
 
   // Rewind track button
-  function bindSeekEvent (element, direction) {
+  function bindSeekEvent(element, direction) {
     // Bind both rewind and fast forward to mouse click event
     let ct = Audio.currentTime;
     $(element).on("click", () => {
       ct = Audio.currentTime;
-      console.log('FIRST CT', ct);
-      if (Audio.state["loaded"])
-      {
+      console.log("FIRST CT", ct);
+      if (Audio.state["loaded"]) {
         const SEEK = 5;
         // hint: Direction -1 == rewind  and 1 == fast forward
 
@@ -99,12 +72,10 @@ $(document).ready(() => {
         // Bind long-press rewind and fast-forward button for desktop and mobile
         $(element).on("mousedown", () => {
           seekInterval = setInterval(() => {
-            if (direction < 0)
-            {
+            if (direction < 0) {
               ct = Audio.currentTime - 5;
-            } else
-            {
-              ct = Audio.currentTime + 5
+            } else {
+              ct = Audio.currentTime + 5;
             }
 
             // TODO: fixed both seek btn when pressed for the first time
@@ -116,14 +87,14 @@ $(document).ready(() => {
 
     $(element).on("mouseup", () => {
       /* Remove interval and release Audio.currentTime */
-      console.log('SEEK TIME', ct.toFixed(2))
+      console.log("SEEK TIME", ct.toFixed(2));
       clearInterval(seekInterval);
       $(element).off("mousedown");
     }); // mouseup
   } // end function bindSeekEvent
 
   // Bind Volume button
-  function volumeControl () {
+  function volumeControl() {
     $("#volume_btn").on("click", function () {
       const vol_wrap = $("#volume_slider_wrapper");
       $(vol_wrap).css("visibility", "visible");

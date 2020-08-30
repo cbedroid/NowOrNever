@@ -1,10 +1,77 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load countrycuzzins_extras%}
+{% load crispy_forms_tags %}
 {% block body %}
-<div class="slider-container">
-<input type="range"  id="slider" min="0" max="100">
+{% include  'countrycuzzins/snippets/messages.html' %}
 
-</div>
- 
+<section id="pf_section">
+  <div class="row">
+    <div class="col-12">
+      <div class="pf-container"
+        style="background-image: url('{% static 'media/images/decorative/profile_background.png' %}')">
+
+        <div class="profile-banner">
+
+          <div class="banner-header">
+            <div class="img-container">
+              <img class="profile-img" src="{{ user.profile.getImage }}" data-color="blue" alt="Profile Image">
+            </div>
+            <h2 class="m-title m-title--bg">{{user.username }}</h2>
+            <h3 class="m-subtitle">{{user.email }}</h3>
+          </div>
+          <legend class="m-title m-title--bg border-bottom mb-4">
+            <span>Profile Info</span>
+          </legend>
+
+        </div> {# p-banner #}
+
+        <div class="form-container">
+          <div class="m-profile">
+            <!--form left -->
+            <div class="m-profile--left">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                  <h3 class="m-form--title">Update profile image</h3>
+                  <hr>
+                  <div class="user-tray m-flex m-flex--inline">
+                    <h2 class="m-user m-user--title user">{{ user.username }}</h2>
+                    <h3 class="m-user m-user--title email">{{ user.email }}</h3>
+                  </div>{# u tray #}
+                  <hr>
+                  <div class="m-form" id="profile_image_form">
+                    {{ p_form|crispy }}
+                  </div> {# m-form -left #}
+                </fieldset>
+                <div class="form-group">
+                  <button class="btn btn-outline-info" type="submit">Update</button>
+                </div> {# form-group --left #}
+              </form>
+            </div> {# left #}
+
+            <!--form right -->
+            <div class="m-profile--right">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                  <h3 class="m-form--title">Update account info</h3>
+                  <hr>
+                  <div class="m-form" id="profile_user_form">
+                    {{ u_form|crispy }}
+                  </div>
+                </fieldset>
+                <div class="form-group">
+                  <button class="btn btn-outline-info" type="submit">Update</button>
+                </div>
+              </form>
+            </div>{# right #}
+          </div> {# m-profile #}
+        </div>{# form container #}
+
+      </div>{# p-container #}
+
+    </div> {# col #}
+  </div> {# row #}
+</section>
+
 {% endblock body %}

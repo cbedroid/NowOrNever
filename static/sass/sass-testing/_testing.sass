@@ -1,28 +1,135 @@
-.slider-container
-  margin: 50px auto
-  padding: 10px 50px
-  width: 400px
 
-input[type="number"]
+#profile_section
+  display: block
+  width: 100vw
+  overflow-x: hidden
 
-#slider
-  -webkit-appearance: none
-  appearance: none
-  -webkit-appearance: none
-  border: 1px solid red
-  height: 5px
-  vertical-align: middle
-  -webkit-border-radius: 20px
-  -moz-border-radius: 20px
-  border-radius: 20px
-  background-color: red
-  outline: none
+  .profile-main-container
+    display: block
+    width: 100%
+    color: #000
+    font-size: 1rem
+    padding: 5px 10px
+    background-color: rgba(0,0,0,.9)
 
-#slider::-webkit-slider-thumb
-  -webkit-appearance: none
-  width: 20px
-  height: 20px
-  border: 1px solid #000000
-  -webkit-border-radius: 10px
-  border-radius: 10px
-  background: #ffffff
+  .user-tray
+    display: flex
+    width: 100%
+    margin: 10px 20px
+    &--fl
+      width: 500px
+      justify-content: flex-start
+    &--inline
+      width: 100%
+
+  .pf-wrapper
+    // profile bottom
+    &--top
+      color: whitesmoke
+    .m-banner
+      width: 100%
+      height: 100%
+      background-repeat: no-repeat
+      background-color: #000
+      +mixin_bg_image(absolute,cover,"100% 50%")
+      position: relative
+      &--header
+        display: block
+        width: 100%
+        .username
+          color: whitesmoke
+          letter-spacing: .1em
+          margin-left: 10px
+        .email
+          margin-left: 10px
+          color: lightgrey
+          font-size: 1.5em
+
+      &--content
+        display: block
+        width: 100%
+        legend
+          display: block
+          width: 100%
+          background: rgba(0,0,0,.5)
+          padding: 0 10px
+          .m-title--bg
+            color: lightgrey
+            font-size: 2.5em
+            text-shadow: 5px 5px  8px  #000
+            letter-spacing: .1em
+
+    // profile bottom
+    &--bottom
+      display: block
+      background: #fff
+      color: #000
+
+    .pf-form-container
+      display: grid
+      grid-template-columns: repeat(2,1fr)
+      grid-column-gap: 2em
+      .form-wrapper
+        display: block
+        padding: 15px 10px
+        background: whitesmoke
+        color: inherit
+        max-width: 100%
+        .user-tray--inner-grid
+          display: block
+          width: 100%
+          .m-subtitle
+            word-break: break-word
+            text-align: justify
+            width: 100%
+            span.bold
+              display: inline-block
+              width: 100px
+              margin: 0 auto
+              font-weight: 600
+              color: #000
+              margin-right: 5px
+
+      form
+        .form-title
+          background: grey
+          padding: 5px 10px
+          text-transform: uppercase
+          letter-spacing: .1em
+          border-radius: 7px
+
+        // Changing builtin form html styling 
+        .m-form
+          label
+            font: 700 1.2em Arial, sans-serif
+            .asteriskField
+              display: none
+
+          // Change image form bultin layout
+          #div_id_image
+            div
+              width: fit-content
+              padding: 5px 8px
+              display: grid
+              grid-template-columns: repeat(2,1fr)
+              grid-gap: .2em
+              align-items: center
+              vertical-align: middle
+              border: 1px solid grey
+              border-radius: 5px
+              white-space: normal
+              font-weight: 600
+              .form-img-thumbnail
+                // builtin in form image 
+                display: none
+                width: 50px
+                height: 50px
+                border-radius: 50%
+                border: 3px solid blue
+
+            .form-control-file
+              font-weight: 600
+              font-style: italic
+              background: transparent
+              margin: 0
+              padding: 0

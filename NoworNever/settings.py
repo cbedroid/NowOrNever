@@ -140,11 +140,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 IMAGE_ROOT = os.path.join(MEDIA_ROOT,'images/')
 AUDIO_ROOT = os.path.join(MEDIA_ROOT,'audio/')
 VIDEO_ROOT = os.path.join(MEDIA_ROOT,'videos/')
+
 LOGIN_URL = '/account/login/'
 
 LOGIN_REDIRECT_URL = '/'
 
-LOGOUT_REDIRECT_URL = None
+LOGOUT_REDIRECT_URL = '/'
 
 # for static css file mimetype errors
 mimetypes.add_type("text/css", ".css", True)

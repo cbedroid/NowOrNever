@@ -20,7 +20,7 @@ def accountSignup(request):
       messages.success(request, 'Welcome %s!'%user.username)
       return HttpResponseRedirect(reverse('index'))
   context['form']=form
-  return render(request,'users/snippets/account/signup.html',context)
+  return render(request,'users/account/signup.html',context)
 
 
 
@@ -40,7 +40,7 @@ def accountLogin(request):
       else:
         messages.error(request, "Invalid username or password.")
   form = AuthenticationForm()
-  return render(request,"users/snippets/account/login.html",
+  return render(request,"users/account/login.html",
                   context={"form":form})
 
 
