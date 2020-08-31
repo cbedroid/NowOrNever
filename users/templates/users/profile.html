@@ -82,14 +82,14 @@
                     </h2>
                   </div>
                   <hr>
-                  <div class="m-form">
+                  <div class="m-form m-form--image-upload">
+                    <img class="m--img m-img--thumbnail" src="{{ user.profile.getImage }}" alt="Profile Thumbnail">
                     {{ p_form| crispy }}
                   </div>
                 </fieldset>
                 <div class="form-group">
                   <button class="btn btn-outline-info" type="submit">Update</button>
                 </div>
-
               </form>
             </div>{# form image #}
           </div>

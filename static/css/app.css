@@ -107,11 +107,11 @@ a, a:hover {
   display: none !important; }
 
 /**** LAYOUTS  *** */
-.zed--1 {
+.zem--1 {
   z-index: 1; }
-.zed--2 {
+.zem--2 {
   z-index: 2; }
-.zed--3 {
+.zem--3 {
   z-index: 3; }
 
 #main_nav {
@@ -1009,82 +1009,124 @@ section#main_musicplayer {
   -o-z-index: 210;
   z-index: 210; }
 
-#pf_section {
+#profile_section {
   display: block;
-  color: #000;
-  padding: 20px;
-  margin: 20px;
-  border: 3px solid pink; }
-
-.pf-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  padding: 10px 20px;
-  background: rgba(0, 0, 0, 0.9);
-  border: 3px solid green; }
-  .pf-container .profile-banner {
+  width: 100vw;
+  overflow-x: hidden; }
+  #profile_section .profile-main-container {
     display: block;
     width: 100%;
-    min-height: 30vh;
-    border: 5px solid red; }
-    .pf-container .profile-banner .banner-header {
-      display: flex;
-      max-width: 100%;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center; }
-      .pf-container .profile-banner .banner-header .m-title {
-        color: #fff; }
-    .pf-container .profile-banner .img-container {
-      display: block; }
-      .pf-container .profile-banner .img-container .profile-img {
-        width: calc(30vh / 1.5);
-        height: calc(30vh / 1.5);
-        background: #000;
-        border: 3px solid blue;
-        border-radius: 50%;
-        color: #f70303; }
-  .pf-container legend {
-    display: inline-block;
+    color: #000;
+    font-size: 1rem;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.9); }
+  #profile_section .user-tray {
+    display: flex;
     width: 100%;
-    text-align: center;
-    color: whitesmoke;
-    background: inherit;
-    letter-spacing: 0.1em;
-    padding: 5px;
-    text-shadow: 2px 2px 5px #000; }
-    .pf-container legend button:hover {
-      padding: 6px, 12px !important;
-      border: 1px solid transparent !important; }
-  .pf-container .m-profile {
+    margin: 10px 20px; }
+    #profile_section .user-tray--fl {
+      width: 500px;
+      justify-content: flex-start; }
+    #profile_section .user-tray--inline {
+      width: 100%; }
+  #profile_section .pf-wrapper--top {
+    color: whitesmoke; }
+  #profile_section .pf-wrapper .m-banner {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-color: #000;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-attachment: absolute;
+    -moz-background-position: 100% 50%;
+    -webkit-background-position: 100% 50%;
+    -ms-background-position: 100% 50%;
+    -o-background-position: 100% 50%;
+    background-position: 100% 50%;
+    -moz-background-repeat: no-repeat;
+    -webkit-background-repeat: no-repeat;
+    -ms-background-repeat: no-repeat;
+    -o-background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: relative; }
+    #profile_section .pf-wrapper .m-banner--header {
+      display: block;
+      width: 100%; }
+      #profile_section .pf-wrapper .m-banner--header .username {
+        color: whitesmoke;
+        letter-spacing: 0.1em;
+        margin-left: 10px; }
+      #profile_section .pf-wrapper .m-banner--header .email {
+        margin-left: 10px;
+        color: lightgrey;
+        font-size: 1.5em; }
+    #profile_section .pf-wrapper .m-banner--content {
+      display: block;
+      width: 100%; }
+      #profile_section .pf-wrapper .m-banner--content legend {
+        display: block;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 0 10px; }
+        #profile_section .pf-wrapper .m-banner--content legend .m-title--bg {
+          color: lightgrey;
+          font-size: 2.5em;
+          text-shadow: 5px 5px 8px #000;
+          letter-spacing: 0.1em; }
+  #profile_section .pf-wrapper--bottom {
+    display: block;
+    background: #fff;
+    color: #000; }
+  #profile_section .pf-wrapper .pf-form-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 1em;
-    font: 500 1rem "Roboto", sans-serif; }
-    .pf-container .m-profile hr {
-      padding: 0;
-      margin: 0 0 5px 0; }
-    .pf-container .m-profile--title {
-      font: 500 2em "Roboto", sans-serif; }
-      .pf-container .m-profile--title.email {
-        font-size: 1.2em;
-        color: #000; }
-    .pf-container .m-profile--left, .pf-container .m-profile--right {
+    grid-column-gap: 2em; }
+    #profile_section .pf-wrapper .pf-form-container .form-wrapper {
+      display: block;
+      padding: 15px 10px;
       background: whitesmoke;
-      padding: 4px 7px; }
-      .pf-container .m-profile--left .profile-tray, .pf-container .m-profile--right .profile-tray {
-        display: flex;
-        align-items: center; }
-      .pf-container .m-profile--left .m-form--title, .pf-container .m-profile--right .m-form--title {
-        font: 600 1.5rem "ceviche", sans-serif;
-        text-transform: uppercase;
-        text-align: center;
-        background: grey;
-        color: Whitesmoke; }
-      .pf-container .m-profile--left .m-form, .pf-container .m-profile--right .m-form {
-        margin-top: 10px; }
+      color: inherit;
+      max-width: 100%; }
+      #profile_section .pf-wrapper .pf-form-container .form-wrapper .user-tray--inner-grid {
+        display: block;
+        width: 100%; }
+        #profile_section .pf-wrapper .pf-form-container .form-wrapper .user-tray--inner-grid .m-subtitle {
+          word-break: break-word;
+          text-align: justify;
+          width: 100%; }
+          #profile_section .pf-wrapper .pf-form-container .form-wrapper .user-tray--inner-grid .m-subtitle span.bold {
+            display: inline-block;
+            width: 100px;
+            margin: 0 auto;
+            font-weight: 600;
+            color: #000;
+            margin-right: 5px; }
+    #profile_section .pf-wrapper .pf-form-container form .form-title {
+      background: grey;
+      padding: 5px 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 7px; }
+    #profile_section .pf-wrapper .pf-form-container form .m-form--image-upload {
+      border: 1px solid grey;
+      width: 100%;
+      max-height: 200px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center; }
+    #profile_section .pf-wrapper .pf-form-container form .m-form label {
+      font: 700 1.2em Arial, sans-serif; }
+      #profile_section .pf-wrapper .pf-form-container form .m-form label .asteriskField {
+        display: none; }
 
 .social-media-widget {
   display: block;
@@ -1095,7 +1137,8 @@ section#main_musicplayer {
     width: 100%;
     height: 100%; }
   .social-media-widget .m-banner {
-    min-height: 300px; }
+    min-height: 300px;
+    overflow: hidden; }
     .social-media-widget .m-banner--content {
       height: 50%; }
   .social-media-widget .m-social--icon-list {
@@ -1275,6 +1318,11 @@ section#main_musicplayer {
     .m-img--profile.bg {
       width: 200px;
       height: 200px; }
+  .m-img--thumbnail {
+    display: block;
+    width: 100px;
+    height: 100%;
+    border: 2px solid red; }
 
 .m-user {
   font: 500 1.3rem Helvetica, Arial, sans-serif;
@@ -1366,140 +1414,6 @@ body {
 i {
   color: #fff;
   background: #000; }
-
-#profile_section {
-  display: block;
-  width: 100vw;
-  overflow-x: hidden; }
-  #profile_section .profile-main-container {
-    display: block;
-    width: 100%;
-    color: #000;
-    font-size: 1rem;
-    padding: 5px 10px;
-    background-color: rgba(0, 0, 0, 0.9); }
-  #profile_section .user-tray {
-    display: flex;
-    width: 100%;
-    margin: 10px 20px; }
-    #profile_section .user-tray--fl {
-      width: 500px;
-      justify-content: flex-start; }
-    #profile_section .user-tray--inline {
-      width: 100%; }
-  #profile_section .pf-wrapper--top {
-    color: whitesmoke; }
-  #profile_section .pf-wrapper .m-banner {
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-color: #000;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-attachment: absolute;
-    -moz-background-position: 100% 50%;
-    -webkit-background-position: 100% 50%;
-    -ms-background-position: 100% 50%;
-    -o-background-position: 100% 50%;
-    background-position: 100% 50%;
-    -moz-background-repeat: no-repeat;
-    -webkit-background-repeat: no-repeat;
-    -ms-background-repeat: no-repeat;
-    -o-background-repeat: no-repeat;
-    background-repeat: no-repeat;
-    -moz-background-size: cover;
-    -webkit-background-size: cover;
-    -ms-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    position: relative; }
-    #profile_section .pf-wrapper .m-banner--header {
-      display: block;
-      width: 100%; }
-      #profile_section .pf-wrapper .m-banner--header .username {
-        color: whitesmoke;
-        letter-spacing: 0.1em;
-        margin-left: 10px; }
-      #profile_section .pf-wrapper .m-banner--header .email {
-        margin-left: 10px;
-        color: lightgrey;
-        font-size: 1.5em; }
-    #profile_section .pf-wrapper .m-banner--content {
-      display: block;
-      width: 100%; }
-      #profile_section .pf-wrapper .m-banner--content legend {
-        display: block;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        padding: 0 10px; }
-        #profile_section .pf-wrapper .m-banner--content legend .m-title--bg {
-          color: lightgrey;
-          font-size: 2.5em;
-          text-shadow: 5px 5px 8px #000;
-          letter-spacing: 0.1em; }
-  #profile_section .pf-wrapper--bottom {
-    display: block;
-    background: #fff;
-    color: #000; }
-  #profile_section .pf-wrapper .pf-form-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 2em; }
-    #profile_section .pf-wrapper .pf-form-container .form-wrapper {
-      display: block;
-      padding: 15px 10px;
-      background: whitesmoke;
-      color: inherit;
-      max-width: 100%; }
-      #profile_section .pf-wrapper .pf-form-container .form-wrapper .user-tray--inner-grid {
-        display: block;
-        width: 100%; }
-        #profile_section .pf-wrapper .pf-form-container .form-wrapper .user-tray--inner-grid .m-subtitle {
-          word-break: break-word;
-          text-align: justify;
-          width: 100%; }
-          #profile_section .pf-wrapper .pf-form-container .form-wrapper .user-tray--inner-grid .m-subtitle span.bold {
-            display: inline-block;
-            width: 100px;
-            margin: 0 auto;
-            font-weight: 600;
-            color: #000;
-            margin-right: 5px; }
-    #profile_section .pf-wrapper .pf-form-container form .form-title {
-      background: grey;
-      padding: 5px 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      border-radius: 7px; }
-    #profile_section .pf-wrapper .pf-form-container form .m-form label {
-      font: 700 1.2em Arial, sans-serif; }
-      #profile_section .pf-wrapper .pf-form-container form .m-form label .asteriskField {
-        display: none; }
-    #profile_section .pf-wrapper .pf-form-container form .m-form #div_id_image div {
-      width: fit-content;
-      padding: 5px 8px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 0.2em;
-      align-items: center;
-      vertical-align: middle;
-      border: 1px solid grey;
-      border-radius: 5px;
-      white-space: normal;
-      font-weight: 600; }
-      #profile_section .pf-wrapper .pf-form-container form .m-form #div_id_image div .form-img-thumbnail {
-        display: none;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 3px solid blue; }
-    #profile_section .pf-wrapper .pf-form-container form .m-form #div_id_image .form-control-file {
-      font-weight: 600;
-      font-style: italic;
-      background: transparent;
-      margin: 0;
-      padding: 0; }
 
 /**** BREAKPOINTS *** */
 /*** MEDIA QUERIES VARS ** */

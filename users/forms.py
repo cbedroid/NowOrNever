@@ -50,13 +50,20 @@ class UserUpdateForm(forms.ModelForm):
     fields = ['username', 'email']
 
   
-class PictureWidget(forms.widgets.Widget):
+class ThumbnailWidget(forms.widgets.Widget):
   def render(self, name, value, attrs=None, renderer=None):
-      html =  Template("""<img class="form-img-thumbnail" src="static/media/$link"/>""")
-      return mark_safe(html.substitute(link=value))
+      if value and getattr(value, "url", None):
+        pass
+      html =  Template("""<img class="form-img-thumbnail" src="{{ user.profile.getImage }}static/media/$link" style="width:50px; height:50px;"/>""")
+      return html.substitute(link=value)
+
 
 class ProfileUpdateForm(forms.ModelForm):
-  #image = forms.ImageField(widget=PictureWidget)
+  image = forms.ImageField( 
+        error_messages = {'invalid':"Opps, File must be an Image file only"},
+        widget=forms.FileInput)
   class Meta:
     model = Profile
-    fields = ['image']
+    fields =['image']
+
+

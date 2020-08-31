@@ -66,7 +66,7 @@ def profile(request):
       if p_form.is_valid():
         p_form.save()
         messages.success(request, f'Your profile image has been updated!')
-      return redirect('profile')
+      return redirect('account_profile')
 
   else:
     u_form = RegistrationForm(instance=request.user)

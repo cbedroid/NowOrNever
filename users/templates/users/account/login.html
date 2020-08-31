@@ -1,55 +1,10 @@
+
 {% extends 'base.html' %}
 {% load static %}
 {% load widget_tweaks %}
 {% load countrycuzzins_extras%}
-{% block body %}
-<section id="login_section">
-  {% include  'countrycuzzins/snippets/messages.html' %}
-  <hr>
-  <div class="container">
-    <div class="row justify-items-center">
-      <div class="col-12 col-md-12 col-lg-6">
-        <div class="m-widget m-account-widget">
-          <div class="m-banner" id="signup_banner">
-            <div class="m-banner m-banner--header">
-              {% if form.fields.email %}
-              {# Register form banner text #}
-              <h1 class="m-title m-title--up">Create An Account</h1>
-              <p class="m-subtitle">Signup to get the latest news and updates!</p>
-              {% else %}
-              {# Login form banner text #}
-              <h1 class="m-title m-title--up">Sign In</h1>
-              <p class="m-subtitle">Connect now to stay tune with the latest news and update </p>
-              {% endif %}
-            </div>
-          </div>
-          <hr class="hr hr--dark">
-          <form method="post" action="{% url 'account_login' %}">
-            {% csrf_token %}
-            {% for field in form %}
-            <div class="form-group">
-              {{ field.label_tag }}<br>
-              {{ field|add_class:"form-control" }}
-              {% if field.help_text %}
-              <small>{{ field.help_text|safe }}</small>
-              {% endif %}
-              <ul class="m-form-error-list">
-                {% for error in fields.errors %}
-                <li class="m-form-error-item">{{error}}</li>
-                {% endfor %}
-              </ul>
-            </div>
-            {% endfor %}
 
-            <button class="btn btn-outline-primary" type="submit">Login</button>
-            <input type="hidden" name="next" value="{{ next }}">
-          </form>
-        </div>
-      </div>
-      <div class="col-12 col-md-3 col-lg-6">
-        {% include  'countrycuzzins/snippets/aside/social_media_banner.html' %}
-      </div>
-    </div>
-  </div>
-</section>
+{% block body %}
+{# Login view #}
+  {% include  'users/snippets/authentication.html' %}
 {% endblock body %}
