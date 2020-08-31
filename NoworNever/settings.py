@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import mimetypes
 from easy_thumbnails.conf import Settings as thumbnail_settings
+from dotenv import load_dotenv
 
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +25,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'f@b8j0!fe#pwqq_+ma($x^30l5#5wr(r&6p+_y2tg_mbpmxn57'
+#SECRET_KEY = 'f@b8j0!fe#pwqq_+ma($x^30l5#5wr(r&6p+_y2tg_mbpmxn57'
+SECRET_KEY = os.environ.get("NON_SECRET_KEY")
+if not SECRET_KEY:
+  raise TypeError('Invalid or Missing Secret Key')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -147,6 +153,13 @@ LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'
 
+# Email service 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('NON_SUPPORT_EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('NON_SUPPORT_EMAIL_PASS')
 # for static css file mimetype errors
 mimetypes.add_type("text/css", ".css", True)
 ALLOWED_HOSTS = ["127.0.0.1",'192.168.0.3','192.168.0.2','10.0.0.54','192.168.0.5','0.0.0.0:80']
