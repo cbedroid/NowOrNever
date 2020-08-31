@@ -4,6 +4,18 @@ $(document).ready(() => {
     navigator.userAgent.toLowerCase()
   );
 
+  /*HEADER BOX SHADOW ON SCROLL */
+  $(window).scroll(function () {
+    var scroll = $(window).scrollTop();
+    console.log("scroll", scroll);
+    if (scroll > 0) {
+      $("#main_header_nav").addClass("active");
+      console.log("scrolling");
+    } else {
+      $("#main_header_nav").removeClass("active");
+    }
+  });
+
   /* APPLY STYLE ON MOBILE DEVICE */
   if (is_mobile) {
     // For mobile, hide "mobile-hidden" class on page load

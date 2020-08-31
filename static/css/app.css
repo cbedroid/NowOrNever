@@ -29,9 +29,11 @@ body, html {
   background: #fff;
   font: normal 16px Arial, "Helvetica Neue", Helvetica, sans-serif;
   margin: 0;
-  padding: 0;
+  padding: 0; }
+
+body {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   color: #000;
   -moz-overflow-x: hidden;
   -webkit-overflow-x: hidden;
@@ -197,6 +199,8 @@ a, a:hover {
   background: linear-gradient(to right, #ddd, #5c5c5c); }
   #follow_us .m-subtitle {
     color: #000; }
+  #follow_us .m-banner--content {
+    padding: 10px 30px; }
 
 #signup_widget {
   margin: 10px 0; }
@@ -279,6 +283,8 @@ header {
 
 #main_header_nav {
   background: #fff !important; }
+  #main_header_nav.active {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
   #main_header_nav .navbar-collapse {
     background: #fff; }
   #main_header_nav .m-nav-item {
@@ -396,7 +402,8 @@ header {
       white-space: pre-line;
       line-height: 1.2em; }
   .m-banner--content {
-    width: fit-content; }
+    width: fit-content;
+    padding: 10px; }
   .m-banner--bg-img {
     display: block;
     width: 100%;
@@ -1139,6 +1146,12 @@ section#main_musicplayer {
   .social-media-widget .m-banner {
     min-height: 300px;
     overflow: hidden; }
+    .social-media-widget .m-banner--header .m-title {
+      color: #F8DDA4; }
+    .social-media-widget .m-banner--header .m-subtitle {
+      color: #294A66;
+      color: #F8DDA4;
+      text-shadow: 2px 2px 2px #000; }
     .social-media-widget .m-banner--content {
       height: 50%; }
   .social-media-widget .m-social--icon-list {
@@ -1419,6 +1432,9 @@ i {
 /*** MEDIA QUERIES VARS ** */
 /*** BREAKPOINT VARS  ** */
 @media (max-device-width: 480px) {
+  header {
+    height: 30px; }
+
   section.nav-spacer {
     display: block;
     width: 100%;
@@ -1560,6 +1576,9 @@ i {
     .profile-main-container .pf-wrapper .m-title {
       font-size: 1.15rem; } }
 @media (max-device-height: 480px) and (orientation: landscape) {
+  header {
+    height: 30px; }
+
   section.nav-spacer {
     display: block;
     width: 100%;
