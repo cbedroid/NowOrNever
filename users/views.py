@@ -9,6 +9,9 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.views.decorators.cache import never_cache
 from .forms import RegistrationForm, UserUpdateForm ,ProfileUpdateForm
 
+def error_404(request,exception):
+  return render(request,"users/HTTP/base_error.html")
+
 def accountSignup(request):
   context = {}
   form = RegistrationForm(request.POST or None)
@@ -53,7 +56,7 @@ def accountLogout(request):
 
 
 @login_required
-def profile(request):
+def profile(request,*args,**kwargs):
   if request.method == 'POST':
     u_form = RegistrationForm(request.POST, instance=request.user)
     p_form = ProfileUpdateForm(request.POST,

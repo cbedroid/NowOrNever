@@ -32,9 +32,13 @@ if not SECRET_KEY:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.environ.get('NON_DEBUG') == 'True') 
 
-ALLOWED_HOSTS = []
+if DEBUG:
+  # for local testing: allowed hosts
+  ALLOWED_HOSTS = ["127.0.0.1",'192.168.0.3','192.168.0.2','10.0.0.54','192.168.0.5','0.0.0.0:80']
+else:
+  ALLOWED_HOSTS = ["127.0.0.1",'192.168.0.3','192.168.0.2','10.0.0.54','192.168.0.5','0.0.0.0:80']
 
 # Application definition
 INSTALLED_APPS = [
@@ -153,6 +157,7 @@ LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'
 
+
 # Email service 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -160,6 +165,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('NON_SUPPORT_EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('NON_SUPPORT_EMAIL_PASS')
+
 # for static css file mimetype errors
 mimetypes.add_type("text/css", ".css", True)
-ALLOWED_HOSTS = ["127.0.0.1",'192.168.0.3','192.168.0.2','10.0.0.54','192.168.0.5','0.0.0.0:80']

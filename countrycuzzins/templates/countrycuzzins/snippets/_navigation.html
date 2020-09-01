@@ -1,17 +1,35 @@
 {% load static %}
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" id="main_header_nav">
-  <button class="navbar-toggler" id="nav_mobile_toggler" type="button" data-toggle="collapse" data-target="#main_navbar"
-    aria-controls="main_navbar" aria-expanded="true" aria-label="Toggle navigation">
+<section id="header_container">
+<nav
+  class="navbar sticky-top navbar-expand-lg navbar-light bg-light"
+  id="main_header_nav"
+>
+  <button
+    class="navbar-toggler"
+    id="nav_mobile_toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#main_navbar"
+    aria-controls="main_navbar"
+    aria-expanded="true"
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="main_navbar">
     <a class="navbar-brand" href="{% url 'index' %}">
-      <img class="m-img m-img--logo" id="main_nav_logo" src="{% static 'media/images/decorative/1-CC-logo.png' %}"
-        alt="Now or Never Logo">
+      <img
+        class="m-img m-img--logo"
+        id="main_nav_logo"
+        src="{% static 'media/images/decorative/1-CC-logo.png' %}"
+        alt="Now or Never Logo"
+      />
     </a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item  m-nav-item active">
-        <a class="nav-link m-nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item m-nav-item active">
+        <a class="nav-link m-nav-link" href="#"
+          >Home <span class="sr-only">(current)</span></a
+        >
       </li>
       <li class="nav-item m-nav-item">
         <a class="nav-link m-nav-link" href="#">Events</a>
@@ -26,9 +44,17 @@
     </ul>
     <div class="navbar-text m-nav-text--override">
       <div class="m-nav-profile-tray" id="index_profile_tray">
-      {% if request.user.is_authenticated %}
-        <a href="{% url 'account_profile' %}" class=" m-user m-user--link profile">
-          <span> <img class="m-img m-img--profile bdr-3-error" src="{{ request.user.profile.getImage }}" alt="profile image">
+        {% if request.user.is_authenticated %}
+        <a
+          href="{% url 'account_profile' request.user.username %}"
+          class="m-user m-user--link profile"
+        >
+          <span>
+            <img
+              class="m-img m-img--profile bdr-3-error"
+              src="{{ request.user.profile.getImage }}"
+              alt="profile image"
+            />
           </span>
           <span>
             <h4 class="profile-title">{{ request.user }}</h4>
@@ -37,15 +63,16 @@
         <a href="{% url 'account_logout' %}" class="nav-link m-nav-link">
           <button class="m-user m-user--link">logout</button>
         </a>
-      {% else %}
-      <a href="{% url 'account_login' %}" class="nav-link m-nav-link">
-        <button class="m-user m-user--link">Login</button>
-      </a>
-      <a href="{% url 'account_signup' %}" class="nav-link m-nav-link">
-        <button class="m-user m-user--link">Signup</button>
-      </a>
+        {% else %}
+        <a href="{% url 'account_login' %}" class="nav-link m-nav-link">
+          <button class="m-user m-user--link">Login</button>
+        </a>
+        <a href="{% url 'account_signup' %}" class="nav-link m-nav-link">
+          <button class="m-user m-user--link">Signup</button>
+        </a>
       </div>
       {% endif %}
     </div>
   </div>
 </nav>
+</section>

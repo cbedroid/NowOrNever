@@ -12,6 +12,7 @@
 
   <link rel="shortcut icon" href="{% static 'media/images/Now_or_Never_Logo.png' %}">
   <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
   <!-- Material Icons -->
@@ -21,8 +22,8 @@
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <!-- Main App CSS -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
-  {% block testingcss %}
-  {% endblock testingcss %}
+  {% block style %}
+  {% endblock style %}
 
   <title>
     {% if title %}
@@ -34,11 +35,15 @@
 </head>
 
 <body>
-  <header>
+<header>
     {% block header %}
     {% include 'countrycuzzins/snippets/_navigation.html' %}
     {% endblock header %}
   </header>
+
+  {% block httperror %}
+  {% endblock httperror %}
+
   <section class="nav-spacer">
   {% block body %}
 

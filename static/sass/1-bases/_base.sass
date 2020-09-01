@@ -10,10 +10,12 @@ body,html
   font: normal 16px Arial, "Helvetica Neue", Helvetica, sans-serif
   margin: 0
   padding: 0
+
 body
   width: 100vw
   height: 100%
   color: #000
+  overflow-x: hidden
   +CrossBrowser(overflow-x, hidden)
   +CrossBrowser(font-smoothing, antialiased)
 
@@ -24,6 +26,7 @@ h1,h2,h3,h5,h5
 section.nav-spacer
   display: block
   margin-top: 35px /* clear fix for navigation header */
+  overflow-x: hidden
 
 ul
   padding: 0

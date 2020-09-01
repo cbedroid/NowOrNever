@@ -62,11 +62,36 @@
       $frame: $frame + $length
     @content
 
+=httpError_mobile_screen
+  // HTTP ERRORS
+  #http_error_section
+    font-size: .75rem
+    img
+      max-height: calc(100% / 1.5)
+      max-width: calc(100% / 1.5)
+    .m-banner--content
+      .overlay
+        display: grid
+        width: 100%
+        grid-template-columns: repeat(1,1fr)
+        grid-template-rows: repeat(2, 1fr)
+        align-items: center
+        justify-items: center
+      &--left
+        width: 100%
+        grid-row: 2 / 3
+        .bg-clip
+          clip-path: polygon(0% 0%, 80% 0%, 90% 50%, 80% 100%, 0% 100%)
+        .link-tray
+          margin-left: -35px
+      &--right
+        width: 100%
+        grid-row: 1 / 2
+
 // PHONE RESPONSIVE 
 =responsive_phone_mixin()
-  header
-    height: 30px
 
+  // Base Nav space
   section.nav-spacer
     display: block
     width: 100%
