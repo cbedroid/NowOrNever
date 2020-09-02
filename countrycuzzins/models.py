@@ -205,6 +205,20 @@ class Video(models.Model):
     return self.name
   
 
+class Event(models.Model):
+  name = models.CharField(verbose_name="Event name",max_length=200, blank=True, null=True,unique=False)
+  location = models.CharField(max_length=100, blank=True, null=True,unique=False,
+            help_text="Example: Jackson MS colosseum or Facebook live")
+  event_date = models.DateTimeField(auto_now=False, auto_now_add=False)
+  created = models.DateTimeField(auto_now=False, auto_now_add=True)
+  updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+  def __str__(self):
+    return f'{self.name} | {self.location}  | {self.event_date.strftime("%A, %b %d %Y @ %I:%M %p EST")}'
+  
+
+  
+
 class SocialMedia(models.Model):
   # Social media site for all website platform
   name = models.CharField(verbose_name="social media site name",max_length=100, blank=True, null=True,unique=True)

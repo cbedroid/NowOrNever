@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load countrycuzzins_extras%}
+
+{% block body %}
+<section id="event_section">
+  <div class="row">
+    <div class="col-12">
+      <div id="event_container">
+        <div class="banner banner--wrapper">
+          <div class="banner--header">
+            {% if request.user.is_authenticated %}
+            <h1 class="title"> Want to be feature on our home page </h1>
+            <p class="subtitle">
+              To enter a chance to win just <span class="text-primary emp">Like</span>, <span
+                class="text-warning emp">Comment</span> and <span class="text-danger emp">Share</span> our streams on
+              your social media
+            </p>
+            {% else %}
+            <h1 class="title">Want to see live event from Home</h1>
+            <p class="subtitle">Sign up now to view all live streams and upcoming events!</p>
+            <div class="account-tray">
+              <a href="{% url 'account_login'%}"><button class="btn btn-primary account-btn">Log In</button></a>
+              <a href="{% url 'account_signup'%}"><button class="btn btn-success account-btn">Sign Up</button></a>
+            </div>
+            {% endif %}
+          </div>
+          <div class="jumbotron banner--jumbotron"
+            style="background-image: url('{% static 'media/images/decorative/winner_theme.png' %}');">
+            <div class="img-wrapper">
+              <img src="{{ request.user.profile.getImage }}" alt="">
+
+            </div>
+            <div class="hero-text">
+              <h1 class="hero-text--top">Congratulation to our #1 fan </h1>
+              <h1 class="hero--text--bottom">{{request.user.username }} </h1>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- upcoming events -->
+        <div class="event event--table-wrapper" id="upcoming_event">
+          <div class="event--table">
+            <div class="event--header">
+              <legend class="title">Events</legend>
+              <div class="row-header">
+                <span>Date</span>
+                <span>Name</span>
+                <span>Time</span>
+              </div>
+            </div>
+            <div class="event--content">
+
+              {% for event in events|dictsort:"event_date.date" %}
+              <div class="row-data">
+                <h4 class="date">
+                  {{ event.event_date|date:"l" }}
+                  <p class="subtext">
+                    {{ event.event_date|date:"DATE_FORMAT" }}
+                  </p>
+                </h4>
+                <h4 class="title">
+                  {{ event.name }}
+                  <p class="subtext">
+                    {{ event.location }}
+                  </p>
+                </h4>
+                <h4 class="title">
+                  {{ event.event_date|date:"g:i A" }} EST
+                  <p class="subtext">
+                    Come Join the fun!
+                  </p>
+                </h4>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</section>
+
+{% endblock body %}

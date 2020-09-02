@@ -7,7 +7,8 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView,DetailView
-from .models import Image, Article, Video,SocialMedia
+from .models import Image, Article, Video,\
+                  SocialMedia,Event
 from .music_models import Album
 
 # Create your views here.
@@ -34,6 +35,16 @@ class AlbumList(ListView):
     #template_name='countrycuzzins/snippets/_music_player.html'
     # new Msic player testing
     template_name='countrycuzzins/snippets/testing_music_player.html'
+
+    def get_context_data(self, **kwargs):
+          context = super().get_context_data(**kwargs)
+          context['now'] = timezone.now()
+          return context
+
+class EventList(ListView):
+    model = Event
+    context_object_name = 'events'
+    template_name='countrycuzzins/events.html'
 
     def get_context_data(self, **kwargs):
           context = super().get_context_data(**kwargs)

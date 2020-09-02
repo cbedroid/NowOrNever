@@ -1,10 +1,12 @@
-from django.urls import path
+from django.urls import path,re_path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name="index"),
+    path('', views.index, name="home"),
+    #re_path(r'(?:\(countrycuzzins/home|home\)/)?', views.index, name="home"),
     path('article/<slug:slug>/', views.ArticleDetailView.as_view(), name='article-detail'),
     path('countrycuzzins/album/<slug:slug>/', views.AlbumList.as_view(), name='albums'),
+    path('countrycuzzins/events/', views.EventList.as_view(), name='events'),
 
 ]
 
