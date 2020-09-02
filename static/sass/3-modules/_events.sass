@@ -1,0 +1,136 @@
+#event_container
+  display: block
+  font-size: 1rem
+  .banner
+    display: block
+    &--wrapper
+      margin-top: 10px
+      background: whitemoke
+      padding: 10px 15px
+    &--header
+      display: block
+      width: 100%
+      text-align: center
+      .title
+        font: 400 3.2em "Anton",Arial,sans-serif
+        text-transform: uppercase
+        margin-bottom: 20px
+      .subtitle
+        margin: auto
+        text-align: center
+        max-width: calc(100vw / 1.3)
+        font: 500 1.25em Helvetica, Arial,sans-serif
+        word-wrap: break-word
+        color: #5e5e5e
+        margin-bottom: 16px
+        .emp
+          font-weight: 700
+          text-transform: uppercase
+
+      .account-tray
+        display: block
+        width: 100%
+        a
+          &:hover
+            padding: inherit
+
+        .account-btn
+          font-weight: 700
+          font-size: 1.2em
+          padding: 8px 10px
+          &:hover
+            padding: 8px 10px
+            height: inherit
+            margin: inherit
+
+    // Winner banner content
+    .jumbotron
+      display: flex
+      flex-direction: row
+      justify-content: space-around
+      width: 100%
+      min-height: 500px
+      height: 100%
+      color: #fff
+      position: relative
+      +mixin_bg_image(absolute,cover,"100% 50%")
+      .img-wrapper
+        width: 200px
+        height: 200px
+        img
+          display: block
+          width: 100%
+          height: 100%
+          border: 2px solid #000
+          border-radius: 50%
+      .hero-text
+        font: 400 64px "Ultra",serif,Arial,sans-serif
+        text-transform: uppercase
+
+  .event
+    display: block
+    width: 100%
+    font-size: 1rem
+    margin-top: 60px
+    padding-bottom: 10px
+    height: 100%
+    background: whitesmoke
+    &--table-wrapper
+      display: block
+      width: 100%
+      text-align: center
+      legend
+        &.title
+          font: 400 3.5em "Ultra",serif,Arial,sans-serif
+          color: $secondary
+          text-shadow: 2px 2px 5px  #000
+
+    // BOTTOM TABLE WIDGET
+    &--table
+      margin-top: 20px
+      border-spacing: 1em 2em
+      border-collapse: separate
+      .event--header
+        box-shadow: 2px 2px 5px #323232
+        margin-bottom: 40px
+      .event--content
+        display: block
+        max-height: 300px
+        overflow: auto
+
+      .row-header,.row-data
+        display: grid
+        grid-template-columns: repeat(3,1fr)
+        grid-template-rows: auto
+        justify-content: center
+        justify-items: center
+        align-items: center
+        align-content: center
+        width: 100%
+        border-bottom: 1px solid #cecece
+
+      .row-header
+        grid-column-gap: 1.5em
+        span
+          font-size: 1.3em
+          font-weight: 700
+
+      .row-data
+        min-height: 100px
+        max-height: 200px
+        overflow: auto
+        p.subtext
+          margin-top: 10px
+          font-size: .7em
+          color: #979797
+
+        .date,.title,
+          font-family: Arial,sans-serif
+        .date
+          font-weight: 550
+          font-size: 2.2em
+          color: $secondary
+        .title
+          font-size: 1.7em
+          font-weight: 700
+          color: #151515

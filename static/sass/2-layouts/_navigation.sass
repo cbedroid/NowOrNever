@@ -11,11 +11,15 @@ header
 
 #main_header_nav
   background: #fff !important
+  padding: 0 !important
+  marging: 0 !important
   &.active
     box-shadow: 0 0 10px rgba(0,0,0,0.4)
 
   .navbar-collapse,
     background: #fff
+    padding: 0 !important
+    marging: 0 !important
 
   .m-nav-item
     padding: 6px
@@ -27,11 +31,12 @@ header
     .m-nav-link
       color: inherit
       font: 600 1.2rem Helvetica, sans-serif
+      border-bottom: 2px solid transparent
       text-transform: uppercase
       +CrossBrowser(transition, .2s ease-in-out)
     &.active
       .m-nav-link
-        border-bottom: 2px solid $secondary
+        border-color: $secondary
 
   .button
     color: #000

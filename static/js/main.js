@@ -4,6 +4,27 @@ $(document).ready(() => {
     navigator.userAgent.toLowerCase()
   );
 
+  /* TOGGLE ACTIVE CLASS FOR NAVIGATION ON PAGE REFRESH */
+  function activeNavLink() {
+    const mainlinks = $("#main_nav_list li");
+    console.log("window locaton", window.location.href);
+
+    $(mainlinks).map(function () {
+      const link_location = $(this).find("a").attr("href");
+      console.log("\nlink location", link_location);
+      if (link_location == "/") {
+        // for home page link
+        $(mainlinks).removeClass("active");
+        $(mainlinks).first().addClass("active");
+      } else if (window.location.href.includes(link_location)) {
+        $(mainlinks).removeClass("active");
+        console.log("\nMatch Found", link_location);
+        $(this).addClass("active");
+      }
+    });
+  }
+  activeNavLink();
+
   /*HEADER BOX SHADOW ON SCROLL */
   $(window).scroll(function () {
     var scroll = $(window).scrollTop();

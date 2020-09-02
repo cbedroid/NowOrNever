@@ -53,7 +53,6 @@ h1, h2, h3, h5, h5 {
 
 section.nav-spacer {
   display: block;
-  margin-top: 35px;
   overflow-x: hidden; }
 
 ul {
@@ -186,9 +185,6 @@ a, a:hover {
     background: #f70303;
     color: #fff; }
 
-#index_profile_tray {
-  margin-right: 50px; }
-
 #about_card {
   width: 100vw;
   background: whitesmoke; }
@@ -286,11 +282,15 @@ header {
   z-index: 200; }
 
 #main_header_nav {
-  background: #fff !important; }
+  background: #fff !important;
+  padding: 0 !important;
+  marging: 0 !important; }
   #main_header_nav.active {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
   #main_header_nav .navbar-collapse {
-    background: #fff; }
+    background: #fff;
+    padding: 0 !important;
+    marging: 0 !important; }
   #main_header_nav .m-nav-item {
     padding: 6px;
     color: #000;
@@ -300,6 +300,7 @@ header {
     #main_header_nav .m-nav-item .m-nav-link {
       color: inherit;
       font: 600 1.2rem Helvetica, sans-serif;
+      border-bottom: 2px solid transparent;
       text-transform: uppercase;
       -moz-transition: 0.2s ease-in-out;
       -webkit-transition: 0.2s ease-in-out;
@@ -307,7 +308,7 @@ header {
       -o-transition: 0.2s ease-in-out;
       transition: 0.2s ease-in-out; }
     #main_header_nav .m-nav-item.active .m-nav-link {
-      border-bottom: 2px solid #f70303; }
+      border-color: #f70303; }
   #main_header_nav .button {
     color: #000; }
     #main_header_nav .button span {
@@ -539,17 +540,17 @@ header {
       font: 300 1em Helvetica, sans-serif;
       color: #575757; }
 
-#music_videos {
+.video-widget-container {
   background: whitesmoke;
   display: flex;
+  flex-direction: column;
   width: 100%;
   align-self: center;
-  flex-direction: row;
   align-content: center;
   align-items: center;
   justify-content: center;
   font-size: 1rem; }
-  #music_videos .jumbotron {
+  .video-widget-container .jumbotron {
     -moz-transform: translate(-50% -50%);
     -webkit-transform: translate(-50% -50%);
     -ms-transform: translate(-50% -50%);
@@ -558,21 +559,22 @@ header {
     text-align: center;
     background: transparent;
     margin: 5em 0; }
-    #music_videos .jumbotron h1.display-4 {
+    .video-widget-container .jumbotron h1.display-4 {
       color: #f70303;
       font: 400 3em "Ultra", cursive, Arial, sans-serif;
       letter-spacing: 0.15em;
       text-transform: uppercase; }
-    #music_videos .jumbotron .m-description {
+    .video-widget-container .jumbotron .m-description {
       margin-top: 1em;
       color: #575757;
       justify-self: flex-start;
       text-align: left;
       font: normal 1.2em Helvetic Arial, sans-serif; }
-    #music_videos .jumbotron .video-container {
+    .video-widget-container .jumbotron .video-wrapper {
       width: 100%;
       max-height: 500px; }
-      #music_videos .jumbotron .video-container iframe, #music_videos .jumbotron .video-container video {
+      .video-widget-container .jumbotron .video-wrapper iframe, .video-widget-container .jumbotron .video-wrapper video {
+        min-width: calc(100vw / 1.2);
         width: 100%;
         height: 500px; }
 
@@ -634,16 +636,10 @@ header {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
-  grid-column-gap: 5px;
   justify-items: center;
   align-items: center;
   width: fit-content;
-  position: relative;
-  -moz-transition: 0.3s ease-in-out;
-  -webkit-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out; }
+  position: relative; }
   .m-nav-profile-tray * {
     padding: 2px; }
 
@@ -1163,6 +1159,148 @@ section#main_musicplayer {
     height: 100%;
     align-items: flex-end; }
 
+#event_container {
+  display: block;
+  font-size: 1rem; }
+  #event_container .banner {
+    display: block; }
+    #event_container .banner--wrapper {
+      margin-top: 10px;
+      background: whitemoke;
+      padding: 10px 15px; }
+    #event_container .banner--header {
+      display: block;
+      width: 100%;
+      text-align: center; }
+      #event_container .banner--header .title {
+        font: 400 3.2em "Anton", Arial, sans-serif;
+        text-transform: uppercase;
+        margin-bottom: 20px; }
+      #event_container .banner--header .subtitle {
+        margin: auto;
+        text-align: center;
+        max-width: calc(100vw / 1.3);
+        font: 500 1.25em Helvetica, Arial, sans-serif;
+        word-wrap: break-word;
+        color: #5e5e5e;
+        margin-bottom: 16px; }
+        #event_container .banner--header .subtitle .emp {
+          font-weight: 700;
+          text-transform: uppercase; }
+      #event_container .banner--header .account-tray {
+        display: block;
+        width: 100%; }
+        #event_container .banner--header .account-tray a:hover {
+          padding: inherit; }
+        #event_container .banner--header .account-tray .account-btn {
+          font-weight: 700;
+          font-size: 1.2em;
+          padding: 8px 10px; }
+          #event_container .banner--header .account-tray .account-btn:hover {
+            padding: 8px 10px;
+            height: inherit;
+            margin: inherit; }
+    #event_container .banner .jumbotron {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+      min-height: 500px;
+      height: 100%;
+      color: #fff;
+      position: relative;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-attachment: absolute;
+      -moz-background-position: 100% 50%;
+      -webkit-background-position: 100% 50%;
+      -ms-background-position: 100% 50%;
+      -o-background-position: 100% 50%;
+      background-position: 100% 50%;
+      -moz-background-repeat: no-repeat;
+      -webkit-background-repeat: no-repeat;
+      -ms-background-repeat: no-repeat;
+      -o-background-repeat: no-repeat;
+      background-repeat: no-repeat;
+      -moz-background-size: cover;
+      -webkit-background-size: cover;
+      -ms-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover; }
+      #event_container .banner .jumbotron .img-wrapper {
+        width: 200px;
+        height: 200px; }
+        #event_container .banner .jumbotron .img-wrapper img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          border: 2px solid #000;
+          border-radius: 50%; }
+      #event_container .banner .jumbotron .hero-text {
+        font: 400 64px "Ultra", serif, Arial, sans-serif;
+        text-transform: uppercase; }
+  #event_container .event {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    margin-top: 60px;
+    padding-bottom: 10px;
+    height: 100%;
+    background: whitesmoke; }
+    #event_container .event--table-wrapper {
+      display: block;
+      width: 100%;
+      text-align: center; }
+      #event_container .event--table-wrapper legend.title {
+        font: 400 3.5em "Ultra", serif, Arial, sans-serif;
+        color: #f70303;
+        text-shadow: 2px 2px 5px #000; }
+    #event_container .event--table {
+      margin-top: 20px;
+      border-spacing: 1em 2em;
+      border-collapse: separate; }
+      #event_container .event--table .event--header {
+        box-shadow: 2px 2px 5px #323232;
+        margin-bottom: 40px; }
+      #event_container .event--table .event--content {
+        display: block;
+        max-height: 300px;
+        overflow: auto; }
+      #event_container .event--table .row-header, #event_container .event--table .row-data {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        align-content: center;
+        width: 100%;
+        border-bottom: 1px solid #cecece; }
+      #event_container .event--table .row-header {
+        grid-column-gap: 1.5em; }
+        #event_container .event--table .row-header span {
+          font-size: 1.3em;
+          font-weight: 700; }
+      #event_container .event--table .row-data {
+        min-height: 100px;
+        max-height: 200px;
+        overflow: auto; }
+        #event_container .event--table .row-data p.subtext {
+          margin-top: 10px;
+          font-size: 0.7em;
+          color: #979797; }
+        #event_container .event--table .row-data .date, #event_container .event--table .row-data .title {
+          font-family: Arial, sans-serif; }
+        #event_container .event--table .row-data .date {
+          font-weight: 550;
+          font-size: 2.2em;
+          color: #f70303; }
+        #event_container .event--table .row-data .title {
+          font-size: 1.7em;
+          font-weight: 700;
+          color: #151515; }
+
 .m-form-error-list {
   display: flex;
   flex-direction: columns;
@@ -1624,18 +1762,18 @@ i {
     .card-deck .card-block {
       width: 100%; }
 
-  #music_videos {
+  .video-widget-container {
     font-size: 0.75rem; }
-    #music_videos .jumbotron {
+    .video-widget-container .jumbotron {
       display: block;
       width: 100%;
       padding: 0 20px; }
-      #music_videos .jumbotron .video-container {
+      .video-widget-container .jumbotron .video-wrapper {
         display: block;
         width: 100%;
         max-height: 350px;
         overflow-y: hidden; }
-        #music_videos .jumbotron .video-container iframe, #music_videos .jumbotron .video-container video {
+        .video-widget-container .jumbotron .video-wrapper iframe, .video-widget-container .jumbotron .video-wrapper video {
           height: 200px;
           width: 100%; }
 
@@ -1706,6 +1844,12 @@ i {
         color: red; }
     .profile-main-container .pf-wrapper .m-title {
       font-size: 1.15rem; }
+
+  #event_container {
+    font-size: 0.82rem; }
+    #event_container .event--content {
+      font-size: 0.62rem;
+      padding: 0 10px; }
 
   #http_error_section {
     font-size: 0.75rem; }
@@ -1788,18 +1932,18 @@ i {
     .card-deck .card-block {
       width: 100%; }
 
-  #music_videos {
+  .video-widget-container {
     font-size: 0.75rem; }
-    #music_videos .jumbotron {
+    .video-widget-container .jumbotron {
       display: block;
       width: 100%;
       padding: 0 20px; }
-      #music_videos .jumbotron .video-container {
+      .video-widget-container .jumbotron .video-wrapper {
         display: block;
         width: 100%;
         max-height: 350px;
         overflow-y: hidden; }
-        #music_videos .jumbotron .video-container iframe, #music_videos .jumbotron .video-container video {
+        .video-widget-container .jumbotron .video-wrapper iframe, .video-widget-container .jumbotron .video-wrapper video {
           height: 200px;
           width: 100%; }
 
@@ -1871,6 +2015,12 @@ i {
     .profile-main-container .pf-wrapper .m-title {
       font-size: 1.15rem; }
 
+  #event_container {
+    font-size: 0.82rem; }
+    #event_container .event--content {
+      font-size: 0.62rem;
+      padding: 0 10px; }
+
   #http_error_section {
     font-size: 0.75rem; }
     #http_error_section img {
@@ -1910,7 +2060,7 @@ i {
       width: fit-content;
       padding: 20px 30px; }
 
-  #music_videos .jumbotron {
+  .video-widget-container .jumbotron {
     padding: 10px; }
 
   #http_error_section {
@@ -1952,7 +2102,7 @@ i {
       width: fit-content;
       padding: 20px 30px; }
 
-  #music_videos .jumbotron {
+  .video-widget-container .jumbotron {
     padding: 10px; }
 
   #http_error_section {

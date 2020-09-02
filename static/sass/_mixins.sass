@@ -151,14 +151,14 @@
       width: 100%
 
   // Music video
-  #music_videos
+  .video-widget-container
     font-size: .75rem
 
     .jumbotron
       display: block
       width: 100%
       padding: 0 20px
-      .video-container
+      .video-wrapper
         display: block
         width: 100%
         max-height: 350px
@@ -241,6 +241,13 @@
 
       .m-title
         font-size: 1.15rem
+  // Events
+  #event_container
+    font-size: .82rem
+    .event
+      &--content
+        font-size: .62rem
+        padding: 0 10px
 
 // TABLETS RESPONSIVE 
 =responsive_tablet_mixin()
@@ -263,6 +270,6 @@
       padding: 20px 30px
 
   // Music Vidoes
-  #music_videos
+  .video-widget-container
     .jumbotron
       padding: 10px
