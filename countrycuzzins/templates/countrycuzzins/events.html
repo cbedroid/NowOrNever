@@ -5,41 +5,72 @@
 
 {% block body %}
 <section id="event_section">
-  <div class="row">
+  <div class="row no-gutters">
     <div class="col-12">
-      <div id="event_container">
-        <div class="banner banner--wrapper">
-          <div class="banner--header">
-            {% if request.user.is_authenticated %}
-            <h1 class="title"> Want to be feature on our home page </h1>
-            <p class="subtitle">
-              To enter a chance to win just <span class="text-primary emp">Like</span>, <span
-                class="text-warning emp">Comment</span> and <span class="text-danger emp">Share</span> our streams on
-              your social media
-            </p>
-            {% else %}
-            <h1 class="title">Want to see live event from Home</h1>
-            <p class="subtitle">Sign up now to view all live streams and upcoming events!</p>
-            <div class="account-tray">
-              <a href="{% url 'account_login'%}"><button class="btn btn-primary account-btn">Log In</button></a>
-              <a href="{% url 'account_signup'%}"><button class="btn btn-success account-btn">Sign Up</button></a>
-            </div>
-            {% endif %}
+      <div class="jumbotron banner banner--wrapper"
+        style="background-image: url('{% static 'media/images/decorative/winner_theme.png' %}');">
+        <div class="banner--header">
+          {% if request.user.is_authenticated %}
+          <h1 class="title"> Want to be feature on our home page </h1>
+          <p class="subtitle">
+            To enter a chance to win just <span class="text-primary emp">Like</span>, <span
+              class="text-warning emp">Comment</span> and <span class="text-danger emp">Share</span> our streams on
+            your social media
+          </p>
+          {% else %}
+          <h1 class="title">Want to see live event from Home</h1>
+          <p class="subtitle">Sign up now to view all live streams and upcoming events!</p>
+          <div class="account-tray">
+            <a href="{% url 'account_login'%}"><button class="btn btn-primary account-btn">Log In</button></a>
+            <a href="{% url 'account_signup'%}"><button class="btn btn-success account-btn">Sign Up</button></a>
           </div>
-          <div class="jumbotron banner--jumbotron"
-            style="background-image: url('{% static 'media/images/decorative/winner_theme.png' %}');">
-            <div class="img-wrapper">
-              <img src="{{ request.user.profile.getImage }}" alt="">
-
-            </div>
-            <div class="hero-text">
-              <h1 class="hero-text--top">Congratulation to our #1 fan </h1>
-              <h1 class="hero--text--bottom">{{request.user.username }} </h1>
-            </div>
-
+          {% endif %}
+          <div class="social-media-tray">
+            <ul class="m-social m-social--icon-list m-flex m-flex--inline m-flex--sb">
+              <li class="m-social m-social--item">
+                <a href="{{ 'facebook'|social_get:'link' }}">
+                  <i class="fa fa-facebook m-social m-social--{{ facebook|social_get:'name'}}"
+                    aria-hidden="true"></i></a>
+              </li>
+              <li class="m-social m-social--item">
+                <a href="{{ 'instgram'|social_get:'link' }}">
+                  <i class="fa fa-instagram m-social--{{ instagram |social_get:'name'}}" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="m-social m-social--item">
+                <a href="{{ 'snapchat'|social_get:'link' }}">
+                  <i class="fa fa-snapchat-ghost m-social--{{ snapchat|social_get:'name'}}" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="m-social m-social--item">
+                <a href="{{ 'twitter'|social_get:'link' }}">
+                  <i class="fa fa-twitter m-social--{{ twitter|social_get:'name'}}" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="m-social m-social--item">
+                <a href="{{ 'youtube'|social_get:'link' }}">
+                  <i class="fa fa-youtube-square m-social--{{ youtube|social_get:'name'}}" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
+        <div class="banner--content">
+          <div class="content-text">
+            <h1 class="title">Congratulation to our #1 fan </h1>
+          </div>
 
+          <div class="user-tray">
+            <img src="{{ request.user.profile.getImage }}" alt="">
+            <h1 class="title">{{request.user.username }} </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="hr-3-primary">
+
+    <div class="col-12">
+      <div id="event_container">
         <!-- upcoming events -->
         <div class="event event--table-wrapper" id="upcoming_event">
           <div class="event--table">
@@ -68,7 +99,7 @@
                   </p>
                 </h4>
                 <h4 class="title">
-                  {{ event.event_date|date:"g:i A" }} EST
+                  {{ event.event_date|date:"g:i A" }} <span class="time-zone">EST</span>
                   <p class="subtext">
                     Come Join the fun!
                   </p>
