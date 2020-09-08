@@ -1,4 +1,4 @@
-import os 
+import os
 import re
 import base64
 from django import template

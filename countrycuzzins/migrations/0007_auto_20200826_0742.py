@@ -6,21 +6,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('countrycuzzins', '0006_auto_20200822_1535'),
+        ("countrycuzzins", "0006_auto_20200822_1535"),
     ]
 
     operations = [
-        migrations.AlterModelOptions(
-            name='socialmedia',
-            options={},
-        ),
-        migrations.AlterModelOptions(
-            name='video',
-            options={'managed': True},
-        ),
+        migrations.AlterModelOptions(name="socialmedia", options={},),
+        migrations.AlterModelOptions(name="video", options={"managed": True},),
         migrations.AlterField(
-            model_name='socialmedia',
-            name='name',
-            field=models.CharField(blank=True, max_length=100, null=True, unique=True, verbose_name='social media site name'),
+            model_name="socialmedia",
+            name="name",
+            field=models.CharField(
+                blank=True,
+                max_length=100,
+                null=True,
+                unique=True,
+                verbose_name="social media site name",
+            ),
         ),
     ]

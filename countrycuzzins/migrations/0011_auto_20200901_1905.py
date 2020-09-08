@@ -6,18 +6,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('countrycuzzins', '0010_auto_20200901_1847'),
+        ("countrycuzzins", "0010_auto_20200901_1847"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='event_date',
-            field=models.DateTimeField(),
+            model_name="event", name="event_date", field=models.DateTimeField(),
         ),
         migrations.AlterField(
-            model_name='event',
-            name='location',
-            field=models.CharField(blank=True, help_text='Example: Jackson MS colosseum or Facebook live', max_length=100, null=True),
+            model_name="event",
+            name="location",
+            field=models.CharField(
+                blank=True,
+                help_text="Example: Jackson MS colosseum or Facebook live",
+                max_length=100,
+                null=True,
+            ),
         ),
     ]

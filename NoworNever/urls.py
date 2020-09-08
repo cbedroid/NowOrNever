@@ -20,10 +20,10 @@ from django.conf import settings
 import countrycuzzins as cc
 
 urlpatterns = [
-    path('', include('countrycuzzins.urls')),
-    path('', include('users.urls')),
-    path('admin/', admin.site.urls),
+    path("", include("countrycuzzins.urls")),
+    path("", include("users.urls")),
+    path("admin/", admin.site.urls),
 ]
 
-handler404 = 'users.views.error_404'
-urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+handler404 = "users.views.error_404"
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

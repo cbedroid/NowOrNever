@@ -10,79 +10,205 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Image',
+            name="Image",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=60, unique=True)),
-                ('image', models.ImageField(blank=True, storage=countrycuzzins.models.OverwriteStorage(), upload_to=countrycuzzins.models.toNameSpace)),
-                ('is_article', models.BooleanField(default=False)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=60, unique=True)),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True,
+                        storage=countrycuzzins.models.OverwriteStorage(),
+                        upload_to=countrycuzzins.models.toNameSpace,
+                    ),
+                ),
+                ("is_article", models.BooleanField(default=False)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Song',
+            name="Song",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('artist', models.CharField(blank=True, default='Country Cuzzins', help_text='<p style="color:#000; font-weight:700;"> Main Artist(s) Only</p>', max_length=120, null=True, verbose_name='artist(s)')),
-                ('feature', models.CharField(blank=True, help_text='<p style="color:#000; font-weight:700;"> Feature Artist(s) Only </p><span>(optional)</span>', max_length=120, null=True, verbose_name='feature artists(s)')),
-                ('name', models.CharField(max_length=120, null=True, unique=True, verbose_name='title')),
-                ('slug', models.SlugField(help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>', max_length=80, unique=True, validators=[django.core.validators.MinLengthValidator(4)])),
-                ('file', models.FileField(max_length=120, storage=countrycuzzins.models.OverwriteStorage(), upload_to=countrycuzzins.models.makeSongName, verbose_name='song file')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                (
+                    "artist",
+                    models.CharField(
+                        blank=True,
+                        default="Country Cuzzins",
+                        help_text='<p style="color:#000; font-weight:700;"> Main Artist(s) Only</p>',
+                        max_length=120,
+                        null=True,
+                        verbose_name="artist(s)",
+                    ),
+                ),
+                (
+                    "feature",
+                    models.CharField(
+                        blank=True,
+                        help_text='<p style="color:#000; font-weight:700;"> Feature Artist(s) Only </p><span>(optional)</span>',
+                        max_length=120,
+                        null=True,
+                        verbose_name="feature artists(s)",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=120, null=True, unique=True, verbose_name="title"
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
+                        max_length=80,
+                        unique=True,
+                        validators=[django.core.validators.MinLengthValidator(4)],
+                    ),
+                ),
+                (
+                    "file",
+                    models.FileField(
+                        max_length=120,
+                        storage=countrycuzzins.models.OverwriteStorage(),
+                        upload_to=countrycuzzins.models.makeSongName,
+                        verbose_name="song file",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Video',
+            name="Video",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=100, null=True)),
-                ('url', models.URLField(blank=True, max_length=300, null=True)),
-                ('is_music', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=100, null=True)),
+                ("url", models.URLField(blank=True, max_length=300, null=True)),
+                ("is_music", models.BooleanField(default=False)),
             ],
-            options={
-                'managed': True,
-            },
+            options={"managed": True,},
         ),
         migrations.CreateModel(
-            name='Article',
+            name="Article",
             fields=[
-                ('name', models.CharField(max_length=60, unique=True)),
-                ('headline', models.CharField(max_length=60, null=True)),
-                ('image', models.OneToOneField(blank=True, default='images/no_content.png', on_delete=django.db.models.deletion.SET_DEFAULT, primary_key=True, serialize=False, to='countrycuzzins.Image')),
-                ('blog', models.TextField(max_length=200)),
-                ('slug', models.SlugField(help_text='<span id="myslughelp"></span>', max_length=80, unique=True, validators=[django.core.validators.MinLengthValidator(4)], verbose_name='article url')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
+                ("name", models.CharField(max_length=60, unique=True)),
+                ("headline", models.CharField(max_length=60, null=True)),
+                (
+                    "image",
+                    models.OneToOneField(
+                        blank=True,
+                        default="images/no_content.png",
+                        on_delete=django.db.models.deletion.SET_DEFAULT,
+                        primary_key=True,
+                        serialize=False,
+                        to="countrycuzzins.Image",
+                    ),
+                ),
+                ("blog", models.TextField(max_length=200)),
+                (
+                    "slug",
+                    models.SlugField(
+                        help_text='<span id="myslughelp"></span>',
+                        max_length=80,
+                        unique=True,
+                        validators=[django.core.validators.MinLengthValidator(4)],
+                        verbose_name="article url",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Album',
+            name="Album",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=100, unique=True)),
-                ('slug', models.SlugField(help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>', max_length=80, unique=True, validators=[django.core.validators.MinLengthValidator(4)], verbose_name='album url')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
-                ('image', models.ForeignKey(blank=True, default='images/_no_image_profile.png', null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='album_image', to='countrycuzzins.Image')),
-                ('songs', models.ManyToManyField(help_text='<p style="color:#000; font-weight:700;"> Select ALL songs that will be on album</p>', related_name='album_songs', to='countrycuzzins.Song', verbose_name='list of songs')),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("name", models.CharField(max_length=100, unique=True)),
+                (
+                    "slug",
+                    models.SlugField(
+                        help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
+                        max_length=80,
+                        unique=True,
+                        validators=[django.core.validators.MinLengthValidator(4)],
+                        verbose_name="album url",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                (
+                    "image",
+                    models.ForeignKey(
+                        blank=True,
+                        default="images/_no_image_profile.png",
+                        null=True,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        related_name="album_image",
+                        to="countrycuzzins.Image",
+                    ),
+                ),
+                (
+                    "songs",
+                    models.ManyToManyField(
+                        help_text='<p style="color:#000; font-weight:700;"> Select ALL songs that will be on album</p>',
+                        related_name="album_songs",
+                        to="countrycuzzins.Song",
+                        verbose_name="list of songs",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Artist',
+            name="Artist",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=80, unique=True)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
-                ('profile_image', models.OneToOneField(default='images/no_image_artist.png', on_delete=django.db.models.deletion.SET_DEFAULT, to='countrycuzzins.Image')),
-                ('article', models.ManyToManyField(to='countrycuzzins.Article', verbose_name='article(s)')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=80, unique=True)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                (
+                    "profile_image",
+                    models.OneToOneField(
+                        default="images/no_image_artist.png",
+                        on_delete=django.db.models.deletion.SET_DEFAULT,
+                        to="countrycuzzins.Image",
+                    ),
+                ),
+                (
+                    "article",
+                    models.ManyToManyField(
+                        to="countrycuzzins.Article", verbose_name="article(s)"
+                    ),
+                ),
             ],
         ),
     ]
