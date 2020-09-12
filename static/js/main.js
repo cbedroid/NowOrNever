@@ -4,21 +4,31 @@ $(document).ready(() => {
     navigator.userAgent.toLowerCase()
   );
 
+  // FOR MOBILE DEVICE
+  // Reference: https://gomakethings.com/how-to-simulate-a-click-event-with-javascript/
+  // var simulateClick = function (elem) {
+  //   // Create our event (with options)
+  //   var evt = new MouseEvent("click", {
+  //     bubbles: true,
+  //     cancelable: true,
+  //     view: window,
+  //   });
+  //   // If cancelled, don't dispatch our event
+  //   var canceled = !elem.dispatchEvent(evt);
+  // };
+
   /* TOGGLE ACTIVE CLASS FOR NAVIGATION ON PAGE REFRESH */
   function activeNavLink() {
     const mainlinks = $("#main_nav_list li");
-    console.log("window locaton", window.location.href);
 
     $(mainlinks).map(function () {
       const link_location = $(this).find("a").attr("href");
-      console.log("\nlink location", link_location);
       if (link_location == "/") {
         // for home page link
         $(mainlinks).removeClass("active");
         $(mainlinks).first().addClass("active");
       } else if (window.location.href.includes(link_location)) {
         $(mainlinks).removeClass("active");
-        console.log("\nMatch Found", link_location);
         $(this).addClass("active");
       }
     });
@@ -117,5 +127,35 @@ $(document).ready(() => {
     }
   }
 
+  $(".featured .thumb-container").on("click", function () {
+    $(this).hide();
+    $("#ft_video").find("iframe", "video")[0].src += "?autoplay=1";
+    if (is_mobile) {
+      // send press event to youtube play button
+      // work around for youtube blocking autoplay
+      const ytb = $(".html5-video-player");
+      //simulateClick(ytb);
+    }
+  });
+  // video thumbnail from carousel video hide on click
+  $(".vc-vid").on("click", function (e) {
+    e.preventDefault();
+    $(".vc-vid").removeClass("active");
+    $(this).toggleClass("active");
+
+    // make sure all carousel thumb ae still showing
+    $(".vc-thumb").css({ visibility: "visible" });
+    // grab the src from the clicked video
+    const src = $(this).find("iframe", "video")[0].src;
+
+    // play video on featured main video spot
+    // remove thumbcover from featured video
+    const vc_title = $(this).find(".m-title").text();
+    const lg_description = $(this).find(".vc-lg-description").text();
+    $("#featured_title").text(vc_title);
+    $("#featured_thumbcover").hide();
+    $("#featured_vid")[0].src = src + "?autoplay=1";
+    $("#featured_long_decription").text(lg_description);
+  });
   showComingSoon();
 });

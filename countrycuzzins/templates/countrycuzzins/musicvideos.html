@@ -1,34 +1,73 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load countrycuzzins_extras%}
+{% load countrycuzzins_extras %}
+{% load widget_tweaks %}
 {% block body %}
 <section id="music_video_view">
-<div class="row no-gutter">
-  <div class="col-12">
-    <div class="video-container">
-      <div class="feature-wrapper">
-        <div class="img-wrapper" style="display:block;text-align: center;margin:100px auto; width:100%;">
-          {% comment %} <img style="" src="https://img.youtube.com/vi/P3vuh4JT3Js/3.jpg" alt=""> {% endcomment %}
-          <div>
-            {{ music_videos.0.thumbnail| safe }}
-          </div>
-          <div>
-        <img src="https://img.youtube.com/vi/P3vuh4JT3Js/hq1.jpg" style="width:800px;height:400px;" alt=" video image">
-          </div>
-          <div>
-        <img src="https://img.youtube.com/vi/qvFYQ_eenuU/hq1.jpg" style="width:800px;height:400px;" alt=" video image">
-          </div>
-          <div>
-        <img src="https://img.youtube.com/vi/61Y90qEBrxY/hq3.jpg" style="width:800px;height:400px;" alt=" video image">
+  <div class="row no-gutter">
+    <div class="col-12">
+      <div class="featured" id="ft_video">
+        <h1 class="m-title">Latest Videos</h1>
+        <hr>
+        {% with ftvideo=music_videos|dictsortreversed:'is_featured'|first %}
+        <div class="video-container">
+          <h1 class="m-title" id="featured_title">
+            {{ ftvideo.title  }}
+          </h1>
+          <div class="video-item vframe">
+            <iframe id="featured_vid" src=" {{ ftvideo.url }}" frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+            <div class="thumb-container">
+              <div class="fa thumbnail-cover" id="featured_thumbcover">
+                <!-- <i class="fa fa-play-circle video-toggler" aria-hidden="true"></i> -->
+                {{ ftvideo.thumbnail|safe }}
+              </div>
+            </div>
           </div>
         </div>
-
-
+        <div class="video-description m-subtitle vframe" id="featured_long_decription">
+          <p class="m-text">{{ ftvideo.long_description }}</p>
+        </div>
+        {% endwith %}
       </div>
-
-
     </div>
   </div>
-</div>
+  <hr>
+
+  <div class="row no-gutter">
+    <div class="col-12">
+      <div class="top-videos">
+        <h1 class="m-title">Top Videos</h1>
+        <ul class="video-carousel">
+          {% for video in music_videos|dictsortreversed:'is_featured' %}
+          <li class="video-container vc-vid">
+            {# vc-vids is for js #}
+            <h1 class="m-title">
+              {{ video.title  }}
+            </h1>
+            <div class="video-item vframe">
+              <iframe src=" {{ video.url }}" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+              </iframe>
+              <div class="thumb-container vc-thumb">
+                <div class="fa thumbnail-cover">
+                  <!-- <i class="fa fa-play-circle video-toggler" aria-hidden="true"></i> -->
+                  {{ video.thumbnail|safe }}
+                </div>
+              </div>
+            </div>
+            <div class="video-description vc-lg-description">
+              <p class="m-subtitle" style="display:none">{{ video.long_description }}</p>
+            </div>
+            <div class="video-status">
+              <p class="m-subtitle">Now Playing</p>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
 {% endblock body %}

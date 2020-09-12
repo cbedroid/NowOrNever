@@ -1,3 +1,4 @@
+from .models import Song
 from django.contrib import messages
 from django.utils import timezone
 from django.urls import reverse
@@ -14,6 +15,8 @@ from .music_models import Album
 
 # Dont need this now
 # Use detailView for the New feed ike in the flask app
+
+
 class ArticleDetailView(DetailView):
     model = Article
     template_name = "countrycuzzins/article.html"
@@ -65,8 +68,9 @@ def index(request):
     return render(request, "countrycuzzins/index.html", context)
 
 
+@never_cache
 def music_videos(request):
-    context = {"music_videos": Video.objects.all()}
+    context = {"music_videos": list(Video.objects.all())}
     return render(request, "countrycuzzins/musicvideos.html", context)
 
 
@@ -75,8 +79,6 @@ def music_videos(request):
 #           ****  TESTER VIEWS   ****                   #
 #           *************************                   #
 #########################################################
-
-from .models import Song
 
 
 def test_music_player(request):

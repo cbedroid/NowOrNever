@@ -20,7 +20,6 @@ class DateCreateAdmin(admin.ModelAdmin):
 
 
 class ThumbnailAdmin(DateCreateAdmin):
-    # fields = ['thumbnail_image',]
     # readonly_fields = ('thumbnail',)
     form = VideoForm
 
@@ -33,6 +32,7 @@ class ThumbnailAdmin(DateCreateAdmin):
     list_display = [
         "title",
         "image_tag",
+        "is_featured",
     ]
 
 
