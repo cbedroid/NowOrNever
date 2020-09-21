@@ -4,7 +4,7 @@
 
   // BASE STYLE
   .m-title
-    font: 500 3.5rem 'Ultra',serif,'Ceviche One', cursive
+    font: 500 3.5em 'Ultra',serif,'Ceviche One', cursive
     text-shadow: 2px 2px 5px #000
     color: $secondary
     letter-spacing: .1em
@@ -31,7 +31,7 @@
       position: relative
       width: 100%
       background: #000
-      iframe,video
+      iframe,video,#player
         width: inherit
         height: inherit
 
@@ -82,15 +82,17 @@
         font-size: 2.5em
         color: #1c1c1c
         text-shadow: 2px 2px 5px whitesmoke
-      iframe,video,.thumb-container
+      iframe,video,.thumb-container,#player
         border: 8px ridge #1c1c1c
         border-radius: 5px
 
     .video-description
       padding: 0 5px
-      text-align: center
+      text-align: justify
+      max-width: 90%
       height: auto
       margin: auto
+
   
   .top-videos
     display: grid
@@ -138,7 +140,7 @@
         text-overflow: ellipsis
         overflow: hidden
         white-space: nowrap
-      .iframe,video
+      .iframe,video,#player
         background: #000
         width: 100%
 

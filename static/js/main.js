@@ -4,6 +4,28 @@ $(document).ready(() => {
     navigator.userAgent.toLowerCase()
   );
 
+  /* APPLY STYLE ON MOBILE DEVICE */
+  if (is_mobile) {
+    // For mobile, hide "mobile-hidden" class on page load
+    $(".mobile-hidden").hide();
+    $("i a button li .fa").css({ cursor: "pointer" });
+
+    // add mobile class to all attribute with data-mobile
+    $("[data-mobile]").addClass("mobile");
+
+    // add mobile class to corresponding element
+    // that is using a mobile device
+    $("section div ul").each(function (i, e) {
+      if ($(e).data("mobile")) {
+        $(e).removeClass("desktop").addClass("mobile");
+        return e;
+      }
+    });
+  } else {
+    // HIDE STYLE FOR DESKTOP
+    $(".desktop-hidden").hide();
+  }
+
   // FOR MOBILE DEVICE
   // Reference: https://gomakethings.com/how-to-simulate-a-click-event-with-javascript/
   // var simulateClick = function (elem) {
@@ -44,26 +66,6 @@ $(document).ready(() => {
       $("#main_header_nav").removeClass("active");
     }
   });
-
-  /* APPLY STYLE ON MOBILE DEVICE */
-  if (is_mobile) {
-    // For mobile, hide "mobile-hidden" class on page load
-    $(".mobile-hidden").hide();
-
-    $("i a button li .fa").css({ cursor: "pointer" });
-
-    // add mobile class to corresponding element
-    // that is using a mobile device
-    $("section div ul").each(function (i, e) {
-      if ($(e).data("mobile")) {
-        $(e).removeClass("desktop").addClass("mobile");
-        return e;
-      }
-    });
-  } else {
-    // HIDE STYLE FOR DESKTOP
-    $(".desktop-hidden").hide();
-  }
 
   /* MOBILE HIDE MAIN NAVIGATION ON TOUCH */
   $("body").on("click", () => {
@@ -127,35 +129,65 @@ $(document).ready(() => {
     }
   }
 
-  $(".featured .thumb-container").on("click", function () {
-    $(this).hide();
-    $("#ft_video").find("iframe", "video")[0].src += "?autoplay=1";
-    if (is_mobile) {
-      // send press event to youtube play button
-      // work around for youtube blocking autoplay
-      const ytb = $(".html5-video-player");
-      //simulateClick(ytb);
-    }
+  /************************
+     MUSIC VIDEO VIEW
+  ****************** */
+  // Main video
+  $(".featured .thumb-container").one("click", function () {
+    /* 
+      Depreciated since development - updated using youtube api
+      Youtube api will handle this instead 
+     */
+    $(this).hide(); // remove the thumbnail overlay
+    //$("#ft_video").find("iframe").src += "?autoplay=1";
   });
+
   // video thumbnail from carousel video hide on click
   $(".vc-vid").on("click", function (e) {
     e.preventDefault();
     $(".vc-vid").removeClass("active");
     $(this).toggleClass("active");
 
-    // make sure all carousel thumb ae still showing
+    // make sure all carousel thumb are still showing
     $(".vc-thumb").css({ visibility: "visible" });
-    // grab the src from the clicked video
-    const src = $(this).find("iframe", "video")[0].src;
+    /* 
+      Grab the src from the clicked video
+       Note: Depreciated since developement 
+       Using youtube api for rendering video source and auto play.
+       See: musicvideo.html script
+    */
 
-    // play video on featured main video spot
-    // remove thumbcover from featured video
+    // collect video data from video carousel and render it in featured video
     const vc_title = $(this).find(".m-title").text();
     const lg_description = $(this).find(".vc-lg-description").text();
     $("#featured_title").text(vc_title);
     $("#featured_thumbcover").hide();
-    $("#featured_vid")[0].src = src + "?autoplay=1";
+    let src = $(this).find("iframe", "video")[0].src;
+    //$("#featured_vid")[0].src = src + "?autoplay=1&mute=1";
     $("#featured_long_decription").text(lg_description);
   });
+
+  /* MUSIC VIDEO CONT */
+  // Readmore expandable
+
+  ReadMore = function (b, t) {
+    $(b).off("click");
+    this.a = () => $(t).attr("aria-expanded");
+    this.bt = (nt) => $(b).find("span").text(nt);
+    this.ba = () => this.a() === "true";
+    this.tf = () => (this.ba() ? 1 : 0);
+    this.cn = (ec) => ["expanded", "collapse"][+ec];
+    this.bst = () => ["hide", "read more"][this.tf()];
+    $(b).on("click", () => {
+      this.bt(this.bst()); // change button text
+      $(t)
+        .addClass(this.cn(this.ba()))
+        .removeClass(this.cn(+!+this.ba())); // add readmore text class
+      $(t).attr("aria-expanded", this.tf() ? false : true); // flip the aria-expanded
+    });
+  };
+  const readmore_toggler = $("[data-mobile] .readmore-toggler");
+  const readmore_text = $(".readmore-text");
+  new ReadMore(readmore_toggler, readmore_text);
   showComingSoon();
 });
