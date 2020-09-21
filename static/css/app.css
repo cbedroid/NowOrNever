@@ -1504,7 +1504,7 @@ section#main_musicplayer {
 #music_video_view {
   font-size: 1rem; }
   #music_video_view .m-title {
-    font: 500 3.5rem "Ultra", serif, "Ceviche One", cursive;
+    font: 500 3.5em "Ultra", serif, "Ceviche One", cursive;
     text-shadow: 2px 2px 5px #000;
     color: #f70303;
     letter-spacing: 0.1em; }
@@ -1525,7 +1525,7 @@ section#main_musicplayer {
       position: relative;
       width: 100%;
       background: #000; }
-      #music_video_view .video-container .video-item iframe, #music_video_view .video-container .video-item video {
+      #music_video_view .video-container .video-item iframe, #music_video_view .video-container .video-item video, #music_video_view .video-container .video-item #player {
         width: inherit;
         height: inherit; }
     #music_video_view .video-container .thumb-container {
@@ -1578,12 +1578,13 @@ section#main_musicplayer {
       font-size: 2.5em;
       color: #1c1c1c;
       text-shadow: 2px 2px 5px whitesmoke; }
-    #music_video_view .featured .video-container iframe, #music_video_view .featured .video-container video, #music_video_view .featured .video-container .thumb-container {
+    #music_video_view .featured .video-container iframe, #music_video_view .featured .video-container video, #music_video_view .featured .video-container .thumb-container, #music_video_view .featured .video-container #player {
       border: 8px ridge #1c1c1c;
       border-radius: 5px; }
     #music_video_view .featured .video-description {
       padding: 0 5px;
-      text-align: center;
+      text-align: justify;
+      max-width: 90%;
       height: auto;
       margin: auto; }
   #music_video_view .top-videos {
@@ -1629,7 +1630,7 @@ section#main_musicplayer {
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap; }
-      #music_video_view .video-carousel .video-container .iframe, #music_video_view .video-carousel .video-container video {
+      #music_video_view .video-carousel .video-container .iframe, #music_video_view .video-carousel .video-container video, #music_video_view .video-carousel .video-container #player {
         background: #000;
         width: 100%; }
       #music_video_view .video-carousel .video-container .thumbnail-cover {
@@ -2216,6 +2217,31 @@ section#main_musicplayer {
     .m-social--item .fa.fa-youtube, .m-social--item .fa.fa-youtube-square, .m-social--item .fa5.fa-youtube, .m-social--item .fa5.fa-youtube-square, .m-social--item .fa4.fa-youtube, .m-social--item .fa4.fa-youtube-square {
       background: #bb0000; }
 
+/*  STATES */
+.has-readmore .readmore-toggler {
+  visibility: hidden; }
+
+.mobile.has-readmore .readmore-toggler {
+  visibility: visible; }
+.mobile.has-readmore .readmore-text.collapse {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -moz-line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -ms-line-clamp: 3;
+  -o-line-clamp: 3;
+  line-clamp: 3;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  -o-box-orient: vertical;
+  box-orient: vertical; }
+.mobile.has-readmore .readmore-text.expanded {
+  overflow: auto;
+  clear: both;
+  color: #1c1c1c; }
+
 /* HTTP ERRORS REPSONSIVE */
 /* PHONE RESPONSIVE  */
 /* TABLETS RESPONSIVE  */
@@ -2393,6 +2419,33 @@ section#main_musicplayer {
       font-size: 0.65rem;
       padding-left: 10px;
       padding-right: 10px; }
+
+  #music_video_view {
+    font-size: 0.7rem; }
+    #music_video_view .m-text {
+      font-size: 1.3em; }
+    #music_video_view .vframe {
+      min-width: 300px;
+      max-width: 1200px;
+      max-height: 400px;
+      height: 300px;
+      width: calc(100% / 1.2); }
+    #music_video_view .featured .video-description .read-more {
+      visibility: visible; }
+    #music_video_view .top-videos {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 100px 3fr;
+      margin: 0;
+      padding: 7px; }
+      #music_video_view .top-videos .m-title {
+        margin: 0; }
+      #music_video_view .top-videos .video-carousel {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 0.3em;
+        padding: 0;
+        margin: 0; }
 
   #http_error_section {
     font-size: 0.75rem; }
@@ -2588,6 +2641,33 @@ section#main_musicplayer {
       padding-left: 10px;
       padding-right: 10px; }
 
+  #music_video_view {
+    font-size: 0.7rem; }
+    #music_video_view .m-text {
+      font-size: 1.3em; }
+    #music_video_view .vframe {
+      min-width: 300px;
+      max-width: 1200px;
+      max-height: 400px;
+      height: 300px;
+      width: calc(100% / 1.2); }
+    #music_video_view .featured .video-description .read-more {
+      visibility: visible; }
+    #music_video_view .top-videos {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 100px 3fr;
+      margin: 0;
+      padding: 7px; }
+      #music_video_view .top-videos .m-title {
+        margin: 0; }
+      #music_video_view .top-videos .video-carousel {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 0.3em;
+        padding: 0;
+        margin: 0; }
+
   #http_error_section {
     font-size: 0.75rem; }
     #http_error_section img {
@@ -2629,6 +2709,33 @@ section#main_musicplayer {
 
   .video-widget-container .jumbotron {
     padding: 10px; }
+
+  #music_video_view {
+    font-size: 0.7rem; }
+    #music_video_view .m-text {
+      font-size: 1.3em; }
+    #music_video_view .vframe {
+      min-width: 300px;
+      max-width: 1200px;
+      max-height: 400px;
+      height: 300px;
+      width: calc(100% / 1.2); }
+    #music_video_view .featured .video-description .read-more {
+      visibility: visible; }
+    #music_video_view .top-videos {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 100px 3fr;
+      margin: 0;
+      padding: 7px; }
+      #music_video_view .top-videos .m-title {
+        margin: 0; }
+      #music_video_view .top-videos .video-carousel {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 0.3em;
+        padding: 0;
+        margin: 0; }
 
   #http_error_section {
     font-size: 0.75rem; }

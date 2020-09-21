@@ -11,15 +11,18 @@ $mq_tv: "(min-device-width: 1201px)"
 // Phones
 @media #{$mq-phone}
   +responsive_phone_mixin()
+  +responsive_mobile_musicview
   +httpError_mobile_screen
 
 @media #{$mq_phone_landscape}
   +responsive_phone_mixin()
+  +responsive_mobile_musicview
   +httpError_mobile_screen
 
 // Tablets
 @media #{$mq_tablet}
   +responsive_tablet_mixin()
+  +responsive_mobile_musicview
   +httpError_mobile_screen
 
 @media #{$mq_tablet_landscape}
