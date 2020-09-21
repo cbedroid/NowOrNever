@@ -3,7 +3,7 @@ from string import Template
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.utils.safestring import mark_safe
-from .models import Profile
+from .models import Profile, ContactUs
 
 
 class RegistrationForm(UserCreationForm):
@@ -66,3 +66,30 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["image"]
+
+
+class ContactUsForm(forms.ModelForm):
+    firstname = forms.CharField(required=True, max_length=60)
+    lastname = forms.CharField(required=True, max_length=60)
+    email = forms.CharField(required=True, max_length=100)
+
+    class Meta:
+        model = ContactUs
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            try:
+                field.widget.attrs.pop("autofocus", None)
+            except:
+                pass
+
+    def save(self, commit=True):
+        contact = super(ContactUsForm, self).save(commit=False)
+        contact.firstname = self.cleaned_data["firstname"]
+        contact.lastname = self.cleaned_data["lastname"]
+        contact.email = self.cleaned_data["email"]
+        if commit:
+            contact.save()
+        return contact

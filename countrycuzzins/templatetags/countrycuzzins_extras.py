@@ -73,8 +73,7 @@ def social_get(name, data):
         dict: social media model dictionary
     """
     try:
-        social = SocialMedia.objects.filter(
-            name__iregex=rf"[.*[\w\s]*.*{name}[\w.\s]*")
+        social = SocialMedia.objects.filter(name__iregex=rf"[.*[\w\s]*.*{name}[\w.\s]*")
         print("\nNAME,DATA", name, data)
         print("\nsocial", social)
         if social:
@@ -94,14 +93,14 @@ def model_get(model, kwargs):
     """
     try:
         # convert the kwargs string into dict
-        print('Video Kwargs before:', kwargs)
-        kwargs = json.loads(re.sub(r'\'', '\"', kwargs))
-        print('Video Kwargs:', kwargs)
+        print("Video Kwargs before:", kwargs)
+        kwargs = json.loads(re.sub(r"\'", '"', kwargs))
+        print("Video Kwargs:", kwargs)
         video = Video.objects.filter(**kwargs)
 
         if video:
             return video.first()
         return " "
     except Exception as e:
-        print('Video extra Error', e)
+        print("Video extra Error", e)
         return "N/A"

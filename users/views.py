@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.views.decorators.cache import never_cache
+from users.forms import ContactUsForm
 from .forms import RegistrationForm, UserUpdateForm, ProfileUpdateForm
 
 
@@ -15,6 +16,8 @@ def error_404(request, exception):
 
 
 def accountSignup(request):
+    # Note: Need to recaptcha this form for spaming post
+
     context = {}
     form = RegistrationForm(request.POST or None)
     if request.method == "POST":
@@ -23,7 +26,7 @@ def accountSignup(request):
             print("USER", user)
             login(request, user)
             messages.success(request, "Welcome %s!" % user.username)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("home"))
     context["form"] = form
     return render(request, "users/account/signup.html", context)
 
@@ -74,5 +77,22 @@ def profile(request, *args, **kwargs):
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {"u_form": u_form, "p_form": p_form}
-
     return render(request, "users/profile.html", context)
+
+
+@never_cache
+def contactUs(request):
+    if request.method == "POST":
+        c_form = ContactUsForm(request.POST)
+        if c_form.is_valid():
+            c_form.save()
+            messages.success(
+                request, f"Thank You, Your message was sent successfully! "
+            )
+            return HttpResponseRedirect(reverse("home"))
+            # return redirect("home")
+    else:
+        c_form = ContactUsForm()
+
+    context = {"form": c_form}
+    return render(request, "users/contact_us.html", context)

@@ -55,16 +55,18 @@
             </ul>
           </div>
         </div>
-        <div class="banner--content">
-          <div class="content-text">
-            <h1 class="title">Congratulation to our #1 fan </h1>
-          </div>
+        {% if request.user.is_authenicated %}
+          <div class="banner--content">
+            <div class="content-text">
+              <h1 class="title">Congratulation to our #1 fan </h1>
+            </div>
 
-          <div class="user-tray">
-            <img src="{{ request.user.profile.getImage }}" alt="">
-            <h1 class="title">{{request.user.username }} </h1>
+            <div class="user-tray">
+              <img src="{{ request.user.profile.getImage }}" alt="">
+              <h1 class="title">{{request.user.username }} </h1>
+            </div>
           </div>
-        </div>
+          {% endif %}
       </div>
     </div>
     <hr class="hr-3-primary">

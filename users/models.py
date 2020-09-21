@@ -15,10 +15,10 @@ def user_namespace_path(instance, *args, **kwargs):
     """ Renaming Profile's ImageField path to current username
 
   Args:
-      instance (models.Model): models.Model instance 
+      instance (models.Model): models.Model instance
 
   Returns:
-      str: abspath file path 
+      str: abspath file path
   """
     # Force all images to be PNG file #
     instance_hash = hash(instance.__class__)
@@ -71,6 +71,27 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+
+class ContactUs(models.Model):
+    firstname = models.CharField(max_length=60, blank=False, null=True)
+    lastname = models.CharField(max_length=60, blank=False, null=True)
+    email = models.CharField(max_length=100, blank=False, null=True)
+    message = models.TextField(max_length=500, blank=False, null=True)
+    created = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    def __str__(self):
+        return f"Message from {self.firstname} {self.lastname}"
+
+    def get_client_ip(request):
+        # For Spamming prevention, we need user ip
+        x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(",")[0]
+        else:
+            ip = request.META.get("REMOTE_ADDR")
+        return ip
 
 
 # Delete old Profile Image after being udpated

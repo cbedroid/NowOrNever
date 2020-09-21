@@ -13,38 +13,6 @@ from .music_models import Album
 
 # Create your views here.
 
-# Dont need this now
-# Use detailView for the New feed ike in the flask app
-
-
-class ArticleDetailView(DetailView):
-    model = Article
-    template_name = "countrycuzzins/article.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["now"] = timezone.now()
-        return context
-
-
-class ImageList(DetailView):
-    model = Image
-    context_object_name = "image"
-    template_name = "countrycuzzins/index.html"
-
-
-class AlbumList(ListView):
-    model = Album
-    context_object_name = "albums"
-    # template_name='countrycuzzins/snippets/_music_player.html'
-    # new Msic player testing
-    template_name = "countrycuzzins/snippets/testing_music_player.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["now"] = timezone.now()
-        return context
-
 
 class EventList(ListView):
     model = Event
@@ -72,22 +40,3 @@ def index(request):
 def music_videos(request):
     context = {"music_videos": list(Video.objects.all())}
     return render(request, "countrycuzzins/musicvideos.html", context)
-
-
-#########################################################
-#           *************************                   #
-#           ****  TESTER VIEWS   ****                   #
-#           *************************                   #
-#########################################################
-
-
-def test_music_player(request):
-    songs = Song.objects.all()
-    context = {"music": songs}
-    return render(request, "countrycuzzins/testing/_music_player.html", context)
-
-
-def test_html(request):
-    # testing html
-    context = {}
-    return render(request, "countrycuzzins/testing/_testing.html", context)

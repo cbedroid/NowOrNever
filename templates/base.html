@@ -46,6 +46,7 @@
   {% endblock httperror %}
 
   <section class="nav-spacer">
+  {% include  'users/snippets/messages.html' %}
   {% block body %}
 
 
@@ -61,10 +62,8 @@
   integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 <script src="{% static 'js/main.js' %}"></script>
 <script type="module" src="{% static 'js/app.js' %}"></script>
-<script src="http://livejs.com/live.js"></script>
-
 {% comment %}
+<script src="http://livejs.com/live.js"></script>
 <script src="{% static 'js/musicplayer.js' %}"></script>
 {% endcomment %}
-
 </html>

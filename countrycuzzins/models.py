@@ -113,8 +113,7 @@ class Image(models.Model):
             filesize = fieldfile_obj.file.size
             megabyte_limit = 5.0
             if filesize > megabyte_limit * 1024 * 1024:
-                raise ValidationError(
-                    "Max file size is %sMB" % str(megabyte_limit))
+                raise ValidationError("Max file size is %sMB" % str(megabyte_limit))
 
 
 class Article(models.Model):
@@ -147,8 +146,7 @@ class Article(models.Model):
         """Create custom url for SlugField from article name on initilization"""
 
         # NOTE:: MAKE TIS METHOD DYNAMIC FOR ALL MODELS WITH SLUG FIELD
-        self.slug = re.sub(
-            r"[^\w\-]", "_", "_".join((self.name, self.headline)))
+        self.slug = re.sub(r"[^\w\-]", "_", "_".join((self.name, self.headline)))
 
     def save(self, *args, **kwargs):
         self.setIsArticle()
@@ -242,8 +240,10 @@ class Video(models.Model):
 
     is_youtube = models.BooleanField(default=False)
     is_music = models.BooleanField(default=True)
-    is_featured = models.BooleanField(default=False,
-                                      help_text='special video that will be highlighted feature on website')
+    is_featured = models.BooleanField(
+        default=False,
+        help_text="special video that will be highlighted feature on website",
+    )
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
@@ -344,7 +344,7 @@ def pathFromName(instance, obj):
     # Capture object classname and set the save path and extention
     Image_hash = hash(Image.image.field)
     Song_hash = hash(Song.file.field)
-    save_info = {Image_hash: ["images/", ".png"], Song_hash: ["audio/", ".mp3"], }.get(
+    save_info = {Image_hash: ["images/", ".png"], Song_hash: ["audio/", ".mp3"],}.get(
         hash(obj.field)
     )
 

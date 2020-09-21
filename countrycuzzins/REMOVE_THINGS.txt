@@ -1,4 +1,3 @@
-- remove test from views <i class="fa fa-files-o" aria-hidden="true"></i>
 - remove console logs from js 
 - remove console log in utils.py
 - remove cache from views

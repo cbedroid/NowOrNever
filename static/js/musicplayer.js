@@ -10,14 +10,13 @@ export class MusicPlayer extends Audio {
     this.startEvents();
 
     // Set audio progress width  according to musicplayer container width
-    let pw = $('#main_musicplayer').innerWidth();
+    let pw = $("#main_musicplayer").innerWidth();
     this._PROGRESS_WIDTH = parseInt(pw / 3);
-    $('#mp_progress').width(this._PROGRESS_WIDTH)
-    $('#progress_meter').attr('max',this._PROGRESS_WIDTH)
+    $("#mp_progress").width(this._PROGRESS_WIDTH);
+    $("#progress_meter").attr("max", this._PROGRESS_WIDTH);
     //this.PROGRESS_WIDTH = 200; // width of HTML progress bar
 
     if (url) {
-      console.log("URL", url);
       this.song = url;
     }
     this.INTERVAL;
@@ -84,8 +83,6 @@ export class MusicPlayer extends Audio {
 
       // update the DOM with new  next trac
       $("#ctr_next_track").data("next_track", next_track);
-
-      console.log("NEXT TRACK", next_track);
     } catch (e) {
       // on failure , just next track to  reset it to 0
       consol.log("Next track failed", e.message);
@@ -136,9 +133,7 @@ export class MusicPlayer extends Audio {
     // update the DOM with current track name
     const name_of_track = name || this._song;
     $("#current_track").text(name_of_track);
-    console.log("Current Song", name_of_track);
   }
-
 
   _clockTime(time) {
     // format time to clock representation
@@ -177,7 +172,7 @@ export class MusicPlayer extends Audio {
 
       const wps = this._PROGRESS_WIDTH / this.duration; // width per second
       //let progress = (wps * this.currentTime).toFixed(2)
-      let progress = (wps * this.currentTime);
+      let progress = wps * this.currentTime;
 
       // set DOM track time
       $(position).text(this._clockTime(this.currentTime));
@@ -185,25 +180,21 @@ export class MusicPlayer extends Audio {
 
       // set progression bar
       $("#progress_meter").val(progress);
-      //console.log('Progress',progress);
 
       // set pressball drag event
       $("#progress_meter").on("mousedown vmousedown", function () {
-        
-        AUDIO.pause()});
-      $('#progress_meter').on("mouseup vmouseup",()=>{
-        const pg_val = $("#progress_meter").val();
-        //console.log("dragging", pg_val * wps );
-        this.currentTime =  pg_val * wps;
-        $(this).val(`${Math.floor(pg_val * wps)}`);
-          AUDIO.play();
+        AUDIO.pause();
       });
-
-
+      $("#progress_meter").on("mouseup vmouseup", () => {
+        const pg_val = $("#progress_meter").val();
+        this.currentTime = pg_val * wps;
+        $(this).val(`${Math.floor(pg_val * wps)}`);
+        AUDIO.play();
+      });
     }
   }
 
-    get state() {
+  get state() {
     // return info about the current audio player
     return {
       ready: this.readyState === 4,

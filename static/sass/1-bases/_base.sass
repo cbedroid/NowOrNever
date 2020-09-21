@@ -43,8 +43,17 @@ button
     border: none
     cursor: pointer
 
+.btn
+  margin: 7px
+  &:hover
+    border: 1px solid transparent !important 
+    
 a,a:hover
   text-decoration: none
+
+i.fa  
+  color: #fff
+  background: #000
 
 li,a,i,button,span
   +CrossBrowser(transition, .3s ease-in-out)

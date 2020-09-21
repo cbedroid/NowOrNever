@@ -159,12 +159,22 @@ $(document).ready(() => {
 
     // collect video data from video carousel and render it in featured video
     const vc_title = $(this).find(".m-title").text();
-    const lg_description = $(this).find(".vc-lg-description").text();
+    const lg_description = $(this).find(".vc-lg-description p").text();
     $("#featured_title").text(vc_title);
     $("#featured_thumbcover").hide();
     let src = $(this).find("iframe", "video")[0].src;
     //$("#featured_vid")[0].src = src + "?autoplay=1&mute=1";
-    $("#featured_long_decription").text(lg_description);
+    $("#featured_long_decription .readmore-text").text(lg_description);
+    if (is_mobile) {
+      $("#featured_long_decription .readmore-text")
+        .removeClass("expanded")
+        .addClass("collapse");
+      $("#featured_long_decription .readmore-text").attr(
+        "aria-expanded",
+        false
+      );
+      $(".readmore-toggler span").text("read more");
+    }
   });
 
   /* MUSIC VIDEO CONT */
@@ -188,6 +198,11 @@ $(document).ready(() => {
   };
   const readmore_toggler = $("[data-mobile] .readmore-toggler");
   const readmore_text = $(".readmore-text");
-  new ReadMore(readmore_toggler, readmore_text);
+  if (is_mobile) {
+    new ReadMore(readmore_toggler, readmore_text);
+  } else {
+    $(".readmore-text").removeClass("collapse").addClass("expanded");
+    $(".readmore-text").attr("aria-expanded", true);
+  }
   showComingSoon();
 });

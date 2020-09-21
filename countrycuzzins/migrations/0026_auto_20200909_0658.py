@@ -6,18 +6,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('countrycuzzins', '0025_video_thumbnail'),
+        ("countrycuzzins", "0025_video_thumbnail"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='video',
-            name='is_featured',
-            field=models.BooleanField(default=False, help_text='special video that will be highlighted feature on website'),
+            model_name="video",
+            name="is_featured",
+            field=models.BooleanField(
+                default=False,
+                help_text="special video that will be highlighted feature on website",
+            ),
         ),
         migrations.AlterField(
-            model_name='video',
-            name='thumbnail_choice',
-            field=models.IntegerField(choices=[(0, 1), (1, 2), (2, 3), (3, 4)], default=1, verbose_name='choose a thumbnail'),
+            model_name="video",
+            name="thumbnail_choice",
+            field=models.IntegerField(
+                choices=[(0, 1), (1, 2), (2, 3), (3, 4)],
+                default=1,
+                verbose_name="choose a thumbnail",
+            ),
         ),
     ]
