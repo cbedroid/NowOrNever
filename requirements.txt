@@ -9,6 +9,7 @@ Django==3.0.7
 django-appconf==1.0.4
 django-crispy-forms==1.9.1
 django-image-cropping==1.4.0
+django-ipware==3.0.1
 django-widget-tweaks==1.4.8
 easy-thumbnails==2.7
 gunicorn==20.0.4

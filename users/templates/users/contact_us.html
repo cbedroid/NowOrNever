@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 {% load widget_tweaks %}
 {% block body %}
-<section id="contact_section">
+<section id="contact_section" class="mobile-scale-8">
   {% include  'users/snippets/messages.html' %}
   <div class="clippy-bg"></div>
   <div class="row justify-content-center">
@@ -19,19 +19,23 @@
           </div>
         </div>
         <!--Banner End-->
-
+        </div>
+        </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-9">
         <div class="forms-container">
           <form method="POST">
             {% csrf_token %}
             {{form|crispy }}
             {% if form.fields.email %}
             <button class="btn btn-outline-success" type="submit">Send</button>
-            <div class="m-flex m-flex--inline sa border-top pt-3 mx-5">
+            <div class="m-flex m-flex--inline sa border-top pt-3 mx-3">
               <small class="text-muted">
-                Need an Account? <a class="ml-2 text-primary" href="{% url 'account_signup' %}">Register </a>
+                Need an Account? <a class="ml-2 text-primary" href="{% url 'account_signup' %}">Sign Up</a>
               </small>
               <small class="text-muted">
-                Already have an Account? <a class="ml-2 text-primary" href="{% url 'account_login' %}">Sign Up Now</a>
+                Already have an Account? <a class="ml-2 text-primary" href="{% url 'account_login' %}">Log In</a>
               </small>
             </div>
             {% else %}
@@ -50,7 +54,6 @@
         </div>
       </div>
     </div>
-  </div>
 </section>
 
 

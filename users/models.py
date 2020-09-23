@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from PIL import Image
 from django.dispatch import receiver
-from NoworNever.utils.utils_models import Command, OverwriteStorage, generateSlug
+from core.utils.utils_models import Command, OverwriteStorage, generateSlug
 from countrycuzzins.models import Video
 
 MEDIA_ROOT = "static" + settings.MEDIA_ROOT
@@ -27,7 +27,7 @@ def user_namespace_path(instance, *args, **kwargs):
     user = kwargs.get("name", None)
 
     Image_hash = hash(Profile)
-    attr, path, ext = {Image_hash: ["image.url", "images/profile/", ".png"],}.get(
+    attr, path, ext = {Image_hash: ["image.url", "images/profile/", ".png"], }.get(
         instance_hash
     )
 
@@ -71,27 +71,6 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
-
-
-class ContactUs(models.Model):
-    firstname = models.CharField(max_length=60, blank=False, null=True)
-    lastname = models.CharField(max_length=60, blank=False, null=True)
-    email = models.CharField(max_length=100, blank=False, null=True)
-    message = models.TextField(max_length=500, blank=False, null=True)
-    created = models.DateTimeField(auto_now=False, auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-
-    def __str__(self):
-        return f"Message from {self.firstname} {self.lastname}"
-
-    def get_client_ip(request):
-        # For Spamming prevention, we need user ip
-        x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(",")[0]
-        else:
-            ip = request.META.get("REMOTE_ADDR")
-        return ip
 
 
 # Delete old Profile Image after being udpated

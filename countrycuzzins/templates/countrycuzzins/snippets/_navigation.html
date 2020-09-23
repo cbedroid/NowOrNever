@@ -29,16 +29,15 @@
       <div class="navbar-text m-nav-text--override">
         <div class="m-nav-profile-tray" id="index_profile_tray">
           {% if request.user.is_authenticated %}
-          <div class="user-tray">
-            <span>
-              <a href="{% url 'account_profile' request.user.username %}" class="m-user m-user--link profile">
-                <img class="m-img m-img--profile bdr-3-error" src="{{ request.user.profile.getImage }}"
-                  alt="profile image" />
-              </a>
-            </span>
-            <span>
+          <div class="user-tray" id="nav_user_tray">
+            <a href="{% url 'account_profile' request.user.username %}" class="m-user m-user--link profile">
+              <img class="m-img m-img--profile bdr-3-error" src="{{ request.user.profile.getImage }}"
+                alt="profile image" />
+            </a>
+            <div class="title-header">
+              <p class="link-title mobile-hidden">view profile</p>
               <h4 class="profile-title">{{ request.user }}</h4>
-            </span>
+            </div>
           </div>
           <div class="m-settings">
             <a href="{% url 'account_logout' %}" class="nav-link m-nav-link">

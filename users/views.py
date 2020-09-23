@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.core.exceptions import FieldDoesNotExist
 from django.views.decorators.cache import never_cache
-from users.forms import ContactUsForm
 from .forms import RegistrationForm, UserUpdateForm, ProfileUpdateForm
 
 
@@ -69,7 +69,8 @@ def profile(request, *args, **kwargs):
                 messages.success(request, f"Your account has been updated!")
             if p_form.is_valid():
                 p_form.save()
-                messages.success(request, f"Your profile image has been updated!")
+                messages.success(
+                    request, f"Your profile image has been updated!")
             return redirect("account_profile")
 
     else:
@@ -78,21 +79,3 @@ def profile(request, *args, **kwargs):
 
     context = {"u_form": u_form, "p_form": p_form}
     return render(request, "users/profile.html", context)
-
-
-@never_cache
-def contactUs(request):
-    if request.method == "POST":
-        c_form = ContactUsForm(request.POST)
-        if c_form.is_valid():
-            c_form.save()
-            messages.success(
-                request, f"Thank You, Your message was sent successfully! "
-            )
-            return HttpResponseRedirect(reverse("home"))
-            # return redirect("home")
-    else:
-        c_form = ContactUsForm()
-
-    context = {"form": c_form}
-    return render(request, "users/contact_us.html", context)

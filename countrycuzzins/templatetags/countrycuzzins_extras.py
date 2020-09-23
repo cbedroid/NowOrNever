@@ -73,9 +73,9 @@ def social_get(name, data):
         dict: social media model dictionary
     """
     try:
-        social = SocialMedia.objects.filter(name__iregex=rf"[.*[\w\s]*.*{name}[\w.\s]*")
-        print("\nNAME,DATA", name, data)
-        print("\nsocial", social)
+        social = SocialMedia.objects.filter(
+            name__iregex=rf"[.*[\w\s]*.*{name}[\w.\s]*")
+        #print("\nsocial", social)
         if social:
             return getattr(social.first(), data)
         return {"name": "N/A", "link": "#"}[data]
@@ -93,9 +93,7 @@ def model_get(model, kwargs):
     """
     try:
         # convert the kwargs string into dict
-        print("Video Kwargs before:", kwargs)
         kwargs = json.loads(re.sub(r"\'", '"', kwargs))
-        print("Video Kwargs:", kwargs)
         video = Video.objects.filter(**kwargs)
 
         if video:

@@ -42,3 +42,37 @@ header
     color: #000
     span
       color: #000
+
+  #nav_user_tray
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: center 
+    padding: 0 5px 
+    border-radius: 10px 
+    +CrossBrowser(transition, .3s ease-in-out )
+    cursor: pointer
+    &:hover
+      background: rgba(230, 225, 225, 0.8)
+      .link-title
+        visibility: visible 
+    a
+      background: transparent
+
+    .title-header
+      position: relative
+
+    .link-title
+      visibility: hidden 
+      width: 100%
+      position: absolute
+      top: -20px
+      left: 0 
+      font-family:  "Anton",serif, sans-serif
+      font-weight: 200
+      text-transform: uppercase
+      text-align: center 
+      color: #3e3c3c
+
+
+

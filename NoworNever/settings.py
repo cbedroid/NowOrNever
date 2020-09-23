@@ -33,7 +33,6 @@ if not SECRET_KEY:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("NON_DEBUG") == "True"
-DEBUG = False
 
 if DEBUG:
     # for local testing: allowed hosts
@@ -57,6 +56,7 @@ else:
 
 # Application definition
 INSTALLED_APPS = [
+    "core.apps.CoreConfig",
     "countrycuzzins.apps.CountrycuzzinsConfig",
     "users.apps.UsersConfig",
     "django.contrib.admin",

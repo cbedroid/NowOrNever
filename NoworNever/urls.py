@@ -1,14 +1,15 @@
 """NoworNever URL Configuration"""
 
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.conf.urls.static import static
 from django.conf import settings
-import countrycuzzins as cc
 
 urlpatterns = [
-    path("", include("countrycuzzins.urls")),
-    path("", include("users.urls")),
+    path("nowornever/", include("core.urls")),
+    path("NoworNever/", include("core.urls")),
+    path("countrycuzzins/", include("countrycuzzins.urls")),
+    path("account/", include("users.urls")),
 ]
 
 # Production and Development Admin

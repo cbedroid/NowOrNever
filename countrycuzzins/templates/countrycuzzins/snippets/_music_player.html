@@ -3,7 +3,7 @@
 {% with ALBUM=albums.0 %}
 <section id="main_musicplayer" data-mobile="true" class="desktop">
   <!--MUSIC PLAYER TOP-->
-  <div class="cover-image" style="background-image: url('{{ ALBUMimage.image.url }}')"></div>
+  <div class="cover-image" style="background-image: url('{{ ALBUM.image.image.url }}')"></div>
   <div class="mp-top flex ">
     <!-- musicplayer controls -->
     <div class="mp-controls-container pos--abs" id="mp_controls">

@@ -1,3 +1,13 @@
+// Mobile scaling Font-Sizes
+=mobile-scale-font()
+  @for $size from 1 through 10
+    $s: $size / 10
+    .mobile-scale-#{$size}
+      font-size: #{$s}rem
+      small
+        font-size: .60rem
+
+
 /* HTTP ERRORS REPSONSIVE */
 =httpError_mobile_screen
   // HTTP ERRORS
@@ -201,7 +211,7 @@
           .subtitle
             margin: auto
             text-align: center
-            width: calc(100% / 1.5)
+            width: calc(100% / 1.1)
             font-size: 1.5em
           .social-media-tray
             display: block

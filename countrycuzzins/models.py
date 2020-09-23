@@ -12,8 +12,7 @@ from image_cropping import ImageCropField, ImageRatioField
 from argparse import RawTextHelpFormatter
 from django.core.management.base import BaseCommand
 from PIL import Image as PIL_IMAGE
-
-from NoworNever.utils.utils_models import Command, OverwriteStorage, generateSlug
+from core.utils.utils_models import Command, OverwriteStorage, generateSlug
 
 
 MEDIA_ROOT = "static" + settings.MEDIA_ROOT
@@ -113,7 +112,8 @@ class Image(models.Model):
             filesize = fieldfile_obj.file.size
             megabyte_limit = 5.0
             if filesize > megabyte_limit * 1024 * 1024:
-                raise ValidationError("Max file size is %sMB" % str(megabyte_limit))
+                raise ValidationError(
+                    "Max file size is %sMB" % str(megabyte_limit))
 
 
 class Article(models.Model):
@@ -146,7 +146,8 @@ class Article(models.Model):
         """Create custom url for SlugField from article name on initilization"""
 
         # NOTE:: MAKE TIS METHOD DYNAMIC FOR ALL MODELS WITH SLUG FIELD
-        self.slug = re.sub(r"[^\w\-]", "_", "_".join((self.name, self.headline)))
+        self.slug = re.sub(
+            r"[^\w\-]", "_", "_".join((self.name, self.headline)))
 
     def save(self, *args, **kwargs):
         self.setIsArticle()
@@ -344,7 +345,7 @@ def pathFromName(instance, obj):
     # Capture object classname and set the save path and extention
     Image_hash = hash(Image.image.field)
     Song_hash = hash(Song.file.field)
-    save_info = {Image_hash: ["images/", ".png"], Song_hash: ["audio/", ".mp3"],}.get(
+    save_info = {Image_hash: ["images/", ".png"], Song_hash: ["audio/", ".mp3"], }.get(
         hash(obj.field)
     )
 

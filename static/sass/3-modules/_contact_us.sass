@@ -2,16 +2,17 @@
   display: block 
   width: 100%
   height: 100%
-  font-size: 1rem
   color: #000
+  position: relative
 
-  .clippy-bg 
+  .clippy-bg
     display: block
     position: absolute
-    +CrossBrowser(z-indez, 200)
+    top: 0
+    +CrossBrowser(z-indez, -10)
     width: 100%
-    height: 100%
-    clip-path: polygon(0 43%, 100% 30%, 100% 100%, 0 99%)
+    height: 100% 
+    clip-path: polygon(48% 40%, 100% 29%, 100% 75%, 54% 85%, 0 100%, 0 50%)
     background: $secondary 
 
   .m-title,.m-subtitle
@@ -20,7 +21,6 @@
   .m-title#contact_header_title
     font-size: 3.5em
     font-weight: 400
-    text-shadow: 2px 2px 10px #858989
 
   .mini-title
     font-family: 'Roboto', Arial,sans-serif
@@ -36,6 +36,7 @@
 
 
   .m-banner
+    padding: 5px 30px
     font-size: 1em
     text-align: center 
     color: #000
@@ -47,7 +48,7 @@
     margin: auto 
     margin-top: 20px
     padding: 7px 12px 
-    max-width: 50%
+    max-width: 800px
     background: whitesmoke
     box-shadow: 10px 5px 30px #000
 

@@ -50,6 +50,8 @@
   top: 0
   left: 0
   right: 0
+  padding: inherit
+  margin: inherit 
   background-attachment: $pos
   +CrossBrowser(background-position,unquote($bpos)) //50% 40%
   +CrossBrowser(background-repeat,no-repeat)
@@ -60,12 +62,10 @@
   $colors: green,red,blue,yellow,orange,purple,grey,pink,teal,orangered
   @keyframes #{$name}
     $length: #{100 / length($colors)}
-    @debug length is $length
     $frame: 0
 
     @each $color in $colors
       #{$frame}%
-        @debug $color
         //box-shadow: 2px  5px 5px  $color
         $lgc: red
         @for $c from 1 through 5

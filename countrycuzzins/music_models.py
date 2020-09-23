@@ -7,7 +7,7 @@ Artist models
 from django.db import models
 from django.core.validators import MinLengthValidator
 from .models import Article, Image, Song
-from NoworNever.utils.utils_models import (
+from core.utils.utils_models import (
     Command,
     OverwriteStorage,
     generateSlug,

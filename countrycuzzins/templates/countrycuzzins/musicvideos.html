@@ -7,7 +7,7 @@
   <div class="row no-gutters">
     <div class="col-12">
       <div class="featured" id="ft_video">
-        <h1 class="m-title">Latest Videos</h1>
+        <h1 class="m-title">Top Video </h1>
         <hr>
         {% with ftvideo=music_videos|dictsortreversed:'is_featured'|first %}
         <div class="video-container">
@@ -94,8 +94,10 @@
 
   <div class="row no-gutter">
     <div class="col-12">
-      <div class="top-videos">
-        <h1 class="m-title">Top Videos</h1>
+      <div class="latest-videos">
+        <div class="title-wrapper bd-right">
+          <h1 class="m-title">Latest Videos</h1>
+        </div>
         <ul class="video-carousel">
           {% for video in music_videos|dictsortreversed:'is_featured' %}
           <li class="video-container vc-vid">
