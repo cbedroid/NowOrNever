@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import mimetypes
-from easy_thumbnails.conf import Settings as thumbnail_settings
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -67,7 +66,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "crispy_forms",
     "widget_tweaks",
-    "easy_thumbnails",
     "image_cropping",
 ]
 
