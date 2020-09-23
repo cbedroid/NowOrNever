@@ -20,6 +20,12 @@ class RegistrationForm(UserCreationForm):
                             </ul>
                             """,
     )
+    subscribed = forms.BooleanField(
+        required=False,
+        initial=True,
+        label="Subscribe to our newsletter",
+        widget=forms.CheckboxInput(attrs={"input_type": "checkbox"}),
+    )
 
     class Meta:
         model = User
@@ -33,6 +39,7 @@ class RegistrationForm(UserCreationForm):
         user = super(RegistrationForm, self).save(commit=False)
         user.username = self.cleaned_data["username"]
         user.email = self.cleaned_data["email"]
+        user.subscribed = self.cleaned_data["subscribed"]
         if commit:
             user.save()
         return user
@@ -66,4 +73,3 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["image"]
-

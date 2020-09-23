@@ -73,6 +73,33 @@ class Profile(models.Model):
             img.save(self.image.path)
 
 
+class NewsLetter(models.Model):
+    email = models.EmailField(
+        max_length=100, unique=True, blank=False, null=True)
+    user_account = models.ForeignKey(
+        User, related_name="user_newletter", null=True, blank=True, on_delete=models.CASCADE)
+    has_account = models.BooleanField(default=False, blank=True, null=True)
+    created = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    def __str__(self):
+        return (f"{ self.email}  | account {self.check_for_account}",
+                f"| subscribed {created}"
+                )
+
+    @property
+    def check_for_account(self):
+        has_account = False
+        try:
+            has_account = User.objects.filter(
+                email__iregex=rf"(www.|http://|https://)?{self.email}")
+        except Exception as e:
+            print(f'\nError while checkig newletter account\n{e}')
+
+        true_false = {True: "yes", False: "no"}[self.check_fo_account]
+        return true_false[has_account]
+
+
 # Delete old Profile Image after being udpated
 @receiver(models.signals.post_delete, sender=Profile)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
@@ -83,6 +110,7 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     try:
         if instance.image:
             if os.path.isfile(instance.image.path):
+                if "default_profile.png" not in instance.image.path
                 os.remove(instance.image.path)
     except:
         if instance.file:

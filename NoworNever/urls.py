@@ -8,6 +8,7 @@ from django.conf import settings
 urlpatterns = [
     path("nowornever/", include("core.urls")),
     path("NoworNever/", include("core.urls")),
+    path("", include("countrycuzzins.urls")),
     path("countrycuzzins/", include("countrycuzzins.urls")),
     path("account/", include("users.urls")),
 ]
