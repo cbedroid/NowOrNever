@@ -69,11 +69,6 @@ INSTALLED_APPS = [
     "image_cropping",
 ]
 
-# Image Cropping
-THUMBNAIL_PROCESSORS = (
-    "image_cropping.thumbnail_processors.crop_corners",
-) + thumbnail_settings.THUMBNAIL_PROCESSORS
-
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
