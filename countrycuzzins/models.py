@@ -1,6 +1,5 @@
 import os
 import re
-import traceback
 from django.db import models
 from django.conf import settings
 from django.core.files import File
@@ -24,25 +23,6 @@ help_html_string = """
   """
 
 
-def makeSongName(instance, *args, **kwargs):
-    """ Updates song's file name to same name as model's namefield
-
-   Args:
-      instance (models.Model): instance of model class
-
-  Returns:
-      str: song's MEDIAROOT path name 
-  """
-
-    # NOTE: This oly fires on creation of model NOT on every save
-    # *** TODO: Put this method in Model's save method to save on every save
-    abspath = kwargs.get("abspath", False)
-    if abspath:
-        return "{}/audio/{}.mp3".format(MEDIA_ROOT, instance.name)
-
-    return "audio/{}.mp3".format(instance.name)
-
-
 def toNameSpace(instance, *args, **kwargs):
     """ Alter models's FileField path name to models' name field
 
@@ -59,10 +39,8 @@ def toNameSpace(instance, *args, **kwargs):
     name = kwargs.get("name", None)
 
     Image_hash = hash(Image)
-    Song_hash = hash(Song)
     attr, path, ext = {
         Image_hash: ["image.url", "images/", ".png"],
-        Song_hash: ["file.url", "audio/", ".mp3"],
     }.get(instance_hash)
 
     attr_name = "".join((instance.name, ext))
@@ -159,55 +137,6 @@ class Article(models.Model):
         """ On initialization, set Image's model is_article attribute to True """
         self.image.is_article = True
         self.image.save()
-
-
-class Song(models.Model):
-    id = models.AutoField(primary_key=True, null=False, blank=True)
-    artist = models.CharField(
-        "artist(s)",
-        default="Country Cuzzins",
-        max_length=120,
-        blank=True,
-        null=True,
-        help_text='<p style="color:#000; font-weight:700;"> Main Artist(s) Only</p>',
-    )
-    feature = models.CharField(
-        "feature artists(s)",
-        max_length=120,
-        blank=True,
-        null=True,
-        help_text='<p style="color:#000; font-weight:700;"> Feature Artist(s) Only </p><span>(optional)</span>',
-    )
-    name = models.CharField(
-        verbose_name="title", max_length=120, blank=False, null=True, unique=True
-    )
-    slug = models.SlugField(
-        max_length=80,
-        unique=True,
-        blank=False,
-        null=False,
-        help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
-        validators=[MinLengthValidator(4)],
-    )
-    file = models.FileField(
-        max_length=120,
-        verbose_name="song file",
-        upload_to=makeSongName,
-        storage=OverwriteStorage(),
-    )
-    created = models.DateTimeField(auto_now=False, auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-
-    def __str__(self):
-        if self.feature:
-            self.feature = f" ft {self.feature.title()} "
-        return f'{self.artist}{self.feature or "" } - {self.name}'
-
-    def save(self, *args, **kwargs):
-        self.name = re.sub("\s|\W", "_", self.name)
-        self.slug = self.slug.lower().strip()
-        super(Song, self).save(*args, **kwargs)
-        path = pathFromName(self, self.file)
 
 
 class Producer(models.Model):
@@ -346,8 +275,7 @@ def pathFromName(instance, obj):
   """
     # Capture object classname and set the save path and extention
     Image_hash = hash(Image.image.field)
-    Song_hash = hash(Song.file.field)
-    save_info = {Image_hash: ["images/", ".png"], Song_hash: ["audio/", ".mp3"], }.get(
+    save_info = {Image_hash: ["images/", ".png"]}.get(
         hash(obj.field)
     )
 

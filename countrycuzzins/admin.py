@@ -4,9 +4,9 @@ from image_cropping import ImageCroppingMixin
 from django.conf.locale.es import formats as es_formats
 from django.utils.html import format_html
 from django.utils.html import mark_safe
-from .music_models import Artist, Album
+from .music_models import Artist, Album, Song
 from .forms import VideoForm
-from .models import Song, Video, Producer, Article, Image, Event, SocialMedia
+from .models import Video, Producer, Article, Image, Event, SocialMedia
 
 
 es_formats.DATETIME_FORMAT = "d M Y H:i:s"

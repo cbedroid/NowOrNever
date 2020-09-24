@@ -1,4 +1,3 @@
-from .models import Song
 from django.contrib import messages
 from django.utils import timezone
 from django.urls import reverse
@@ -9,7 +8,7 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from .models import Image, Article, Video, SocialMedia, Event
-from .music_models import Album
+from .music_models import Album, Song
 
 # Create your views here.
 

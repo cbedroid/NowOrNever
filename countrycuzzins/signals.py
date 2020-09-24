@@ -2,7 +2,8 @@ import os
 from django.db.models.signals import pre_save, post_delete
 from django.utils.html import format_html
 from django.dispatch import receiver
-from .models import Video, Image, Song
+from .models import Video, Image
+from .music_models import Song
 
 
 @receiver(pre_save, sender=Video)
