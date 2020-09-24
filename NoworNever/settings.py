@@ -33,6 +33,7 @@ if not SECRET_KEY:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("NON_DEBUG") == "True"
+DEBUG = True
 
 if DEBUG:
     # for local testing: allowed hosts
@@ -43,6 +44,7 @@ if DEBUG:
         "10.0.0.54",
         "192.168.0.5",
         "0.0.0.0:80",
+        "countrycuzzins.herokuapp.com"
     ]
 else:
     ALLOWED_HOSTS = ['countrycuzzins.herokuapp.com']
