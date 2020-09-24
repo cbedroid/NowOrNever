@@ -99,10 +99,21 @@ WSGI_APPLICATION = "NoworNever.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "dcvftu4lm9kcuf",
+        "USER": "qduihevkmbekzz",
+        "PASSWORD": "9f0a2ae89c68de2f7b5c895c57d4b88f82070a07323fba5c44ed21cef867f9a9",
+        "HOST": "ec2-52-200-134-180.compute-1.amazonaws.com",
+        "PORT": "5432",
     }
 }
 
