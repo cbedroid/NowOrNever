@@ -57,22 +57,29 @@ header
       .link-title
         visibility: visible 
     a
+      padding-top: 5px 
+      display: flex
+      font-size: 1em
+      align-items: center
+      justify-content: flex-end
       background: transparent
-
-    .title-header
-      position: relative
-
-    .link-title
-      visibility: hidden 
-      width: 100%
-      position: absolute
-      top: -20px
-      left: 0 
-      font-family:  "Anton",serif, sans-serif
-      font-weight: 200
-      text-transform: uppercase
-      text-align: center 
-      color: #3e3c3c
+    span
+      &.title-header
+        display: block 
+        position: relative
+        height: 100%
+      .link-title
+        display: block 
+        width: 100%
+        visibility: hidden 
+        position: absolute
+        top: -25px
+        left: 0 
+        text-align: center 
+        font-family:  "Anton",serif, sans-serif
+        font-weight: 200
+        text-transform: uppercase
+        color: #3e3c3c
 
 
 

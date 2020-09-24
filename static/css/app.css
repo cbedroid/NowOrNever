@@ -688,19 +688,27 @@ header {
       #main_header_nav #nav_user_tray:hover .link-title {
         visibility: visible; }
     #main_header_nav #nav_user_tray a {
+      padding-top: 5px;
+      display: flex;
+      font-size: 1em;
+      align-items: center;
+      justify-content: flex-end;
       background: transparent; }
-    #main_header_nav #nav_user_tray .title-header {
-      position: relative; }
-    #main_header_nav #nav_user_tray .link-title {
-      visibility: hidden;
+    #main_header_nav #nav_user_tray span.title-header {
+      display: block;
+      position: relative;
+      height: 100%; }
+    #main_header_nav #nav_user_tray span .link-title {
+      display: block;
       width: 100%;
+      visibility: hidden;
       position: absolute;
-      top: -20px;
+      top: -25px;
       left: 0;
+      text-align: center;
       font-family: "Anton", serif, sans-serif;
       font-weight: 200;
       text-transform: uppercase;
-      text-align: center;
       color: #3e3c3c; }
 
 #footer {
@@ -2578,10 +2586,13 @@ section#main_musicplayer {
         #event_section .jumbotron .banner--content .user-tray img {
           max-width: 120px;
           max-height: 120px; }
+    #event_section #upcoming_event {
+      padding: 0;
+      margin: 0; }
     #event_section #event_container .event {
       font-size: 0.65rem;
-      padding-left: 10px;
-      padding-right: 10px; }
+      padding-left: 0px;
+      padding-right: 0px; }
 
   #music_video_view {
     font-size: 0.65rem; }
@@ -2849,10 +2860,13 @@ section#main_musicplayer {
         #event_section .jumbotron .banner--content .user-tray img {
           max-width: 120px;
           max-height: 120px; }
+    #event_section #upcoming_event {
+      padding: 0;
+      margin: 0; }
     #event_section #event_container .event {
       font-size: 0.65rem;
-      padding-left: 10px;
-      padding-right: 10px; }
+      padding-left: 0px;
+      padding-right: 0px; }
 
   #music_video_view {
     font-size: 0.65rem; }

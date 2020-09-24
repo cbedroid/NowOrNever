@@ -166,6 +166,7 @@ class Video(models.Model):
     long_description = models.TextField(max_length=600, blank=True, null=True)
     producer = models.ForeignKey(
         Producer, verbose_name="video producer",
+        default=1,
         related_name="video_producer",
         on_delete=models.DO_NOTHING
     )
