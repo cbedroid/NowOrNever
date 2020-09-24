@@ -110,8 +110,8 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     try:
         if instance.image:
             if os.path.isfile(instance.image.path):
-                if "default_profile.png" not in instance.image.path
-                os.remove(instance.image.path)
+                if "default_profile.png" not in instance.image.path:
+                    os.remove(instance.image.path)
     except:
         if instance.file:
             if os.path.isfile(instance.file.path):
