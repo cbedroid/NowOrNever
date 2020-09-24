@@ -48,44 +48,41 @@ class Album(models.Model):
         help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
         validators=[MinLengthValidator(4)],
     )
-    songs = models.CharField(max_length=100, blank=False, unique=True)
-    # songs = models.ManyToManyField(
-    #     Song,
-    #     verbose_name="list of songs",
-    #     help_text='<p style="color:#000; font-weight:700;"> Select ALL songs that will be on album</p>',
-    #     related_name="album_songs",
-    # )
+
+    songs = models.ManyToManyField(
+        Song,
+        verbose_name="list of songs",
+        help_text='<p style="color:#000; font-weight:700;"> Select ALL songs that will be on album</p>',
+        related_name="album_songs",
+    )
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
         return self.name
 
-    # def save(self, *args, **kwargs):
-    #     if not self.id:
-    #         super(Album, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if not self.id:
+            super(Album, self).save(*args, **kwargs)
 
-    #     self = urlParseSlugField(self, [self.name, self.id])
-    #     super(Album, self).save(*args, **kwargs)
+        self = urlParseSlugField(self, [self.name, self.id])
+        super(Album, self).save(*args, **kwargs)
 
-    # def clean(self, *args, **kwargs):
-    #     # Force Album to have at least one song
-    #     # and less than 20
-
-    #     MAX_SONGS = 20
-    #     MIN_SONGS = 1
-    #     if MIN_SONGS > self.songs.count() > MAX_SONGS:
-    #         raise ValidationError(
-    #             f"Album must have at least one ({MIN_SONG}) song and no more than {MAX_SONG}"
-    #         )
-    #     super(Album, self).clean(*args, **kwargs)
+    def clean(self, *args, **kwargs):
+        # Force Album to have at least one song
+        # and less than 20
+        MAX_SONGS = 20
+        MIN_SONGS = 1
+        if MIN_SONGS > self.songs.count() > MAX_SONGS:
+            raise ValidationError(
+                f"Album must have at least one ({MIN_SONG}) song and no more than {MAX_SONG}"
+            )
+        super(Album, self).clean(*args, **kwargs)
 
     @property
     def songslist(self):
-        return [1, 2, 3]
         return list(self.songs.all())
 
     @property
     def song_urls(self):
-        return ["1", "2"]
         return list(song.file.url for song in self.songslist)
