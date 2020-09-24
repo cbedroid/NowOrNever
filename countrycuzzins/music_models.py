@@ -62,6 +62,9 @@ class Album(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
+        if not self.id:
+            super(Album, self).save(*args, **kwargs)
+
         self = urlParseSlugField(self, [self.name, self.id])
         super(Album, self).save(*args, **kwargs)
 

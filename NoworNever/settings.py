@@ -106,6 +106,17 @@ WSGI_APPLICATION = "NoworNever.wsgi.application"
 #     }
 # }
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "dcvftu4lm9kcuf",
+        "USER": "qduihevkmbekzz",
+        "PASSWORD": "9f0a2ae89c68de2f7b5c895c57d4b88f82070a07323fba5c44ed21cef867f9a9",
+        "HOST": "ec2-52-200-134-180.compute-1.amazonaws.com",
+        "PORT": "5432",
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
