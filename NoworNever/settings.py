@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import mimetypes
+import django_heroku
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -44,7 +45,7 @@ if DEBUG:
         "0.0.0.0:80",
     ]
 else:
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['countrycuzzins.herokuapp.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -170,3 +171,4 @@ EMAIL_HOST_PASSWORD = os.environ.get("NON_SUPPORT_EMAIL_PASS")
 
 # for static css file mimetype errors
 mimetypes.add_type("text/css", ".css", True)
+django_heroku.settings(locals())
