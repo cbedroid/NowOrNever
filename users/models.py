@@ -76,8 +76,8 @@ class Profile(models.Model):
 class NewsLetter(models.Model):
     email = models.EmailField(
         max_length=100, unique=True, blank=False, null=True)
-    user_account = models.ForeignKey(
-        User, related_name="user_newletter", null=True, blank=True, on_delete=models.CASCADE)
+    # user_account = models.ForeignKey(
+    #     User, related_name="user_newletter", null=True, blank=True, on_delete=models.CASCADE)
     has_account = models.BooleanField(default=False, blank=True, null=True)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
