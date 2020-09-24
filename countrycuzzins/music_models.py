@@ -49,7 +49,7 @@ class Album(models.Model):
         validators=[MinLengthValidator(4)],
     )
 
-    songs = models.ForiegnKey(
+    songs = models.ForeignKey(
         Song,
         verbose_name="album songs",
         help_text='<p style="color:#000; font-weight:700;"> Select ALL songs that will be on album</p>',
