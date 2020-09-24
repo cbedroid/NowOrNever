@@ -235,9 +235,9 @@ class Video(models.Model):
     thumbnail = models.CharField(max_length=200, blank=True, null=True)
     short_description = models.CharField(max_length=100, blank=True, null=True)
     long_description = models.TextField(max_length=600, blank=True, null=True)
-    producer = models.ForeignKey(
-        Producer, verbose_name="video producer", on_delete=models.DO_NOTHING
-    )
+    producer = models.ForeignKey(related_name="video_producer",
+                                 Producer, verbose_name="video producer", on_delete=models.DO_NOTHING
+                                 )
 
     is_youtube = models.BooleanField(default=False)
     is_music = models.BooleanField(default=True)
