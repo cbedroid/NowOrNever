@@ -61,23 +61,24 @@ class Album(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            super(Album, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.id:
+    #         super(Album, self).save(*args, **kwargs)
 
-        self = urlParseSlugField(self, [self.name, self.id])
-        super(Album, self).save(*args, **kwargs)
+    #     self = urlParseSlugField(self, [self.name, self.id])
+    #     super(Album, self).save(*args, **kwargs)
 
-    def clean(self, *args, **kwargs):
-        # Force Album to have at least one song
-        # and less than 20
-        MAX_SONGS = 20
-        MIN_SONGS = 1
-        if MIN_SONGS > self.songs.count() > MAX_SONGS:
-            raise ValidationError(
-                f"Album must have at least one ({MIN_SONG}) song and no more than {MAX_SONG}"
-            )
-        super(Album, self).clean(*args, **kwargs)
+    # def clean(self, *args, **kwargs):
+    #     # Force Album to have at least one song
+    #     # and less than 20
+
+    #     MAX_SONGS = 20
+    #     MIN_SONGS = 1
+    #     if MIN_SONGS > self.songs.count() > MAX_SONGS:
+    #         raise ValidationError(
+    #             f"Album must have at least one ({MIN_SONG}) song and no more than {MAX_SONG}"
+    #         )
+    #     super(Album, self).clean(*args, **kwargs)
 
     @property
     def songslist(self):
