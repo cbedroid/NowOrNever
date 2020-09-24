@@ -33,7 +33,6 @@ if not SECRET_KEY:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("NON_DEBUG") == "True"
-DEBUG = True
 
 if DEBUG:
     # for local testing: allowed hosts
