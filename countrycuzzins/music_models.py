@@ -49,13 +49,14 @@ class Album(models.Model):
         validators=[MinLengthValidator(4)],
     )
 
-    songs = models.ManyToManyField(
+    songs = models.ForiegnKey(
         Song,
         verbose_name="album songs",
         help_text='<p style="color:#000; font-weight:700;"> Select ALL songs that will be on album</p>',
         related_name="album_songs",
+        blank=False, null=True,
+        on_delete=models.DO_NOTHING,
     )
-    tester = models.CharField(max_length=100, blank=False, null=True)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
