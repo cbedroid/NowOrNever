@@ -48,7 +48,7 @@ class Album(models.Model):
         help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
         validators=[MinLengthValidator(4)],
     )
-    song = models.CharField(max_length=100, blank=False, unique=True)
+    songs = models.CharField(max_length=100, blank=False, unique=True)
     # songs = models.ManyToManyField(
     #     Song,
     #     verbose_name="list of songs",
@@ -81,10 +81,10 @@ class Album(models.Model):
 
     @property
     def songslist(self):
-        return [1,2,3]
+        return [1, 2, 3]
         return list(self.songs.all())
 
     @property
     def song_urls(self):
-        return ["1","2"]
+        return ["1", "2"]
         return list(song.file.url for song in self.songslist)
