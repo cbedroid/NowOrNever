@@ -44,14 +44,7 @@ if DEBUG:
         "0.0.0.0:80",
     ]
 else:
-    ALLOWED_HOSTS = [
-        "127.0.0.1",
-        "192.168.0.3",
-        "192.168.0.2",
-        "10.0.0.54",
-        "192.168.0.5",
-        "0.0.0.0:80",
-    ]
+    ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
@@ -66,7 +59,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "crispy_forms",
     "widget_tweaks",
-    "image_cropping",
 ]
 
 
