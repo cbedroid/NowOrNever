@@ -1,0 +1,27 @@
+/*  STATES */
+.has-readmore
+  .readmore-toggler
+    // hide all toggler as a default state
+    visibility: hidden
+
+.mobile
+  &.has-readmore
+    .readmore-toggler
+      visibility: visible
+
+    .readmore-text
+      &.collapse
+        overflow: hidden
+        text-overflow: ellipsis
+        display: -webkit-box
+        +CrossBrowser('line-clamp',3)
+        +CrossBrowser('box-orient',vertical)
+      &.expanded
+        overflow: auto 
+        clear: both 
+        color: #1c1c1c
+    
+
+
+
+

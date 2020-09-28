@@ -1,0 +1,155 @@
+#event_section
+  display: block
+  font-size: 1rem
+
+  // JUMBOTRON
+  .jumbotron
+    margin: 0
+    padding: 20px 20px 0
+    position: relative
+    font-size: 1rem
+    +mixin_bg_image(absolute,cover,"100% 50%")
+    &.banner
+      max-width: 100%
+      &--wrapper
+        display: block
+        text-align: center
+        padding: 10px
+
+      &--header,&--content
+        max-width: 100%
+
+    .title,.subtitle
+      max-width: 100%
+      +CrossBrowser(text-overflow, wrap)
+      +CrossBrowser( word-wrap, break-word)
+      +CrossBrowser( overflow-wrap, break-word)
+
+    .title
+      color: inherit
+      margin-bottom: 1.2rem
+      font: 550 3em "Anton",Arial,sans-serif
+      text-transform: uppercase
+      letter-spacing: .07em
+      text-shadow: 2px 2px 2px whitesmoke
+    .subtitle
+      color: #383535
+      font: 550 1.2em "Roboto",Arial,sans-serif
+      text-shadow: 2px 2px 2px whitesmoke
+      .emp
+        font-weight: 700
+        text-transform: uppercase
+        text-shadow: 2px 2px 2px whitesmoke
+
+    .banner
+      // BANNER HEADERS
+      &--header
+        //Social Media Tray
+        .social-media-tray
+          display: block
+          margin: 40px auto
+          max-width: 45%
+          min-width: 30%
+          width: auto 
+
+          i,i::after
+            font-size: 3.2em
+            font-size: calc(100vw / 25) + 16
+
+      // BANNER CONTENT
+      &--content
+        display: flex
+        flex-direction: row
+        font-size: 1rem
+
+        .title
+          display: block
+          max-width: 100%
+          color: whitesmoke
+          font: 550 2em "Ultra",serif,sans-serif
+          text-shadow: 8px 2px 5px #000
+
+        .user-tray
+          margin-right: 2px
+          display: block
+          margin-right: 1em
+          order: 1
+          .title
+            text-shadow: 5px 2px 5px #000
+
+          img
+            max-width: 225px
+            max-height: 225px
+            width: calc(100% / .5)
+            height: calc(100% / .5)
+            background: #000
+            border: 3px solid #000
+            border-radius: 50%
+
+        .content-text
+          order: 2
+          .title
+            text-overflow: wrap
+
+  .event
+    display: block
+    width: 100%
+    font-size: 1rem
+    height: 100%
+    background: whitesmoke
+    &--table-wrapper
+      display: block
+      width: 100%
+      text-align: center
+      legend
+        &.title
+          font: 400 3.5em "Ultra",serif,Arial,sans-serif
+          color: $secondary
+          text-shadow: 2px 2px 5px  #000
+
+    // BOTTOM TABLE WIDGET
+    &--table
+      border-spacing: 1em 2em
+      border-collapse: separate
+      .event--header
+        box-shadow: 2px 2px 5px #323232
+        margin-bottom: 40px
+      .event--content
+        display: block
+        max-height: 300px
+        overflow: auto
+        padding: 0 10px 10px 10px
+
+      .row-header,.row-data
+        display: grid
+        grid-template-columns: repeat(3,1fr)
+        grid-template-rows: auto
+        place-items: center
+        width: 100%
+        border-bottom: 1px solid #cecece
+
+      .row-header
+        grid-column-gap: 1.5em
+        span
+          font-size: 1.3em
+          font-weight: 700
+
+      .row-data
+        min-height: 100px
+        max-height: 200px
+        overflow: auto
+        p.subtext
+          margin-top: 10px
+          font-size: .7em
+          color: #979797
+
+        .date,.title,
+          font-family: Arial,sans-serif
+        .date
+          font-weight: 550
+          font-size: 2.2em
+          color: $secondary
+        .title
+          font-size: 1.7em
+          font-weight: 700
+          color: #151515

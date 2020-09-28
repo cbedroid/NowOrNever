@@ -1,4 +1,15 @@
+
+*checklist.txt
+
+# static images and audio
+static/media/*
+android/*
+sass-testing/*
+sqltest*
+*_BAK*
+*_BAK
 # Byte-compiled / optimized / DLL files
+
 __pycache__/
 *.py[cod]
 *$py.class

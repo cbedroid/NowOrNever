@@ -1,32 +1,59 @@
-{% extends "countrycuzzins/base.html" %}
 {% load static %}
-{% block header %}
-  <div class="l-nav-sticky">
-    <nav class="m-nav-main">
-      <div class="m-nav-items">
-        <img class="i-logo-img img-round" src="{% static 'media/images/Now_or_Never_Logo.png' %}" alt="LOGO" class="img img-round">
-        <h1 id="logo_title">Cuzzins</h1>
-      </div>
-      <ul class="m-nav-items">
-        <li class="m-menu-link"><a href="#">News</a></li>
-        <li class="m-menu-link"><a href="#">Music</a></li>
-        <li class="m-menu-link"><a href="#">Home</a></li>
-        <li class="m-menu-link"><a href="#">About</a></li>
-        {% if request.user.is_authenticated %}
-            <div class="dropdown open" id="m_nav_dd">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="m_bs_user_btn" data-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="false">
-                  {{ request.user }}
-                  </button>
-              <div class="dropdown-menu" aria-labelledby="m_bs_user_btn">
-                <a class="dropdown-item" href="#">Logout</a>
-              </div>
-            </div>
-        {% else %}
-          <li class="m-menu-link"><a href="#"> Logout</a></li>
-          <li class="m-menu-link"><a href="#"> Register</a></li>
-        {% endif %}
+<section id="header_container">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" id="main_header_nav">
+    <button class="navbar-toggler" id="nav_mobile_toggler" type="button" data-toggle="collapse"
+      data-target="#main_navbar" aria-controls="main_navbar" aria-expanded="true" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="main_navbar">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img class="m-img m-img--logo" id="main_nav_logo" src="{% static 'media/images/decorative/1-CC-logo.png' %}"
+          alt="Now or Never Logo" />
+      </a>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0" id="main_nav_list">
+
+        <li class="nav-item m-nav-item active">
+          <a class="nav-link m-nav-link" href="{% url 'home'%}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item m-nav-item">
+          <a class="nav-link m-nav-link" href="{% url 'events' %}">Events</a>
+        </li>
+        <li class="nav-item m-nav-item">
+          <a class="nav-link m-nav-link" href="{% url 'musicvideos' %}">Music</a>
+        </li>
+
+        <li class="nav-item m-nav-item">
+          <a class="nav-link m-nav-link" href="{% url 'contact_us' %}">Contact</a>
+        </li>
       </ul>
-    </nav>
-  </div>
-{% endblock header %}
+      <div class="navbar-text m-nav-text--override">
+        <div class="m-nav-profile-tray" id="index_profile_tray">
+          {% if request.user.is_authenticated %}
+          <div class="user-tray" id="nav_user_tray">
+            <a href="{% url 'account_profile' request.user.username %}" class="m-user m-user--link profile">
+              <img class="m-img m-img--profile bdr-3-error" src="{{ request.user.profile.getImage }}"
+                alt="profile image" />
+            </a>
+            <div class="title-header">
+              <p class="link-title mobile-hidden">view profile</p>
+              <h4 class="profile-title">{{ request.user }}</h4>
+            </div>
+          </div>
+          <div class="m-settings">
+            <a href="{% url 'account_logout' %}" class="nav-link m-nav-link">
+              <button class="m-user m-user--link">logout</button>
+            </a>
+          </div>
+          {% else %}
+          <a href="{% url 'account_login' %}" class="nav-link m-nav-link">
+            <button class="m-user m-user--link">Login</button>
+          </a>
+          <a href="{% url 'account_signup' %}" class="nav-link m-nav-link">
+            <button class="m-user m-user--link">Signup</button>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+</section>

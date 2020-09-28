@@ -1,47 +1,81 @@
-/**** BASES ****/
-*, *:hover, *::before, *::after
+/* BASES */
+*, *::before, *::after
+  margin: 0
   -webkit-box-sizing: border-box  /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box     /* Firefox, other Gecko */
   box-sizing: border-box          /* Opera/IE 8+ */
 
-body
-  font-family: Arial, Helvetica, sans-serif
-  font-size: 18px
+body,html
+  background: $primary
+  font: normal 16px Arial, "Helvetica Neue", Helvetica, sans-serif
   margin: 0
   padding: 0
-  background: #000
-  color: #fff
-  width: 100%
+
+body
+  width: 100vw
   height: 100%
+  color: #000
   overflow-x: hidden
+  +CrossBrowser(overflow-x, hidden)
+  +CrossBrowser(font-smoothing, antialiased)
 
-header
+h1,h2,h3,h5,h5
+  padding: 0
+  margin: 0
+
+section.nav-spacer
   display: block
-  width: 100%
-
-  h1,h2,h3,h5,h5
-    padding: 0
-    margin: 0
-
-div[role="main"]
-  padding: 0 10px
-
-section
-  display: block
+  //padding-top: 75px /* clear fix for navigation header */
+  overflow-x: hidden
 
 ul
   padding: 0
   margin: 0
 
-li
-  list-style: none
+button
+  color: $primary
+  background: $secondary
+  outline: none
+  border: none
+  cursor: pointer
+  :hover
+    outline: none
+    border: none
+    cursor: pointer
 
-a
-  color: #000
-  text-decoration: none
+.btn
+  margin: 7px
   &:hover
-    text-decoration: none
+    border: 1px solid transparent !important 
+    
+a,a:hover
+  text-decoration: none
 
-a,i
+i.fa  
+  color: #fff
+  background: #000
+
+li,a,i,button,span
+  +CrossBrowser(transition, .3s ease-in-out)
+  cursor: pointer
   &:hover
     cursor: pointer
+
+button
+  &:hover
+    border: none
+    outline: none
+
+li,li:hover
+  list-style: none
+a,a:hover
+  text-decoration: none
+  color: inherit
+
+  
+hr
+  +mix_hr()
+
+/* Work around for boostrap 4 collapse not closing on mobile */
+.navbar-close
+  display: none !important

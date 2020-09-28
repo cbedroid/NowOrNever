@@ -1,83 +1,57 @@
-/* Modules Navigtion */
-.m-nav-main
-  display: flex
-  flex-direction: row
-  justify-content: space-between
-  align-items: baseline
-  margin: 0 auto
-  color: #fff
-  padding: 10px  20px
+/* Navigation Header */
 
-#logo_title
-  font: $nav_logo_font
-  margin: auto 10px
-  text-transform: uppercase
-  text-shadow: 2px 2px 5px #3f3f3f
-  &::before
-    content: "Country"
-    color: $goldred
-  &::after
-    content: " "
-    transform: rotate(95deg)
-    font-weight: 700
-    font-size: 36px
+.m-nav-text--override
+  span
+    display: inline-block
+    vertical-align: middle
+    margin-left: 10px
+  img
+    margin: 0
+    padding: 0
 
-.m-nav-items
-  display: flex
-  align-self: center
+  .m-user--link
+    border: 2px solid transparent
+    border-radius: 5px
 
-.m-menu-link
-  margin: 10px
-  position: relative
-  &:hover::after
-    content: " "
-    display: block
-    position: absolute
-    bottom: 1%
-    width: 2%
-    left: 50%
-    right: 50%
-    margin: 0 auto
-    border-bottom: 3px solid red
-    +LineSpread(absolute,1%,$goldred)
+  .profile-title
+    display: inline-block
+    padding: 0
+    margin: 0
+    font: 600 1.3em Arial,sans-serif
 
-  a
-    font: $nav_links_font
-    padding: 10px
-    text-transform: uppercase
-    color: #ffffff
-    &:hover
-      color: #afafaf
-
-// Booststrap Navigations (User link)
-#m_nav_dd
-  font: $nav_links_font
-  #m_bs_user_btn
-    font: inherit
-    color: #fff
-    background: transparent
-    border-color: $goldred
-    font-weight: bold
-    &:focus
-      border-color: rgba(0,123,255,.15)
-      outline: rgba(0,123,255,.15)
-      box-shadow: 0 0 0 3px $goldred
-  .dropdown-menu
-    background: #3f3f3f
+  button
+    margin: 0
     color: #000
-    margin: 0 auto
-  .dropdown-item
-    font-size: 18px
-    font-weight: 700
-    letter-spacing: .15em
-    margin: auto
-    color: #fff
+    background: rgb(255, 255, 255) !important
+    outline: #000
+    border: 2px solid $secondary
+    width: 100px
+    height: 35px
+    letter-spacing: .1em
+    border-radius: 5px
+    letter-spacing: .1em
+    text-transform: uppercase
+    font-family: 'Anton', cursive, Arial, sans-serif
+    font-weight: 500
+    +CrossBrowser(transition, .3s ease-in-out)
     &:hover
-      background: #fff
-      color: #3f3f3f
+      background: $secondary !important
+      border-color: #000
+      color: #fff
+  a
+    margin: 0
+    background: #fff
+    color: #000
 
-// RESETS  
-.no-effect:hover::after
-  // remove li hover mixin
-  content: " "
-  display: none
+.m-nav-profile-tray
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  grid-template-rows: auto
+  justify-items: center
+  align-items: center
+  width: fit-content
+  position: relative
+  *
+    padding: 2px
+
+ 

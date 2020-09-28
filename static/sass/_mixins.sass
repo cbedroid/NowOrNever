@@ -1,4 +1,40 @@
-/**** MIXINS ****/
+
+// Cross Browser Property
+=CrossBrowser($name,$style)
+  -moz-#{$name}: #{$style}
+  -webkit-#{$name}: #{$style}
+  -ms-#{$name}: #{$style}
+  -o-#{$name}: #{$style}
+  #{$name}: #{$style}
+
+=Borders()
+  $range: 1,2,3,4,5,6,7,8,9,10 
+  $colors: ("primary": $secondary,"dark":black,"error":red,"info":blue,"success":green,"warn":yellow)
+  @each $size in  $range
+    @each $name,$color in $colors
+      &.bdr-#{$size}-#{$name}
+        border: #{$size}px solid #{$color}
+
+=mix_hr()
+  // HR MIXIN CHANGE COLOR AND SIZE
+  $range: 1,2,3,4,5,6,7,8,9,10 
+  $colors: ("primary": $secondary,"dark":black,"error":red,"info":blue,"success":green,"warn":yellow)
+  @each $size in  $range
+    @each $name,$color in $colors
+      &.hr-#{$size}-#{$name}
+        display: block
+        width: 100%
+        margin: 0
+        padding: 0
+        border: #{$size}px ridge #{$color}
+
+=position_zero()
+  // zero out all position element 
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+
 =LineSpread($pos,$bottom,$color:"#fff")
   // Border bottom line spread  from middle
   box-sizing: border-box
@@ -10,14 +46,30 @@
   animation-fill-mode: forwards
 
 // Image to fit div container 
-=bg_div_image($pos,$bgsize,$bpos:"center center",$repeat:"no-repeat no-repeat")
+=mixin_bg_image($pos,$bgsize,$bpos:"center center",$repeat:"no-repeat no-repeat")
   top: 0
   left: 0
   right: 0
+  padding: inherit
+  margin: inherit 
   background-attachment: $pos
-  background-position: unquote($bpos) //50% 40%
-  background-repeat: unquote($repeat)
-  -webkit-background-size: $bgsize
-  -moz-background-size: $bgsize
-  -o-background-size: $bgsize
-  background-size: $bgsize
+  +CrossBrowser(background-position,unquote($bpos)) //50% 40%
+  +CrossBrowser(background-repeat,no-repeat)
+  +CrossBrowser(background-size,$bgsize )
+
+// KEYFRAMES
+=keyframe($name)
+  $colors: green,red,blue,yellow,orange,purple,grey,pink,teal,orangered
+  @keyframes #{$name}
+    $length: #{100 / length($colors)}
+    $frame: 0
+
+    @each $color in $colors
+      #{$frame}%
+        //box-shadow: 2px  5px 5px  $color
+        $lgc: red
+        @for $c from 1 through 5
+          $lgc: append($lgc,nth($colors, random(length($colors))),comma)
+          background: linear-gradient(45deg, $lgc)
+      $frame: $frame + $length
+    @content

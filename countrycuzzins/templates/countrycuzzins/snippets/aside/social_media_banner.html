@@ -1,0 +1,42 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load countrycuzzins_extras %}
+<section class="social-media-widget mobile-hidden">
+<aside class="m-widget">
+  <div class="m-banner m-banner--bg-img"
+    style=" background-image: url('{% static 'media/images/decorative/social-mobile2.png' %}')">
+    <div class="m-banner--header">
+      <h1 class="m-title m-title--bg">Follow Us</h1>
+      <p class="m-subtitle">Connect with us on social media </p>
+    </div>
+    <div class="m-banner--content">
+      <ul class="m-social m-social--icon-list m-flex m-flex--inline m-flex--sb">
+        <li class="m-social m-social--item">
+          <a href="{{ 'facebook'|social_get:'link' }}">
+            <i class="fa fa-facebook m-social m-social--{{ facebook|social_get:'name'}}" aria-hidden="true"></i></a>
+        </li>
+        <li class="m-social m-social--item">
+          <a href="{{ 'instgram'|social_get:'link' }}">
+            <i class="fa fa-instagram m-social--{{ instagram |social_get:'name'}}" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="m-social m-social--item">
+          <a href="{{ 'snapchat'|social_get:'link' }}">
+            <i class="fa fa-snapchat-ghost m-social--{{ snapchat|social_get:'name'}}" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="m-social m-social--item">
+          <a href="{{ 'twitter'|social_get:'link' }}">
+            <i class="fa fa-twitter m-social--{{ twitter|social_get:'name'}}" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="m-social m-social--item">
+          <a href="{{ 'youtube'|social_get:'link' }}">
+            <i class="fa fa-youtube-square m-social--{{ youtube|social_get:'name'}}" aria-hidden="true"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>
+</section>

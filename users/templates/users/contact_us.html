@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block body %}
+<section id="contact_section" class="mobile-scale-8">
+  {% include  'users/snippets/messages.html' %}
+  <div class="clippy-bg"></div>
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="widget" id="contact_us">
+        <div class="m-banner">
+          <div class="m-banner--contact-header">
+            <h3 class="m-title" id="contact_header_title"> Got a Question ?</h3>
+            <p class="m-subtitle"> We're here to help and answer any question you may have.
+              Your questions are important to us and we look forward to hearing from you
+            </p>
+            <h1 class="m-title mini-title">Contact Us</h1>
+          </div>
+        </div>
+        <!--Banner End-->
+        </div>
+        </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-9">
+        <div class="forms-container">
+          <form method="POST">
+            {% csrf_token %}
+            {{form|crispy }}
+            {% if form.fields.email %}
+            <button class="btn btn-outline-success" type="submit">Send</button>
+            <div class="m-flex m-flex--inline sa border-top pt-3 mx-3">
+              <small class="text-muted">
+                Need an Account? <a class="ml-2 text-primary" href="{% url 'account_signup' %}">Sign Up</a>
+              </small>
+              <small class="text-muted">
+                Already have an Account? <a class="ml-2 text-primary" href="{% url 'account_login' %}">Log In</a>
+              </small>
+            </div>
+            {% else %}
+            <button class="btn btn-outline-primary" type="submit">Login</button>
+            <small class="text-primary ml-2 ">
+              <a href="{% url 'password_reset' %}">Forgot Password?</a>
+            </small>
+            <div class="border-top pt-3">
+              <small class="text-muted">
+                Need An account? <a class="ml-2 text-primary" href="{% url 'account_signup' %}">Sign Up Now</a>
+              </small>
+            </div>
+            {% endif %}
+            <input type="hidden" name="next" value="{{ next }}">
+          </form>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+{% endblock body %}

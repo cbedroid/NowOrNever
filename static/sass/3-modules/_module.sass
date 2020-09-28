@@ -1,22 +1,263 @@
 /**** MODULES ****/
 
-.m-article-container
+.m-flex
+  display: flex
+  flex-direction: column
+  &--inline
+    flex-direction: row
+    justify-content: space-evenly
+  &--sa
+    justify-content: space-around
+  &--se
+    justify-content: space-evenly
+  &--sb
+    justify-content: space-between
+  &--end
+    justify-content: flex-end
+
+.m-title
+  text-align: center
+  font: 300 2em 'Ultra',serif, Arial, sans-serif
+  &--bg
+    text-transform: uppercase
+  &--header
+    color: $secondary
+    text-align: center
+    font: 900 3em Anton, Arial sans-serif
+    letter-spacing: .1em
+    margin-bottom: 20px
+
+.m-subtitle
+  margin-top: 10px
+  color: grey
+  font: 600 1.2em Roboto, Arial, sans-serif
+
+.m-btn
+  border-radius: 5px
+  &--action
+    padding: 15px 20px
+    font: 700 1.2em Anton, Arial, sans-serif
+    box-shadow: 2px 2px 5px #000
+    letter-spacing: .12em
+  &--submit
+    font-weight: 700
+
+  &:hover
+    background: red
+
+.m-flex
+  display: flex
+  flex-direction: columns
+  justify-content: space-between
+  align-items: flex-start
+
+  &--inline
+    flex-direction: rows
+  &--sa
+    justify-content: space-around
+  &-fe
+    justify-content: flex-end
+
+// Main widget wrapper for all divs
+.m-widget
   display: block
-  max-height: 800px
+  height: auto
   width: 100%
-  position: relative
-  // tinted image with background effect
-  .m-article
+  padding-top: 20px
+  margin: 40px 0
+
+.m-banner
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-items: space-around
+  font-size: 1rem
+  overflow-x: hidden
+
+  &--header
+    justify-self: flex-start
+    margin-bottom: 20px
+    .m-title
+      font: 700 2.7em 'Anton',cursive ,Arial, sans-serif
+      letter-spacing: .15em
+      color: $secondary
+      text-shadow: 2px 2px 5px #000
+      overflow-wrap: break-word
+      &--bg
+        font-size: 3.5em
+        font-weight: 700
+      &--up
+        text-transform: uppercase
+
+    .m-subtitle
+      margin-top: 10px
+      width: 100%
+      text-align: center
+      font-size: 1.2em
+      white-space: pre-line
+      line-height: 1.2em
+
+  &--content
+    width: fit-content
+    padding: 10px
+
+  &--bg-img
     display: block
-    &--bgi
+    width: 100%
+    height: 200px
+    position: relative
+    +mixin_bg_image(absolute,cover,"100% 50%")
+    &::after
+      content: ""
+      position: absolute
       display: block
-      +bg_div_image(absolute,contain,"50% 50%")
-      height: $bgi_image_height
-      &::before
-        display: block
-        content: ""
-        position: absolute
-        height: $bgi_image_height
+      top: 0
+      left: 0
+      height: inherit
+      width: 100%
+      +CrossBrowser(mix-blend-mode, color-dodge)
+    .m-title
+      color: whitesmoke
+      text-shadow: 5px 5px 5px #000
+      letter-spacing: .1em
+    .m-subtitle
+      color: #fff
+      text-shadow: 5px 5px 5px #000
+
+// CAROUSEL
+.m-carousel-wrapper
+  display: block
+  padding: 20px 50px
+
+// Index Carousel 
+#index_carousel
+  display: flex
+  flex-direction: row
+  justify-self: center
+  align-self: center
+  align-content: center
+  justify-content: center
+  width: 100%
+
+  .carousel-inner
+    display: block
+    width: 100%
+    max-width: 1200px
+    max-height: 550px
+    +CrossBrowser(transition, .3s ease-in)
+    overflow: hidden
+    .carousel-item
+      diplay: block
+      width: 100%
+      max-height: 500px
+      img
+        margin: 0 auto
+        background: #fff
         width: 100%
-        content: ""
-        background: rgba(0, 0, 0, .5)
+        height: 500px
+
+  a
+    background: rgba(207, 201, 201,.2)
+    +CrossBrowser(transition, .3s ease-in-out)
+    &:hover
+      background: rgba(207, 201, 201,.7)
+  .m-cr-control
+    max-width: 100px
+    +CrossBrowser(background-color, rbga(0,0,0,.4))
+    +CrossBrowser(background, rbga(0,0,0,.4))
+    &--left
+      left: 55px
+    &--right
+      right: 55px
+
+// Index Card 
+.card-deck-wrapper
+  width: 100%
+
+.card-deck
+  display: grid
+  margin: 10px 0px
+  grid-template-columns: repeat(3, 1fr)
+  grid-gap: .2em
+  justify-items: center
+  img
+    display: block
+    padding: 0
+    border-radius: 50%
+    width: 200px
+    height: 200px
+    margin: auto
+
+  .card-block
+    text-align: center
+    width: calc(100vw / 4 )
+    padding: 20px 10px
+
+    .card-text
+      height: auto
+      text-align: center
+      line-height: 1.5rem !important
+      word-wrap: break-word
+      font: 300 1em Helvetica, sans-serif
+      color: #575757
+
+// Videos  Widget
+.video-widget-container
+  background: whitesmoke
+  display: flex
+  flex-direction: column
+  width: 100%
+  align-self: center
+  align-content: center
+  align-items: center
+  justify-content: center
+  font-size: 1rem
+
+  .jumbotron
+    +CrossBrowser(transform,translate(-50% -50%))
+    text-align: center
+    background: transparent
+    margin: 1.5em 0
+
+    h1.display-4
+      color: $secondary
+      font: 400 3em "Ultra",cursive, Arial, sans-serif
+      letter-spacing: .15em
+      text-transform: uppercase
+    .m-description
+      margin-top: 1em
+      color: #575757
+      justify-self: flex-start
+      text-align: left
+      font: normal 1.2em Helvetic Arial,sans-serif
+    .video-wrapper
+      width: 100%
+      max-height: 500px
+      iframe,video
+        min-width: calc(100vw / 1.2)
+        width: 100%
+        height: 500px
+    .producer-content
+      color: grey
+      display: flex
+      justify-self: flex-start
+      margin: 5px 0 0 
+      a
+        color: blue
+        text-decoration: underline
+        &:hover
+          color: grey
+    
+
+//Follow us Banner
+.m-follow-us-container
+  width: 100%
+
+// For Account Form and Account Widgets
+.m-account-widget
+  background: whitesmoke
+  border-radius: 7px
+  padding: 30px
+
+  label
+    font-weight: 600

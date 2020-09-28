@@ -1,0 +1,36 @@
+=responsive_mobile_musicview()
+  // Mobile Breakpoint for Musicview
+
+  #music_video_view
+    font-size: .65rem
+
+    .m-text
+      font-size: 1.3em
+
+    .vframe
+      // controls the height and width of video and thumb
+      min-width: 300px
+      max-width: 1200px
+      max-height: 400px
+      height: 300px
+      width: calc(100% / 1.2)
+
+    .featured
+      .video-description
+        .read-more
+          visibility: visible
+
+    .latest-videos
+      display: grid
+      grid-template-columns: 1fr
+      grid-template-rows: 100px 3fr
+      margin: 0 
+      padding:  7px
+      .m-title
+        margin: 0 
+      .video-carousel
+        display: grid
+        grid-template-columns: repeat(2, 1fr)
+        grid-gap: .3em
+        padding: 0
+        margin: 0 

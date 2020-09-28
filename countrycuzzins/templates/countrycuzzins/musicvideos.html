@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load countrycuzzins_extras %}
+{% load widget_tweaks %}
+{% block body %}
+<section id="music_video_view">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <div class="featured" id="ft_video">
+        <h1 class="m-title">Top Video </h1>
+        <hr>
+        {% with ftvideo=music_videos|dictsortreversed:'is_featured'|first %}
+        <div class="video-container">
+          <h1 class="m-title" id="featured_title">
+            {{ ftvideo.title  }}
+          </h1>
+          <div class="video-item vframe">
+            <div id="player"></div>
+            <input id="init_vid" type="hidden" name="initial_video" value={{ ftvideo.url }}>
+            {% verbatim %}
+           <script>
+
+              function getVidId(vid){
+                    return vid.match(/.*\/(.*)/i)[1];
+              }
+
+              var tag = document.createElement('script');
+              tag.src = "https://www.youtube.com/iframe_api";
+              var firstScriptTag = document.getElementsByTagName('script')[0];
+              firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+              var player;
+              var muted = true;
+              function onYouTubeIframeAPIReady() {
+                const host  = window.location.hostname;
+                const port = window.location.port;
+                const initial_video = $('#init_vid')[0].value;
+                player = new YT.Player('player', {
+                  videoId: getLink(getVidId(initial_video)),
+                  playerVars: {'origin':`${host}:${port}`},
+                  events: {
+                    'onReady': onPlayerReady,
+                  }
+                });
+              }
+              function onPlayerReady(event) {
+               $(".featured .thumb-container").hide() // remove featured vdeo thumbnail
+                muted ===true ? player.mute() : player.unMute()
+                event.target.playVideo();
+              }
+
+              function stopVideo() {
+                player.stopVideo();
+              }
+
+              function getLink(link){
+              $(".vc-vid").on("click", function(e){
+                e.preventDefault();
+                try{
+                  let src = $(this).find('iframe').first().attr('src');
+                  if ( src ) {
+                    // unmute the layer
+                    player.unMute();
+                    src = getVidId(src);
+                    player.loadVideoById(src);
+                  }
+                } catch(e){
+                  console.log("Youtube API Error: ",e.message);
+                }
+              });
+                return link;
+              }
+            </script>
+            {% endverbatim %}
+            <div class="thumb-container">
+              <div class="fa thumbnail-cover" id="featured_thumbcover">
+                {{ ftvideo.thumbnail|safe }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-description m-subtitle vframe has-readmore" id="featured_long_decription" data-mobile="true">
+          <p class="m-text readmore-text collapse" id="video-description-text" role="article" 
+              aria-expanded="false" aria-labeledby="video_description-toggler" >
+            {{ ftvideo.long_description }}
+           </p>
+          <p class="readmore-toggler" aria-controls="video-description-text" id="video-description-toggler">...<span class="text-warning">read more</p>
+        </div>
+        {% endwith %}
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row no-gutter">
+    <div class="col-12">
+      <div class="latest-videos">
+        <div class="title-wrapper bd-right">
+          <h1 class="m-title">Latest Videos</h1>
+        </div>
+        <ul class="video-carousel">
+          {% for video in music_videos|dictsortreversed:'is_featured' %}
+          <li class="video-container vc-vid">
+            {# vc-vids is for js #}
+            <h1 class="m-title">
+              {{ video.title  }}
+            </h1>
+            <div class="video-item vframe">
+              <iframe src=" {{ video.url }}" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+              </iframe>
+              <div class="thumb-container vc-thumb">
+                <div class="fa thumbnail-cover">
+                  {{ video.thumbnail|safe }}
+                </div>
+              </div>
+            </div>
+            <div class="video-description vc-lg-description">
+              <p class="m-subtitle" style="display:none">{{ video.long_description }}</p>
+            </div>
+            <div class="video-status">
+              <p class="m-subtitle">Now Playing</p>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock body %}
+
