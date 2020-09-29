@@ -4,6 +4,7 @@ export class MusicPlayer extends Audio {
     this.init = false;
     this._status = false;
     this.loaded = false;
+    this.reloop = false;
     this._song = "";
     this._songs_length;
     this._next_track = 0;
@@ -95,13 +96,10 @@ export class MusicPlayer extends Audio {
 
   load(index) {
     this.loaded = false;
-    // load audio track
+    /*LOAD AUDIO TRACK */
     // If path is a number then get the url from songs_list.
     let url;
-
-    // if "index" argument is not pass, then
-    // just load next track
-
+    // if "index" argument is not pass, then just load next track
     // check if songs are available
     if (this._songs_length === 0) {
       this.setDomName("No Tracks Available");
@@ -126,12 +124,22 @@ export class MusicPlayer extends Audio {
     this.init = true;
     this.loaded = true;
     this.next_track = index;
+    console.log(
+      "Loading track ",
+      this.src,
+      this.song,
+      this.url,
+      this.next_track
+    );
     return true;
   }
 
   setDomName(name) {
     // update the DOM with current track name
-    const name_of_track = name || this._song;
+    let name_of_track = name || this._song;
+    name_of_track = name_of_track
+      .replace(/(_|\.mp3|\.mp4|\.mpeg)/g, " ")
+      .trim();
     $("#current_track").text(name_of_track);
   }
 
@@ -221,11 +229,17 @@ export class MusicPlayer extends Audio {
     $(audio).on("ended", () => {
       // unloaded track
       this.loaded = false;
+      console.log("Track ended", this.ended);
       // change pause button to play
       $("#mp_play").removeClass("fa-pause").addClass("fa-play");
 
-      //TODO: add render next track
-      this.load(this.next_track);
+      if (this.next_track !== 0 || this.reloop === true) {
+        /*Autoplay next track, but dont reloop unless 
+          reload is enabled
+        */
+        this.load(this.next_track);
+        this.play();
+      }
     });
 
     //TODO: Add on error

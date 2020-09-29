@@ -12,6 +12,7 @@ from argparse import RawTextHelpFormatter
 from django.core.management.base import BaseCommand
 from PIL import Image as PIL_IMAGE
 from core.utils.utils_models import Command, OverwriteStorage, generateSlug
+from core.models import Rating
 
 
 MEDIA_ROOT = "static" + settings.MEDIA_ROOT
@@ -170,6 +171,9 @@ class Video(models.Model):
         related_name="video_producer",
         on_delete=models.DO_NOTHING
     )
+    rating = models.ManyToManyField(
+        Rating, related_name="video_ratings")
+    # , default=1,on_delete=models.CASCADE)
 
     is_youtube = models.BooleanField(default=False)
     is_music = models.BooleanField(default=True)
@@ -199,6 +203,7 @@ class Video(models.Model):
 
     def save(self, *args, **kwargs):
         url = re.sub(r"\.", "", self.url)
+        #super(Video, self).save(*args, **kwargs)
         # Convert youtube's video url to embed url
         if "youtube" in url:
             self.is_youtube = True

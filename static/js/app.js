@@ -61,7 +61,6 @@ $(document).ready(() => {
     let ct = Audio.currentTime;
     $(element).on("click", () => {
       ct = Audio.currentTime;
-      console.log("FIRST CT", ct);
       if (Audio.state["loaded"]) {
         const SEEK = 5;
         // hint: Direction -1 == rewind  and 1 == fast forward
@@ -97,18 +96,25 @@ $(document).ready(() => {
   function volumeControl() {
     $("#volume_btn").on("click", function () {
       const vol_wrap = $("#volume_slider_wrapper");
-      $(vol_wrap).css("visibility", "visible");
+      $(vol_wrap).css({
+        visibility: "visible",
+        display: "flex",
+        "align-items": "center",
+      });
 
-      $("#volume_slider").on("change", function () {
+      $("#volume_range").on("change", function () {
         Audio.volume = $(this).val();
         console.log(Audio.volume);
       });
       // hide the volume control
-      $(vol_wrap).on("mouseleave", () => {
+
+      $(vol_wrap).on("mouseleave mouseup", () => {
         setTimeout(() => {
-          $(vol_wrap).css("visibility", "hidden");
+          $(vol_wrap).css({ visibility: "hidden" });
         }, 1000);
       });
     });
   }
+
+  /* BIND LOOP BUTTON */
 }); // READY

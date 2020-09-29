@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import ContactUs
-
-# Register your models here.
+from .models import ContactUs, Rating
 
 
 class DateCreateAdmin(admin.ModelAdmin):
@@ -12,3 +10,4 @@ class DateCreateAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ContactUs, DateCreateAdmin)
+admin.site.register(Rating, DateCreateAdmin)

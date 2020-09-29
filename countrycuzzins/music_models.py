@@ -12,10 +12,8 @@ from django.core.validators import MinLengthValidator
 from django.conf import settings
 from .models import Article, Image
 from core.utils.utils_models import (
-    Command,
-    OverwriteStorage,
-    generateSlug,
-    urlParseSlugField,
+    Command, OverwriteStorage,
+    generateSlug, urlParseSlugField,
 )
 
 
@@ -44,7 +42,8 @@ def makeSongName(instance, *args, **kwargs):
 class Artist(models.Model):
     name = models.CharField(max_length=80, blank=True, unique=True)
     profile_image = models.OneToOneField(
-        Image, default="images/default_artist.png", on_delete=models.SET_DEFAULT
+        Image, default="images/default_artist.png",
+        on_delete=models.SET_DEFAULT
     )
     article = models.ManyToManyField(Article, verbose_name="article(s)")
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -54,26 +53,61 @@ class Artist(models.Model):
         return self.name
 
 
-class Album(models.Model):
-    name = models.CharField(max_length=100, blank=False, unique=True)
-    image = models.ForeignKey(
-        "Image",
-        related_name="album_image",
-        null=True,
-        blank=True,
-        default=1,
-        on_delete=models.DO_NOTHING,
+class Song(models.Model):
+    #id = models.AutoField(primary_key=True, null=False, blank=True)
+    artist = models.CharField(
+        "artist(s)", default="Country Cuzzins",
+        help_text='<p style="color:#000; font-weight:700;"> Main Artist(s) Only</p>',
+        blank=True, null=True,
+        max_length=120,
+    )
+
+    feature = models.CharField(
+        "feature artists(s)", max_length=120,
+        blank=True, null=True,
+        help_text='<p style="color:#000; font-weight:700;"> Feature Artist(s) Only </p><span>(optional)</span>',
+    )
+    name = models.CharField(
+        verbose_name="title", max_length=120, blank=False, null=True, unique=True
     )
     slug = models.SlugField(
-        verbose_name="album url",
-        max_length=80,
-        unique=True,
-        blank=False,
-        null=False,
+        max_length=80, unique=True,
+        blank=False, null=False,
         help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
         validators=[MinLengthValidator(4)],
     )
+    file = models.FileField(
+        max_length=120, verbose_name="song file",
+        upload_to=makeSongName, storage=OverwriteStorage(),
+    )
+    created = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
+    def __str__(self):
+        if self.feature:
+            self.feature = f" ft {self.feature.title()} "
+        return f'{self.artist}{self.feature or "" } - {self.name}'
+
+    def save(self, *args, **kwargs):
+        self.name = re.sub("\s|\W", "_", self.name)
+        self.slug = self.slug.lower().strip()
+        super(Song, self).save(*args, **kwargs)
+        path = pathFromName(self, self.file)
+
+
+class Album(models.Model):
+    name = models.CharField(max_length=100, blank=False, unique=True)
+    image = models.ForeignKey(
+        "Image", related_name="album_image",
+        null=True, blank=True,
+        default=1, on_delete=models.DO_NOTHING,
+    )
+
+    slug = models.SlugField(verbose_name="album url", max_length=80,
+                            unique=True, blank=False, null=False, help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
+                            validators=[MinLengthValidator(4)],
+                            )
+    songs = models.ManyToManyField(Song, related_name="alum_songs")
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
@@ -100,10 +134,9 @@ class Album(models.Model):
 
     @property
     def songslist(self):
-        # NOTE:
-        #  Sept 24, songs are now retrieved through Song'srelated_name
+        # NOTE: Sept 24, songs are now retrieved through Song'srelated_name
         try:
-            return self.album_songs.all()
+            return self.songs.all()
         except:
             pass
 
@@ -115,62 +148,6 @@ class Album(models.Model):
             return [song.file.url for song in self.album_songs.all()]
         except:
             pass
-
-
-class Song(models.Model):
-    #id = models.AutoField(primary_key=True, null=False, blank=True)
-    artist = models.CharField(
-        "artist(s)",
-        default="Country Cuzzins",
-        max_length=120,
-        blank=True,
-        null=True,
-        help_text='<p style="color:#000; font-weight:700;"> Main Artist(s) Only</p>',
-    )
-    album = models.ManyToManyField(
-        Album,
-        verbose_name="Album name",
-        help_text='<p style="color:#000; font-weight:700;"> Select ALL songs that will be on album</p>',
-        related_name="album_songs",
-    )
-
-    feature = models.CharField(
-        "feature artists(s)",
-        max_length=120,
-        blank=True,
-        null=True,
-        help_text='<p style="color:#000; font-weight:700;"> Feature Artist(s) Only </p><span>(optional)</span>',
-    )
-    name = models.CharField(
-        verbose_name="title", max_length=120, blank=False, null=True, unique=True
-    )
-    slug = models.SlugField(
-        max_length=80,
-        unique=True,
-        blank=False,
-        null=False,
-        help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
-        validators=[MinLengthValidator(4)],
-    )
-    file = models.FileField(
-        max_length=120,
-        verbose_name="song file",
-        upload_to=makeSongName,
-        storage=OverwriteStorage(),
-    )
-    created = models.DateTimeField(auto_now=False, auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-
-    def __str__(self):
-        if self.feature:
-            self.feature = f" ft {self.feature.title()} "
-        return f'{self.artist}{self.feature or "" } - {self.name}'
-
-    def save(self, *args, **kwargs):
-        self.name = re.sub("\s|\W", "_", self.name)
-        self.slug = self.slug.lower().strip()
-        super(Song, self).save(*args, **kwargs)
-        path = pathFromName(self, self.file)
 
 
 #***************************************#
@@ -216,13 +193,11 @@ def pathFromName(instance, obj):
 
         # Change obj basename to obj name
         if name_of_obj != base_path:
-
             rel_np_path = (
                 savepath + str(name_of_obj) + ext
             )  # change img name to new name
             old_path = os.path.abspath(obj.path)
             new_path = os.path.join(settings.MEDIA_ROOT, rel_np_path)
-
             try:
                 os.rename(old_path, new_path)
             except:

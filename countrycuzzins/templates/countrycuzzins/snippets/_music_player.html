@@ -1,21 +1,20 @@
 {% load static %}
 {% load countrycuzzins_extras %}
-{% with ALBUM=albums.0 %}
 <section id="main_musicplayer" data-mobile="true" class="desktop">
   <!--MUSIC PLAYER TOP-->
-  <div class="cover-image" style="background-image: url('{{ ALBUM.image.image.url }}')"></div>
+  <div class="cover-image" style="background-image: url('{{ album.image.image.url }}')"></div>
   <div class="mp-top flex ">
     <!-- musicplayer controls -->
     <div class="mp-controls-container pos--abs" id="mp_controls">
       <!--control top-->
       <div class="control--top">
         <div class="title-wrapper flex">
-          <h3 class="mp-title--top" title="{{ ALBUM.name }}">
-          {{ ALBUM.name }}</h3>
-          <span class="hover-tip">{{ALBUM.name}}</span>
+          <h3 class="mp-title--top" title="{{ album.name }}">
+          {{ album.name }}</h3>
+          <span class="hover-tip">{{album.name}}</span>
           <h5 id="current_track" class="mp-subtitle"></h5>
         </div>
-
+          {# Track durations and position #}
         <div class="track-info flex flex--inline flex--sa">
           <h6 id="track_position"></h6>
           <h6 id="track_duration"></h6>
@@ -25,14 +24,14 @@
       <!--control middle-->
       <div class="control--middle">
         <div class="controls controls-top flex flex--inline flex--sa">
-          <i id="repeater" class="fa fa-repeat" aria-hidden="true"></i>
+          <i id="reloop_btn" class="fa fa-repeat" aria-hidden="true"></i>
           <div id="mp_progress">
             <input type="range" class="progress-slider" id="progress_meter" min="0" max="200" value="0">
           </div>
           <div class="volume-control-container">
             <i id="volume_btn" class="fa fa-volume-up" aria-hidden="true"></i>
-            <div class="volume-slider-panel" id="volume_slider_wrapper" style="visibility:hidden;">
-              <input type="range" name="volume_range" id="volume_slider" value="1" min="0" max="1" step=".1">
+            <div class="volume-slider-panel mobile" id="volume_slider_wrapper" style="visibility:hidden;">
+              <input type="range" name="volume_range" id="volume_range" value="1" min="0" max="1" step=".1">
             </div>
           </div>
         </div>
@@ -54,7 +53,7 @@
   <!--MUSIC PLAYER BOTTOM-->
   <div class="mp-bottom">
     <ul id="track-list">
-      {% for song in ALBUM.songslist %}
+      {% for song in album.songslist %}
       {# Add thumbs icons here#}
       <div class="track-item" data-tracknumber={{forloop.counter}}>
         <small class="mp_track-index">track {{forloop.counter}}</small>
@@ -72,4 +71,3 @@
     </ul>
   </div>
 </section>
-{% endwith %}

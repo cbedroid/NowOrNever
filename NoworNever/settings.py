@@ -78,6 +78,7 @@ ROOT_URLCONF = "NoworNever.urls"
 
 TEMPLATES = [
     {
+
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
@@ -105,14 +106,34 @@ WSGI_APPLICATION = "NoworNever.wsgi.application"
 #     }
 # }
 
+
+#*************************#
+#****** DEV POSTGRES *****#
+#*************************#
+if DEBUG:
+    db_host = os.environ.get("NON_DEV_PSQL_HOST", "127.0.0.1")
+    db_name = os.environ.get("NON_DEV_PSQL_NAME")
+    db_user = os.environ.get("NON_DEV_PSQL_USER")
+    db_pwd = os.environ.get("NON_DEV_PSQL_PASSWORD")
+
+    if any(not x for x in [db_name, db_user, db_pwd]):
+        raise TypeError(
+            f'DEV POSTGRES FAILED\nDatabase Name: {db_name}\nuser: {db_user}')
+else:
+    db_host = os.environ.get("NON_PRO_PSQL_HOST")
+    db_name = os.environ.get("NON_PRO_PSQL_NAME")
+    db_user = os.environ.get("NON_PRO_PSQL_USER")
+    db_pwd = os.environ.get("NON_PRO_PSQL_PASSWORD")
+
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "dcvftu4lm9kcuf",
-        "USER": "qduihevkmbekzz",
-        "PASSWORD": "9f0a2ae89c68de2f7b5c895c57d4b88f82070a07323fba5c44ed21cef867f9a9",
-        "HOST": "ec2-52-200-134-180.compute-1.amazonaws.com",
-        "PORT": "5432",
+        "ENGINE":  'django.db.backends.postgresql',
+        "NAME":  db_name,
+        "USER": db_user,
+        "PASSWORD": db_pwd,
+        "HOST": db_host,
+        "PORT": "5432"
     }
 }
 

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load core_extras%}
+{% block body %}
+  <div class="row">
+    <div class="col-12">
+      <div class="featured" id="ft_video">
+        <h1 class="m-title">Top Video </h1>
+        <hr>
+        {% with ftvideo=music_videos|dictsortreversed:'is_featured'|first %}
+        <div class="video-container">
+          <h1 class="m-title" id="featured_title">
+            {{ ftvideo.title  }}
+          </h1>
+          <div class="video-item vframe">
+            <div id="player"></div>
+            <input id="init_vid" type="hidden" name="initial_video" value={{ ftvideo.url }}>
+            {# Youtube API Script #}
+            {% include 'countrycuzzins/snippets/youtubeAPI.html' %}
+            <div class="thumb-container">
+              <div class="fa thumbnail-cover" id="featured_thumbcover">
+                {{ ftvideo.thumbnail|safe }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-description m-subtitle vframe has-readmore" id="featured_long_decription" data-mobile="true">
+          <p class="m-text readmore-text collapse" id="video-description-text" role="article" 
+              aria-expanded="false" aria-labeledby="video_description-toggler" >
+            {{ ftvideo.long_description }}
+           </p>
+          <p class="readmore-toggler" aria-controls="video-description-text" id="video-description-toggler">...<span class="text-warning">read more</p>
+        </div>
+        {% endwith %}
+      </div>
+     </div>
+    </div>
+
+ 
+{% endblock body %}

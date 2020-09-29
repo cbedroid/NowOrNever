@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -14,3 +15,16 @@ class ContactUs(models.Model):
 
     def __str__(self):
         return f"Message from {self.firstname} {self.lastname}"
+
+
+class Rating(models.Model):
+    RATING_CHOICES = [(0, "no ratings"), (1, "like"),
+                      (2, "dislike"), (3, "heart"), (4, "flame"), (5, "trash")]
+    rate = models.IntegerField(choices=RATING_CHOICES, default=0)
+    user = models.ForeignKey(
+        User, related_name="user_ratings", default=1, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    def __str__(self):
+        return f"{user}-{rate}"

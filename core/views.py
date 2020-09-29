@@ -4,8 +4,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.core.exceptions import FieldDoesNotExist
 from django.views.decorators.cache import never_cache
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView, View, DetailView
 from .forms import ContactUsForm
-from .models import ContactUs
+from .models import ContactUs, Rating
+from countrycuzzins.models import Video
 
 
 @never_cache
@@ -47,3 +50,18 @@ def privacyPolicy(request):
         "website": "https://www.NoworNever.com",
     }
     return render(request, "snippets/terms_policy/privacy_policy.html", context)
+
+
+class VideoRatingDetailView(DetailView):
+    model = Video
+    template_name = "core/snippets/video_rating.html"
+    pk_url_kwarg = "video_id"
+    slug_url_kwarg = 'slug'
+    query_pk_and_slug = True
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        video = get_object_or_404(Video, id=kwargs.get('video_id'))
+        context['video'] = video
+        context['ratings'] = video.rating.all()
+        return context

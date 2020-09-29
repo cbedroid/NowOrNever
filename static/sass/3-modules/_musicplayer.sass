@@ -103,6 +103,7 @@ section#main_musicplayer
     padding: 5px
     transition: .3s ease-in-out
     border-radius: 10px
+    box-shadow: 4px 2px 3px #4c4c4c
     &:hover
       padding: 5px
       color: #fff
@@ -156,13 +157,20 @@ section#main_musicplayer
   min-height: 25px
   position: relative
 
+  // Reloop button
+  #reloop_btn
+    &.active
+      background: $secondary
+
   // VOLUME PANEL 
   .volume-control-container
     display: block
     max-width: 50px
 
   .volume-slider-panel
-    display: block
+    +CrossBrowser(transform, rotateZ(270deg))
+    display: flex
+    align-items: center
     position: absolute
     left: calc(100% -  65px )
     top: 0px
@@ -171,9 +179,8 @@ section#main_musicplayer
     border: 1px  solid #000
     border-radius: 10px
     padding: 5px
-    +CrossBrowser(transform, rotateZ(270deg))
 
-    #volume_slider
+    #volume_range
       -webkit-appearance: none  /* Override default CSS styles */
       appearance: none
       width: 100% /* Full-width */
@@ -185,15 +192,15 @@ section#main_musicplayer
       transition: opacity .2s
 
     //* Mouse-over effects */
-    #volume_slider:hover
+    #volume_range:hover
       opacity: 1 /* Fully shown on mouse-over */
       height: 8px
 
     //* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-    #volume_slider::-webkit-slider-thumb
+    #volume_range::-webkit-slider-thumb
       -webkit-appearance: none /* Override default look */
       appearance: none
-      width: 15px /* Set a specific slider handle width */
+      width: 20px /* Set a specific slider handle width */
       height: 20px /* Slider handle height */
       background: $ctrl_primary /* background */
       cursor: grabbing /* Cursor on hover */
@@ -203,13 +210,26 @@ section#main_musicplayer
       &:active
         +CrossBrowser(cursor,grabbing)
 
-    #volume_slider::-moz-range-thumb
+    #volume_range::-moz-range-thumb
       width: 25px /* Set a specific slider handle width */
       height: 25px /* Slider handle height */
-      background: #4CAF50 /* Green background */
+      background: #646564 /* Grey background */
       cursor: grabbing /* Cursor on hover */
       &:hover
         cursor: grabbing
+
+    //VOLUME MOBILE STYLE
+    &.mobile
+      display: flex
+      align-items: center
+      height: 4px 
+      #volume_range,#volume_range:hover
+        height: 4px 
+      #volume_range::-webkit-slider-thumb
+        width: 15px /* Set a specific slider handle width */
+        height: 15px /* Slider handle height */
+
+      
 
 .title-wrapper
   margin-bottom: 40px

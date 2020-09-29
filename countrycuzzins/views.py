@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
@@ -26,8 +27,7 @@ class EventList(ListView):
 
 def index(request):
     context = {
-        "articles": Article.objects.all(),
-        "albums": Album.objects.filter(name="Country Cuzzins"),
+        "album": get_object_or_404(Album, name="TESTALBUM"),
         "images": Image.objects.all(),
         "music_videos": Video.objects.filter(is_music=True),
         "social_media": SocialMedia,

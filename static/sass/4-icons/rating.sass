@@ -1,0 +1,86 @@
+
+.rating-container
+  display: grid
+  grid-template-columns: repeat(2,1fr)
+  
+  .rate--left,.rate--right
+    border: 2px solid #000
+  .rate--left
+    .rating-tray
+      display: flex
+      .icon-wrapper
+        display: inline-block
+        background: whitesmoke
+        background: inherit 
+        width: 45px 
+        height: 45px
+        border-radius: 50%
+        padding: 2px
+        margin: 0 2px 
+        outline: none
+        border: none
+
+      .rate-icon 
+        border-radius: 50%
+        width: 45px
+        height: 45px 
+        padding-top: 7px
+        margin: auto
+        text-align: center
+        color: #000
+        background: #fff
+        +CrossBrowser(transition,.5s ease-in-out)
+        &:hover,&.active
+          color: whitesmoke
+          background: #e9e9e9
+
+        &--like
+          color: #3673ec
+          &:hover,&.active
+            background: #3673ec
+        &--heart
+          color: #f02849
+          &:hover,&.active
+            background: #f02849
+        &--dislike
+          color: red
+          &:hover,&.active
+            background: red
+        &--flame
+          color: transparent
+          +CrossBrowser(background ,linear-gradient(45deg,orange,orangered,red))
+          +CrossBrowser(background-clip,text)
+          &:hover,&.active
+            +CrossBrowser(background ,linear-gradient(45deg,orange,orangered,red))
+        &--trash
+          color: transparent
+          +CrossBrowser(background ,linear-gradient(160deg,lightgrey, grey,darkgrey))
+          +CrossBrowser(background-clip,text)
+          &:hover,&.active
+            color: whitesmoke
+            background: darkgrey
+            //+CrossBrowser(background ,linear-gradient(45deg,lightgrey, grey,darkgrey))
+
+  .rate--right
+    .past-votes
+      display: flex
+      flex-direction: row
+      ul.voter-list
+        display: flex
+        flex-direction: row
+
+        padding: 0 5px
+        li.voter-item
+          margin-left: 5px 
+          .img-wrapper
+            width: 40px
+            height: 40px
+            img
+              width: 100%
+              height: 100%
+              border: 2px solid #000
+              border-radius: 50%
+
+
+          
+          
