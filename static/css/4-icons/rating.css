@@ -1,109 +1,17 @@
-/*
-Error: Undefined mixin 'CrossBrowser'.
-        on line 32 of sass/4-icons/rating.sass, in `CrossBrowser'
-        from line 32 of sass/4-icons/rating.sass
+/* Error: Undefined mixin.
+ *    ,
+ * 32 |         +CrossBrowser(transition,.5s ease-in-out)
+ *    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *    '
+ *   sass/4-icons/rating.sass 32:9  root stylesheet */
 
-27:         padding-top: 7px
-28:         margin: auto
-29:         text-align: center
-30:         color: #000
-31:         background: #fff
-32:         +CrossBrowser(transition,.5s ease-in-out)
-33:         &:hover,&.active
-34:           color: whitesmoke
-35:           background: #e9e9e9
-36: 
-37:         &--like
-
-Backtrace:
-sass/4-icons/rating.sass:32:in `CrossBrowser'
-sass/4-icons/rating.sass:32
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:349:in `block in visit_mixin'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:98:in `block in with_mixin'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:115:in `with_frame'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:98:in `with_mixin'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:347:in `visit_mixin'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:158:in `block in visit'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `block in with_base'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:115:in `with_frame'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `with_base'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:158:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `map'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:179:in `with_environment'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:429:in `visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:158:in `block in visit'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `block in with_base'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:115:in `with_frame'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `with_base'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:158:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `map'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:179:in `with_environment'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:429:in `visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:158:in `block in visit'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `block in with_base'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:115:in `with_frame'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `with_base'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:158:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `map'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:179:in `with_environment'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:429:in `visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:158:in `block in visit'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `block in with_base'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:115:in `with_frame'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `with_base'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:158:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `map'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:179:in `with_environment'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:429:in `visit_rule'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:158:in `block in visit'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `block in with_base'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:115:in `with_frame'
-/usr/lib/ruby/vendor_ruby/sass/stack.rb:79:in `with_base'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:158:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:52:in `map'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:52:in `visit_children'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:179:in `with_environment'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:166:in `visit_children'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `block in visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:186:in `visit_root'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/base.rb:36:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:157:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/visitors/perform.rb:8:in `visit'
-/usr/lib/ruby/vendor_ruby/sass/tree/root_node.rb:36:in `css_tree'
-/usr/lib/ruby/vendor_ruby/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-/usr/lib/ruby/vendor_ruby/sass/engine.rb:378:in `_render_with_sourcemap'
-/usr/lib/ruby/vendor_ruby/sass/engine.rb:295:in `render_with_sourcemap'
-/usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:490:in `update_stylesheet'
-/usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:209:in `each'
-/usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:471:in `on_file_changed'
-/usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:328:in `block in watch'
-/usr/lib/ruby/vendor_ruby/listen/event/config.rb:23:in `call'
-/usr/lib/ruby/vendor_ruby/listen/event/processor.rb:115:in `_process_changes'
-/usr/lib/ruby/vendor_ruby/listen/event/processor.rb:19:in `block in loop_for'
-/usr/lib/ruby/vendor_ruby/listen/event/processor.rb:15:in `loop'
-/usr/lib/ruby/vendor_ruby/listen/event/processor.rb:15:in `loop_for'
-/usr/lib/ruby/vendor_ruby/listen/event/loop.rb:84:in `_wait_for_changes'
-/usr/lib/ruby/vendor_ruby/listen/event/loop.rb:42:in `block in setup'
-/usr/lib/ruby/vendor_ruby/listen/internals/thread_pool.rb:6:in `block in add'
-*/
-body:before {
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
   white-space: pre;
-  font-family: monospace;
-  content: "Error: Undefined mixin 'CrossBrowser'.\A         on line 32 of sass/4-icons/rating.sass, in `CrossBrowser'\A         from line 32 of sass/4-icons/rating.sass\A \A 27:         padding-top: 7px\A 28:         margin: auto\A 29:         text-align: center\A 30:         color: #000\A 31:         background: #fff\A 32:         +CrossBrowser(transition,.5s ease-in-out)\A 33:         &:hover,&.active\A 34:           color: whitesmoke\A 35:           background: #e9e9e9\A 36: \A 37:         &--like"; }
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined mixin.\a    \2577 \a 32 \2502          +CrossBrowser(transition,.5s ease-in-out)\a    \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a    \2575 \a   sass/4-icons/rating.sass 32:9  root stylesheet";
+}

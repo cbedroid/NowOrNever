@@ -1,4 +1,23 @@
 {
+
+  "emmet.excludeLanguages": {
+    "django-html": "html",
+  },
   "python.pythonPath": "/usr/local/bin/python3.8",
-  "python.formatting.provider": "autopep8"
+  "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
+  "python.formatting.blackPath": "/usr/local/bin/black",
+  //"python.formatting.provider": "black",
+  "files.autoSave": "false",
+
+  "[python]":{
+    "formattting.provider": "autopep8",
+    "editor.formatOnSave": true,
+    "editor.tabCompletion": true,
+  },
+
+
+  "[django-html]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.html-language-features",
+  }
 }

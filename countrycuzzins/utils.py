@@ -14,14 +14,13 @@ def admin_js_slugUrl(instance, views_url=""):
     """
     Hacky way to Build SlugField using ip and/or port of website.
     using javascript instead of python to get url address
-  """
+    """
     url_path = "countrycuzzins"
     if views_url:
         # strip the default app name :NOTE not necessary
         # but to ensure that the start of the url is not duplicated
         # we TRY strip it and adding it by default.
-        url_path = os.path.join(
-            url_path, views_url.strip(url_path), instance.slug)
+        url_path = os.path.join(url_path, views_url.strip(url_path), instance.slug)
     else:
         url_path = os.path.join(url_path, instance.slug)
 
@@ -51,11 +50,10 @@ def admin_js_slugUrl(instance, views_url=""):
 def add_SlugField(instance, namesplits, add_jsurl=True):
     """
     Create custom url for SlugField from article name on initilization
-  """
+    """
     if not isinstance(namesplits, (list, tuple)):
         namesplits = namesplits.split(",")
-    instance.slug = re.sub(
-        r"[^\w\-]", "_", "_".join(list(map(str, namesplits))))
+    instance.slug = re.sub(r"[^\w\-]", "_", "_".join(list(map(str, namesplits))))
     print("\nSELF.SLUG", instance.slug)
     # instance.save()
 

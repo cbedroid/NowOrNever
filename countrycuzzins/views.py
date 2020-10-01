@@ -31,6 +31,7 @@ def index(request):
         "images": Image.objects.all(),
         "music_videos": Video.objects.filter(is_music=True),
         "social_media": SocialMedia,
+        "test_image": Image.objects.last(),
     }
     return render(request, "countrycuzzins/index.html", context)
 
@@ -39,3 +40,16 @@ def index(request):
 def music_videos(request):
     context = {"music_videos": list(Video.objects.all())}
     return render(request, "countrycuzzins/musicvideos.html", context)
+
+
+class VideoDetailView(DetailView):
+    model = Video
+    template_name = "countrycuzzins/test_video.html"
+    # context = {}
+    # def get(self, *args, **kwargs):
+    #     if video.exists:
+    #         video = video.first()
+    #         self.context["video"] = video
+    #         return self.context
+
+    # return render(request, "countrycuzzins/musicvideos.html", context)

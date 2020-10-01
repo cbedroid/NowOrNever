@@ -15,7 +15,7 @@
           <div class="video-item vframe">
             <div id="player"></div>
             <input id="init_vid" type="hidden" name="initial_video" value={{ ftvideo.url }}>
-            {# Youtube API Script #}
+            <!--Youtube API script-->
             {% include 'countrycuzzins/snippets/youtubeAPI.html' %}
             <div class="thumb-container">
               <div class="fa thumbnail-cover" id="featured_thumbcover">
@@ -23,6 +23,8 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="rating-container">
         </div>
         <div class="video-description m-subtitle vframe has-readmore" id="featured_long_decription" data-mobile="true">
           <p class="m-text readmore-text collapse" id="video-description-text" role="article" 

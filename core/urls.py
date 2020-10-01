@@ -3,7 +3,8 @@ from . import views
 
 urlpatterns = [
     re_path(r"contact_us/$(?i)", views.contactUs, name="contact_us"),
-    re_path(r"terms-policy/privacy_policy/$(?i)",
-            views.privacyPolicy, name="privacy_policy"),
-    re_path(f"video/(P?<video_id>[\d]+)/$", views.VideoRatingDetailView)
+    re_path(
+        r"terms-policy/privacy_policy/$(?i)", views.privacyPolicy, name="privacy_policy"
+    ),
+    #path("video/<video_id>/", views.VideoRatingDetailView.as_view(),name="core_video"),
 ]

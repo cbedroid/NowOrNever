@@ -69,8 +69,7 @@ def profile(request, *args, **kwargs):
                 messages.success(request, f"Your account has been updated!")
             if p_form.is_valid():
                 p_form.save()
-                messages.success(
-                    request, f"Your profile image has been updated!")
+                messages.success(request, f"Your profile image has been updated!")
             return redirect("account_profile")
 
     else:

@@ -43,10 +43,10 @@ if DEBUG:
         "10.0.0.54",
         "192.168.0.5",
         "0.0.0.0:80",
-        "countrycuzzins.herokuapp.com"
+        "countrycuzzins.herokuapp.com",
     ]
 else:
-    ALLOWED_HOSTS = ['countrycuzzins.herokuapp.com']
+    ALLOWED_HOSTS = ["countrycuzzins.herokuapp.com"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -78,7 +78,6 @@ ROOT_URLCONF = "NoworNever.urls"
 
 TEMPLATES = [
     {
-
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
@@ -107,18 +106,26 @@ WSGI_APPLICATION = "NoworNever.wsgi.application"
 # }
 
 
-#*************************#
-#****** DEV POSTGRES *****#
-#*************************#
+# *************************#
+# ****** DEV POSTGRES *****#
+# *************************#
+REMOTE = True
 if DEBUG:
-    db_host = os.environ.get("NON_DEV_PSQL_HOST", "127.0.0.1")
-    db_name = os.environ.get("NON_DEV_PSQL_NAME")
-    db_user = os.environ.get("NON_DEV_PSQL_USER")
-    db_pwd = os.environ.get("NON_DEV_PSQL_PASSWORD")
+    if REMOTE:
+        db_host = os.environ.get("NON_REMOTE_DEV_PSQL_HOST")
+        db_name = os.environ.get("NON_REMOTE_DEV_PSQL_NAME")
+        db_user = os.environ.get("NON_REMOTE_DEV_PSQL_USER")
+        db_pwd = os.environ.get("NON_REMOTE_DEV_PSQL_PASSWORD")
+    else:
+        db_host = os.environ.get("NON_DEV_PSQL_HOST", "127.0.0.1")
+        db_name = os.environ.get("NON_DEV_PSQL_NAME")
+        db_user = os.environ.get("NON_DEV_PSQL_USER")
+        db_pwd = os.environ.get("NON_DEV_PSQL_PASSWORD")
 
     if any(not x for x in [db_name, db_user, db_pwd]):
         raise TypeError(
-            f'DEV POSTGRES FAILED\nDatabase Name: {db_name}\nuser: {db_user}')
+            f"DEV POSTGRES FAILED\nDatabase Name: {db_name}\nuser: {db_user}"
+        )
 else:
     db_host = os.environ.get("NON_PRO_PSQL_HOST")
     db_name = os.environ.get("NON_PRO_PSQL_NAME")
@@ -128,12 +135,12 @@ else:
 
 DATABASES = {
     "default": {
-        "ENGINE":  'django.db.backends.postgresql',
-        "NAME":  db_name,
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": db_name,
         "USER": db_user,
         "PASSWORD": db_pwd,
         "HOST": db_host,
-        "PORT": "5432"
+        "PORT": "5432",
     }
 }
 
@@ -145,9 +152,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 

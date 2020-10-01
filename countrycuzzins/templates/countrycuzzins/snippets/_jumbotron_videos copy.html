@@ -7,7 +7,8 @@
     <h1 class="display-4">{{ video.title }}</h1>
     <p class=" lead m-description">{{ video.short_description }}</p>
     <div class="video-wrapper">
-      {% if video.is_youtube %}
+      
+      <!-- {% if video.is_youtube %}
       <iframe src="{{ video.url }}" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
@@ -17,7 +18,7 @@
         <source src="{{ video.url }}" type="video/ogg">
         Your browser does not support the video tag.
       </video>
-      {% endif %}
+      {% endif %} -->
       <hr class="my-4">
     </div>
     <div class="producer-content">

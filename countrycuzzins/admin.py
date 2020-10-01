@@ -24,8 +24,6 @@ class ThumbnailAdmin(DateCreateAdmin):
     form = VideoForm
 
     def image_tag(self, obj):
-        url = f"https://img.youtube.com/vi/{obj._vid_id}/hq{obj.thumbnail_choice}.jpg"
-        print("Creating thumbnail", url)
         return mark_safe(obj.thumbnail)
 
     image_tag.short_description = "thumbnail"

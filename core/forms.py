@@ -5,13 +5,25 @@ from .models import ContactUs
 
 class ContactUsForm(forms.ModelForm):
     firstname = forms.CharField(
-        required=True, max_length=60, widget=forms.TextInput(attrs={'class': 'cf-fname'}))
+        required=True,
+        max_length=60,
+        widget=forms.TextInput(attrs={"class": "cf-fname"}),
+    )
     lastname = forms.CharField(
-        required=True, max_length=60, widget=forms.TextInput(attrs={'class': 'cf-lname'}))
-    email = forms.EmailField(required=True, max_length=80,
-                             widget=forms.TextInput(attrs={'class': 'cf-email'}))
-    message = forms.CharField(required=True, max_length=500,
-                              widget=forms.Textarea(attrs={'class': 'cf-message'}))
+        required=True,
+        max_length=60,
+        widget=forms.TextInput(attrs={"class": "cf-lname"}),
+    )
+    email = forms.EmailField(
+        required=True,
+        max_length=80,
+        widget=forms.TextInput(attrs={"class": "cf-email"}),
+    )
+    message = forms.CharField(
+        required=True,
+        max_length=500,
+        widget=forms.Textarea(attrs={"class": "cf-message"}),
+    )
     ip_address = forms.CharField(required=False, widget=forms.HiddenInput())
 
     class Meta:
@@ -31,8 +43,8 @@ class ContactUsForm(forms.ModelForm):
         contact.firstname = self.cleaned_data["firstname"]
         contact.lastname = self.cleaned_data["lastname"]
         contact.email = self.cleaned_data["email"]
-        contact.ip_address = self.cleaned_data['ip_address']
-        print('\nFrom Forms IP_ADDRESS:', contact.ip_address)
+        contact.ip_address = self.cleaned_data["ip_address"]
+        print("\nFrom Forms IP_ADDRESS:", contact.ip_address)
         if commit:
             contact.save()
         return contact

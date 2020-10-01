@@ -11,13 +11,10 @@ urlpatterns = [
     path("signup/", views.accountSignup, name="account_signup"),
     path(
         "logout/",
-        auth_views.LogoutView.as_view(
-            template_name="users/account/logout.html"),
+        auth_views.LogoutView.as_view(template_name="users/account/logout.html"),
         name="account_logout",
     ),
-    re_path(
-        r"^profile/(?P<username>\w+)/$", views.profile, name="account_profile"
-    ),
+    re_path(r"^profile/(?P<username>\w+)/$", views.profile, name="account_profile"),
     path(
         "user/password-reset/",
         auth_views.PasswordResetView.as_view(

@@ -4,6 +4,7 @@
 {% load widget_tweaks %}
 {% block body %}
 <section id="music_video_view">
+
   <div class="row no-gutters">
     <div class="col-12">
       <div class="featured" id="ft_video">
@@ -17,61 +18,9 @@
           <div class="video-item vframe">
             <div id="player"></div>
             <input id="init_vid" type="hidden" name="initial_video" value={{ ftvideo.url }}>
-            {% verbatim %}
-           <script>
-
-              function getVidId(vid){
-                    return vid.match(/.*\/(.*)/i)[1];
-              }
-
-              var tag = document.createElement('script');
-              tag.src = "https://www.youtube.com/iframe_api";
-              var firstScriptTag = document.getElementsByTagName('script')[0];
-              firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-              var player;
-              var muted = true;
-              function onYouTubeIframeAPIReady() {
-                const host  = window.location.hostname;
-                const port = window.location.port;
-                const initial_video = $('#init_vid')[0].value;
-                player = new YT.Player('player', {
-                  videoId: getLink(getVidId(initial_video)),
-                  playerVars: {'origin':`${host}:${port}`},
-                  events: {
-                    'onReady': onPlayerReady,
-                  }
-                });
-              }
-              function onPlayerReady(event) {
-               $(".featured .thumb-container").hide() // remove featured vdeo thumbnail
-                muted ===true ? player.mute() : player.unMute()
-                event.target.playVideo();
-              }
-
-              function stopVideo() {
-                player.stopVideo();
-              }
-
-              function getLink(link){
-              $(".vc-vid").on("click", function(e){
-                e.preventDefault();
-                try{
-                  let src = $(this).find('iframe').first().attr('src');
-                  if ( src ) {
-                    // unmute the layer
-                    player.unMute();
-                    src = getVidId(src);
-                    player.loadVideoById(src);
-                  }
-                } catch(e){
-                  console.log("Youtube API Error: ",e.message);
-                }
-              });
-                return link;
-              }
-            </script>
-            {% endverbatim %}
+            <!--Youtube Script-->
+            {% include 'countrycuzzins/snippets/youtubeAPI.html' %}
+            <!--Youtube Script End-->
             <div class="thumb-container">
               <div class="fa thumbnail-cover" id="featured_thumbcover">
                 {{ ftvideo.thumbnail|safe }}

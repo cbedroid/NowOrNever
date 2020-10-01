@@ -12,14 +12,14 @@ MEDIA_ROOT = "static" + settings.MEDIA_ROOT
 
 
 def user_namespace_path(instance, *args, **kwargs):
-    """ Renaming Profile's ImageField path to current username
+    """Renaming Profile's ImageField path to current username
 
-  Args:
-      instance (models.Model): models.Model instance
+    Args:
+        instance (models.Model): models.Model instance
 
-  Returns:
-      str: abspath file path
-  """
+    Returns:
+        str: abspath file path
+    """
     # Force all images to be PNG file #
     instance_hash = hash(instance.__class__)
 
@@ -27,9 +27,9 @@ def user_namespace_path(instance, *args, **kwargs):
     user = kwargs.get("name", None)
 
     Image_hash = hash(Profile)
-    attr, path, ext = {Image_hash: ["image.url", "images/profile/", ".png"], }.get(
-        instance_hash
-    )
+    attr, path, ext = {
+        Image_hash: ["image.url", "images/profile/", ".png"],
+    }.get(instance_hash)
 
     attr_name = "".join((instance.user.username, ext))
     print("ATTR_USER", attr_name)
@@ -74,8 +74,7 @@ class Profile(models.Model):
 
 
 class NewsLetter(models.Model):
-    email = models.EmailField(
-        max_length=100, unique=True, blank=False, null=True)
+    email = models.EmailField(max_length=100, unique=True, blank=False, null=True)
     # user_account = models.ForeignKey(
     #     User, related_name="user_newletter", null=True, blank=True, on_delete=models.CASCADE)
     has_account = models.BooleanField(default=False, blank=True, null=True)
@@ -83,18 +82,20 @@ class NewsLetter(models.Model):
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
-        return (f"{ self.email}  | account {self.check_for_account}",
-                f"| subscribed {created}"
-                )
+        return (
+            f"{ self.email}  | account {self.check_for_account}",
+            f"| subscribed {created}",
+        )
 
     @property
     def check_for_account(self):
         has_account = False
         try:
             has_account = User.objects.filter(
-                email__iregex=rf"(www.|http://|https://)?{self.email}")
+                email__iregex=rf"(www.|http://|https://)?{self.email}"
+            )
         except Exception as e:
-            print(f'\nError while checkig newletter account\n{e}')
+            print(f"\nError while checkig newletter account\n{e}")
 
         true_false = {True: "yes", False: "no"}[self.check_fo_account]
         return true_false[has_account]
@@ -104,9 +105,9 @@ class NewsLetter(models.Model):
 @receiver(models.signals.post_delete, sender=Profile)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     """
-  Deletes file from filesystem
-  when corresponding `MediaFile` object is deleted.
-  """
+    Deletes file from filesystem
+    when corresponding `MediaFile` object is deleted.
+    """
     try:
         if instance.image:
             if os.path.isfile(instance.image.path):
