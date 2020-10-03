@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from .models import Image, Article, Video, SocialMedia, Event
 from .music_models import Album, Song
 
@@ -29,7 +29,7 @@ def index(request):
     context = {
         "album": get_object_or_404(Album, name="TESTALBUM"),
         "images": Image.objects.all(),
-        "music_videos": Video.objects.filter(is_music=True),
+        "music_videos": Video.objects.all(),
         "social_media": SocialMedia,
         "test_image": Image.objects.last(),
     }
@@ -45,11 +45,9 @@ def music_videos(request):
 class VideoDetailView(DetailView):
     model = Video
     template_name = "countrycuzzins/test_video.html"
-    # context = {}
-    # def get(self, *args, **kwargs):
-    #     if video.exists:
-    #         video = video.first()
-    #         self.context["video"] = video
-    #         return self.context
 
-    # return render(request, "countrycuzzins/musicvideos.html", context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # add all other videos ( non featured videos)
+        context['videos'] = Video.objects.all()
+        return context

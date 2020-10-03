@@ -25,7 +25,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'f@b8j0!fe#pwqq_+ma($x^30l5#5wr(r&6p+_y2tg_mbpmxn57'
 SECRET_KEY = os.environ.get("NON_SECRET_KEY")
 if not SECRET_KEY:
     raise TypeError("Invalid or Missing Secret Key")
@@ -96,14 +95,14 @@ WSGI_APPLICATION = "NoworNever.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+# https: // docs.djangoproject.com/en/3.0/ref/settings/  # databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    }
+}
 
 
 # *************************#
@@ -132,17 +131,16 @@ else:
     db_user = os.environ.get("NON_PRO_PSQL_USER")
     db_pwd = os.environ.get("NON_PRO_PSQL_PASSWORD")
 
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": db_name,
-        "USER": db_user,
-        "PASSWORD": db_pwd,
-        "HOST": db_host,
-        "PORT": "5432",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": db_name,
+#         "USER": db_user,
+#         "PASSWORD": db_pwd,
+#         "HOST": db_host,
+#         "PORT": "5432",
+#     }
+# }
 
 
 # Password validation

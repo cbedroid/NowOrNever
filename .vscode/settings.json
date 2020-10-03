@@ -1,8 +1,8 @@
 {
-
-  "emmet.excludeLanguages": {
-    "django-html": "html",
+  "emmet.includeLanguages":{
+    "django-html":"html",
   },
+  
   "python.pythonPath": "/usr/local/bin/python3.8",
   "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
   "python.formatting.blackPath": "/usr/local/bin/black",
