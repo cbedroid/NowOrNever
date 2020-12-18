@@ -1,16 +1,24 @@
 {% load static %}
 {% load widget_tweaks %}
 {% load countrycuzzins_extras %}
-<section class="social-media-widget mobile-hidden">
-<aside class="m-widget">
-  <div class="m-banner m-banner--bg-img"
-    style=" background-image: url('{% static 'media/images/decorative/social-mobile2.png' %}')">
-    <div class="m-banner--header">
-      <h1 class="m-title m-title--bg">Follow Us</h1>
-      <p class="m-subtitle">Connect with us on social media </p>
-    </div>
-    <div class="m-banner--content">
-      <ul class="m-social m-social--icon-list m-flex m-flex--inline m-flex--sb">
+<style>
+  .m-social li{
+    width: 60px;
+    margin: 0 10px;
+  }
+  .m-social li i{
+    font-size: 3rem !important;
+  }
+</style>
+
+<aside class="m-widget social-media-widget mobile-hidden m-banner bg-img d-none d-lg-block" style="height:500px;background-image: url('{% static 'media/images/decorative/social-mobile2.png' %}')">
+  <div class="row">
+    <div class="col-12">
+      <div class="header text-light mb-5" style="text-shadow: 2px 2px 5px rgba(0,0,0,.7);">
+        <h1 class="m-title m-title--bg">Follow Us</h1>
+        <p class="m-subtitle text-center text-light">Connect with us on social media </p>
+      </div>
+      <ul class="m-social text-center mt-4">
         <li class="m-social m-social--item">
           <a href="{{ 'facebook'|social_get:'link' }}">
             <i class="fa fa-facebook m-social m-social--{{ facebook|social_get:'name'}}" aria-hidden="true"></i></a>
@@ -39,4 +47,3 @@
     </div>
   </div>
 </aside>
-</section>

@@ -2,13 +2,18 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block body %}
-{% include  'users/snippets/messages.html' %}
+{% include 'users/snippets/alert_message.html' %}
 
+
+<style>
+  #div_id_image label{ /*django built in form label class */
+    visibility: hidden !important;
+  }
+</style>
 <section id="profile_section">
-  <div class="row">
-    <div class="col-12">
-
-      <div class="profile-main-container">
+  <section id="profile-top">
+    <div class="row">
+      <div class="col-12">
         <!--Profile Top-->
         <div class="pf-wrapper pf-wrapper--top">
           <!--Banner-->
@@ -21,29 +26,36 @@
                 <h3 class="m-title m-title--bg username">{{user.username}}</h3>
               </div>
             </div>{# banner #}
-            <div class="m-banner--content">
-              <legend class="border-bottom mb-4">
-                <h2 class="m-title m-title--bg">Profile Info</h2>
-              </legend>
-              <div class="form-toggle desktop-hidden">
-                <button role="button" data-toggle="#profile_account_form" class="fa fa-user-circle  pf-toggler"
-                  aria-hidden="true">
-                  <span>Update Account</span>
-                </button>
-                <button role="button" data-toggle="#profile_image_form" class="fa fa-picture-o pf-toggler"
-                  aria-hidden="true">
-                  <span>Update Image</span>
-                </button>
-              </div>
+            <legend class="border-bottom mb-4">
+              <h2 class="m-title m-title--bg">Profile Info</h2>
+            </legend>
+            <div class="form-toggle desktop-hidden mb-2">
+              <!--update profile-->
+              <button class="btn btn-primary pf-toggler" data-toggle="#profile_account_form" aria-hidden="true">
+                <i class="fa fa-user-circle bg-transparent"> </i>
+                <span>Update Account</span>
+              </button>
+
+              <!--update image-->
+              <button class="btn btn-success pf-toggler" data-toggle="#profile_image_form" aria-hidden="true">
+                <i class="fa fa-picture-o pf-toggler bg-transparent"> </i>
+                <span>Update Image</span>
+              </button>
             </div>
           </div> {# banner #}
         </div>{# profile--top #}
+      </div>
+    </div>
+  </section>
 
-        <!--Profile Bottom-->
-        <div class="pf-wrapper pf-wrapper--bottom">
-          <div class="pf-form-container">
-            <!--form info update-->
-            <div class="m-form--info-update form-wrapper" id="profile_account_form">
+
+  <section id="profile-update">
+    <!--Profile Bottom-->
+    <div class="wrapper px-3 my-2">
+      <div class="row">
+        <div class="col-sm-6 mb-4">
+          <div class="card shadow h-100" id="profile_account_form">
+            <div class="card-body">
               <form method="POST">
                 {% csrf_token %}
                 <fieldset class="form-group">
@@ -55,14 +67,17 @@
                     {{ u_form|crispy }}
                   </div>
                 </fieldset>
+                <hr>
                 <div class="form-group">
-                  <button class="btn btn-outline-info" type="submit">Update</button>
+                  <button class="btn btn-outline-info btn-block" type="submit">Update</button>
                 </div>
               </form>
             </div>
-
-            <!--form image update-->
-            <div class="m-form--image-update form-wrapper mobile-hidden" id="profile_image_form">
+          </div>
+        </div>
+        <div class="col-sm-6 mb-4">
+          <div class="card shadow h-100" id="profile_image_form">
+            <div class="card-body">
               <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <fieldset class="form-group">
@@ -72,13 +87,13 @@
                   <hr>
                   <div class="user-tray--inner-grid">
                     <h2 class="m-subtitle">
-                      <span class="bold">Username:</span>
-                      {{ user.username }}
+                      <span class="text-dark"><b>Username:</b></span>
+                      <span class="font-weight-bold">{{ user.username }}</span>
                     </h2>
                     <hr>
                     <h2 class="m-subtitle">
-                      <span class="bold">Email:</span>
-                      {{ user.email }}
+                      <span class="text-dark"><b>Email:</b></span>
+                      <spaan class="font-weight-bold">{{ user.email }}</spaan>
                     </h2>
                   </div>
                   <hr>
@@ -87,16 +102,18 @@
                     {{ p_form| crispy }}
                   </div>
                 </fieldset>
+                <hr>
                 <div class="form-group">
-                  <button class="btn btn-outline-info" type="submit">Update</button>
+                  <button class="btn btn-outline-info btn-block" type="submit">Update</button>
                 </div>
               </form>
-            </div>{# form image #}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
 </section>
 
 

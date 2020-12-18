@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load widget_tweaks %}
 <section id="login_section">
-  {% include  'users/snippets/messages.html' %}
+  {% include 'users/snippets/alert_message.html' %}
   <hr>
   <div class="container">
     <div class="row justify-items-center">
@@ -34,7 +34,7 @@
             </div>
             {% else %}
             <button class="btn btn-outline-primary" type="submit">Login</button>
-            <small class="text-primary ml-2 ">
+            <small class="text-primary ml-2">
               <a href="{% url 'password_reset' %}">Forgot Password?</a>
             </small>
             <div class="border-top pt-3">
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="col-12 col-md-3 col-lg-6">
-        {% include  'countrycuzzins/snippets/aside/social_media_banner.html' %}
+        {% include 'countrycuzzins/snippets/aside/followus_aside.html' %}
       </div>
     </div>
   </div>
