@@ -2,19 +2,19 @@
 {% load countrycuzzins_extras %}
 <section id="main_musicplayer" data-mobile="true" class="desktop">
   <!--MUSIC PLAYER TOP-->
-  <div class="cover-image" style="background-image: url('{{ album.image.image.url }}')"></div>
-  <div class="mp-top flex ">
+  <div class="cover-image" style="background-image: url('{{ album.cover.image.url }}')"></div>
+  <div class="mp-top flex">
     <!-- musicplayer controls -->
     <div class="mp-controls-container pos--abs" id="mp_controls">
       <!--control top-->
       <div class="control--top">
         <div class="title-wrapper flex">
           <h3 class="mp-title--top" title="{{ album.name }}">
-          {{ album.name }}</h3>
+            {{ album.name }}</h3>
           <span class="hover-tip">{{album.name}}</span>
           <h5 id="current_track" class="mp-subtitle"></h5>
         </div>
-          {# Track durations and position #}
+        {# Track durations and position #}
         <div class="track-info flex flex--inline flex--sa">
           <h6 id="track_position"></h6>
           <h6 id="track_duration"></h6>
@@ -39,7 +39,7 @@
 
       <!--control bottom-->
       <div class="controls--bottom">
-        <div class="controls controls-bottom  flex flex--inline flex--sa" id="main-controls">
+        <div class="controls controls-bottom flex flex--inline flex--sa" id="main-controls">
           <input type="hidden" name="current_track_index" id="ctr_next_track" data-next_track="0">
           <i id="mp_rewind" class="fa fa-backward" aria-hidden="true"></i>
           <i id="mp_play" class="fa fa-play" aria-hidden="true"></i>
@@ -58,12 +58,12 @@
       <div class="track-item" data-tracknumber={{forloop.counter}}>
         <small class="mp_track-index">track {{forloop.counter}}</small>
         <li class="track-item-inner list-item flex flex--inline flex--sb">
-          <input type="hidden" name="songs_url" class="song_urls" value="{{ song.file.url }}">
+          <input type="hidden" name="songs_url" class="song_urls" value="{{ song.audio.url }}">
           <h4 class="song-title"> {{ song|re_sub:"_" }}</h4>
           <i class="mp-equalizer material-icons">equalizer</i>
           {# REMOVE THIS #}
           {% comment %} <audio class="mp_audio">
-            <source src="{{ song.file.url|space_escape}}" type="audio/mpeg">
+            <source src="{{ song.audio.url|space_escape}}" type="audio/mpeg">
           </audio> {% endcomment %}
         </li>
       </div>

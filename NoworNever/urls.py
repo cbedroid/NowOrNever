@@ -7,8 +7,6 @@ from django.conf import settings
 
 urlpatterns = [
     path("nowornever/", include("core.urls")),
-    path("NoworNever/", include("core.urls")),
-    path("core/", include("core.urls")),
     path("", include("countrycuzzins.urls")),
     path("countrycuzzins/", include("countrycuzzins.urls")),
     path("account/", include("users.urls")),
@@ -16,10 +14,13 @@ urlpatterns = [
 
 # Production and Development Admin
 if settings.DEBUG == True:
-    urlpatterns.append(path("admin/", admin.site.urls))
+    urlpatterns.append(path("admin/", admin.site.urls ))
 else:
     urlpatterns.append(path("Non/Spud/admin/", admin.site.urls))
 
-
 handler404 = "users.views.error_404"
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+media_url = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+static_url = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += media_url
+urlpatterns += static_url

@@ -32,18 +32,10 @@ if not SECRET_KEY:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("NON_DEBUG") == "True"
-
+print('Debug:' ,DEBUG)
 if DEBUG:
     # for local testing: allowed hosts
-    ALLOWED_HOSTS = [
-        "127.0.0.1",
-        "192.168.0.3",
-        "192.168.0.2",
-        "10.0.0.54",
-        "192.168.0.5",
-        "0.0.0.0:80",
-        "countrycuzzins.herokuapp.com",
-    ]
+    ALLOWED_HOSTS = ["*","https://facebook.com","https://twitter.com"]
 else:
     ALLOWED_HOSTS = ["countrycuzzins.herokuapp.com"]
 
@@ -61,7 +53,6 @@ INSTALLED_APPS = [
     "crispy_forms",
     "widget_tweaks",
 ]
-
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -104,44 +95,42 @@ DATABASES = {
     }
 }
 
-
 # *************************#
 # ****** DEV POSTGRES *****#
 # *************************#
-REMOTE = True
-if DEBUG:
-    if REMOTE:
-        db_host = os.environ.get("NON_REMOTE_DEV_PSQL_HOST")
-        db_name = os.environ.get("NON_REMOTE_DEV_PSQL_NAME")
-        db_user = os.environ.get("NON_REMOTE_DEV_PSQL_USER")
-        db_pwd = os.environ.get("NON_REMOTE_DEV_PSQL_PASSWORD")
-    else:
-        db_host = os.environ.get("NON_DEV_PSQL_HOST", "127.0.0.1")
-        db_name = os.environ.get("NON_DEV_PSQL_NAME")
-        db_user = os.environ.get("NON_DEV_PSQL_USER")
-        db_pwd = os.environ.get("NON_DEV_PSQL_PASSWORD")
 
-    if any(not x for x in [db_name, db_user, db_pwd]):
-        raise TypeError(
-            f"DEV POSTGRES FAILED\nDatabase Name: {db_name}\nuser: {db_user}"
-        )
-else:
-    db_host = os.environ.get("NON_PRO_PSQL_HOST")
-    db_name = os.environ.get("NON_PRO_PSQL_NAME")
-    db_user = os.environ.get("NON_PRO_PSQL_USER")
-    db_pwd = os.environ.get("NON_PRO_PSQL_PASSWORD")
+REMOTE =  False or not DEBUG  # whether the database is local or cloud base
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": db_name,
-#         "USER": db_user,
-#         "PASSWORD": db_pwd,
-#         "HOST": db_host,
-#         "PORT": "5432",
-#     }
-# }
+if  REMOTE or not DEBUG:
+    # Default to remote Elephant database during Development
+    db_host = os.environ.get("NON_REMOTE_DEV_PSQL_HOST")
+    db_name = os.environ.get("NON_REMOTE_DEV_PSQL_NAME")
+    db_user = os.environ.get("NON_REMOTE_DEV_PSQL_USER")
+    db_pwd = os.environ.get("NON_REMOTE_DEV_PSQL_PASSWORD")
 
+    # Changes to Heroku database during production
+    if not DEBUG:
+        db_host = os.environ.get("NON_PRO_PSQL_HOST")
+        db_name = os.environ.get("NON_PRO_PSQL_NAME")
+        db_user = os.environ.get("NON_PRO_PSQL_USER")
+        db_pwd = os.environ.get("NON_PRO_PSQL_PASSWORD")
+
+
+
+    if any(x is None for x in [db_name, db_user, db_pwd]):
+            raise TypeError(
+                f"POSTGRES DATABASE FAILED\nDatabase Name: {db_name}\nuser: {db_user}"
+            )
+    DATABASES = { # Setup postgress database for production or remote development 
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": db_name,
+            "USER": db_user,
+            "PASSWORD": db_pwd,
+            "HOST": db_host,
+            "PORT": "5432",
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -175,28 +164,28 @@ USE_L10N = True
 
 USE_TZ = True
 
-TIME_INPUT_FORMATS = [
-    "%I:%M:%S %p",  # 6:22:44 PM
-    "%I:%M %p",  # 6:22 PM
-    "%I %p",  # 6 PM
-    "%H:%M:%S",  # '14:30:59'
-    "%H:%M:%S.%f",  # '14:30:59.000200'
-    "%H:%M",  # '14:30'
-]
+# TIME_INPUT_FORMATS = [
+#     "%I:%M:%S %p",  # 6:22:44 PM
+#     "%I:%M %p",  # 6:22 PM
+#     "%I %p",  # 6 PM
+#     "%H:%M:%S",  # '14:30:59'
+#     "%H:%M:%S.%f",  # '14:30:59.000200'
+#     "%H:%M",  # '14:30'
+# ]
 
 
 # Static
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+else:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "static/media")
-IMAGE_ROOT = os.path.join(MEDIA_ROOT, "images/")
-AUDIO_ROOT = os.path.join(MEDIA_ROOT, "audio/")
-VIDEO_ROOT = os.path.join(MEDIA_ROOT, "videos/")
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/media/")
+
 
 LOGIN_URL = "/account/login/"
 

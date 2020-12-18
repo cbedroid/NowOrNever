@@ -206,5 +206,6 @@ $(document).ready(() => {
     $(".readmore-text").removeClass("collapse").addClass("expanded");
     $(".readmore-text").attr("aria-expanded", true);
   }
+
   showComingSoon();
 });

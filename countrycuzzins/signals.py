@@ -1,3 +1,5 @@
+#NOTE: Dec 2020 REFACTOR THIS WHOLE FILE !!!!!! 
+
 import os
 import re
 import traceback
@@ -5,10 +7,10 @@ from django.utils.html import format_html
 from django.dispatch import receiver
 from django.conf import settings
 from .models import Video, Image
-from .music_models import Song
+from .music_models import Song,Artist
 from django.db.models.signals import (
     pre_init, post_init, pre_save,
-    post_save, post_delete,
+    post_save, post_delete,post_migrate
 )
 
 
@@ -53,7 +55,7 @@ def nameSpaceImage(sender, instance=None, **kwargs):
     Image_hash = hash(Image)
     attr, path, ext = ["image.url", "images/", ".png"]
     attr_name = "".join((path, instance.name, ext))
-    setattr(instance, "image", attr_name)
+    setattr(instance, "image", attr_name.lower())
     instance.save()
     pre_save.connect(nameSpaceImage, sender=sender)
 
@@ -190,3 +192,18 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
         if instance.file:
             if os.path.isfile(instance.file.path):
                 os.remove(instance.file.path)
+
+
+
+#NOTE DEC 2020 DONT TOUCH --New Signal Dec 2020 
+
+# @receiver(post_save, sender=Song)
+# def songAddMainArtist(sender,instance,created=False,**kwargs):
+#     print('\nSender',sender)
+#     print('Instance',instance)
+#     if not created:
+#         if not instance.artist.exists():
+#             instance.artist.add(*main_artists)
+#             instance.save()
+#             print("Song Updated: ",instance.artist.all())
+    

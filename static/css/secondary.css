@@ -1,0 +1,185 @@
+/** CSS improved addon Dec 1010  **/
+
+.ff-osw {
+    font-family: 'Oswald', sans-serif;
+}
+
+.bg-img {
+    background-attachment: absolute;
+    -moz-background-position: 100% 20%;
+    -webkit-background-position: 100% 20%;
+    -ms-background-position: 100% 20%;
+    -o-background-position: 100% 20%;
+    background-position: 100% 20%;
+    -moz-background-repeat: no-repeat;
+    -webkit-background-repeat: no-repeat;
+    -ms-background-repeat: no-repeat;
+    -o-background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.artwork-content {
+    display: block;
+    height: 100%;
+}
+
+.overlay-1::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.overlay-2 {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent !important;
+    z-index: 100;
+}
+
+.greyscaled::before {
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+
+#album_detail {
+    position: relative;
+}
+
+#album_action .col-4 {
+    padding: 5px;
+    margin: 0 -3px;
+    background: rgba(0, 0, 0, 0.3) !important;
+    cursor: pointer;
+}
+
+#album_action .col-4:hover {
+    background: rgba(0, 0, 0, 0.1) !important;
+}
+
+#album_action span {
+    vertical-align: center;
+}
+
+#album_action i {
+    font-size: .85rem;
+    max-width: 35px;
+}
+
+.artwork-minicover {
+    position: absolute;
+    text-align: center;
+    top: 25%;
+    left: 0;
+}
+
+#album_share.sharelink {
+    display: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#album_share.active {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 500;
+}
+
+#album_share.sharelink li.sharelink__item {
+    border: none !important;
+    background: transparent !important;
+    font-size: 1.5rem;
+    color: #fff !important;
+}
+
+.sharelink .sharelink__img {
+    display: block;
+    max-width: 120px;
+    max-height: 120px;
+    height: 100%;
+    width: auto;
+    margin-bottom: 12px;
+    border-radius: 7px;
+    box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+#tracklist .track {
+    transition: 0.4s ease-in-out;
+}
+
+#tracklist .track.active {
+    background: #0ec7ff;
+    color: #fff;
+}
+
+/* Phones */
+@media screen and (max-device-width: 475px) {
+    .artwork-container .jumbotron {
+        min-height: 300px !important;
+    }
+
+    #album_action {
+        position: relative;
+        display: block;
+        font-size: 10px;
+    }
+
+    .artwork-minicover {
+        position: absolute;
+        text-align: center;
+        top: 25% !important;
+        left: 0;
+    }
+
+    .artwork-minicover img {
+        max-width: calc(100% / 1.2);
+        max-height: 175px !important;
+    }
+
+    #album_action i {
+        font-size: .65rem;
+        max-width: 30px;
+    }
+
+    .artwork-minicover {
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        left: 0;
+    }
+
+    .bg-img {
+        background-attachment: absolute;
+        -moz-background-position: 50% 50%;
+        -webkit-background-position: 50% 50%;
+        -ms-background-position: 50% 50%;
+        -o-background-position: 50% 50%;
+        background-position: 50% 50%;
+        -moz-background-repeat: no-repeat;
+        -webkit-background-repeat: no-repeat;
+        -ms-background-repeat: no-repeat;
+        -o-background-repeat: no-repeat;
+        background-repeat: no-repeat;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+}

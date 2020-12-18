@@ -1,61 +1,68 @@
 {% load static %}
+
 <section id="header_container">
-  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" id="main_header_nav">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light shadow-sm pt-2" id="main_header_nav">
     <button class="navbar-toggler" id="nav_mobile_toggler" type="button" data-toggle="collapse"
       data-target="#main_navbar" aria-controls="main_navbar" aria-expanded="true" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="main_navbar">
-      <a class="navbar-brand" href="{% url 'home' %}">
+      <a class="navbar-brand" href="{% url 'country_cuzzins:home' %}">
         <img class="m-img m-img--logo" id="main_nav_logo" src="{% static 'media/images/decorative/1-CC-logo.png' %}"
           alt="Now or Never Logo" />
       </a>
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0" id="main_nav_list">
+      <!--Nav Links-->
+      <ul class="navbar-nav d-flex align-items-md-center pl-2 pl-md-0 mr-auto" id="main_nav_list">
 
         <li class="nav-item m-nav-item active">
-          <a class="nav-link m-nav-link" href="{% url 'home'%}">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link m-nav-link" href="{% url 'country_cuzzins:home'%}">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item m-nav-item">
-          <a class="nav-link m-nav-link" href="{% url 'events' %}">Events</a>
+          <a class="nav-link m-nav-link" href="{% url 'country_cuzzins:events' %}">Events</a>
         </li>
         <li class="nav-item m-nav-item">
-          <a class="nav-link m-nav-link" href="{% url 'musicvideos' %}">Music</a>
+          <a class="nav-link m-nav-link" href="{% url 'country_cuzzins:musicvideos' %}">Music</a>
         </li>
 
         <li class="nav-item m-nav-item">
-          <a class="nav-link m-nav-link" href="{% url 'contact_us' %}">Contact</a>
+          <a class="nav-link m-nav-link" href="{% url 'core:contact_us' %}">Contact</a>
         </li>
-      </ul>
-      <div class="navbar-text m-nav-text--override">
-        <div class="m-nav-profile-tray" id="index_profile_tray">
-          {% if request.user.is_authenticated %}
-          <div class="user-tray" id="nav_user_tray">
-            <a href="{% url 'account_profile' request.user.username %}" class="m-user m-user--link profile">
-              <span>
-                <img class="m-img m-img--profile bdr-3-error" src="{{ request.user.profile.getImage }}"
-                  alt="profile image" />
-              </span>
-            <span class="title-header">
-              <p class="link-title mobile-hidden">view profile</p>
-              <h4 class="profile-title">{{ request.user }}</h4>
-            </span>
+        {% if request.user.is_staff %}
+        <li class="nav-item m-nav-item">
+          <a href="admin/" class="nav-link m-nav-link text-warning">Admin</a>
+        </li>
+        {% endif %}
+        <div class="navbar-text m-nav-text--override">
+          <div class="m-nav-profile-tray" id="index_profile_tray">
+
+            {% if request.user.is_authenticated %}
+            <div class="user-tray" id="nav_user_tray">
+              <a href="{% url 'account_profile' request.user.username %}" class="m-user m-user--link profile">
+                <span>
+                  <img class="m-img m-img--profile bdr-3-error" src="{{ request.user.profile.getImage }}"
+                    alt="profile image" />
+                </span>
+                <span class="title-header">
+                  <p class="link-title mobile-hidden">view profile</p>
+                  <h4 class="profile-title">{{ request.user }}</h4>
+                </span>
+              </a>
+            </div>
+            <div class="m-settings">
+              <a href="{% url 'account_logout' %}" class="nav-link m-nav-link">
+                <button class="m-user m-user--link">logout</button>
+              </a>
+            </div>
+            {% else %}
+            <a href="{% url 'account_login' %}" class="nav-link m-nav-link">
+              <button class="m-user m-user--link">Login</button>
             </a>
-          </div>
-          <div class="m-settings">
-            <a href="{% url 'account_logout' %}" class="nav-link m-nav-link">
-              <button class="m-user m-user--link">logout</button>
+            <a href="{% url 'account_signup' %}" class="nav-link m-nav-link">
+              <button class="m-user m-user--link">Signup</button>
             </a>
+            {% endif %}
           </div>
-          {% else %}
-          <a href="{% url 'account_login' %}" class="nav-link m-nav-link">
-            <button class="m-user m-user--link">Login</button>
-          </a>
-          <a href="{% url 'account_signup' %}" class="nav-link m-nav-link">
-            <button class="m-user m-user--link">Signup</button>
-          </a>
-          {% endif %}
         </div>
       </div>
-    </div>
-  </nav>
-</section>
+    </nav>
+  </section>

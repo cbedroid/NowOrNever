@@ -17,6 +17,12 @@ from core.utils.utils_models import (
     generateSlug,
     urlParseSlugField,
 )
+# new features 
+from django.urls import reverse,reverse_lazy
+from django.utils.text import slugify
+from django.dispatch  import Signal
+
+
 
 
 MEDIA_ROOT = "static" + settings.MEDIA_ROOT
@@ -43,129 +49,115 @@ def makeSongName(instance, *args, **kwargs):
 
 class Artist(models.Model):
     name = models.CharField(max_length=80, blank=True, unique=True)
-    profile_image = models.OneToOneField(
-        Image, default="images/default_artist.png", on_delete=models.SET_DEFAULT
-    )
-    article = models.ManyToManyField(Article, verbose_name="article(s)")
+    image = models.ForeignKey(Image, default=1, on_delete=models.SET_DEFAULT)
+    bio = models.TextField(max_length=500,default="Country Cuzzins Artist")
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-
+    
     def __str__(self):
         return self.name
 
-
 class Song(models.Model):
-    # id = models.AutoField(primary_key=True, null=False, blank=True)
-    artist = models.CharField(
-        "artist(s)",
-        default="Country Cuzzins",
-        help_text='<p style="color:#000; font-weight:700;"> Main Artist(s) Only</p>',
-        blank=True,
-        null=True,
-        max_length=120,
-    )
-
-    feature = models.CharField(
-        "feature artists(s)",
-        max_length=120,
-        blank=True,
-        null=True,
-        help_text='<p style="color:#000; font-weight:700;"> Feature Artist(s) Only </p><span>(optional)</span>',
-    )
+    _song_signal = Signal()
+    artist = models.ManyToManyField(Artist,related_name="main_artist",blank=True,null=True)
+    feature_artist = models.ManyToManyField(
+        Artist,
+        verbose_name = "feature artists(s)",
+        related_name="featured_artist",
+            blank=True,
+            null=True,
+            help_text='<p style="color:#000; font-weight:700;"> Feature Artist(s) Only </p><span>(optional)</span>',
+        )
     name = models.CharField(
-        verbose_name="title", max_length=120, blank=False, null=True, unique=True
+        verbose_name="title",
+         max_length=120,
+          blank=False,
+         null=True, 
+         unique=True
     )
-    slug = models.SlugField(
-        max_length=80,
-        unique=True,
-        blank=False,
-        null=False,
-        help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
-        validators=[MinLengthValidator(4)],
-    )
-    file = models.FileField(
+    
+    audio = models.FileField(
         max_length=120,
-        verbose_name="song file",
         upload_to=makeSongName,
         storage=OverwriteStorage(),
     )
+
+    slug = models.SlugField(
+        max_length=150,
+        default="",
+        editable=False,
+        validators=[MinLengthValidator(4)],
+    )
+    
+    played_count = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
-    def __str__(self):
-        if self.feature:
-            self.feature = f" ft {self.feature.title()} "
-        return f'{self.artist}{self.feature or "" } - {self.name}'
+    def save(self,*args,**kwargs): 
+        slug_name = self.name
+        self.slug = slugify(slug_name)
+        super().save(*args, **kwargs)
 
-    def save(self, *args, **kwargs):
-        self.name = re.sub("\s|\W", "_", self.name)
-        self.slug = self.slug.lower().strip()
-        super(Song, self).save(*args, **kwargs)
-        path = pathFromName(self, self.file)
+    @property
+    def get_artists(self):
+        main_artists =  " & ".join([artist.name for artist in self.artist.get_queryset()])
+        featured_artists =  " & ".join(
+            [artist.name for artist in self.feature_artist.get_queryset()]
+            )
+        if featured_artists:
+            return " ft ".join((main_artists,featured_artist))
+        return main_artists
+
+    @property
+    def get_playcount_url(self,*args,**kwargs):
+        return reverse('country_cuzzins:song-playcount',
+            kwargs={
+                'pk': self.pk,
+            })
+
+    def __str__(self):
+        return f'{self.name} - {self.get_artists}'
 
 
 class Album(models.Model):
     name = models.CharField(max_length=100, blank=False, unique=True)
-    image = models.ForeignKey(
-        "Image",
-        related_name="album_image",
+    cover = models.ForeignKey(
+        Image,
+        related_name="album_cover",
         null=True,
         blank=True,
         default=1,
         on_delete=models.DO_NOTHING,
     )
-
+    songs = models.ManyToManyField(Song, related_name="songs")
+    is_featured = models.BooleanField(default=False,help_text="Do you want this on the home page")
     slug = models.SlugField(
-        verbose_name="album url",
-        max_length=80,
-        unique=True,
-        blank=False,
-        null=False,
-        help_text='<p style="color:red; font-weight:700;"> DO NOT ADD DASHES</p>',
+        max_length=150,
+        default="",
+        editable=False,
         validators=[MinLengthValidator(4)],
     )
-    songs = models.ManyToManyField(Song, related_name="alum_songs")
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            super(Album, self).save(*args, **kwargs)
-
-        self = urlParseSlugField(self, [self.name, self.id])
-        super(Album, self).save(*args, **kwargs)
-
-    # def clean(self, *args, **kwargs):
-    #     # Force Album to have at least one song
-    #     # and less than 20
-    #     MAX_SONGS = 20
-    #     MIN_SONGS = 1
-    #     if MIN_SONGS > self.songs.count() > MAX_SONGS:
-    #         raise ValidationError(
-    #             f"Album must have at least one ({MIN_SONG}) song and no more than {MAX_SONG}"
-    #         )
-    #     super(Album, self).clean(*args, **kwargs)
+    def save(self,*args,**kwargs): 
+        slug_name = self.name
+        self.slug = slugify(slug_name)
+        super().save(*args, **kwargs)
 
     @property
     def songslist(self):
-        # NOTE: Sept 24, songs are now retrieved through Song'srelated_name
-        try:
-            return self.songs.all()
-        except:
-            pass
+        return self.songs.get_queryset()
 
     @property
-    def song_urls(self):
-        # NOTE:
-        #  Sept 24, songs are now retrieved through Song'srelated_name
-        try:
-            return [song.file.url for song in self.album_songs.all()]
-        except:
-            pass
-
+    def get_absolute_url(self):
+        return  reverse('country_cuzzins:album-detail',
+            kwargs={
+                'slug': self.slug,
+            })
 
 # ***************************************#
 # ***************************************#
@@ -182,7 +174,7 @@ def pathFromName(instance, obj):
         str: path to file
     """
     # Capture object classname and set the save path and extention
-    Song_hash = hash(Song.file.field)
+    Song_hash = hash(Song.audio.field)
     save_info = {
         Song_hash: ["audio/", ".mp3"],
     }.get(hash(obj.field))
@@ -223,3 +215,4 @@ def pathFromName(instance, obj):
     except Exception as e:
         print("\nE", e)
         traceback.print_exc()
+

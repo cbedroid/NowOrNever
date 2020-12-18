@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load countrycuzzins_extras %}
+
+{% block meta %}
+<meta property="og:image" content="{{album.cover.image.url}}" />
+<meta property="og:url" content="{{request.get_full_path}}">
+<meta property="og:title" content="Country Cuzzins - {{album.name}}">
+<meta property="og:description" content="Country Cuzzins new hot release {{album.name}}" />
+<meta property="og:image" content="{{album.cover.image.url}}">
+<meta property="og:image:width" content="500">
+<meta property="og:image:height" content="500">
+<meta property="og:type" content="video">
+{% endblock meta %}
+{% block title %}
+Country Cuzzins - {{album.name}}
+{% endblock title %}
+
+{% block body %}
+
+<style>
+  .vote-percentage{
+    margin-top: 7px;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  
+  
+</style>
+{# NOTE: REMOVE PADDING & MARGIN HERE -- ITS ONLY FOR TESTING #}
+<section id="album_detail" class="mb-4">
+  <div class="top-mini-nav text-center bg-dark py-2">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="font-weight-bolder text-light"> {{album.name}}</h2>
+      </div>
+    </div>
+  </div>
+  <!-- ALBUM ARTWORK -->
+  <div class="artwork-container position-relative greyscaled overlay-1">
+    <div class="jumbotron bg-img my-0" style="background-image:url('{{album.cover.image.url}}'); min-height:600px;">
+      <!-- SHARELINKS-->
+      <div id="album_share" class="sharelink">
+        <ul class="list-group list-group-horizontal d-flex justify-content-center p-2">
+          <li class="sharelink__item list-group-item">
+            <a target="_blank" rel="nofollow" class="sharelink__facebook">
+              <img class="sharelink__img" src="{% static 'media/images/public/facebook2.png' %}" alt="" class="">
+            </a>
+            <span>Facebook </span>
+          </li>
+          <li class="sharelink__item list-group-item">
+            <a target="_blank" rel="nofollow" class="sharelink__twitter">
+              <img class="sharelink__img" src="{% static 'media/images/public/twitter.png' %}" alt="" class="">
+            </a>
+            <span>Twitter</span>
+          </li>
+          {% comment %} <li class="list-group-item">
+            <a target="_blank" rel="nofollow" class="sharlink__google"> </a>
+            <span>Google+</span>
+          </li> {% endcomment %}
+        </ul>
+      </div>
+      <!-- /SHARELINKS-->
+
+      <div class="artwork-content">
+        <!--inner content-->
+        <div class="inner-content overlay-2">
+          <div class="row">
+            <div class="col-12 clear-fixed bg-transparent position-absolute">
+              <div class="voted-wrapper d-flex justify-content-between p-2">
+                {# NOTE: ADD LINK TO COMMENT ON THIS #}
+                <div class="left-voted">
+                  <i class="fas fa-arrow-circle-down text-danger" style=font-size:2.5rem></i>
+                  <p class="vote-percentage">0%</p>
+                </div>
+                <div class="right-voted">
+                  <i class="fas fa-arrow-circle-up text-success" style="font-size: 2.5rem"></i>
+                  <p class="vote-percentage">100%</p>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="row no-gutters">
+            <div class="artwork-minicover col-6 offset-3 mt-3">
+              <a href="{{album.cover.image.url}}"></a>
+              <img class="img-fluid" src="{{album.cover.image.url}}" alt="{{album.name}} artwork"
+                style="max-height: 375px">
+            </div>
+          </div>
+        </div>
+        <!--inner content end-->
+      </div>
+
+
+    </div>
+  </div>
+  <!-- /ALBUM ARTWORK -->
+
+  <!--ALBUM ACTION SHARE-->
+  <div id="album_action" class="bg-dark px-1 px-sm-0">
+    <div class="row text-center text-light font-weight-bold">
+      <!--action download-->
+      <div class="col-4">
+        <a id="action__download" href="{{album.cover.image.url}}">
+          <i class="fa fa-download bg-success"></i>
+          <span class="ml-2">Download</span>
+        </a>
+      </div>
+      <!--action share-->
+      <div class="col-4">
+        <a class="social-share" id="action__share" href="{{album.cover.image.url}}">
+          <i class="fas fa-share-alt bg-primary"></i>
+          <span class="ml-2">Share</span>
+        </a>
+
+      </div>
+      <!--action favorite-->
+      <div class="col-4">
+        <a id="action__favorite" href="{{album.cover.image.url}}">
+          <i class="fa fa-heart bg-danger"></i>
+          <span class="ml-2">Favorite</span>
+        </a>
+      </div>
+    </div>
+    {% block script %}
+    <script type="text/javascript">
+          document.addEventListener('DOMContentLoaded',function(){
+
+            /* Social Share */
+            $('.social-share').socialShare({
+              social: 'facebook,twitter,google',
+              whenSelect: true,
+              selectContainer: '.social-share',
+              shareUrl:'{{request.get_full_path}}',
+              blur: true
+            });
+
+            /* magnificPopup */
+          	$('#album_action').magnificPopup({
+                preloader: true,
+                items: {
+                src: '#album_share',
+                type: 'inline'
+              },
+              closeOnContentClick:true,
+              mainClass:"mfp-nomargins mfp-with-zoom",
+              zoom: {
+                enabled: false,
+                duration: 300 // don't foget to change the duration also in CSS
+              },
+             callbacks: {
+                  open: function() {
+                    $('#album_share.sharelink').addClass('active')
+                    console.log("opened")
+                  },
+                  close: function() {
+                    $('#album_share.sharelink').removeClass('active')
+                    console.log("closed")
+                  },         
+                }
+            });
+          })
+        </script>
+    {% endblock script %}
+  </div>
+  <!--/ALBUM ACTION SHARE-->
+
+  <!--PROGRESSION-->
+  <div class="progression_wrapper w-100">
+    {# MAKE THIS GRABBLE ON MOBILE #}
+    <div id="progression_bar" class="bg-primary" style="max-height:10px; height:10px;">
+      <div class="clear-fix"></div>
+    </div>
+  </div>
+  <!--/PROGRESSION-->
+
+  <div id="song_content" class="ff-osw text-secondary">
+    <!--PLAYER CONTROLS-->
+    <div id="player_control" class="list-group-item" aria-current="true">
+      <form id="song_view_form"> {# Song Play Count Form #}
+        {% csrf_token %}
+        <div class="row">
+          <div class="left col-6">
+            <div class="top">
+              <p id="current_artist" class="title__top text-uppercase">{{ songs.0.get_artists }}</p>
+              <div class="mx-1 pb-3 d-flex flex-column flex-sm-row align-items-sm-center">
+                <span id="current_title" style="color:#0ec7ff;letter-spacing:.3ch;">{{songs.0.name}}</span>
+                <span class="d-none d-sm-inline-block mx-1">-</span>
+                {# song view counter #}
+                <small><span id="album_viewcount" class="font-weight-lighter align-middle">{{songs.0.played_count}} views</span></small>
+              </div>
+            </div>
+          </div>
+          <div class="right col-6">
+            <div class="play-btn__wrapper mr-4 pull-right">
+              <i id="play_btn" class="h-100 text-secondary far fa-play-circle" style="font-size:3.5rem;border-radius:50%;"></i>
+            </div>
+            <!-- </div> -->
+          </div>
+        </form>
+      </div>
+      <!--/PLAYER CONTROLS-->
+      <!--SONG LIST-->
+      <ul id="track_list" class="list-group">
+        {% for song in songs %}
+        <li class="track list-group-item w-100"
+          data-song="{{song.audio.url}}" data-title="{{song.name}}"
+          data-songref={{song.get_playcount_url}}
+          data-group="CountryCuzzins" data-image="{{album.cover.image.url}}">
+          <span class="mr-2">{{forloop.counter}}.</span>
+          <span class="track__name">{{song.name}}</span>
+          <div class="song-detail pt-2">
+            <small class="font-weight-light font-italic">
+              <span class="track__artist-name" style="letter-spacing:.2ch">{{song.get_artists}}</span>
+            </small>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <!--/SONG LIST -->
+    </div>
+
+  </section>
+  {% endblock body %}
