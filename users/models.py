@@ -8,6 +8,8 @@ from django.dispatch import receiver
 from core.utils.utils_models import Command, OverwriteStorage, generateSlug
 from countrycuzzins.models import Video
 
+
+from django.urls import reverse, reverse_lazy
 MEDIA_ROOT = "static" + settings.MEDIA_ROOT
 
 
@@ -60,8 +62,7 @@ class Profile(models.Model):
     def getImage(self):
         if os.path.isfile(self.image.path):
             return self.image.url
-        default_image = "static/media/images/profidefault_profile.png"
-        return default_image
+        return "static/media/images/profile/fault_profile.png"
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -72,11 +73,14 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
+    def get_absolute_url(self):
+        return reverse("users:user-profile",
+                       kwargs={"user": self.user.username})
+
 
 class NewsLetter(models.Model):
-    email = models.EmailField(max_length=100, unique=True, blank=False, null=True)
-    # user_account = models.ForeignKey(
-    #     User, related_name="user_newletter", null=True, blank=True, on_delete=models.CASCADE)
+    email = models.EmailField(
+        max_length=100, unique=True, blank=False, null=True)
     has_account = models.BooleanField(default=False, blank=True, null=True)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
@@ -86,19 +90,6 @@ class NewsLetter(models.Model):
             f"{ self.email}  | account {self.check_for_account}",
             f"| subscribed {created}",
         )
-
-    @property
-    def check_for_account(self):
-        has_account = False
-        try:
-            has_account = User.objects.filter(
-                email__iregex=rf"(www.|http://|https://)?{self.email}"
-            )
-        except Exception as e:
-            print(f"\nError while checkig newletter account\n{e}")
-
-        true_false = {True: "yes", False: "no"}[self.check_fo_account]
-        return true_false[has_account]
 
 
 # Delete old Profile Image after being udpated
@@ -113,7 +104,7 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
             if os.path.isfile(instance.image.path):
                 if "default_profile.png" not in instance.image.path:
                     os.remove(instance.image.path)
-    except:
+    except BaseException:
         if instance.file:
             if os.path.isfile(instance.file.path):
                 os.remove(instance.file.path)

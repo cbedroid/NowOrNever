@@ -14,11 +14,11 @@ class RegistrationForm(UserCreationForm):
         widget=forms.PasswordInput(),
         required=True,
         help_text="""<ul class="help_text">
-                            <li class="help-item"> Choose a strong password.</li>
-                            <li class="help-item"> Your password must contain an alphabet character.</li>
-                            <li class="help-item"> Your password must be 8 or more characters long.</li>
-                            </ul>
-                            """,
+                        <li class="help-item"> Choose a strong password.</li>
+                        <li class="help-item"> Your password must contain an alphabet character.</li>
+                        <li class="help-item"> Your password must be 8 or more characters long.</li>
+                       </ul>
+                      """,
     )
     subscribed = forms.BooleanField(
         required=False,
@@ -69,6 +69,15 @@ class ProfileUpdateForm(forms.ModelForm):
         error_messages={"invalid": "Opps, File must be an Image file only"},
         widget=forms.FileInput,
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # remove annoying autofocus
+        for field in self.fields:
+            try:
+                field.widget.attrs.pop("autofocus", None)
+            except BaseException:
+                pass
 
     class Meta:
         model = Profile

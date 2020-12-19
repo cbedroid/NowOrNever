@@ -28,7 +28,7 @@ def accountSignup(request):
             messages.success(request, "Welcome %s!" % user.username)
             return HttpResponseRedirect(reverse("home"))
     context["form"] = form
-    return render(request, "users/account/signup.html", context)
+    return render(request, "account/signup.html", context)
 
 
 def accountLogin(request):
@@ -47,7 +47,7 @@ def accountLogin(request):
         else:
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
-    return render(request, "users/account/login.html", context={"form": form})
+    return render(request, "account/login.html", context={"form": form})
 
 
 def accountLogout(request):
@@ -69,8 +69,9 @@ def profile(request, *args, **kwargs):
                 messages.success(request, f"Your account has been updated!")
             if p_form.is_valid():
                 p_form.save()
-                messages.success(request, f"Your profile image has been updated!")
-            return redirect("account_profile")
+                messages.success(
+                    request, f"Your profile image has been updated!")
+            return redirect("users:user-profile")
 
     else:
         u_form = RegistrationForm(instance=request.user)

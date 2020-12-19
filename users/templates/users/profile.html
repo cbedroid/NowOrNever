@@ -2,13 +2,16 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block body %}
-{% include 'users/snippets/alert_message.html' %}
+{% include 'core/snippets/alert_message.html' %}
 
 
 <style>
   #div_id_image label{ /*django built in form label class */
     visibility: hidden !important;
   }
+  #profile_username{ font-size: calc(1em + 3vw); letter-spacing:.12ch;}
+  legend h2 { font-size: calc(1em + 2vw) !important; letter-spacing:.12ch;}
+
 </style>
 <section id="profile_section">
   <section id="profile-top">
@@ -17,30 +20,38 @@
         <!--Profile Top-->
         <div class="pf-wrapper pf-wrapper--top">
           <!--Banner-->
-          <div class="m-banner"
-            style="background-image: url('{% static 'media/images/decorative/profile_background.png' %}')">
-            <div class="m-banner--header">
-              {# user tray #}
-              <div class="user-tray user-tray--fl">
-                <img src="{{ user.profile.getImage }}" alt="Profile Image" class="m-img m-img--profile bg bdr-3-info">
-                <h3 class="m-title m-title--bg username">{{user.username}}</h3>
-              </div>
-            </div>{# banner #}
-            <legend class="border-bottom mb-4">
-              <h2 class="m-title m-title--bg">Profile Info</h2>
-            </legend>
-            <div class="form-toggle desktop-hidden mb-2">
-              <!--update profile-->
-              <button class="btn btn-primary pf-toggler" data-toggle="#profile_account_form" aria-hidden="true">
-                <i class="fa fa-user-circle bg-transparent"> </i>
-                <span>Update Account</span>
-              </button>
+          <div class="hero m-banner greyscaled position-relative overlay-1"
 
-              <!--update image-->
-              <button class="btn btn-success pf-toggler" data-toggle="#profile_image_form" aria-hidden="true">
-                <i class="fa fa-picture-o pf-toggler bg-transparent"> </i>
-                <span>Update Image</span>
-              </button>
+            style="background-image: url('{% static 'media/images/decorative/profile_background.png' %}')">
+            <div class="inner-hero overlay-2 position-relative top-0 start-0 zed-3">
+              <div class="hero__top row m-2">
+                <div class="col-4">
+                  <img class="img-thumbnail rounded-circle border-0 border-info" src="{{ user.profile.getImage }}" alt="{{user.username}} profile image"
+                    style="width:calc(6em + 10vw);">
+
+                </div>
+                <div class="col-8">
+                  <h3 id="profile_username" class="ff-ant h-100 d-flex align-items-center align-content-left">{{user.username}}</h3>
+                </div>
+              </div>
+              <div class="hero__bottom">
+                <legend class="border-bottom mb-4">
+                  <h2 class="m-title text-uppercase">Profile Info</h2>
+                </legend>
+                <div class="form-toggle desktop-hidden mb-2">
+                  <!--update profile-->
+                  <button class="btn btn-primary pf-toggler" data-toggle="#profile_account_form" aria-hidden="true">
+                    <i class="fa fa-user-circle bg-transparent"> </i>
+                    <span>Update Account</span>
+                  </button>
+
+                  <!--update image-->
+                  <button class="btn btn-success pf-toggler" data-toggle="#profile_image_form" aria-hidden="true">
+                    <i class="fa fa-picture-o pf-toggler bg-transparent"> </i>
+                    <span>Update Image</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div> {# banner #}
         </div>{# profile--top #}
@@ -54,10 +65,12 @@
     <div class="wrapper px-3 my-2">
       <div class="row">
         <div class="col-sm-6 mb-4">
+
           <div class="card shadow h-100" id="profile_account_form">
             <div class="card-body">
-              <form method="POST">
+              <form method="POST" action="{{request.user.profile.get_absolute_url}}">
                 {% csrf_token %}
+                <input type="hidden" name="user" value="{{request.user.username}}">
                 <fieldset class="form-group">
                   <div class="form-title">
                     <h2 class="m-title">Update account info</h2>
@@ -93,7 +106,7 @@
                     <hr>
                     <h2 class="m-subtitle">
                       <span class="text-dark"><b>Email:</b></span>
-                      <spaan class="font-weight-bold">{{ user.email }}</spaan>
+                      <span class="font-weight-bold">{{ user.email }}</span>
                     </h2>
                   </div>
                   <hr>
