@@ -9,14 +9,14 @@ from django.conf import settings
 from .models import Video, Image
 from .music_models import Song, Artist
 from django.db.models.signals import (
-    pre_init, post_init, pre_save,
-    post_save, post_delete, post_migrate
-)
+     pre_save, post_save, post_delete
+     )
 
 @receiver(pre_save, sender=Image)
 def nameSpaceImage(sender, instance=None, **kwargs):
-    """Change images file path to match Image model name's field.
-        Change images file extension to png.
+    """
+       Change images file path to match Image model name's field.
+       Extension will be changed to png
 
     Ex: myimage = Image.create(name="hello",image="some_file")
         myimage.image.url  will be changed to --> hello.png
@@ -33,15 +33,16 @@ def nameSpaceImage(sender, instance=None, **kwargs):
 
 @receiver(post_save, sender=Image)
 def pathFromName(sender, **kwargs):
-    """Rename file path to model name's attribute
-    Args:
-        sender (class Image ): models.Models Image
-        instance (class field):  models.Model class field
-        filetype (str):  media field type
-        extention (str, optional): extention to assign to path. Defaults to None.
+    """
+        Rename file path to model name's attribute
+        Args:
+            sender (class Image ): models.Models Image
+            instance (class field):  models.Model class field
+            filetype (str):  media field type
+            extention (str, optional): extention to assign to path. Defaults to None.
 
-    Returns:
-        str: path to file
+        Returns:
+            str: path to file
     """
     # Capture instanceect classname and set the save path and extention
     instance = kwargs.get("instance")
@@ -55,7 +56,6 @@ def pathFromName(sender, **kwargs):
         return
 
     # get the name attribute from model
-    print("save_info", save_info)
     save_directory, ext = save_info
     model_name_field = instance.name
 
@@ -63,7 +63,6 @@ def pathFromName(sender, **kwargs):
     # if not then abort all chande and return the current instance untouched
     has_url = getattr(target_image, "url", None)
     if not has_url or not save_info:
-        print("\nSignalError: Target image has no url path")
         return
 
     image_basename = os.path.basename(instance.image.url)
@@ -83,8 +82,6 @@ def pathFromName(sender, **kwargs):
                 os.rename(current_path, new_path)
             except:
                 pass
-            print("\nImage New Path", image_new_path)
-            # instance.save()
             return image_new_path
     except Exception as e:
         print("\nE", e)
@@ -98,8 +95,8 @@ def pathFromName(sender, **kwargs):
 #########################################################
 
 
-def create_thumbnail(title, thumbnail, youtube_video_id):
-    # create the video thumbail
+def create_thumbnail_cover(title, thumbnail, youtube_video_id):
+    # Create the thumbnail covers for video 
     url = f"https://img.youtube.com/vi/{youtube_video_id}/hq{thumbnail}.jpg"
     return format_html(
         '<img class="video-thumbnail" src="%s" width="150" height="150" alt="%s Video Thumbnail"/>'
@@ -109,6 +106,7 @@ def create_thumbnail(title, thumbnail, youtube_video_id):
 
 @receiver(pre_save, sender=Video)
 def create_youtube_embeded_url(sender, instance, **kwargs):
+    """ Convert youtube video to validate embeded format"""
     youtube_url_names = ["youtube", "youtu.be"]
     youtube_video_id = None
     url = instance.url
@@ -120,9 +118,6 @@ def create_youtube_embeded_url(sender, instance, **kwargs):
         except AttributeError:
             youtube_video_id = re.match(r".*/(\w*)", instance.url).group(1)
         except Exception as e:
-            print(
-                f"\nSignalVideoError: Can not detect video url in signals. \n{e}\n")
-
             return
 
         if youtube_video_id:
@@ -130,14 +125,14 @@ def create_youtube_embeded_url(sender, instance, **kwargs):
             instance.url = f"https://www.youtube.com/embed/{youtube_video_id}"
 
     # Disconnect from signal to save changes
-    if not youtube_video_id:
-        print('Youtube already embed')
+    if not youtube_video_id: # video is already converted
         youtube_video_id = re.match(r'.*/(.*)', instance.url)
     pre_save.disconnect(create_youtube_embeded_url, sender=sender)
     # NOTE: this is a potential error if re.search return None
     try:
-        instance.thumbnail = create_thumbnail(
-            instance.title, instance.thumbnail_choice, youtube_video_id.group(1)
+        instance.thumbnail = create_thumbnail_cover(
+            instance.title, instance.thumbnail_choice,
+            youtube_video_id.group(1)
         )
     except:
         pass
@@ -155,9 +150,7 @@ def create_youtube_embeded_url(sender, instance, **kwargs):
 @receiver(post_delete, sender=Image)
 @receiver(post_delete, sender=Song)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
-    """Deletes file from filesystem
-    when corresponding `MediaFile` object is deleted.
-    """
+    """ Remove deleted file from filesystem """
     try:
         if instance.image:
             if os.path.isfile(instance.image.path):

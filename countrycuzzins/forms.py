@@ -1,6 +1,5 @@
 from django import forms
 from string import Template
-from django.utils.safestring import mark_safe
 from .models import Video
 
 

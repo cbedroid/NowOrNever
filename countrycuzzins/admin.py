@@ -1,8 +1,6 @@
 from django import forms
 from django.contrib import admin
-from image_cropping import ImageCroppingMixin
 from django.conf.locale.es import formats as es_formats
-from django.utils.html import format_html
 from django.utils.html import mark_safe
 from .music_models import Artist, Album, Song
 from .forms import VideoForm
@@ -12,36 +10,35 @@ from .models import Video, Producer, Image, Event, SocialMedia
 es_formats.DATETIME_FORMAT = "d M Y H:i:s"
 
 
+
 class DateCreateAdmin(admin.ModelAdmin):
     readonly_fields = (
         "created",
         "updated",
     )
 
-
-class VideoAdmin(DateCreateAdmin):
-    # readonly_fields = ('thumbnail',)
-
-    form = VideoForm
-
+class ThumbnailWidget(DateCreateAdmin):
     def image_tag(self, obj):
-        return mark_safe(obj.thumbnail)
+        try:
+            return mark_safe(obj.thumbnail)
+        except: 
+            return mark_safe(obj.image)
 
-    def choiceThumbnail(self, obj):
+    def image_widget(self, obj):
         return mark_safe(
-            '<img class="img-thumbnail ml-1" src={} style="width:25px;hieght:25px;"></img>',
-            obj.thumbnail)
+            '<img class="img-thumbnail ml-1" src={obj.thumbnail.url} style="width:25px;hieght:25px;"></img>'
+        )
 
     image_tag.short_description = "thumbnail"
+
+ 
+class VideoAdmin(ThumbnailWidget):
+    form = VideoForm
     list_display = [
         "title",
-        "image_tag",
+        "image_widget",
         "is_featured",
     ]
-
-
-class SlugFieldAdmin(DateCreateAdmin):
-    readonly_fields = ("slug",)
 
 
 class SongAdmin(DateCreateAdmin):
@@ -69,16 +66,24 @@ class SongAdmin(DateCreateAdmin):
     ]
 
 
+# class ImageInline(admin.StackedInline):
+#     model = Artist
+
+# @admin.register(Image)
+# class ArtistStacked( admin.ModelAdmin):
+#     inlines = [ImageInline]
+
+
 class AlbumAdmin(DateCreateAdmin):
     filter_horizontal = ['songs']
 
 
 # Register your models here.
 admin.site.register(Artist, DateCreateAdmin)
-admin.site.register(Album, AlbumAdmin)
-admin.site.register(Song, SongAdmin)
-admin.site.register(Video, VideoAdmin)
+admin.site.register(Image, DateCreateAdmin)
 admin.site.register(Producer, DateCreateAdmin)
 admin.site.register(Event, DateCreateAdmin)
 admin.site.register(SocialMedia, DateCreateAdmin)
-admin.site.register(Image, DateCreateAdmin)
+admin.site.register(Video, VideoAdmin)
+admin.site.register(Album, AlbumAdmin)
+admin.site.register(Song, SongAdmin)

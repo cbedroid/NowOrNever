@@ -9,10 +9,10 @@ import traceback
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.conf import settings
-from .models import Image
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.utils.text import slugify
 from django.dispatch import Signal
+from .models import Image
 from core.utils.utils_models import (
     Command,
     OverwriteStorage,
@@ -32,9 +32,8 @@ def makeSongName(instance, *args, **kwargs):
     Returns:
         str: song's MEDIAROOT path name
     """
-
     # NOTE: This oly fires on creation of model NOT on every save
-    # *** TODO: Put this method in Model's save method to save on every save
+    # TODO: Put this method in Model's save method to save on every save
     abspath = kwargs.get("abspath", False)
     if abspath:
         return "{}/audio/{}.mp3".format(MEDIA_ROOT, instance.name)
@@ -42,7 +41,7 @@ def makeSongName(instance, *args, **kwargs):
 
 
 class Artist(models.Model):
-    name = models.CharField(max_length=80, blank=True, unique=True)
+    name = models.CharField(max_length=80, unique=True)
     image = models.ForeignKey(Image, default=1, on_delete=models.SET_DEFAULT)
     bio = models.TextField(max_length=500, default="Country Cuzzins Artist")
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -54,21 +53,9 @@ class Artist(models.Model):
 
 class Song(models.Model):
     _song_signal = Signal()
-
-    artist = models.ManyToManyField(
-        Artist, related_name="main_artist", blank=True, null=True)
-    feature_artist = models.ManyToManyField(
-        Artist,
-        verbose_name="feature artists(s)",
-        related_name="featured_artist",
-        blank=True,
-        null=True,
-        help_text='<p style="color:#000; font-weight:700;"> Feature Artist(s) Only </p><span>(optional)</span>',
-        )
     name = models.CharField(
         verbose_name="title",
         max_length=120,
-        blank=False,
         null=True,
         unique=True
         )
@@ -77,6 +64,18 @@ class Song(models.Model):
         upload_to=makeSongName,
         storage=OverwriteStorage(),
         )
+
+    artist = models.ManyToManyField(
+        Artist, related_name="main_artist", 
+        )
+    feature_artist = models.ManyToManyField(
+        Artist,
+        verbose_name="feature artists(s)",
+        related_name="featured_artist",
+        blank=True,
+        help_text='<p style="color:#000; font-weight:700;"> Feature Artist(s) Only </p><span>(optional)</span>',
+        )
+    
     played_count = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)

@@ -13,6 +13,12 @@ urlpatterns = [
     path("account/", include("users.urls.account_urls")),
 ]
 
+
+#Amin Custom Site Title
+admin.site.site_header = "NoworNever"
+admin.site.site_title = "NoworNever Admin Portal"
+admin.site.index_title = "Welcome to NoworNever Entertainment Portal"
+
 # Production and Development Admin
 if settings.DEBUG == True:
     urlpatterns.append(path("admin/", admin.site.urls))
