@@ -1,45 +1,31 @@
 from django.contrib import messages
-from ipware import get_client_ip
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.core.exceptions import FieldDoesNotExist
-from django.views.decorators.cache import never_cache
 from .forms import ContactUsForm
-from .models import ContactUs
+from .models import ContactUs, Rating
+from countrycuzzins.models import Video
+from django.urls import reverse, reverse_lazy
+from django.views.generic.edit import FormView
+from django.views.generic import View
 
 
-@never_cache
-def contactUs(request):
-    if request.method == "POST":
-        c_form = ContactUsForm(request.POST)
-        if c_form.is_valid():
-            c_form.save(commit=True)
-            print('\nDIR C_FORM', dir(c_form))
-            print('Post C_FORM', c_form)
-            client_ip, is_routable = get_client_ip(request,)
-            if client_ip is None:
-                print('IP Address not available')
-            else:
-                print('Client IP', client_ip,)
-                try:
-                    ContactUs.objects.update(pk=c_form, defaults={
-                                             "ip_address": client_ip})
-                except FieldDoesNotExist as e:
-                    print('Updating Field Failed', e)
+class ContactUsView(FormView):
+    template_name = 'core/contact_us.html'
+    form_class = ContactUsForm
+    success_url = reverse_lazy('country_cuzzins:home')
 
+    def form_valid(self, form):
+        if form.is_valid():
+            form.check_contact_has_account(form)
             messages.success(
-                request, f"Thank You, Your message was sent successfully! "
-            )
-            return HttpResponseRedirect(reverse("home"))
-            # return redirect("home")
+                self.request, f"Thank You, Your message was sent successfully! "
+                )
         else:
-            print('Form not validate')
-            return redirect("contact_us")
-    else:
-        c_form = ContactUsForm()
-
-    context = {"form": c_form}
-    return render(request, "users/contact_us.html", context)
+            messages.warn(
+                self.request,
+                f"Oh No..., Something went wrong. Please try resending your message again."
+                )
+        return super().form_valid(form)
 
 
 def privacyPolicy(request):
@@ -47,3 +33,23 @@ def privacyPolicy(request):
         "website": "https://www.NoworNever.com",
     }
     return render(request, "snippets/terms_policy/privacy_policy.html", context)
+
+
+class VideoRatingDetailView(View):
+    model = Video
+    template_name = "core/snippets/video_rating.html"
+    pk_url_kwarg = "video_id"
+    slug_url_kwarg = "slug"
+    query_pk_and_slug = True
+
+    def get(self, *args, **kwargs):
+        context = {}
+        print("Args kwargs", kwargs)
+        video = Video.objects.filter(id=kwargs.get("video_id"))
+        if video.exists:
+            video = video.first()
+            context["video"] = video
+            context["ratings"] = video.rating.all()
+            return context
+        else:
+            return render(self.request, "countrycuzzins:home")

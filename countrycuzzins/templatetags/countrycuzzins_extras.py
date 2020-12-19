@@ -10,14 +10,14 @@ register = template.Library()
 
 @register.filter("image_get")
 def image_get(model, args):
-    """ Check Image modes attribute and return the corresponding object
-  Args:
-      model (Models.Model): HTML Model String
-      key (string): "Image model attribute"
-      value (string|int|bool): value of attribute
-  Returns:
-       string: return model atrribute (if exists)
-  """
+    """Check Image modes attribute and return the corresponding object
+    Args:
+        model (Models.Model): HTML Model String
+        key (string): "Image model attribute"
+        value (string|int|bool): value of attribute
+    Returns:
+         string: return model atrribute (if exists)
+    """
     try:
         key, value, *index = args.split(",")
         img = Image.objects.filter(**{key: value})
@@ -73,9 +73,8 @@ def social_get(name, data):
         dict: social media model dictionary
     """
     try:
-        social = SocialMedia.objects.filter(
-            name__iregex=rf"[.*[\w\s]*.*{name}[\w.\s]*")
-        #print("\nsocial", social)
+        social = SocialMedia.objects.filter(name__iregex=rf"[.*[\w\s]*.*{name}[\w.\s]*")
+        # print("\nsocial", social)
         if social:
             return getattr(social.first(), data)
         return {"name": "N/A", "link": "#"}[data]
@@ -85,7 +84,7 @@ def social_get(name, data):
 
 @register.filter("model_get")
 def model_get(model, kwargs):
-    """ Retrieve an object from model
+    """Retrieve an object from model
 
     Args:
         model (models.Model): models.Model instance

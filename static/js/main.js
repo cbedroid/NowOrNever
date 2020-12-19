@@ -78,8 +78,9 @@ $(document).ready(() => {
     e.preventDefault();
     e.stopPropagation();
     const nb = $(".navbar-collapse");
-    const display = { false: "block", true: "none" }[is_open];
-    $(nb).css("display", display);
+    //const display = { false: "block", true: "none" }[is_open];
+    //$(nb).css("display", display);
+    is_open === true ? $(nb).hide() : $(nb).show();
     $(this).attr("aria-expanded", is_open == false ? true : false);
     is_open = !is_open;
   });

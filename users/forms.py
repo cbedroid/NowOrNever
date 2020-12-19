@@ -14,11 +14,17 @@ class RegistrationForm(UserCreationForm):
         widget=forms.PasswordInput(),
         required=True,
         help_text="""<ul class="help_text">
-                            <li class="help-item"> Choose a strong password.</li>
-                            <li class="help-item"> Your password must contain an alphabet character.</li>
-                            <li class="help-item"> Your password must be 8 or more characters long.</li>
-                            </ul>
-                            """,
+                        <li class="help-item"> Choose a strong password.</li>
+                        <li class="help-item"> Your password must contain an alphabet character.</li>
+                        <li class="help-item"> Your password must be 8 or more characters long.</li>
+                       </ul>
+                      """,
+    )
+    subscribed = forms.BooleanField(
+        required=False,
+        initial=True,
+        label="Subscribe to our newsletter",
+        widget=forms.CheckboxInput(attrs={"input_type": "checkbox"}),
     )
 
     class Meta:
@@ -33,6 +39,7 @@ class RegistrationForm(UserCreationForm):
         user = super(RegistrationForm, self).save(commit=False)
         user.username = self.cleaned_data["username"]
         user.email = self.cleaned_data["email"]
+        user.subscribed = self.cleaned_data["subscribed"]
         if commit:
             user.save()
         return user
@@ -63,7 +70,15 @@ class ProfileUpdateForm(forms.ModelForm):
         widget=forms.FileInput,
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # remove annoying autofocus
+        for field in self.fields:
+            try:
+                field.widget.attrs.pop("autofocus", None)
+            except BaseException:
+                pass
+
     class Meta:
         model = Profile
         fields = ["image"]
-

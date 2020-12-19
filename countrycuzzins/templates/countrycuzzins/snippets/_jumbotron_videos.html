@@ -2,16 +2,15 @@
 {% load countrycuzzins_extras%}
 
 <div class="m-widget video-widget-container">
-  {% for video in  music_videos %}
+  {% for video in music_videos %}
   <div class="jumbotron jumbotron-fluid">
     <h1 class="display-4">{{ video.title }}</h1>
-    <p class=" lead m-description">{{ video.short_description }}</p>
-    <div class="video-wrapper">
+    <p class="lead m-description">{{ video.short_description }}</p>
+    <div class="video-wrapper bg-secondary">
       {% if video.is_youtube %}
-
-      <iframe src="{{ video.url }}" frameborder="0"
+      <iframe loading="lazy" src="{{ video.url }}" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-        </iframe>
+      </iframe>
       {% else %}
       <video controls>
         <source src="{{ video.url }}" type="video/mp4">

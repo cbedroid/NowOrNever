@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% include  'core/snippets/alert_message.html' %}
+
+{% block header %}
+{% endblock header %}
+{% block style %}
+<style>
+  section.nav-spacer {
+    display: none
+  }
+</style>
+{% endblock style %}
+{% block httperror %}
+<section id="http_error_section">
+  <div class="row">
+    <div class="col-12">
+      <div class="error-container">
+        <div class="m-banner">
+          <div class="m-header http-header">
+            <legend class="border-bottom mb-4 m-title">We're Sorry</legend>
+            <p class="subtitle">The page you are trying to access is not available</p>
+          </div>
+
+          <div class="m-banner--content">
+            <div class="overlay">
+              <div class="m-banner--content--left">
+                <div class="bg-clip"></div>
+                <img src="{% static 'media/images/errors/404_microphone.png' %}" alt="">
+                <div class="link-tray">
+                  <ul class="link-list">
+                    <li class="m-link-item">
+                      <a href="{% url 'index' %}" class="link">
+                        <i class="fa fa-home" aria-hidden="true">Home</i>
+                      </a>
+                    </li>
+                    <li class="m-link-item">
+                      <a href="{% url 'account_login' %}" class="link">
+                        <i class="fa fa-user" aria-hidden="true">Login</i>
+                      </a>
+                    </li>
+                    <li class="m-link-item">
+                      <a href="{% url 'account_signup' %}" class="link">
+                        <i class="fa fa-user" aria-hidden="true">Signup</i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="m-banner--content--right">
+                <div class="headline">
+                  <h1 class="m-title">Whoops ...</h1>
+                  <p class="subtitle">It looks like you're lost??</p>
+                  <a href="{{ request.META.HTTP_REFERER }}" class="link">
+                    <i class="fa fa-long-arrow-left" aria-hidden="true"><span>Go Back</span></i>
+                  </a>
+                </div>
+                <img src="{% static 'media/images/errors/404_flip_questionmark.png' %}" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+{% endblock httperror %}

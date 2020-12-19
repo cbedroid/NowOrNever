@@ -1,7 +1,7 @@
 //*** Music Player Module ***//
 
 // Delete body only here to stop screen from being too bright
-// while testing 
+// while testing
 
 // +bg_div_image(absolute,cover,"120% 50%")
 //   filter: grayscale(75%)
@@ -13,321 +13,372 @@ $player-height: 500px
 $dark: #1A1B1E
 $light: #e9e9e9
 $ctrl_primary: rgb(244, 67, 54)
-$ctrl_primary_rgba: rgba(244,67,54,.3)
+$ctrl_primary_rgba: rgba(244, 67, 54, 0.3)
 $ctrl_secondary: #03A9F4
 
 // Base rules for icon
 i
-  verticle-align: middle
-  text-align: center
-  padding: 2px
-  width: 50px
-  border-radius: 10px
-  max-height: 40px
-  transition: .3s
-  &:hover
-    +CrossBrowser(cursor, pointer)
-
-.flex
-  display: flex
-  flex-direction: column
-  &--inline
-    flex-direction: row
-  &--sa
-    justify-content: space-around
-  &--sb
-    justify-content: space-between
-
-.hidden
-  display: none
-
-input[type="range"]::-webkit-slider-thumb
-  &:hover
-    +CrossBrowser(cursor,grab)
-  &:active
-    +CrossBrowser(cursor, grabbing)
-
-// BASE END 
-section#main_musicplayer
-  width: 100%
-  height: $player_height
-  background: $dark
-  color: $light
-  position: relative
-  padding: 10px
-  border-radius: 10px
-  border: 1px solid #1c1c1c
-  overflow: hidden
-
-.mp-subtitle
-  margin-top: 5px
-  font-size: .8em
-  color: $secondary
-
-// musicplayer top window 
-.mp-top
-  display: flex
-  flex-direction: column
-  position: absolute
-  top: 0
-  width: 100%
-  height: 300px
-  z-index: 2
-
-.cover-image
-  display: block
-  height: 240px
-  position: relative
-  +mixin_bg_image(absolute,cover,"100% 50%")
-  &::after
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    content: ""
-    height: inherit
-    background: rgba(0,0,0,.8)
-    z-index: 1
-
-// PLAYER CONTROLS 
-.mp-controls-container
-  width: 95%
-  position: absolute
-  top: 30px
-  left: 0
-  right: 0
-  bottom: 100px
-  i
-    font-size: 1.2rem
-    padding: 5px
-    transition: .3s ease-in-out
-    border-radius: 10px
-    &:hover
-      padding: 5px
-      color: #fff
-      background: $ctrl_primary
-
-  .control--top
-    margin: 5px 30px 0px 30px
-
-  .track-info
-    margin: 0 45px
-
-// Progress Bar  
-#mp_progress
-  display: block
-  width: 200px
-  align-self: center
-  padding: 10px 0
-
-  input[type="range"]
-    display: block
-    +CrossBrowser(appearance,none)
-    +CrossBrowser(border-radius, 10px)
-    +CrossBrowser(transition,.2s)
-    width: 100%
-    height: 8px
-    background: #d3d3d3
-    outline: none
-    opacity: 0.7
-
-    //* Mouse-over effects */
-    input[type="range"]:hover
-      +CrossBrowser(opacity,1)
-      height: 8px
-
-  input[type="range"]::-webkit-slider-thumb
-    -webkit-appearance: none
-    border: none
-    width: 15px
-    height: 15px
-    background: red
-    +CrossBrowser(cursor, grab)
-    border-radius: 50%
-    transform: translateX(-50%)
-    &:active
-      +CrossBrowser(cursor, grabbing)
-
-  //CONTROLS PANEL
-.control--middle
-  display: block
-  width: 100%
-  min-height: 25px
-  position: relative
-
-  // VOLUME PANEL 
-  .volume-control-container
-    display: block
-    max-width: 50px
-
-  .volume-slider-panel
-    display: block
-    position: absolute
-    left: calc(100% -  65px )
-    top: 0px
-    width: 100px
-    background: #1c1c1c
-    border: 1px  solid #000
-    border-radius: 10px
-    padding: 5px
-    +CrossBrowser(transform, rotateZ(270deg))
-
-    #volume_slider
-      -webkit-appearance: none  /* Override default CSS styles */
-      appearance: none
-      width: 100% /* Full-width */
-      height: 8px
-      background: #d3d3d3 /* Grey background */
-      outline: none /* Remove outline */
-      opacity: 0.7 /* Set transparency (for mouse-over effects on hover) */
-      -webkit-transition: .2s /* 0.2 seconds transition on hover */
-      transition: opacity .2s
-
-    //* Mouse-over effects */
-    #volume_slider:hover
-      opacity: 1 /* Fully shown on mouse-over */
-      height: 8px
-
-    //* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-    #volume_slider::-webkit-slider-thumb
-      -webkit-appearance: none /* Override default look */
-      appearance: none
-      width: 15px /* Set a specific slider handle width */
-      height: 20px /* Slider handle height */
-      background: $ctrl_primary /* background */
-      cursor: grabbing /* Cursor on hover */
-      border-radius: 50%
-      &:hover
-        +CrossBrowser(cursor,grab)
-      &:active
-        +CrossBrowser(cursor,grabbing)
-
-    #volume_slider::-moz-range-thumb
-      width: 25px /* Set a specific slider handle width */
-      height: 25px /* Slider handle height */
-      background: #4CAF50 /* Green background */
-      cursor: grabbing /* Cursor on hover */
-      &:hover
-        cursor: grabbing
-
-.title-wrapper
-  margin-bottom: 40px
-  align-self: center
-  text-align: center
-  letter-spacing: .15em
-  .hover-tip
-    display: none
-  &:hover
-    .hover-tip
-      display: flex
-      max-height: 50px
-      width: fit-content
-      align-self: center
-      justify-self: center
-      margin: 0 auto
-      padding: 10px 20px
-      align-items: center
-      font: italic 700 1em 'Roboto', Arial, sans-serif
-      justify-content: center
-      background: #fff
-      color: #000
-      border: 2px solid brown
-      border-radius: 10px
-      position: absolute
-      +CrossBrowser(z-index, 200)
-      top: -15px
-      right: 0
-      bottom: 0
-      left: 0
-
-  .mp-title--top
-    display: inline-block
-    width: 100%
-    font-size: 1.3em
-    font-family: 'Racing Sans One', cursive
-    +CrossBrowser(line-clamp,1)
-    letter-spacing: .15em
-    text-overflow: ellipsis
-    white-space: nowrap
-    position: relative
-    overflow: hidden
-
-  .mp-subtitle
-    color: #fff
-    font: 500 18px  Oswald, "Roboto Slab", Merriweather
-    letter-spacing: .15em
-
-.controls-bottom
-  margin-top: .5em
-
-// TRACK SECTION
-.mp-bottom
-  height: 250px
-  padding: 5px 10px
-  border-top: 1px solid grey
-  border-bottom: 2px solid $secondary
-  overflow: auto
-
-  #track-list
-    width: 100%
-    .track-item
-      transition: .3s
-      border-radius: 5px
-      padding: 5px
-      letter-spacing: .15em
-      &:hover
-        cursor: pointer
-        background: $ctrl_primary_rgba
-
-    .track-index
-      color: grey
-      letter-spacing: .15em
-
-    .list-item
-      padding: 10px 2px
-      border-bottom: 1px solid $light
-      i
-        align-self: flex-end
-        font-size: 1.3em
-
-      i.active
-        color: $ctrl_primary
-        background: $light
-
-  .song-title
-    display: block
-    max-width: 85%
-    font: 1em Roboto ,Arial, san-serif
-    text-size-adjust: 80%
-
-// Mobile Version 
-#main_musicplayer.mobile
-  i
-    font-size: 1rem
     verticle-align: middle
     text-align: center
-    padding: 5px
+    padding: 2px
     width: 50px
     border-radius: 10px
     max-height: 40px
-    transition: .3s
+    transition: 0.3s
+
     &:hover
-      +CrossBrowser(cursor, pointer)
+        +CrossBrowser(cursor, pointer)
 
-  #mp_progress
-    width: 150px
+.flex
+    display: flex
+    flex-direction: column
 
-  .control--middle
-    display: block
+    &--inline
+        flex-direction: row
+
+    &--sa
+        justify-content: space-around
+
+    &--sb
+        justify-content: space-between
+
+.hidden
+    display: none
+
+input[type="range"]::-webkit-slider-thumb
+    &:hover
+        +CrossBrowser(cursor, grab)
+
+    &:active
+        +CrossBrowser(cursor, grabbing)
+
+// BASE END
+section#main_musicplayer
     width: 100%
-    height: 55px
+    height: $player_height
+    background: $dark
+    color: $light
+    position: relative
+    padding: 10px
+    border-radius: 10px
+    border: 1px solid #1c1c1c
+    overflow: hidden
+
+.mp-subtitle
+    margin-top: 5px
+    font-size: 0.8em
+    color: $secondary
+
+// musicplayer top window
+.mp-top
+    display: flex
+    flex-direction: column
+    position: absolute
+    top: 0
+    width: 100%
+    height: 300px
+    z-index: 2
+
+.cover-image
+    display: block
+    height: 240px
     position: relative
 
+    +mixin_bg_image(absolute, cover, "100% 50%")
+
+    &::after
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        content: ""
+        height: inherit
+        background: rgba(0, 0, 0, 0.8)
+        z-index: 1
+
+// PLAYER CONTROLS
+.mp-controls-container
+    width: 95%
+    position: absolute
+    top: 30px
+    left: 0
+    right: 0
+    bottom: 100px
+
+    i
+        font-size: 1.2rem
+        padding: 5px
+        transition: 0.3s ease-in-out
+        border-radius: 10px
+        box-shadow: 4px 2px 3px #4c4c4c
+
+        &:hover
+            padding: 5px
+            color: #fff
+            background: $ctrl_primary
+
+    .control--top
+        margin: 5px 30px 0px 30px
+
+    .track-info
+        margin: 0 45px
+
+// Progress Bar
+#mp_progress
+    display: block
+    width: 200px
+    align-self: center
+    padding: 10px 0
+
+    input[type="range"]
+        display: block
+
+        +CrossBrowser(appearance, none)
+        +CrossBrowser(border-radius, 10px)
+        +CrossBrowser(transition, 0.2s)
+
+        width: 100%
+        height: 8px
+        background: #d3d3d3
+        outline: none
+        opacity: 0.7
+
+        //* Mouse-over effects
+        input[type="range"]:hover
+            +CrossBrowser(opacity, 1)
+
+            height: 8px
+
+    input[type="range"]::-webkit-slider-thumb
+        -webkit-appearance: none
+        border: none
+        width: 15px
+        height: 15px
+        background: red
+
+        +CrossBrowser(cursor, grab)
+
+        border-radius: 50%
+        transform: translateX(-50%)
+
+        &:active
+            +CrossBrowser(cursor, grabbing)
+
+    //CONTROLS PANEL
+
+.control--middle
+    display: block
+    width: 100%
+    min-height: 25px
+    position: relative
+
+    // Reloop button
+    #reloop_btn
+        &.active
+            background: $secondary
+
+    // VOLUME PANEL
+    .volume-control-container
+        display: block
+        max-width: 50px
+
     .volume-slider-panel
-      display: block
-      width: 100px
-      position: absolute
-      top: calc(100% - 20px)
-      left: calc(100% - 110px)
-      +CrossBrowser(transform, rotateZ(0deg))
+        +CrossBrowser(transform, rotateZ(270deg))
+
+        display: flex
+        align-items: center
+        position: absolute
+        left: calc(100% -  65px )
+        top: 0px
+        width: 100px
+        background: #1c1c1c
+        border: 1px solid #000
+        border-radius: 10px
+        padding: 5px
+
+        #volume_range
+            -webkit-appearance: none
+            appearance: none
+            width: 100%
+            height: 8px
+            background: #d3d3d3
+            outline: none
+            opacity: 0.7
+            -webkit-transition: 0.2s
+            transition: opacity 0.2s
+
+        //* Mouse-over effects
+        #volume_range:hover
+            opacity: 1
+            height: 8px
+
+        //* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look)
+        #volume_range::-webkit-slider-thumb
+            -webkit-appearance: none
+            appearance: none
+            width: 20px
+            height: 20px
+            background: $ctrl_primary
+            cursor: grabbing
+            border-radius: 50%
+
+            &:hover
+                +CrossBrowser(cursor, grab)
+
+            &:active
+                +CrossBrowser(cursor, grabbing)
+
+        #volume_range::-moz-range-thumb
+            width: 25px
+            height: 25px
+            background: #646564
+            cursor: grabbing
+
+            &:hover
+                cursor: grabbing
+
+        //VOLUME MOBILE STYLE
+        &.mobile
+            display: flex
+            align-items: center
+            height: 4px
+
+            #volume_range, #volume_range:hover
+                height: 4px
+
+            #volume_range::-webkit-slider-thumb
+                width: 15px
+                height: 15px
+
+.title-wrapper
+    margin-bottom: 40px
+    align-self: center
+    text-align: center
+    letter-spacing: 0.15em
+
+    .hover-tip
+        display: none
+
+    &:hover
+        .hover-tip
+            display: flex
+            max-height: 50px
+            width: fit-content
+            align-self: center
+            justify-self: center
+            margin: 0 auto
+            padding: 10px 20px
+            align-items: center
+            font: italic 700 1em "Roboto", Arial, sans-serif
+            justify-content: center
+            background: #fff
+            color: #000
+            border: 2px solid brown
+            border-radius: 10px
+            position: absolute
+
+            +CrossBrowser(z-index, 200)
+
+            top: -15px
+            right: 0
+            bottom: 0
+            left: 0
+
+    .mp-title--top
+        display: inline-block
+        width: 100%
+        font-size: 1.3em
+        font-family: "Racing Sans One", cursive
+
+        +CrossBrowser(line-clamp, 1)
+
+        letter-spacing: 0.15em
+        text-overflow: ellipsis
+        white-space: nowrap
+        position: relative
+        overflow: hidden
+
+    .mp-subtitle
+        color: #fff
+        font: 500 18px Oswald, "Roboto Slab", Merriweather
+        letter-spacing: 0.15em
+
+.controls-bottom
+    margin-top: 0.5em
+
+// TRACK SECTION
+.mp-bottom
+    height: 250px
+    padding: 5px 10px
+    border-top: 1px solid grey
+    border-bottom: 2px solid $secondary
+    overflow: auto
+
+    #track-list
+        width: 100%
+
+        .track-item
+            transition: 0.3s
+            border-radius: 5px
+            padding: 5px
+            letter-spacing: 0.15em
+
+            &:hover
+                cursor: pointer
+                background: $ctrl_primary_rgba
+
+        .track-index
+            color: grey
+            letter-spacing: 0.15em
+
+        .list-item
+            padding: 10px 2px
+            border-bottom: 1px solid $light
+
+            i
+                align-self: flex-end
+                font-size: 1.3em
+
+            i.active
+                color: $ctrl_primary
+                background: $light
+
+    .song-title
+        display: block
+        max-width: 85%
+        font: 1em Roboto, Arial, san-serif
+        text-size-adjust: 80%
+
+// Mobile Version
+#main_musicplayer.mobile
+    i
+        font-size: 1rem
+        verticle-align: middle
+        text-align: center
+        padding: 5px
+        width: 50px
+        border-radius: 10px
+        max-height: 40px
+        transition: 0.3s
+
+        &:hover
+            +CrossBrowser(cursor, pointer)
+
+    #mp_progress
+        width: 150px
+
+    .control--middle
+        display: block
+        width: 100%
+        height: 55px
+        position: relative
+
+        .volume-slider-panel
+            display: block
+            width: 100px
+            position: absolute
+            top: calc(100% - 20px)
+            left: calc(100% - 110px)
+
+            +CrossBrowser(transform, rotateZ(0deg))

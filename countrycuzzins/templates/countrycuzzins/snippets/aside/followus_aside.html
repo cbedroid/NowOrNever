@@ -1,0 +1,49 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load countrycuzzins_extras %}
+<style>
+  .m-social li{
+    width: 60px;
+    margin: 0 10px;
+  }
+  .m-social li i{
+    font-size: 3rem !important;
+  }
+</style>
+
+<aside class="m-widget social-media-widget mobile-hidden m-banner bg-img d-none d-lg-block" style="height:500px;background-image: url('{% static 'media/images/decorative/social-mobile2.png' %}')">
+  <div class="row">
+    <div class="col-12">
+      <div class="header text-light mb-5" style="text-shadow: 2px 2px 5px rgba(0,0,0,.7);">
+        <h1 class="m-title m-title--bg">Follow Us</h1>
+        <p class="m-subtitle text-center text-light">Connect with us on social media </p>
+      </div>
+      <ul class="m-social text-center mt-4">
+        <li class="m-social m-social--item">
+          <a href="{{ 'facebook'|social_get:'link' }}">
+            <i class="fa fa-facebook m-social m-social--{{ facebook|social_get:'name'}}" aria-hidden="true"></i></a>
+        </li>
+        <li class="m-social m-social--item">
+          <a href="{{ 'instgram'|social_get:'link' }}">
+            <i class="fa fa-instagram m-social--{{ instagram |social_get:'name'}}" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="m-social m-social--item">
+          <a href="{{ 'snapchat'|social_get:'link' }}">
+            <i class="fa fa-snapchat-ghost m-social--{{ snapchat|social_get:'name'}}" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="m-social m-social--item">
+          <a href="{{ 'twitter'|social_get:'link' }}">
+            <i class="fa fa-twitter m-social--{{ twitter|social_get:'name'}}" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="m-social m-social--item">
+          <a href="{{ 'youtube'|social_get:'link' }}">
+            <i class="fa fa-youtube-square m-social--{{ youtube|social_get:'name'}}" aria-hidden="true"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>

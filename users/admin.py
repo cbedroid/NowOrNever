@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile
+from .models import Profile, NewsLetter
 
 
 class DateCreateAdmin(admin.ModelAdmin):
@@ -8,5 +8,5 @@ class DateCreateAdmin(admin.ModelAdmin):
         "updated",
     )
 
-
 admin.site.register(Profile, DateCreateAdmin)
+admin.site.register(NewsLetter, DateCreateAdmin)
