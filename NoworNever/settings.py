@@ -32,10 +32,10 @@ if not SECRET_KEY:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("NON_DEBUG") == "True"
-print('Debug:' ,DEBUG)
+print('Debug:', DEBUG)
 if DEBUG:
     # for local testing: allowed hosts
-    ALLOWED_HOSTS = ["*","https://facebook.com","https://twitter.com"]
+    ALLOWED_HOSTS = ["*", "https://facebook.com", "https://twitter.com"]
 else:
     ALLOWED_HOSTS = ["countrycuzzins.herokuapp.com"]
 
@@ -99,9 +99,9 @@ DATABASES = {
 # ****** DEV POSTGRES *****#
 # *************************#
 
-REMOTE =  False or not DEBUG  # whether the database is local or cloud base
+REMOTE = False or not DEBUG  # whether the database is local or cloud base
 
-if  REMOTE or not DEBUG:
+if REMOTE or not DEBUG:
     # Default to remote Elephant database during Development
     db_host = os.environ.get("NON_REMOTE_DEV_PSQL_HOST")
     db_name = os.environ.get("NON_REMOTE_DEV_PSQL_NAME")
@@ -115,13 +115,11 @@ if  REMOTE or not DEBUG:
         db_user = os.environ.get("NON_PRO_PSQL_USER")
         db_pwd = os.environ.get("NON_PRO_PSQL_PASSWORD")
 
-
-
     if any(x is None for x in [db_name, db_user, db_pwd]):
-            raise TypeError(
-                f"POSTGRES DATABASE FAILED\nDatabase Name: {db_name}\nuser: {db_user}"
-            )
-    DATABASES = { # Setup postgress database for production or remote development 
+        raise TypeError(
+            f"POSTGRES DATABASE FAILED\nDatabase Name: {db_name}\nuser: {db_user}"
+        )
+    DATABASES = {  # Setup postgress database for production or remote development
         "default": {
             "ENGINE": "django.db.backends.postgresql",
             "NAME": db_name,

@@ -1,7 +1,45 @@
 /** CSS improved addon Dec 1010  **/
 
+:root {
+    --zindex-dropdown: 1000;
+    --zindex-sticky: 1020;
+    --zindex-fixed: 1030;
+    --zindex-modal-backdrop: 1040;
+    --zindex-modal: 1050;
+    --zindex-popover: 1060;
+    --zindex-1: 100;
+    --zindex-2: 200;
+    --zindex-3: 300;
+    --zindex-4: 400;
+    --zindex-5: 500;
+}
+
+.zed-1 {
+    zindex: var(--zindex-1);
+}
+
+.zed-2 {
+    zindex: var(--zindex-2);
+}
+
+.zed-3 {
+    zindex: var(--zindex-3);
+}
+
+.zed-4 {
+    zindex: var(--zindex-4);
+}
+
+.zed-5 {
+    zindex: var(--zindex-5);
+}
+
 .ff-osw {
     font-family: 'Oswald', sans-serif;
+}
+
+.ff-ant {
+    font-family: "Anton", cursive, Arial, sans-serif;
 }
 
 .bg-img {
@@ -45,8 +83,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: transparent !important;
     z-index: 100;
+}
+
+.bg-clear {
+    background: transparent !important;
 }
 
 .greyscaled::before {
@@ -127,6 +168,8 @@
     background: #0ec7ff;
     color: #fff;
 }
+
+/** PROFILE **/
 
 /* Phones */
 @media screen and (max-device-width: 475px) {

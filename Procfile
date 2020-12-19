@@ -1,1 +1,1 @@
-web: gunicorn NoworNever.wsgi 
+web: gunicorn NoworNever.wsgi

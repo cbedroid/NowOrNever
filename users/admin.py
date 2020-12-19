@@ -8,6 +8,5 @@ class DateCreateAdmin(admin.ModelAdmin):
         "updated",
     )
 
-
 admin.site.register(Profile, DateCreateAdmin)
 admin.site.register(NewsLetter, DateCreateAdmin)

@@ -8,13 +8,14 @@ from django.conf import settings
 urlpatterns = [
     path("nowornever/", include("core.urls")),
     path("", include("countrycuzzins.urls")),
-    path("countrycuzzins/", include("countrycuzzins.urls")),
-    path("account/", include("users.urls")),
+    #path("countrycuzzins/", include("countrycuzzins.urls")),
+    path("user/", include("users.urls.users_urls")),
+    path("account/", include("users.urls.account_urls")),
 ]
 
 # Production and Development Admin
 if settings.DEBUG == True:
-    urlpatterns.append(path("admin/", admin.site.urls ))
+    urlpatterns.append(path("admin/", admin.site.urls))
 else:
     urlpatterns.append(path("Non/Spud/admin/", admin.site.urls))
 
