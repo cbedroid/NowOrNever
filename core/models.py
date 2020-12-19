@@ -10,11 +10,12 @@ class ContactUs(models.Model):
     ip_address = models.CharField(max_length=30, blank=True, null=False)
     email = models.EmailField(max_length=100, blank=False, null=True)
     message = models.TextField(max_length=500, blank=False, null=True)
+    has_account = models.BooleanField(default=False, blank=True, null=True)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
-        return f"Message from {self.firstname} {self.lastname}"
+        return f"Message from {self.firstname} {self.lastname} - {self.has_account}"
 
 
 class Rating(models.Model):

@@ -63,7 +63,8 @@ def adminSlugHelp(instance, views_url=""):
         # strip the default app name :NOTE not necessary
         # but to ensure that the start of the url is not duplicated
         # we TRY strip it and adding it by default.
-        url_path = os.path.join(url_path, views_url.strip(url_path), instance.slug)
+        url_path = os.path.join(
+            url_path, views_url.strip(url_path), instance.slug)
     else:
         url_path = os.path.join(url_path, instance.slug)
 
@@ -101,7 +102,8 @@ def urlParseSlugField(instance, nametupled, help_text=True):
     #   Create custom url for SlugField from article name on initilization
     if not isinstance(nametupled, (list, tuple)):
         nametupled = nametupled.split(",")
-    instance.slug = re.sub(r"[^\w\-]", "_", "_".join(list(map(str, nametupled))))
+    instance.slug = re.sub(
+        r"[^\w\-]", "_", "_".join(list(map(str, nametupled))))
     print("\nSELF.SLUG", instance.slug)
     # instance.save()
 
