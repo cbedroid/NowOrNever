@@ -1,4 +1,4 @@
-#NOTE: Dec 2020 REFACTOR THIS WHOLE FILE !!!!!! 
+# NOTE: Dec 2020 REFACTOR THIS WHOLE FILE !!!!!!
 
 import os
 import re
@@ -7,40 +7,11 @@ from django.utils.html import format_html
 from django.dispatch import receiver
 from django.conf import settings
 from .models import Video, Image
-from .music_models import Song,Artist
+from .music_models import Song, Artist
 from django.db.models.signals import (
     pre_init, post_init, pre_save,
-    post_save, post_delete,post_migrate
+    post_save, post_delete, post_migrate
 )
-
-
-@receiver(pre_save, sender=Video)
-def auto_create_slugfield(sender, instance, **kwargs):
-    """Create custom url for SlugField from model name"""
-    if not hasattr(sender, 'slug'):
-        return
-    # Find model name or title attribute
-    try:
-        name = instance.name
-    except AttributeError:
-        try:
-            name = instance.title
-        except:
-            print(
-                f'SlugSignalError: Can not create slug for {sender} with id: {instance.id}')
-            return
-
-    sender_name = str(sender.__name__).lower()
-    if not instance.slug or re.search(rf'{sender_name}-\d*', instance.slug):
-        # instance slug was aready created
-        return instance.slug
-    else:
-
-        pre_save.disconnect(auto_create_slugfield, sender=sender)
-        instance.slug = f"{sender_name}-{instance.id}"
-        instance.save()
-        pre_save.connect(auto_create_slugfield, sender=sender)
-
 
 @receiver(pre_save, sender=Image)
 def nameSpaceImage(sender, instance=None, **kwargs):
@@ -164,9 +135,12 @@ def create_youtube_embeded_url(sender, instance, **kwargs):
         youtube_video_id = re.match(r'.*/(.*)', instance.url)
     pre_save.disconnect(create_youtube_embeded_url, sender=sender)
     # NOTE: this is a potential error if re.search return None
-    instance.thumbnail = create_thumbnail(
-        instance.title, instance.thumbnail_choice, youtube_video_id.group(1)
-    )
+    try:
+        instance.thumbnail = create_thumbnail(
+            instance.title, instance.thumbnail_choice, youtube_video_id.group(1)
+        )
+    except:
+        pass
     instance.save()
     pre_save.connect(create_youtube_embeded_url, sender=sender)
 
@@ -192,18 +166,3 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
         if instance.file:
             if os.path.isfile(instance.file.path):
                 os.remove(instance.file.path)
-
-
-
-#NOTE DEC 2020 DONT TOUCH --New Signal Dec 2020 
-
-# @receiver(post_save, sender=Song)
-# def songAddMainArtist(sender,instance,created=False,**kwargs):
-#     print('\nSender',sender)
-#     print('Instance',instance)
-#     if not created:
-#         if not instance.artist.exists():
-#             instance.artist.add(*main_artists)
-#             instance.save()
-#             print("Song Updated: ",instance.artist.all())
-    

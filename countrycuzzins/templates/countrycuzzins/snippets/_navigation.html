@@ -37,7 +37,7 @@
 
             {% if request.user.is_authenticated %}
             <div class="user-tray" id="nav_user_tray">
-              <a href="{% url 'account_profile' request.user.username %}" class="m-user m-user--link profile">
+              <a href="{{request.user.profile.get_absolute_url}}" class="m-user m-user--link profile">
                 <span>
                   <img class="m-img m-img--profile bdr-3-error" src="{{ request.user.profile.getImage }}"
                     alt="profile image" />

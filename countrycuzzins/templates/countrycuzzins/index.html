@@ -56,19 +56,14 @@
           <img loading="lazy" src="{{album.cover.image.url}}" class="card-img-top" alt="{{album.name}} image"
             style="max-height:365px;">
           <div class="card-body" style="transform: rotate(0);">
-            <blockquote>
-            Country Cuzzin's <span class="font-weight-bolder text-danger">The Introduction</span> drop in tribute to the lost of one of their family members
-            <span><b>Robert Brooks</b></span>
-            <footer class="blockquote-footer my-1"><b>R.I.H Robert Brooks</b>
-              <p class="hashtag mt-2">
-                <span class="bagde badge-secondary p-1">#LLSPUD</span>
-                <span class="bagde badge-secondary p-1">#DaTruth</span>
-                <span class="bagde badge-secondary p-1">#33</span>
-              </p>
-            </footer>   
-            
-            </blockquote>
-            <a class="btn btn-danger btn-block text-white m-subtitle stretched-link" href={{album.get_absolute_url}}> Listen {{album.name}}</a>
+          {% if album.description %}
+            {{album.description|safe}}
+          {% else %}
+          <div> Country Cuzzins - {{album.name}}
+          newest release. check it out here
+          </div>
+          {% endif %}
+            <a class="btn btn-danger btn-block text-white m-subtitle stretched-link" href={{album.get_absolute_url}}> Listen to {{album.name}}</a>
           </div>
         </div>
         

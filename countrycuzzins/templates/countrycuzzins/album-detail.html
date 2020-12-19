@@ -25,6 +25,14 @@ Country Cuzzins - {{album.name}}
     font-weight: 500;
     text-align: center;
   }
+  .song-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .song-info span:nth-child(1), .song-info span:nth-child(3){
+    letter-spacing:.20ch;
+  }
 
   
   
@@ -66,7 +74,7 @@ Country Cuzzins - {{album.name}}
 
       <div class="artwork-content">
         <!--inner content-->
-        <div class="inner-content overlay-2">
+        <div class="inner-content overlay-2 bg-clear">
           <div class="row">
             <div class="col-12 clear-fixed bg-transparent position-absolute">
               <div class="voted-wrapper d-flex justify-content-between p-2">
@@ -188,10 +196,15 @@ Country Cuzzins - {{album.name}}
             <div class="top">
               <p id="current_artist" class="title__top text-uppercase">{{ songs.0.get_artists }}</p>
               <div class="mx-1 pb-3 d-flex flex-column flex-sm-row align-items-sm-center">
-                <span id="current_title" style="color:#0ec7ff;letter-spacing:.3ch;">{{songs.0.name}}</span>
-                <span class="d-none d-sm-inline-block mx-1">-</span>
+              <div class="song-info" style="color:#0ec7ff;">
+                <span id="album-title">{{album.name}}</span>
+                <span class="mx-1">-</span>
+                <span id="current_title">{{songs.0.name}}</span>
                 {# song view counter #}
-                <small><span id="album_viewcount" class="font-weight-lighter align-middle">{{songs.0.played_count}} views</span></small>
+                <small class="ml-2 align-middle">
+                  <span id="album_viewcount" class="font-weight-lighter text-muted align-middle">{{songs.0.played_count}} views</span>
+                </small>
+              </div>
               </div>
             </div>
           </div>

@@ -13,7 +13,8 @@ class ThumbnailWidget(forms.widgets.Widget):
 
 
 class VideoForm(forms.ModelForm):
-    thumbnail = forms.CharField(max_length=200, widget=ThumbnailWidget, required=False)
+    thumbnail = forms.CharField(
+        max_length=200, widget=ThumbnailWidget, required=False)
 
     class Meta:
         model = Video

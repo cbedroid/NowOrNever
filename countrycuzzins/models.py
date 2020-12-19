@@ -1,5 +1,6 @@
 import re
 from django.db import models
+from django.utils.text import slugify
 from django.core.validators import MinLengthValidator
 from core.utils.utils_models import Command, OverwriteStorage, generateSlug
 from core.models import Rating
@@ -13,7 +14,6 @@ class Image(models.Model):
         upload_to="images", blank=True,
         storage=OverwriteStorage()
     )
-    is_article = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
@@ -24,38 +24,6 @@ class Image(models.Model):
         """ Hooking into  ___init___ save method and changing "image" name. """
         super().save(*args, **kwargs)
 
-
-class Article(models.Model):
-    name = models.CharField(max_length=60, unique=True)
-    headline = models.CharField(max_length=60, null=True)
-    image = models.OneToOneField(
-        Image, default="images/no_content.png",
-        blank=True, primary_key=True,
-        on_delete=models.SET_DEFAULT
-    )
-    blog = models.TextField(max_length=200, null=False)
-    slug = models.SlugField(
-        verbose_name="article url",
-        max_length=80,
-        unique=True, blank=False, null=False,
-        help_text='<span id="myslughelp"></span>',
-        validators=[MinLengthValidator(4)],
-    )
-    created = models.DateTimeField(auto_now=False, auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-
-    def __str__(self):
-        return f"Article {self.name}"
-
-    def save(self, *args, **kwargs):
-        self.setIsArticle()
-        generateSlug(self)
-        super(Article, self).save(*args, **kwargs)
-
-    def setIsArticle(self):
-        """ On initialization, set Image's model is_article attribute to True """
-        self.image.is_article = True
-        self.image.save()
 
 
 class Producer(models.Model):
@@ -86,13 +54,12 @@ class Video(models.Model):
         Producer, verbose_name="video producer",
         related_name="video_producer",
         blank=True, null=True,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.SET_NULL,
     )
     slug = models.SlugField(
         verbose_name="video slug",
-        max_length=80,
-        unique=True, blank=False, null=False,
-        help_text='<span id="myslughelp"></span>',
+        max_length=120,
+        editable=False,
         validators=[MinLengthValidator(4)],
     )
     rating = models.ManyToManyField(
@@ -106,14 +73,13 @@ class Video(models.Model):
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
-    class Meta:
-        managed = True
-
     def save(self, *args, **kwargs):
+        slug_name = self.title
+        self.slug = slugify(slug_name)
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.title
+        return f'{self.title} - {self.slug}'
 
 
 class Event(models.Model):

@@ -10,7 +10,7 @@
       <div class="featured" id="ft_video">
         <h1 class="m-title">Top Video </h1>
         <hr>
-        {% with ftvideo=music_videos|dictsortreversed:'is_featured'|first %}
+        {% with ftvideo=featured_video %}
         <div class="video-container">
           <h1 class="m-title" id="featured_title">
             {{ ftvideo.title  }}
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="video-description m-subtitle vframe has-readmore" id="featured_long_decription" data-mobile="true">
-          <p class="m-text readmore-text collapse" id="video-description-text" role="article" 
+          <p class="readmore-text text-secondary" id="video-description-text" role="article" 
               aria-expanded="false" aria-labeledby="video_description-toggler" >
             {{ ftvideo.long_description }}
            </p>
