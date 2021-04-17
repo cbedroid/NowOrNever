@@ -1,0 +1,33 @@
+DO_ENV /home/cbedroid1614/NowOrNever/.env.do
+[
+{
+    "model": "countrycuzzins.socialmedia",
+    "pk": 1,
+    "fields": {
+        "name": "facebook",
+        "link": "https://www.facebook.com/countri.cousins",
+        "created": "2020-09-24T16:47:45.668Z",
+        "updated": "2020-09-24T16:47:45.668Z"
+    }
+},
+{
+    "model": "countrycuzzins.socialmedia",
+    "pk": 2,
+    "fields": {
+        "name": "twitter",
+        "link": "https://twitter.com/Country_Cuzzins",
+        "created": "2020-09-24T16:48:15.294Z",
+        "updated": "2020-09-24T16:48:15.294Z"
+    }
+},
+{
+    "model": "countrycuzzins.socialmedia",
+    "pk": 3,
+    "fields": {
+        "name": "youtube",
+        "link": "https://www.youtube.com/channel/UCXQ376o9hzgTfhMoD54rrGg/videos",
+        "created": "2020-09-24T16:48:39.969Z",
+        "updated": "2020-09-24T16:48:39.969Z"
+    }
+}
+]

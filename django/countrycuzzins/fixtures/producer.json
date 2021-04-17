@@ -1,0 +1,25 @@
+DO_ENV /home/cbedroid1614/NowOrNever/.env.do
+[
+{
+    "model": "countrycuzzins.producer",
+    "pk": 1,
+    "fields": {
+        "name": "Dash Brown",
+        "company": "Digital Dash Films",
+        "link": "https://www.youtube.com/channel/UCgNRMAsRubn9kA4NXNcqMyw",
+        "created": "2020-09-24T16:57:35.465Z",
+        "updated": "2020-09-24T16:57:35.465Z"
+    }
+},
+{
+    "model": "countrycuzzins.producer",
+    "pk": 2,
+    "fields": {
+        "name": "Country Cuzzins",
+        "company": "Now or Never LLC",
+        "link": "https://www.youtube.com/channel/UCXQ376o9hzgTfhMoD54rrGg",
+        "created": "2020-09-24T16:58:26.546Z",
+        "updated": "2020-09-24T16:58:26.546Z"
+    }
+}
+]

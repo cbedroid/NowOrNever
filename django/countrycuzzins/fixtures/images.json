@@ -1,0 +1,93 @@
+DO_ENV /home/cbedroid1614/NowOrNever/.env.do
+[
+{
+    "model": "countrycuzzins.image",
+    "pk": 1,
+    "fields": {
+        "name": "Now_Never_Logo",
+        "image": "images/Now_Never_Logo.png",
+        "created": "2020-09-24T15:40:53.115Z",
+        "updated": "2020-09-24T15:40:53.115Z"
+    }
+},
+{
+    "model": "countrycuzzins.image",
+    "pk": 2,
+    "fields": {
+        "name": "Laidback_W_Nipsey",
+        "image": "images/Laidback_W_Nipsey.png",
+        "created": "2020-09-24T18:48:16.224Z",
+        "updated": "2020-09-24T18:48:16.224Z"
+    }
+},
+{
+    "model": "countrycuzzins.image",
+    "pk": 3,
+    "fields": {
+        "name": "CC_pose_in_street",
+        "image": "images/CC_pose_in_street.png",
+        "created": "2020-09-24T18:49:01.413Z",
+        "updated": "2020-09-24T18:49:01.413Z"
+    }
+},
+{
+    "model": "countrycuzzins.image",
+    "pk": 4,
+    "fields": {
+        "name": "BottomBoiCort_on_balcony",
+        "image": "images/BottomBoiCort_on_balcony.png",
+        "created": "2020-09-24T18:49:59.548Z",
+        "updated": "2020-09-24T18:49:59.548Z"
+    }
+},
+{
+    "model": "countrycuzzins.image",
+    "pk": 5,
+    "fields": {
+        "name": "CC_business_meeting",
+        "image": "images/CC_business_meeting.png",
+        "created": "2020-09-24T18:50:50.067Z",
+        "updated": "2020-09-24T18:50:50.067Z"
+    }
+},
+{
+    "model": "countrycuzzins.image",
+    "pk": 6,
+    "fields": {
+        "name": "Laidback_on_steps",
+        "image": "images/Laidback_on_steps.png",
+        "created": "2020-09-24T18:52:01.381Z",
+        "updated": "2020-09-24T18:52:01.381Z"
+    }
+},
+{
+    "model": "countrycuzzins.image",
+    "pk": 7,
+    "fields": {
+        "name": "Cort_dueces",
+        "image": "images/Cort_dueces.png",
+        "created": "2020-09-24T18:52:51.233Z",
+        "updated": "2020-09-24T18:52:51.233Z"
+    }
+},
+{
+    "model": "countrycuzzins.image",
+    "pk": 8,
+    "fields": {
+        "name": "NON_team",
+        "image": "images/NON_team.png",
+        "created": "2020-09-24T18:53:24.675Z",
+        "updated": "2020-09-24T18:53:24.676Z"
+    }
+},
+{
+    "model": "countrycuzzins.image",
+    "pk": 9,
+    "fields": {
+        "name": "TheIntroduction",
+        "image": "images/TheIntroduction.png",
+        "created": "2020-10-16T03:56:26.499Z",
+        "updated": "2020-10-16T04:01:05.582Z"
+    }
+}
+]

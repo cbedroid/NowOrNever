@@ -1,0 +1,25 @@
+DO_ENV /home/cbedroid1614/NowOrNever/.env.do
+[
+{
+    "model": "countrycuzzins.event",
+    "pk": 1,
+    "fields": {
+        "name": "\"The Radio People Jimmie Rodgers Competition\"",
+        "location": "Meridian, Ms",
+        "event_date": "2020-10-25T00:00:00Z",
+        "created": "2020-09-24T17:38:42.838Z",
+        "updated": "2020-10-16T03:41:19.375Z"
+    }
+},
+{
+    "model": "countrycuzzins.event",
+    "pk": 2,
+    "fields": {
+        "name": "Pure Bar & Grill Halloween Bash",
+        "location": "Jackson, Ms",
+        "event_date": "2020-11-01T01:00:00Z",
+        "created": "2020-10-16T03:37:56.310Z",
+        "updated": "2020-10-16T03:37:56.310Z"
+    }
+}
+]
